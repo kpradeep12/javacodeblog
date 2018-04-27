@@ -1,0 +1,29 @@
+= Stream of dates with LocalDate
+Pradeep
+2018-02-17
+:jbake-type: post
+:jbake-status: published
+:jbake-tags: java, jshell, localdate
+:jbake-summary: I want a list of all dates with starting range from Jan 15, 2018 to Feb 20, 2018. I can generate this list using the new ‘datesUntil’ method in LocalDate class. This method is introduced in Java 9 and I recently found out this method while browsing through Java API and quickly did some code experiments using JShell.
+:idprefix:
+
+I want a list of all dates with starting range from Jan 15, 2018 to Feb 20, 2018. I can generate this list using the new ‘datesUntil’ method in LocalDate class. This method is introduced in Java 9 and I recently found out this method while browsing through Java API and quickly did some code experiments using JShell. I thought this is very useful method and wanted to share my experiments in this article.
+
+Below is the definition of this method.
+:source-highlighter: prettify
+[source,java,numbered]
+----
+public Stream<LocalDate> datesUntil​(LocalDate endExclusive)
+----
+This method returns stream of LocalDate objects so we can process these dates in a stream. To use this method we need fromDate and toDate so we can generate stream of LocalDate’s.
+
+I fired up my JShell and executed below code snippets. JShell is a quick and best way to experiment small code snippets like below. I always love to use JShell for these type of experiments. I will also give some tips on JShell usage on the way while we do this experiment.
+
+You need Java 9 to run JShell. Go to command prompt/terminal and execute ‘jshell’ command.
+[source,shell]
+----
+~ $ jshell
+| Welcome to JShell -- Version 9.0.4
+| For an introduction type: /help intro
+jshell>
+----
