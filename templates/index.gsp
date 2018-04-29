@@ -35,7 +35,7 @@
             <!-- Pager -->
             <ul class="col pager list-unstyled">
                 <li class="next">
-                    <a href="/${config.archive_file}">Older Posts &rarr;</a>
+                    <a href="${config.archive_file}">Older Posts &rarr;</a>
                 </li>
             </ul>
         </div>
