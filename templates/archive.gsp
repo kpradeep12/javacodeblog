@@ -1,7 +1,8 @@
 <%include 'header.gsp'%>
 
 	<%include 'menu.gsp'%>
-
+	<%include "title.gsp"%>
+	
     <div class="container">	
 	<div class="page-header">
 		<h1>Blog Archive</h1>

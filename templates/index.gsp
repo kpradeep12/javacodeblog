@@ -1,49 +1,45 @@
 <%include "header.gsp"%>
-
     <%include "menu.gsp"%>
-
-    <!-- Page Header -->
-    <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>img/home-bg.jpg')">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="site-heading">
-                        <h1>Java Code Blog</h1>
-                        <hr class="small">
-                        <span class="subheading">Sharing my Java experiments</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+    <%include "title.gsp"%>
 
     <!-- Main Content -->
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <%published_posts.each {post ->%>
-                    <div class="post-preview">
-                        <a href="${post.uri}">
-                            <h2 class="post-title">
-                                ${post.title}
-                            </h2>
-                        </a>
-                        ${post.summary}
-                        <span style="clear:left"></span>
-                        <p class="post-meta">Posted by ${post.author} on ${post.date.format("dd MMMM yyyy")}</p>
+        
+        <%published_posts.each {post ->%>
+            <div class="col-lg-4 col-sm-6 mb-3">
+                <div class="card">
+                    <h1 class="card-header post-title">
+                        <a href="${post.uri}">${post.title}</a>
+                    </h1>
+                    <a href="${post.uri}">
+                        <img class="card-img-top portfolio-image" src="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>img/${post.image}" alt="">
+                    </a>
+                    <div class="card-body">
+                        <p class="card-text m-0">${post.summary}</p>
                     </div>
-                    <hr>
-                <%}%>
-
-                <!-- Pager -->
-                <ul class="pager">
-                    <li class="next">
-                        <a href="/${config.archive_file}">Older Posts &rarr;</a>
-                    </li>
-                </ul>
+                    <div class="card-footer">
+                        <small class="text-muted">
+                            <p class="post-meta my-1 font-weight-bold"><i class="fa fa-clock-o" aria-hidden="true"></i> ${post.date.format("dd MMMM yyyy")}</p>
+                        </small>
+                    </div>
+                </div>
             </div>
+        <%}%>
         </div>
-    </div> <!-- /.container -->
+    </div>
+
+    <div class="container py-4">
+        <div class="row">
+
+            <!-- Pager -->
+            <ul class="col pager list-unstyled">
+                <li class="next">
+                    <a href="/${config.archive_file}">Older Posts &rarr;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
 
 <%include "footer.gsp"%>

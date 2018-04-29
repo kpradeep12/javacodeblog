@@ -1,0 +1,28 @@
+.card-header{
+    background-color: transparent !important;
+    border-bottom: unset !important;
+}
+
+.post-title {
+    color: #2b3542;
+    font-family: "Roboto Slab",sans-serif;
+    font-size: 1.25em;
+    font-weight: 700;
+    line-height: 120%;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.post-title a:hover{
+    text-decoration: none !important;
+}
+
+.portfolio-image{
+    cursor: default !important;
+}
+
+.post-image{
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}

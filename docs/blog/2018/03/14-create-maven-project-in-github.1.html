@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content="JBake">
+
+    <title>Create Maven project in GitHub</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../../css/clean-blog.css" rel="stylesheet">
+    <link href="../../../css/3-portfolio-theme.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <!-- link rel="shortcut icon" href="../../../favicon.ico" -->
+  </head>
+  <body>
+   
+
+        <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="../../../index.html">Java Thought</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="../../../index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../../../about.html">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Archive</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../../../contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('../../../img/home-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="site-heading">
+                        <h1>Java Thought</h1>
+                        <hr class="small">
+                        <span class="subheading">Sharing my Java experiments</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="mt-4">Create Maven project in GitHub</h1>
+                    <p class="mt-0 small">Posted on March 14, 2018</p>
+                    <hr>
+                    <!-- Preview Image -->
+                    <img class="img-fluid rounded post-image" src="../../../img/" alt="">
+
+
+                    <div id="preamble"> 
+ <div class="sectionbody"> 
+  <div class="paragraph"> 
+   <p>If you are looking to publish your first Maven project to gitHub then this article will help you to get started with that. I am going to explain the steps involved in creating a new maven project and pushing it to gitHub. Before creating local project its better to create empty repository in gitHub so we can later clone it.</p> 
+  </div> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="create_new_repository_in_github">Create new repository in Github</h4> 
+ <div class="ulist"> 
+  <ul> 
+   <li> <p>Login into your gitHub account and create new repository.</p> </li> 
+  </ul> 
+ </div> 
+ <div class="paragraph text-center"> 
+  <p><span class="image"><img src="http://localhost:8820/img/posts/new-repo-in-git.png" alt="New repo in Git" width="510" height="90"></span></p> 
+ </div> 
+ <div class="ulist"> 
+  <ul> 
+   <li> <p>Provide name for repository. I am providing name as ‘my-app’.</p> </li> 
+  </ul> 
+ </div> 
+ <div class="paragraph text-center"> 
+  <p><span class="image"><img src="http://localhost:8820/img/posts/create-new-repo-in-git.png" alt="Create new repo in Git" width="500" height="300"></span></p> 
+ </div> 
+ <div class="ulist"> 
+  <ul> 
+   <li> <p>Select ‘java’ from ‘Add .gitignore’ dropdown. This will generate a default .gitignore file needed for a java project.</p> </li> 
+   <li> <p>Click on ‘Create repository’ button. Empty repository will be created and in next section we will create Maven project.</p> </li> 
+  </ul> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="create_new_maven_project_in_local">Create new maven project in local</h4> 
+ <div class="ulist"> 
+  <ul> 
+   <li> <p>Make sure you have java, maven and git installed in your local before proceeding further.</p> </li> 
+   <li> <p>Open command prompt (or terminal) and go to a folder where you want to create a new project.</p> </li> 
+   <li> <p>Execute below maven command. This command will create a simple Java project with in folder ‘my-app’. Note that this name should match with repository name in gitHub.</p> </li> 
+  </ul> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">mvn -B archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DgroupId=com.mycompany.app -DartifactId=my-app</code></pre> 
+  </div> 
+ </div> 
+ <div class="ulist"> 
+  <ul> 
+   <li> <p>Above command should show ‘BUILD SUCCESS’ message and it will create below files and folders:</p> 
+    <div class="ulist"> 
+     <ul> 
+      <li> <p>New folder ‘my-app’ (this is the same name we provided for repository in gitHub)</p> </li> 
+      <li> <p>pom.xml in my-app folder. This is the main maven file.</p> </li> 
+      <li> <p>Folders for java and test classes.</p> </li> 
+     </ul> 
+    </div> </li> 
+   <li> <p>New maven project is created.</p> </li> 
+  </ul> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="clone_github_repository_and_merge_with_maven_project">Clone GitHub repository and merge with Maven project</h4> 
+ <div class="ulist"> 
+  <ul> 
+   <li> <p>In github.com goto ‘my-app’ project.</p> </li> 
+   <li> <p>Click on ‘Clone or download’ drop-down and click copy icon next to repository web URL. This will copy URL into clipboard.</p> </li> 
+  </ul> 
+ </div> 
+ <div class="paragraph text-center"> 
+  <p><span class="image"><img src="http://localhost:8820/img/posts/copy-clone-repo-url.png" alt="Copy clone repo" width="510" height="130"></span></p> 
+ </div> 
+ <div class="ulist"> 
+  <ul> 
+   <li> <p>Now we need to clone this project into our maven folder but git clone command will not work if already project folder exists. In our case we already created maven project folder so we will clone it into temp folder. I found this trick from this stack-overflow discussion.</p> </li> 
+   <li> <p>If you are in ‘my-app’ folder in CMD/termical then go to parent folder and execute below command. This command will clone gitHub repository into temp folder.</p> </li> 
+  </ul> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">git clone &lt;URL copied from gitHub&gt; temp</code></pre> 
+  </div> 
+ </div> 
+ <div class="ulist"> 
+  <ul> 
+   <li> <p>In temp folder you should see .git and .gitignore files downloaded. These are hidden files.</p> </li> 
+   <li> <p>Now copy .git and .gitignore from temp into my-app folder and then remove temp folder by executing below commands</p> </li> 
+  </ul> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">Use below commands in Windows command prompt
+xcopy /S/H/Y temp my-app
+rmdir temp /S/Q
+
+Use below commands in Mac terminal
+cp -a temp/. my-app/
+rm -rf temp</code></pre> 
+  </div> 
+ </div> 
+ <div class="ulist"> 
+  <ul> 
+   <li> <p>You should see .git, .gitignore, src and pom.xml files in my-app folder.</p> </li> 
+   <li> <p>Now we have maven project with git. In next section we will see how to do first commit and push to gitHub repository.</p> </li> 
+  </ul> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="commit_and_push_to_github_repository">Commit and push to gitHub repository</h4> 
+ <div class="ulist"> 
+  <ul> 
+   <li> <p>‘git status’ command in gitHub project will show current check-in status of the files so execute ‘git status’ in root folder of the project.</p> </li> 
+  </ul> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">my-app $ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+
+	pom.xml
+	src/
+
+nothing added to commit but untracked files present (use "git add" to track)</code></pre> 
+  </div> 
+ </div> 
+ <div class="ulist"> 
+  <ul> 
+   <li> <p>This command shows that pom.xml and src is not yet committed, so execute ‘git add -A’ this will add all new files to staging.</p> </li> 
+   <li> <p>Now again check the status ‘git status’</p> </li> 
+  </ul> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">my-app $ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes to be committed:
+  (use "git reset HEAD &lt;file&gt;..." to unstage)
+
+	new file:   pom.xml
+	new file:   src/main/java/com/mycompany/app/App.java
+	new file:   src/test/java/com/mycompany/app/AppTest.java</code></pre> 
+  </div> 
+ </div> 
+ <div class="ulist"> 
+  <ul> 
+   <li> <p>This time it shows all files are in staging and ready to be committed.</p> </li> 
+   <li> <p>Execute ‘git commit -m “initial project setup”‘ this command will commit all staged files to local gitHub repository. We are also providing comment for all these files with -m option.</p> </li> 
+  </ul> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">my-app $ git commit -m "initial project setup"
+[master e719d11] initial project setup
+ 3 files changed, 69 insertions(+)
+ create mode 100644 pom.xml
+ create mode 100644 src/main/java/com/mycompany/app/App.java
+ create mode 100644 src/test/java/com/mycompany/app/AppTest.java</code></pre> 
+  </div> 
+ </div> 
+ <div class="ulist"> 
+  <ul> 
+   <li> <p>All files are checked into local repository. Now lets push them to remote gitHub repository. Execute ‘git push origin master’</p> </li> 
+  </ul> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">my-app $ git push origin master
+Counting objects: 16, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (16/16), 1.51 KiB | 0 bytes/s, done.
+Total 16 (delta 0), reused 0 (delta 0)
+To https://github.com/kpradeep12/my-app.git
+   62985a4..e719d11  master -&gt; master</code></pre> 
+  </div> 
+ </div> 
+ <div class="ulist"> 
+  <ul> 
+   <li> <p>Go to gitHub repository and you should see all your maven files uploaded there. Now any one can work on this repository. If you want to pull all new changes from remote to local repository then execute ‘git pull –all’</p> </li> 
+  </ul> 
+ </div> 
+ <div class="paragraph"> 
+  <p>Now we have a full maven project setup with gitHub integration. This project is ready to be imported into any of your favorite IDE.</p> 
+ </div> 
+</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+		<div id="push"></div>
+    
+    <!-- Footer -->
+    <footer class="bg-graphite">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <ul class="list-inline text-center list-unstyled">
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript 
+    <script src="../../../js/clean-blog.min.js"></script>
+    -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  </body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content="JBake">
+
+    <title>Quick way to create, read, write and delete files in Java</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../../css/clean-blog.css" rel="stylesheet">
+    <link href="../../../css/3-portfolio-theme.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <!-- link rel="shortcut icon" href="../../../favicon.ico" -->
+  </head>
+  <body>
+   
+
+        <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="../../../index.html">Java Thought</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="../../../index.html">Home</a>
+            </li>
+            <!--<li class="nav-item">
+                <a class="nav-link" href="../../../about.html">About</a>
+            </li>-->
+            <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Archive</a>
+            </li>
+            <!--<li class="nav-item">
+                <a class="nav-link" href="../../../contact.html">Contact</a>
+            </li>-->
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('../../../img/home-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="site-heading">
+                        <h1>Java Thought</h1>
+                        <hr class="small">
+                        <span class="subheading">Sharing my Java experiments</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="mt-4">Quick way to create, read, write and delete files in Java</h1>
+                    <p class="mt-0 small">Posted on February 28, 2018</p>
+                    <hr>
+                    <!-- Preview Image -->
+                    <img class="img-fluid rounded post-image" src="../../../img/" alt="">
+
+
+                    <div id="preamble"> 
+ <div class="sectionbody"> 
+  <div class="paragraph"> 
+   <p>Files class in java.nio.file package contains static utility methods to operate on files and directories. In this article I will provide information on some of these static methods. These methods will help us in writing simple and quick code to work on the files. The main advantage of using this class is that we no more need to handle lower level input/output streams.</p> 
+  </div> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="create_file">Create file</h4> 
+ <div class="paragraph"> 
+  <p>Quick way to create a file is using createFile method by passing the path object. If file already exists then it throws FileAlreadyExistsException, so in the below example I called deleteIfExists method before creating file. I am creating a file which is located at “/Users/pradeep/temp/data.txt” in my computer, so you can create a file with different path based on your computer. If it is Microsoft OS then use \\ in the string to separate the folder paths.</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-java" data-lang="java">Path create() throws IOException {
+        Path path = Paths.get("/Users/pradeep/temp/data.txt");
+        //deletes the file if it exists
+        Files.deleteIfExists(path);
+
+        //creates new file and returns path
+        return Files.createFile(path);
+}</code></pre> 
+  </div> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="write_to_file">Write to file</h4> 
+ <div class="paragraph"> 
+  <p>Files class have couple of overloaded write methods. In below example I used one of the write method which takes three parameters; path of the file, list of strings to be written into the file and optional array of OpenOption objects. OpenOption tells how the file is created or opened.</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-java" data-lang="java">void write() throws IOException {
+        //writes list of cities into file
+        Files.write(Paths.get("/Users/pradeep/temp/data.txt"),
+                Arrays.asList("New York", "San Francisco", "Chicago", "Orlando"));
+}</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>If we don’t pass OpenOption to this method then this method will use three default OpenOptions CREATE, TRUNCATE_EXISTING and WRITE which means creates file if it doesn’t exist, opens to write content, truncates all existing contents.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>There is another overloaded write method which takes byte[] instead of Iterable. This method is useful if you have large data so you can convert it to byte array, for example a string can be converted to byte arrays by calling getBytes() method on it.</p> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="read_file">Read file</h4> 
+ <div class="paragraph"> 
+  <p>If you want to get all lines in the file as a List&lt;String&gt; and want to read whole file at once, then you can use ‘readAllLines’ method as mentioned in below example.</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-java" data-lang="java">void read() throws IOException {
+        //readAllLines returns List&lt;String&gt; and forEach iterates on this list and prints to console
+        Files.readAllLines(Paths.get("/Users/pradeep/temp/data.txt"))
+                .forEach(System.out::println);
+}</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>In the above example I used forEach on the returned list to print each line on the console, so which means you can process each single line separately. If in case data can not be processed line by line then we can use ‘readAllBytes’ method, this will return whole file content as byte[].</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>We can also get Stream&lt;String&gt; on the file by calling ‘lines’ method. This will be useful if we want to process the content line by line, but after the processing we should close the stream. Below is the example:</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-java" data-lang="java">void read() throws IOException {
+        //get stream of strings from file
+        Stream&lt;String&gt; lines = Files.lines(Paths.get("/Users/pradeep/temp/data.txt"));
+        //process each line
+        lines.forEach(System.out::println);
+        //close the stream
+        lines.close();
+}</code></pre> 
+  </div> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="delete_file">Delete file</h4> 
+ <div class="paragraph"> 
+  <p>There are two methods available to delete a file. One of the method is ‘deleteIfExists’ which I used in create() mentioned in first example. The other method is ‘delete’</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-java" data-lang="java">void delete() throws IOException{
+        //deletes the file
+        Files.delete(Paths.get("/Users/pradeep/temp/data.txt"));
+}</code></pre> 
+  </div> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="conclusion">Conclusion</h4> 
+ <div class="paragraph"> 
+  <p>All the above examples can be used to do simple file operations easily with out using any third party libraries. Go through the Java 9 Files API to see all available methods.</p> 
+ </div> 
+</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+		<div id="push"></div>
+    
+    <!-- Footer -->
+    <footer class="bg-graphite">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <ul class="list-inline text-center list-unstyled">
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript 
+    <script src="../../../js/clean-blog.min.js"></script>
+    -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  </body>
+</html>

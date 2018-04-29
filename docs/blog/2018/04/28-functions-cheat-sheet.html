@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content="JBake">
+
+    <title>Functions cheat sheet</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../../css/clean-blog.css" rel="stylesheet">
+    <link href="../../../css/3-portfolio-theme.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <!-- link rel="shortcut icon" href="../../../favicon.ico" -->
+  </head>
+  <body>
+   
+
+        <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="../../../index.html">Java Thought</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="../../../index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../../../about.html">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Archive</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../../../contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('../../../img/home-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="site-heading">
+                        <h1>Java Thought</h1>
+                        <hr class="small">
+                        <span class="subheading">Sharing my Java experiments</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="mt-4">Functions cheat sheet</h1>
+                    <p class="mt-0 small">Posted on March 28, 2018</p>
+                    <hr>
+                    <!-- Preview Image -->
+                    <img class="img-fluid rounded post-image" src="../../../img/" alt="">
+
+
+                    <div id="preamble"> 
+ <div class="sectionbody"> 
+  <div class="paragraph"> 
+   <p>Functional interface will have single abstract method and they provide target types for lambda expressions. There are many functional interfaces in Java and they all are available in java.util.function package. I tried to organize all of them with a logical diagram and table. Table contains interface name and abstract method. You can refer this article to get an idea of available functions and its variants.</p> 
+  </div> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="consumer">Consumer</h4> 
+ <div class="paragraph"> 
+  <p>Consumer takes input and always returns void. You can use this to perform some action with out returning anything.</p> 
+ </div> 
+ <table class="tableblock frame-all grid-all spread"> 
+  <colgroup> 
+   <col style="width: 50%;"> 
+   <col style="width: 50%;"> 
+  </colgroup> 
+  <tbody> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">Consumer</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">void accept(T t)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">DoubleConsumer</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">void accept(double value)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">IntConsumer</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">void accept(int value)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">LongConsumer</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">void accept(long value)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">BiConsumer</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">void accept(T t, U t)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">ObjDoubleConsumer</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">void accept(T t, double value)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">ObjIntConsumer</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">void accept(T t, int value)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">ObjLongConsumer</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">void accept(T t, long value)</p></td> 
+   </tr> 
+  </tbody> 
+ </table> 
+</div> 
+<div class="sect3"> 
+ <h4 id="function">Function</h4> 
+ <div class="paragraph"> 
+  <p>Function takes input and produces different kind of output.</p> 
+ </div> 
+ <table class="tableblock frame-all grid-all spread"> 
+  <colgroup> 
+   <col style="width: 50%;"> 
+   <col style="width: 50%;"> 
+  </colgroup> 
+  <tbody> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">Function</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">R apply(T t)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">IntFunction</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">R apply(int value)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">LongFunction</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">R apply(long value)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">DoubleFunction</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">R apply(double value)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">DoubleToIntFunction</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">int applyAsInt(double value)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">DoubleToLongFunction</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">long applyAsLong(double value)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">IntToDoubleFunction</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">double applyAsDouble(int value)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">IntToLongFunction</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">long applyAsLong(int value)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">LongToDoubleFunction</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">double applyAsDouble(long value)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">LongToIntFunction</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">int applyAsInt(long value)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">ToDoubleFunction</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">double applyAsDouble(T value)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">ToIntFunction</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">int applyAsInt(T value)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">ToLongFunction</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">long applyAsLong(T value)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">BiFunction</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">R apply(T t, U t)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">ToDoubleBiFunction</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">double applyAsDouble(T t, U t)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">ToIntBiFunction</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">int applyAsInt(T t, U t)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">ToLongBiFunction</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">long applyAsLong(T t, U t)</p></td> 
+   </tr> 
+  </tbody> 
+ </table> 
+</div> 
+<div class="sect3"> 
+ <h4 id="operator">Operator</h4> 
+ <div class="paragraph"> 
+  <p>Operator is a special kind of function where it always accepts and produces same type.</p> 
+ </div> 
+ <table class="tableblock frame-all grid-all spread"> 
+  <colgroup> 
+   <col style="width: 50%;"> 
+   <col style="width: 50%;"> 
+  </colgroup> 
+  <tbody> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">UnaryOperator</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">T apply(T t)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">DoubleUnaryOperator</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">double applyAsDouble(double operand)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">IntUnaryOperator</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">int applyAsInt(int operand)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">LongUnaryOperator</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">long applyAsLong(long operand)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">BinaryOperator</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">R apply(T t, U t)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">DoubleBinaryOperator</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">double applyAsDouble(double left, double right)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">IntBinaryOperator</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">int applyAsInt(int left, int right)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">LongBinaryOperator</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">long applyAsLong(long left, long right)</p></td> 
+   </tr> 
+  </tbody> 
+ </table> 
+</div> 
+<div class="sect3"> 
+ <h4 id="predicate">Predicate</h4> 
+ <div class="paragraph"> 
+  <p>Predicate always returns a boolean so you can this in conditional evaluations.</p> 
+ </div> 
+ <table class="tableblock frame-all grid-all spread"> 
+  <colgroup> 
+   <col style="width: 50%;"> 
+   <col style="width: 50%;"> 
+  </colgroup> 
+  <tbody> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">Predicate</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">boolean test(T t)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">DoublePredicate</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">boolean test(double value)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">IntPredicate</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">boolean test(int t)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">LongPredicate</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">boolean test(long t)</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">BiPredicate</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">boolean test(T t, U u)</p></td> 
+   </tr> 
+  </tbody> 
+ </table> 
+</div> 
+<div class="sect3"> 
+ <h4 id="supplier">Supplier</h4> 
+ <div class="paragraph"> 
+  <p>Supplier always returns a value. This can be used to generate random values or data from some source.</p> 
+ </div> 
+ <table class="tableblock frame-all grid-all spread"> 
+  <colgroup> 
+   <col style="width: 50%;"> 
+   <col style="width: 50%;"> 
+  </colgroup> 
+  <tbody> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">Supplier</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">T get()</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">BooleanSupplier</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">boolean getAsBoolean()</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">DoubleSupplier</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">double getAsDouble()</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">IntSupplier</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">int getAsInt()</p></td> 
+   </tr> 
+   <tr> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">LongSupplier</p></td> 
+    <td class="tableblock halign-left valign-top"><p class="tableblock">long getAsLong()</p></td> 
+   </tr> 
+  </tbody> 
+ </table> 
+</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+		<div id="push"></div>
+    
+    <!-- Footer -->
+    <footer class="bg-graphite">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <ul class="list-inline text-center list-unstyled">
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript 
+    <script src="../../../js/clean-blog.min.js"></script>
+    -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  </body>
+</html>

@@ -1,12 +1,12 @@
 		<div id="push"></div>
     
     <!-- Footer -->
-    <footer>
+    <footer class="bg-graphite">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <ul class="list-inline text-center">
-                        <li>
+                <div class="col">
+                    <ul class="list-inline text-center list-unstyled">
+                        <li class="list-inline-item">
                             <a href="#">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -14,7 +14,7 @@
                                 </span>
                             </a>
                         </li>
-                        <li>
+                        <li class="list-inline-item">
                             <a href="#">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -22,7 +22,7 @@
                                 </span>
                             </a>
                         </li>
-                        <li>
+                        <li class="list-inline-item">
                             <a href="#">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -31,7 +31,7 @@
                             </a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake ${version}</a></p>
+                    <p class="copyright text-muted">Baked with <a href="http://jbake.org">JBake ${version}</a></p>
                 </div>
             </div>
         </div>
@@ -43,9 +43,9 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>js/bootstrap.min.js"></script>
 
-    <!-- Custom Theme JavaScript -->
+    <!-- Custom Theme JavaScript 
     <script src="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>js/clean-blog.min.js"></script>
-
-    
+    -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
   </body>
 </html>

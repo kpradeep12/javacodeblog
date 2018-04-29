@@ -15,7 +15,8 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/clean-blog.min.css" rel="stylesheet">
+    <link href="css/clean-blog.css" rel="stylesheet">
+    <link href="css/3-portfolio-theme.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -40,43 +41,46 @@
    
 
 	    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">Start Bootstrap</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li>
-                        <a href="about.html">About</a>
-                    </li>
-                    <li>
-                        <a href="/archive.html">Archive</a>
-                    </li>
-                    <li>
-                        <a href="contact.html">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Java Thought</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <!--<li class="nav-item">
+                <a class="nav-link" href="about.html">About</a>
+            </li>-->
+            <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Archive</a>
+            </li>
+            <!--<li class="nav-item">
+                <a class="nav-link" href="contact.html">Contact</a>
+            </li>-->
+          </ul>
         </div>
-        <!-- /.container -->
+      </div>
     </nav>
-
-
-
+	<!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('img/home-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="site-heading">
+                        <h1>Java Thought</h1>
+                        <hr class="small">
+                        <span class="subheading">Sharing my Java experiments</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+	
     <div class="container">	
 	<div class="page-header">
 		<h1>Blog Archive</h1>
@@ -86,55 +90,138 @@
 		
 		
 			
-				<h4>February 2018</h4>
+				<h4>April 2018</h4>
 				<ul>
 			
 			
-			<li>17 - <a href="blog/2018/02/1-stream-of-dates.html">Stream of dates with LocalDate</a></li>
+			<li>22 - <a href="blog/2018/04/22-strategy-design-pattern.html">Strategy design pattern</a></li>
+			
+		
+			
+				
+			
+			
+			<li>18 - <a href="blog/2018/04/18-introduction-to-java-time.html">Introduction to java.time</a></li>
+			
+		
+			
+				
+			
+			
+			<li>15 - <a href="blog/2018/04/15-how-concurrentModificationException-is-thrown.html">How ConcurrentModificationException is thrown?</a></li>
+			
+		
+			
+				
+			
+			
+			<li>11 - <a href="blog/2018/04/11-regex-tester-with-spring-shell.html">Regex Tester With Spring Shell</a></li>
+			
+		
+			
+				
+			
+			
+			<li>08 - <a href="blog/2018/04/8-infinite-streams.html">Infinite streams</a></li>
+			
+		
+			
+				
+			
+			
+			<li>03 - <a href="blog/2018/04/3-recipes-for-optional.html">Recipes for Optional</a></li>
 			
 		
 			
 				
 					</ul>
-					<h4>October 2013</h4>
+					<h4>March 2018</h4>
 					<ul>
 				
 			
 			
-			<li>17 - <a href="blog/2013/fourth-post.html">Fourth Post</a></li>
+			<li>28 - <a href="blog/2018/03/28-functions-cheat-sheet.html">Functions cheat sheet</a></li>
+			
+		
+			
+				
+			
+			
+			<li>24 - <a href="blog/2018/03/24-reduce-stream-to-single-value.html">Reduce stream to single value</a></li>
+			
+		
+			
+				
+			
+			
+			<li>21 - <a href="blog/2018/03/21-quick-way-to-create-list-set-and-map.html">Quick way to create List, Set and Map</a></li>
+			
+		
+			
+				
+			
+			
+			<li>17 - <a href="blog/2018/03/17-using-consumer-functional-interface.html">Using consumer functional interface</a></li>
+			
+		
+			
+				
+			
+			
+			<li>14 - <a href="blog/2018/03/14-create-maven-project-in-github.html">Create Maven project in GitHub</a></li>
+			
+		
+			
+				
+			
+			
+			<li>10 - <a href="blog/2018/03/10-fixed-thread-pool-using-executor-framework.html">Fixed Thread Pool using Executor framework</a></li>
+			
+		
+			
+				
+			
+			
+			<li>07 - <a href="blog/2018/03/7-producer-consumer-with-bounded-blocked-queue.html">Producer and Consumer with Bounded Blocked Queue</a></li>
+			
+		
+			
+				
+			
+			
+			<li>03 - <a href="blog/2018/03/3-generate-stream-of-random-numbers.html">Generate stream of random numbers</a></li>
 			
 		
 			
 				
 					</ul>
-					<h4>September 2013</h4>
+					<h4>February 2018</h4>
 					<ul>
 				
 			
 			
-			<li>26 - <a href="blog/2013/third-post.html">Third Post</a></li>
+			<li>28 - <a href="blog/2018/02/28-quickway-to-create-read-write-delete-files.html">Quick way to create, read, write and delete files in Java</a></li>
 			
 		
 			
 				
-					</ul>
-					<h4>August 2013</h4>
-					<ul>
-				
 			
 			
-			<li>25 - <a href="blog/2013/second-post.html">Second Post</a></li>
+			<li>23 - <a href="blog/2018/02/23-quick-introduction-to-priorityQueue.html">Quick introduction to PriorityQueue</a></li>
 			
 		
 			
 				
-					</ul>
-					<h4>July 2013</h4>
-					<ul>
+			
+			
+			<li>21 - <a href="blog/2018/02/21-using-comparing-methods-in-comparator-interface.html">Using comparing methods in Comparator Interface</a></li>
+			
+		
+			
 				
 			
 			
-			<li>24 - <a href="blog/2013/first-post.html">First Post</a></li>
+			<li>17 - <a href="blog/2018/02/17-stream-of-dates-with-localdate.html">Stream of dates with LocalDate</a></li>
 			
 		
 	</ul>
@@ -143,12 +230,12 @@
 		<div id="push"></div>
     
     <!-- Footer -->
-    <footer>
+    <footer class="bg-graphite">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <ul class="list-inline text-center">
-                        <li>
+                <div class="col">
+                    <ul class="list-inline text-center list-unstyled">
+                        <li class="list-inline-item">
                             <a href="#">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -156,7 +243,7 @@
                                 </span>
                             </a>
                         </li>
-                        <li>
+                        <li class="list-inline-item">
                             <a href="#">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -164,7 +251,7 @@
                                 </span>
                             </a>
                         </li>
-                        <li>
+                        <li class="list-inline-item">
                             <a href="#">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -173,7 +260,7 @@
                             </a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+                    <p class="copyright text-muted">Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
                 </div>
             </div>
         </div>
@@ -185,9 +272,9 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
-    <!-- Custom Theme JavaScript -->
+    <!-- Custom Theme JavaScript 
     <script src="js/clean-blog.min.js"></script>
-
-    
+    -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
   </body>
 </html>

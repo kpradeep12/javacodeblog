@@ -1,36 +1,25 @@
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>index.html">Start Bootstrap</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>index.html">Home</a>
-                    </li>
-                    <li>
-                        <a href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>about.html">About</a>
-                    </li>
-                    <li>
-                        <a href="/${config.archive_file}">Archive</a>
-                    </li>
-                    <li>
-                        <a href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>contact.html">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>index.html">Java Thought</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>index.html">Home</a>
+            </li>
+            <!--<li class="nav-item">
+                <a class="nav-link" href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>about.html">About</a>
+            </li>-->
+            <li class="nav-item">
+                <a class="nav-link" href="/${config.archive_file}">Archive</a>
+            </li>
+            <!--<li class="nav-item">
+                <a class="nav-link" href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>contact.html">Contact</a>
+            </li>-->
+          </ul>
         </div>
-        <!-- /.container -->
+      </div>
     </nav>
-

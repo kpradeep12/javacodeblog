@@ -2,29 +2,2271 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>JBake</title>
-    <link>http://jbake.org</link>
-    <atom:link href="http://jbake.org/feed.xml" rel="self" type="application/rss+xml" />
+    <link>http://localhost:8820</link>
+    <atom:link href="http://localhost:8820/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Thu, 26 Apr 2018 22:48:49 -0400</pubDate>
-    <lastBuildDate>Thu, 26 Apr 2018 22:48:49 -0400</lastBuildDate>
+    <pubDate>Sat, 28 Apr 2018 23:37:49 -0400</pubDate>
+    <lastBuildDate>Sat, 28 Apr 2018 23:37:49 -0400</lastBuildDate>
 
     
     <item>
+      <title>Strategy design pattern</title>
+      <link>http://localhost:8820/blog/2018/04/22-strategy-design-pattern.html</link>
+      <pubDate>Sun, 22 Apr 2018 00:00:00 -0400</pubDate>
+      <guid isPermaLink="false">blog/2018/04/22-strategy-design-pattern.html</guid>
+      <description>
+      &lt;div id=&quot;preamble&quot;&gt; 
+ &lt;div class=&quot;sectionbody&quot;&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;This article will explain the strategy design pattern using functional interfaces. Sometimes application may need to execute an algorithm conditionally. Here the algorithm means nothing but a strategy, execution of this strategy depends on runtime conditions or it depends on the input received from the user. For example, sorting a list of persons can be a strategy and a type of the sorting can depend on age or name, Encrypting a string can be strategy and this strategy can depend on the type like RSA or Blowfish.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;We can conditionally execute algorithms based on the if or switch conditions like below&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;public class EncryptClient {
+    static String encryptMessage(String type, String input){
+        //to shorten the code this method just converts the case of the input
+        if(type.equals(&quot;RSA&quot;))
+            return input.toUpperCase();
+        else if(type.equals(&quot;Blowfish&quot;))
+            return input.toLowerCase();
+        return input;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(EncryptClient.encryptMessage(&quot;RSA&quot;,&quot;teXt&quot;));
+    }
+}&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;The problem with the above code is, EncryptClient class needs to modified for every new algorithm added. Also modification needed, if name of the type changes. This is not a good design.&lt;/p&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;strategy_design_pattern&quot;&gt;Strategy design pattern&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Instead of executing algorithm conditionally we use an interface to define the strategy.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;public class EncryptClient {
+    static String encryptMessage(EncryptionStrategy es, String input){
+        return es.encrypt(input);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(EncryptClient.encryptMessage(new RSAEncryption(),&quot;teXt&quot;));
+    }
+}
+
+interface EncryptionStrategy{
+    public String encrypt(String input);
+}
+class RSAEncryption implements EncryptionStrategy{
+    @Override
+    public String encrypt(String input){
+        	//to shorten the code this method just converts the input to upper case
+        return input.toUpperCase();
+    }
+}
+class BlowFishEncryption implements EncryptionStrategy{
+    @Override
+    public String encrypt(String input) {
+        //to shorten the code this method just converts the input to lower case
+        return input.toLowerCase();
+    }
+}&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;We created an interface (EncryptionStrategy) and implemented it for each algorithm. Note that the implementation classes are not actually encrypting the input but instead converting the case of the input characters, this is to reduce the code size, in real word application it should call a method which contains real algorithm. Instead of passing the name of the algorithm we passed the implementation to encryptMessage method. No more if conditions are needed in encryptMessage method because it receives the EncryptionStrategy as one of the parameter so it just uses it. In future we can create new class for new algorithm which implements EncryptionStrategy and there will be no change needed in encryptMessage method. We further optimize and improve the code using static interface methods, which will be explained in below section.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;sect4&quot;&gt; 
+  &lt;h5 id=&quot;strategy_pattern_with_static_interface_methods&quot;&gt;Strategy pattern with static interface methods&lt;/h5&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Another approach to implement strategy pattern is using static methods in the interface, this way, instead of creating new class for each implementation we have to create new static method in the interface. This will help us to have less number of classes. Static methods in interface are introduced in Java 8.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;public class EncryptClient {
+    static String encryptMessage(EncryptionStrategy es, String input){
+        return es.encrypt(input);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(EncryptClient.encryptMessage(EncryptionStrategy.getRSAStrategy(),&quot;teXt&quot;));
+    }
+}
+
+interface EncryptionStrategy{
+    public String encrypt(String input);
+
+    static EncryptionStrategy getRSAStrategy(){
+		  //returns lambda, which implements encrypt method of EncryptionStrategy
+        return input -&amp;gt; input.toUpperCase();
+    }
+    static EncryptionStrategy getBlowFishStrategy(){
+        return input -&amp;gt; input.toLowerCase();
+    }
+}&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;getRSAStrategy and getBlowfishStrategy returns the lambda which implements the EncyrptionStrategy interface.&lt;/p&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;sect4&quot;&gt; 
+  &lt;h5 id=&quot;strategy_pattern_with_functional_interfaces&quot;&gt;Strategy pattern with functional interfaces.&lt;/h5&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;We can improve and optimize this code even more by utilizing functional interfaces. If you observe the EncryptionStrategy interface, it is having a single method which is encrypt, this method accepts and returns String. This is how the UnaryOperator interface in java.util.function package works. UnaryOperator accepts and returns the same type. Java provided some standard functional interfaces, we can utilize these interfaces instead of creating new ones.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;public class EncryptClient {
+    static String encryptMessage(UnaryOperator&amp;lt;String&amp;gt; es, String input){
+        return es.apply(input);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(
+                EncryptClient.encryptMessage(
+                        input -&amp;gt; input.toUpperCase(),&quot;teXt&quot;));
+    }
+}&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;We no more need any custom interface, instead we can use UnaryOperator because it accepts and returns same type. EncryptionStrategy is doing the same thing so instead of using this interface we can reuse exiting functional interfaces. Caller of encryptMessage is passing the lambda which is the implementation on UnaryOperator. This lambda is just passing the case conversion logic but in real world application caller will pass the real call to the algorithm, this is to just make code smaller for this article purpose.&lt;/p&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;We have seen how strategy design pattern works and multiple ways to design it in the Java.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
+    
+    <item>
+      <title>Introduction to java.time</title>
+      <link>http://localhost:8820/blog/2018/04/18-introduction-to-java-time.html</link>
+      <pubDate>Wed, 18 Apr 2018 00:00:00 -0400</pubDate>
+      <guid isPermaLink="false">blog/2018/04/18-introduction-to-java-time.html</guid>
+      <description>
+      &lt;div id=&quot;preamble&quot;&gt; 
+ &lt;div class=&quot;sectionbody&quot;&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;This article will provide introduction to the java.time package. This package is introduced in Java 8 version and it contains many classes and interfaces to represent and process dates and times. Below are the five most basic classes you need to know in this package.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;&lt;strong&gt;LocalDate:&lt;/strong&gt; a date without a time. You can store year, month and day. If you want to work on only dates with out any time information, then this is the class. For example, you can store birthday dates.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;&lt;strong&gt;LocalTime:&lt;/strong&gt; a time without a date and time-zone. You can store hour, minutes and seconds. Stop-watch is the example, where only hours, minutes and seconds are needed.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;&lt;strong&gt;LocalDateTime:&lt;/strong&gt; a date and time with out time-zone. This class can represent all date and time fields like year, month, day, hour, minute and second. Date and time of the local foot ball match can be saved in this instance.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;&lt;strong&gt;ZonedDateTime:&lt;/strong&gt; a date, time and time-zone. Meeting invite in a calendar may require all these fields. It becomes complex to process time with zone information so its better to use this class only if required.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;&lt;strong&gt;Instant:&lt;/strong&gt; a timestamp. This is the long number represents epoch-seconds. For example, a network ping application needs epoch seconds to calculate the timing of the network packets.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;All classes in java.time package are thread-safe and all are immutable. Every change to the object results in the new instance of it. This package uses a consistent method prefixes for all standard operations and which made this API to understand easily.&lt;/p&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;creating_new_instance&quot;&gt;Creating new instance&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Use static method now(), to create the instances based on the current time, this method creates instance based on the system clock. In the below example, I created instances using now().&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;LocalDate date = LocalDate.now();
+LocalTime time = LocalTime.now();
+LocalDateTime dateTime = LocalDateTime.now();
+ZonedDateTime zonedDateTime = ZonedDateTime.now();
+Instant instant = Instant.now();&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;If you want to create instance based on particular time, then use static method of(). Methods with prefix ‘of’ will create instance based on the provided arguments.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;public static LocalDate of​(int year, int month, int dayOfMonth)
+public static LocalTime of​(int hour,  int minute, int second)
+public static LocalDateTime of​(int year, int month, int dayOfMonth, int hour, int minute, int second)
+public static ZonedDateTime of​(LocalDateTime localDateTime, ZoneId zone)
+public static Instant ofEpochSecond​(long epochSecond)&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;There are other overloaded methods for ‘of’ and ‘now’, read the documentation for all available methods. If you want to create instances based on the string then you can use parse method. Parse method takes CharSequence and returns time object. Below example creates LocalDate based on the string.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;LocalDate date = LocalDate.parse(&quot;2018-01-01&quot;);&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Note that we need to pass string in ISO format. This method throws DateTimeParseException if you pass different format. ISO formats are the standard, when you want to parse any string then check if the string is a ISO format, if it is, then you can pass it to parse method directly. Below are the list of parse methods in all the classes.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;// accepts ISO_LOCAL_DATE ex: &apos;2011-12-03&apos;
+public static LocalDate parse​(CharSequence text)
+
+// accepts ISO_LOCAL_TIME ex: &apos;10:15:30&apos;
+public static LocalTime parse​(CharSequence text)
+
+// accepts ISO_LOCAL_DATE_TIME ex: &apos;2011-12-03T10:15:30&apos;
+public static LocalDateTime parse​(CharSequence text)
+
+//accepts ISO_ZONED_DATE_TIME ex: &apos;2011-12-03T10:15:30+01:00[Europe/Paris]&apos;
+public static ZonedDateTime parse​(CharSequence text)
+
+//accepts ISO_INSTANT ex: &apos;2011-12-03T10:15:30Z&apos;
+public static Instant parse​(CharSequence text)&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Some times we need to parse different format then we can use another version of the parse method which also takes DateTimeFormatter.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;LocalDate.parse(&quot;1 Jan 2018&quot;, DateTimeFormatter.ofPattern(&quot;d MMM uuuu&quot;));&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Above example shows the basic usage of parsing with DateTimeFormatter. In this article I am not providing much information on DateTimeFormatter because it is a huge class with lot of methods.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;This article provided information about the basic classes in java.time package and the different ways to create there instances.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
+    
+    <item>
+      <title>How ConcurrentModificationException is thrown?</title>
+      <link>http://localhost:8820/blog/2018/04/15-how-concurrentModificationException-is-thrown.html</link>
+      <pubDate>Sun, 15 Apr 2018 00:00:00 -0400</pubDate>
+      <guid isPermaLink="false">blog/2018/04/15-how-concurrentModificationException-is-thrown.html</guid>
+      <description>
+      &lt;div id=&quot;preamble&quot;&gt; 
+ &lt;div class=&quot;sectionbody&quot;&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;How concurrent modification detection logic works and on what basis ConcurrentModificationException is thrown? This article will explain these questions. Iterating a collection is one of the important operation we usually perform and it can be a time consuming if collection is big enough. Iterator interface is the responsible for iterating the collection. Many collection classes in Java implement iterator like List and Set. If we want to iterate through the collection we first need to get the instance of it, we can get it by calling iterate(). Refer below code, which gets iterator from list.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;var numList = new ArrayList&amp;lt;&amp;gt;(List.of(1,2,3));
+var iterator = numList.iterator();
+iterator.forEachRemaining((num) -&amp;gt; {
+	System.out.println(num);
+});&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Note that I used local variable type inference so I can declare variables with ‘var’. This is the new feature in version 10. This code gets iterator from ArrayList and iterates the list using forEachRemaining. forEachRemaining is a default method in Iterator which is introduced in Java 1.8 and we can use it to replace traditional while loop. This code just works fine and prints the numbers in the console. For your reference Iterator has below methods;&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;default void forEachRemaining​(Consumer&amp;lt;? super E&amp;gt; action)
+boolean hasNext()
+E next()
+default void remove()&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;adding_an_element&quot;&gt;Adding an element&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Lets see what happens when numList.iterator() is called. From now on, I refer collection as the classes which implement iterator interface like List or Set. Collections will maintain a private modification count variable and this count gets updated on every modification like addition or deletion of elements.Modification count is the internal private variable so we can not access this variable. When iterator() is called on the collection, it creates a new instance of iterator and modification count is passed to this new iterator instance. In the above example, we created a list of size 3 and an iterator, both of them will have the same modification count. Now lets add an element to the list after the iterator instance creation.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;var numList = newArrayList&amp;lt;&amp;gt;(List.of(1,2,3));
+var iterator = numList.iterator();
+numList.add(4);
+iterator.forEachRemaining((num) -&amp;gt; {
+    System.out.println(num);
+});&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;It throws ConcurrentModificationException at line number 4. All iterator methods except hasNext() will compare modification count of iterator and collection instance. In the above case collection is modified at line number 3 so collections modification count gets updated but iterator will have old count. Counts will not match when forEachRemaining is executed so it throws ConcurrentModificationException. This approach is called fail-fast; because exception is thrown before performing the real action. Note that this modification can occur in a multi threaded environment but for simplicity purpose I not used any threads. This comparison will help the iterator to detect the modifications in the collection and in case of mismatch it throws an exception.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;I can add a new element after iterating the collection but I need to get new iterator instance to iterate again else I get exception because of different modification counts between the updated collection and old iterator instance.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;removing_an_element&quot;&gt;Removing an element&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Calling remove after the creation of iterator will throw ConcurrentModificationException. Check below code;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;var numList = newArrayList&amp;lt;&amp;gt;(List.of(1,2,3));
+var iterator = numList.iterator();
+numList.remove(1);
+iterator.forEachRemaining((num) -&amp;gt; {
+    System.out.println(num);
+});&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;At line number 3 we removed element from the collection, iterator will detect it in forEachRemaining method and throws exception because list’s modification count gets updated but it is not passed down to the iterator, so comparison fails in forEachRemaining method and it throws exception. Alternatively we can call remove() on iterator which will not throw exception because remove method will update modification count of itself and also it passes new count to its creator, in this case creator is the list instance such that iterator and collection will be in sync. Below is the updated code which removes element using remove() of iterator instance.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;var numList = newArrayList&amp;lt;&amp;gt;(List.of(1,2,3));
+var iterator = numList.iterator();
+iterator.next();
+iterator.remove();
+numList.forEach(System.out::println);&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Because the first element is removed so this code prints 2 and 3. Note that I moved iterators position to the next element by calling next() because by default it will not point to any element. This code will not throw ConcurrentModificationException because remove() method will pass new modification count to the list.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;modifications_in_listiterator&quot;&gt;Modifications in ListIterator&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;ListIterator is the sub interface of Iterator and this also depends on modification count to detect concurrent modifications. Along with the behavior of iterator, it supports addition, update and reverse iteration operations. When ListIterator instance is created, it gets modification count from the collection and it validates this count on every operation. If count mismatch happens, then it throws exception. All the modification operations like add, update and remove in the ListIterator will pass the updated modification count to its creator, in this case it is the list. Below is the example;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;var numList = newArrayList&amp;lt;&amp;gt;(List.of(1,2,3));
+var iterator = numList.listIterator();
+//removes 1 from the list
+iterator.next();
+iterator.remove();
+//updates 2 with 0
+iterator.next();
+iterator.set(0);
+//adds 4 to the list
+iterator.add(4);
+numList.forEach(System.out::println);&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;exception_with_hidden_iterators&quot;&gt;Exception with hidden iterators&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Code can throw ConcurrentModificationException with out direct use of iterator because of hidden iterators. For example, for-each loop will internally creates iterator instance so concurrent modifications will make for-each to throw exception. Be cautious when using internal iterators. There are many methods which uses iterators internally. See below example;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;System.out.println(numList.toString());&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;toString() of list uses iterator to construct the string from each element of it. Similarly containsAll, removeAll, retainAll and constructors that take collection internally uses iterator and all of these methods can throw ConcurrentModificationException.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Collection can not be modified directly once the iterator is created but we can modify indirectly using the iterator instance. ConcurrentModificationException will give us the clue that multiple parts of the application is modifying the collection so it helps us to debug the issue.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
+    
+    <item>
+      <title>Regex Tester With Spring Shell</title>
+      <link>http://localhost:8820/blog/2018/04/11-regex-tester-with-spring-shell.html</link>
+      <pubDate>Wed, 11 Apr 2018 00:00:00 -0400</pubDate>
+      <guid isPermaLink="false">blog/2018/04/11-regex-tester-with-spring-shell.html</guid>
+      <description>
+      &lt;div id=&quot;preamble&quot;&gt; 
+ &lt;div class=&quot;sectionbody&quot;&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Spring framework is the suite of many projects, using which we can develop wide variety of applications. These applications may need user interaction, the most common way is to have a web interface. Not all applications need to have a web interface, a simple command line interface can be suffice for some type of applications. Spring Shell is a simple project which provides the infrastructure to build command line interface applications easily and quickly.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;In this article I will show the steps needed to create a Spring shell project which tests the regex string provided at the command line. Easier way to create spring project is using &lt;a href=&quot;https://start.spring.io/&quot;&gt;start.spring.io&lt;/a&gt; Go to the site and select you choice of configuration with ‘Spring Shell’ as dependency. See below screenshot for the reference.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph text-center&quot;&gt; 
+   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/Post-Regex-tester-spring-starter.png&quot; alt=&quot;Regex tester spring starter&quot; width=&quot;550&quot; height=&quot;300&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Click on ‘Generate Project’ which will download the pre-configured spring project. Unzip and import it into your favorite java editor.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph text-center&quot;&gt; 
+   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/Post-Regex-tester-spring-shell-pom.png&quot; alt=&quot;Regex tester spring shell&quot; width=&quot;570&quot; height=&quot;300&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Now we have empty spring shell project ready.&lt;/p&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;create_command_for_regex_tester&quot;&gt;Create command for Regex tester&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Creating a command is as simple as creating a class and method in Spring shell. Lets first create a class ‘RegexTester.java’ and annotate it will @ShellComponent.All command related classes need to be annotated with ShellComponent, this is a stereotype annotation which helps spring to configure component for the command interface. Add a method in this class and annotate with @ShellMethod. See code below;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;package com.regex.regextester;
+
+import org.springframework.shell.standard.ShellComponent;
+import org.springframework.shell.standard.ShellMethod;
+import java.util.regex.Pattern;
+
+@ShellComponent
+public class RegexTester {
+
+    @ShellMethod(&quot;Regex tester&quot;)
+    public void regex(String pattern, String text){
+        Pattern.compile(pattern)
+                .matcher(text)
+                .results()
+                .forEach(mr -&amp;gt; {
+                    System.out.printf(&quot;Match: %s\n&quot;,
+                            text.substring(0,mr.start())+
+                                    &quot;&apos;&quot;+
+                                    mr.group()+
+                                    &quot;&apos;&quot;+
+                                    text.substring(mr.end(),text.length()));
+                });
+    }
+}&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;A method annotated with @ShellMethod becomes the command. In the example above, ‘regex’ becomes the command name and it expects two parameters. First parameter is the regex pattern and second one is the text on which regex pattern will be tested.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;build_project&quot;&gt;Build project&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;I used Maven to build the application. In the project folder execute below command to execute maven build;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;./mvnw clean install -DskipTests&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Maven will download the required dependencies and builds the project. Packaged jar will be created in target folder.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;run_regex_tester&quot;&gt;Run Regex tester&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Maven build zipped all the required dependencies into regex-tester-0.0.1-SNAPSHOT.jar it even contains Spring Shell in it. Lets run this jar with java command. In the command prompt, go to the project folder and execute below command.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;java -jar target/regex-tester-0.0.1-SNAPSHOT.jar&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;You should see a prompt saying ‘shell:&amp;gt;’ As I mentioned earlier, spring shell provides the required infrastructure for the command line interface so this prompt is provided by the spring shell and it is ready to take the commands. lets execute some commands on the shell prompt.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph text-center&quot;&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/Post-Regex-tester-regex-cli.png&quot; alt=&quot;Regex tester cli&quot; width=&quot;500&quot; height=&quot;140&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;I passed ‘ab’ as the pattern and ‘abcabc’ as the test string to regex command. Spring will internally execute regex method and passes provided arguments to it. The output of the method will be printed in the console. We can continue to test regex command multiple times with different strings and it can be used as regex utility in local.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;For the same ShellController class we can add multiple methods and use them as different commands. After completing the regex testing, type ‘exit’ to quit from the shell. We have completed spring shell project with simple regex tester. You can continue to explore and learn more on Spring shell at this &lt;a href=&quot;https://docs.spring.io/spring-shell/docs/2.0.1.BUILD-SNAPSHOT/reference/htmlsingle/#_what_is_spring_shell&quot;&gt;link&lt;/a&gt;. Happy Coding!&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
+    
+    <item>
+      <title>Infinite streams</title>
+      <link>http://localhost:8820/blog/2018/04/8-infinite-streams.html</link>
+      <pubDate>Sun, 8 Apr 2018 00:00:00 -0400</pubDate>
+      <guid isPermaLink="false">blog/2018/04/8-infinite-streams.html</guid>
+      <description>
+      &lt;div id=&quot;preamble&quot;&gt; 
+ &lt;div class=&quot;sectionbody&quot;&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Streams allows us to generate endless progression of discrete objects. There are couple of methods available in Java which will help us to generate infinite sequences.&lt;/p&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;with_streams&quot;&gt;With streams&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;There are four main stream interfaces in java.util.stream package; Stream, IntStream, LongStream and DoubleStream. All of these interfaces have a common method called iterate, which will generate infinite objects. I am using IntStream as an example in this article but these examples are also applicable for other stream interfaces.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://docs.oracle.com/javase/9/docs/api/java/util/stream/IntStream.html#iterate-int-java.util.function.IntUnaryOperator-&quot;&gt;static IntStream iterate​(int seed, IntUnaryOperator f)&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;This method generates infinite sequence of integers based on the provided unary operator. Unary operator is one of the functional interface which takes single parameter and returns same type of result. Iterate in IntStream expects IntUnaryOperator so it always takes and returns integer. We can implement unary operator to generate customizable sequence. Input to this unary operator is always its previous returned result but for first execution it gets the seed from the first parameter. If f is an unary operator then it generates sequence like {seed, f(seed), f(f(seed)), f(f(f(seed))) … }&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Below code starts from 0 and continues to generate numbers by incrementing two.We can customize the lambda expression to generate different type of sequences. I added a limit on the sequence else the code continues to execute indefinitely.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;IntStream.iterate(0, (i) -&amp;gt; i+2)
+	.limit(100)
+        .forEach(System.out::println);&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;We can also use ‘generate’ method which takes the supplier as parameter. This method can be used to generate constant or random numbers. Supplier is a functional interface which will not take any input so it will not depend on its previous state.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://docs.oracle.com/javase/9/docs/api/java/util/stream/IntStream.html#generate-java.util.function.IntSupplier-&quot;&gt;static IntStream generate​(IntSupplier s)&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;with_random_class&quot;&gt;With Random class&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Random class provides some utility methods to generate infinite random numbers in the form of integers, longs or doubles. In below example I used ints method, which takes inclusive start and exclusive end range.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;Random r = new Random(120);
+r.ints(10, 30)
+   .limit(100)
+   .forEach(System.out::println);&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
+    
+    <item>
+      <title>Recipes for Optional</title>
+      <link>http://localhost:8820/blog/2018/04/3-recipes-for-optional.html</link>
+      <pubDate>Tue, 3 Apr 2018 00:00:00 -0400</pubDate>
+      <guid isPermaLink="false">blog/2018/04/3-recipes-for-optional.html</guid>
+      <description>
+      &lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Optional allows us to wrap a nullable object in it so we can make a method to return Optional instead of bare object. There is a possibility that below method can return null; so we need to explicitly do the null check on the returned object before using it.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;Employee getEmployee(Integer id){
+ //return employee;
+}&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Check below modified method which returns Optional&amp;lt;Employee&amp;gt; and it communicates very well, saying that the result can be null.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;Optional&amp;lt;Employee&amp;gt; getEmployee(Integer id){
+ // return optional employee
+}&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;I will go through some recipes to handle Optional results, before that lets create an EmployeeService which returns Employee object.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;class Employee{
+    private Integer id;
+    private String name;
+    private Integer age;
+
+    Employee(Integer id, String name, Integer age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
+
+    public Integer getId() { return id; }
+    public String getName() { return name; }
+    public Integer getAge() { return age; }
+
+    @Override
+    public String toString() {
+        return &quot;Employee{ id=&quot; + id +
+                &quot;, name=&apos;&quot; + name + &apos;\&apos;&apos; +
+                &quot;, age=&quot; + age + &apos;}&apos;;
+    }
+}
+
+public class EmployeeService {
+    Map&amp;lt;Integer, Employee&amp;gt; store = Map.of(1, new Employee(1, &quot;Peter&quot;, 34),
+            2, new Employee(2, &quot;John&quot;, 28),
+            3, new Employee(3, &quot;Bill&quot;, 42));
+
+    Optional&amp;lt;Employee&amp;gt; getEmployee(Integer id){
+        return Optional.ofNullable(store.get(id));
+    }
+}&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;&lt;strong&gt;Recipe 1:&lt;/strong&gt; Check if result is present in the Optional using isPresent() and if it present then get the result using get() function.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;EmployeeService es = new EmployeeService();
+Optional&amp;lt;Employee&amp;gt; emp = es.getEmployee(2);
+if(emp.isPresent()){
+    System.out.println(emp.get());
+}
+//Output: Employee{id=2, name=&apos;John&apos;, age=28}&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Its not a good practice to use isPresent and get methods because this code is doing regular null check and then performing action on it. Instead follow the next recipes which will show you different ways to use Optional result. I used these methods to show available functions in the Optional class.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;&lt;strong&gt;Recipe 2:&lt;/strong&gt; Consume the result with out checking null. ifPresent() takes a consumer and it is executed only if the result is not null. We no need to explicitly check the null.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;EmployeeService es = new EmployeeService();
+es.getEmployee(2)
+    .ifPresent(System.out::println);
+//Output: Employee{id=2, name=&apos;John&apos;, age=28}&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;&lt;strong&gt;Recipe 3:&lt;/strong&gt; Consume and perform action if the result is present and if not present then perform empty action. ifPresentOrElse function takes two parameters, first parameter is consumer which will be executed if the result is present and second parameter is a runnable which will be executed when the result is null.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;EmployeeService es = new EmployeeService();
+//Employee id 5 is not available.
+es.getEmployee(5)
+    .ifPresentOrElse(System.out::println,
+                     () -&amp;gt; {System.out.println(&quot;No object present&quot;);});
+//Output: No object present&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;&lt;strong&gt;Recipe 4:&lt;/strong&gt; Perform filter before consuming the result. Filter function takes predicate and returns Optional. We can test the result before processing. Filter function returns empty Optional if predicate returns false.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;EmployeeService es = new EmployeeService();
+es.getEmployee(3)
+      .filter(emp -&amp;gt; emp.getAge() &amp;gt; 40)
+      .ifPresent(System.out::println);
+//Output: Employee{ id=3, name=&apos;Bill&apos;, age=42}&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;&lt;strong&gt;Recipe 5:&lt;/strong&gt; If result is present then perform action on it else perform action by creating new Optional. If getEmployee did not return Employee then we can create and return empty Employee. Other alternatives to this function is orElse(T other), orElseGet(Supplier&amp;lt;? extends T&amp;gt; supplier) both of these functions returns T instead of Optional&amp;lt;T&amp;gt;&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;EmployeeService es = new EmployeeService();
+//Employee id 5 is not available.
+es.getEmployee(5)
+        .or(() -&amp;gt; {return Optional.of(new Employee(0, &quot;&quot;, 0));})
+        .ifPresent(System.out::println);
+//Output: Employee{ id=0, name=&apos;&apos;, age=0}&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;&lt;strong&gt;Recipe 6:&lt;/strong&gt; Throw exception if result is not present. orElseThrow takes supplier which should return throwable object.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;EmployeeService es = new EmployeeService();
+es.getEmployee(5).orElseThrow(() -&amp;gt; {
+            return new IllegalStateException(&quot;employee not available&quot;);
+        });
+//Output: Exception in thread &quot;main&quot; java.lang.IllegalStateException: employee not available&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;&lt;strong&gt;Recipe 7:&lt;/strong&gt; We can map the result to different type with map function. For example using map we can extract employee age from the employee object. The returned employee age from the map is wrapped in its own Optional. So make sure to unwrap it before using.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;EmployeeService es = new EmployeeService();
+es.getEmployee(2)
+        .map(Employee::getAge)
+        .ifPresent(System.out::println);
+//Output: 28&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;&lt;strong&gt;Recipe 8:&lt;/strong&gt; Alternative to map is flatMap function. Both of these functions returns Optional except in flatMap we need to explicitly map to Optional.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;EmployeeService es = new EmployeeService();
+es.getEmployee(2)
+        .flatMap(emp -&amp;gt; Optional.of(emp.getAge()))
+        .ifPresent(System.out::println);
+//Output: 28&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
+    
+    <item>
+      <title>Functions cheat sheet</title>
+      <link>http://localhost:8820/blog/2018/03/28-functions-cheat-sheet.html</link>
+      <pubDate>Wed, 28 Mar 2018 00:00:00 -0400</pubDate>
+      <guid isPermaLink="false">blog/2018/03/28-functions-cheat-sheet.html</guid>
+      <description>
+      &lt;div id=&quot;preamble&quot;&gt; 
+ &lt;div class=&quot;sectionbody&quot;&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Functional interface will have single abstract method and they provide target types for lambda expressions. There are many functional interfaces in Java and they all are available in java.util.function package. I tried to organize all of them with a logical diagram and table. Table contains interface name and abstract method. You can refer this article to get an idea of available functions and its variants.&lt;/p&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;consumer&quot;&gt;Consumer&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Consumer takes input and always returns void. You can use this to perform some action with out returning anything.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph text-center&quot;&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/consumer-function.png&quot; alt=&quot;Consumer Function&quot; width=&quot;590&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;table class=&quot;tableblock frame-all grid-all spread&quot;&gt; 
+  &lt;colgroup&gt; 
+   &lt;col style=&quot;width: 50%;&quot;&gt; 
+   &lt;col style=&quot;width: 50%;&quot;&gt; 
+  &lt;/colgroup&gt; 
+  &lt;tbody&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Consumer&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;void accept(T t)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;DoubleConsumer&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;void accept(double value)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;IntConsumer&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;void accept(int value)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;LongConsumer&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;void accept(long value)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;BiConsumer&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;void accept(T t, U t)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;ObjDoubleConsumer&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;void accept(T t, double value)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;ObjIntConsumer&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;void accept(T t, int value)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;ObjLongConsumer&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;void accept(T t, long value)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+  &lt;/tbody&gt; 
+ &lt;/table&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;function&quot;&gt;Function&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Function takes input and produces different kind of output.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph text-center&quot;&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/function.png&quot; alt=&quot;Function&quot; width=&quot;590&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;table class=&quot;tableblock frame-all grid-all spread&quot;&gt; 
+  &lt;colgroup&gt; 
+   &lt;col style=&quot;width: 50%;&quot;&gt; 
+   &lt;col style=&quot;width: 50%;&quot;&gt; 
+  &lt;/colgroup&gt; 
+  &lt;tbody&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Function&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;R apply(T t)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;IntFunction&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;R apply(int value)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;LongFunction&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;R apply(long value)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;DoubleFunction&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;R apply(double value)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;DoubleToIntFunction&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;int applyAsInt(double value)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;DoubleToLongFunction&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;long applyAsLong(double value)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;IntToDoubleFunction&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;double applyAsDouble(int value)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;IntToLongFunction&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;long applyAsLong(int value)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;LongToDoubleFunction&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;double applyAsDouble(long value)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;LongToIntFunction&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;int applyAsInt(long value)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;ToDoubleFunction&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;double applyAsDouble(T value)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;ToIntFunction&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;int applyAsInt(T value)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;ToLongFunction&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;long applyAsLong(T value)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;BiFunction&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;R apply(T t, U t)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;ToDoubleBiFunction&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;double applyAsDouble(T t, U t)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;ToIntBiFunction&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;int applyAsInt(T t, U t)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;ToLongBiFunction&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;long applyAsLong(T t, U t)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+  &lt;/tbody&gt; 
+ &lt;/table&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;operator&quot;&gt;Operator&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Operator is a special kind of function where it always accepts and produces same type.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph text-center&quot;&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/operator-function.png&quot; alt=&quot;Operator Function&quot; width=&quot;590&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;table class=&quot;tableblock frame-all grid-all spread&quot;&gt; 
+  &lt;colgroup&gt; 
+   &lt;col style=&quot;width: 50%;&quot;&gt; 
+   &lt;col style=&quot;width: 50%;&quot;&gt; 
+  &lt;/colgroup&gt; 
+  &lt;tbody&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;UnaryOperator&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;T apply(T t)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;DoubleUnaryOperator&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;double applyAsDouble(double operand)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;IntUnaryOperator&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;int applyAsInt(int operand)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;LongUnaryOperator&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;long applyAsLong(long operand)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;BinaryOperator&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;R apply(T t, U t)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;DoubleBinaryOperator&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;double applyAsDouble(double left, double right)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;IntBinaryOperator&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;int applyAsInt(int left, int right)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;LongBinaryOperator&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;long applyAsLong(long left, long right)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+  &lt;/tbody&gt; 
+ &lt;/table&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;predicate&quot;&gt;Predicate&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Predicate always returns a boolean so you can this in conditional evaluations.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph text-center&quot;&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/predicate-function.png&quot; alt=&quot;Predicate Function&quot; width=&quot;590&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;table class=&quot;tableblock frame-all grid-all spread&quot;&gt; 
+  &lt;colgroup&gt; 
+   &lt;col style=&quot;width: 50%;&quot;&gt; 
+   &lt;col style=&quot;width: 50%;&quot;&gt; 
+  &lt;/colgroup&gt; 
+  &lt;tbody&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Predicate&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;boolean test(T t)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;DoublePredicate&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;boolean test(double value)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;IntPredicate&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;boolean test(int t)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;LongPredicate&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;boolean test(long t)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;BiPredicate&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;boolean test(T t, U u)&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+  &lt;/tbody&gt; 
+ &lt;/table&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;supplier&quot;&gt;Supplier&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Supplier always returns a value. This can be used to generate random values or data from some source.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph text-center&quot;&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/supplier-function.png&quot; alt=&quot;Supplier Function&quot; width=&quot;290&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;table class=&quot;tableblock frame-all grid-all spread&quot;&gt; 
+  &lt;colgroup&gt; 
+   &lt;col style=&quot;width: 50%;&quot;&gt; 
+   &lt;col style=&quot;width: 50%;&quot;&gt; 
+  &lt;/colgroup&gt; 
+  &lt;tbody&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Supplier&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;T get()&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;BooleanSupplier&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;boolean getAsBoolean()&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;DoubleSupplier&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;double getAsDouble()&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;IntSupplier&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;int getAsInt()&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+   &lt;tr&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;LongSupplier&lt;/p&gt;&lt;/td&gt; 
+    &lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;long getAsLong()&lt;/p&gt;&lt;/td&gt; 
+   &lt;/tr&gt; 
+  &lt;/tbody&gt; 
+ &lt;/table&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
+    
+    <item>
+      <title>Reduce stream to single value</title>
+      <link>http://localhost:8820/blog/2018/03/24-reduce-stream-to-single-value.html</link>
+      <pubDate>Sat, 24 Mar 2018 00:00:00 -0400</pubDate>
+      <guid isPermaLink="false">blog/2018/03/24-reduce-stream-to-single-value.html</guid>
+      <description>
+      &lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Lets say we want to return the sum of all numbers in a list, there are multiple ways in Java we can achieve this, one of the way is using a for loop to iterate the list by keeping track of current sum in a temporary variable, like below:&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;List&amp;lt;Integer&amp;gt; numbers = List.of(1,2,3);
+int total = 0;
+for(int i: numbers){
+   total += i;
+}
+System.out.println(total); //prints 6&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;This same can be achieved using reduce function with lot less code and also we get the advantage of using streams. This reduce function is called reduction operation, means this function takes multiple elements from the stream and reduces it to a single element. There are three reduce functions in the stream interface and I will go through each of them below;&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;&lt;strong&gt;T reduce (T identity, BinaryOperator&amp;lt;T&amp;gt; accumulator)&lt;/strong&gt;&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;This function takes two parameters, an identity and an accumulator and returns T.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;ulist&quot;&gt; 
+ &lt;ul&gt; 
+  &lt;li&gt; &lt;p&gt;Identity: Initial starting value. Reduction operation will use this as an initial value for the first accumulation in the stream. It is like assigning 0 to variable (total) as starting value in the first example.&lt;/p&gt; &lt;/li&gt; 
+  &lt;li&gt; &lt;p&gt;&amp;lt;T&amp;gt;: Binary operator takes two parameters of same time and returns the result of same type. Below code uses reduce on integer stream.&lt;/p&gt; &lt;/li&gt; 
+ &lt;/ul&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;List&amp;lt;Integer&amp;gt; numbers = List.of(1,2,3);
+int total = numbers.stream()
+                .reduce(0, (i,j) -&amp;gt; i+j);
+System.out.println(total); //prints 6&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;We passed 0 as identity, because we need to start calculating sum from 0, then we passed accumulator function. Accumulator takes two integers, ‘i’ and ‘j’. ‘i’ is the previous calculated sum and j is the current element in the stream. Result of accumulator function is passed as ‘i’ for the next accumulator execution. Below code demonstrates how the internals of accumulator works.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;List&amp;lt;Integer&amp;gt; numbers = List.of(1,2,3);
+int total = numbers.stream()
+             .reduce(0,(i,j)-&amp;gt;{
+                 System.out.printf(&quot;In accumulator i=%d j=%d -&amp;gt; return: %d \n&quot;, i, j, i+j);
+                 return i+j;
+             });
+System.out.printf(&quot;total : %d\n&quot;,total);&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;In accumulator i=0 j=1 -&amp;gt; return: 1
+In accumulator i=1 j=2 -&amp;gt; return: 3
+In accumulator i=3 j=3 -&amp;gt; return: 6
+total : 6&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;‘i’ in the output shows the accumulated sum from the previous execution and ‘j’ is the current element from the stream.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;&lt;strong&gt;Optional&amp;lt;T&amp;gt; reduce​(BinaryOperator&amp;lt;T&amp;gt; accumulator)&lt;/strong&gt;&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Result of the reduce function is returned as an optional object. Optional will make it easier to handle return values with out checking nulls. We need to only pass accumulator to this function and by default it considers first element as an initial value.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;List&amp;lt;Integer&amp;gt; numbers = List.of(1,2,3);
+Optional&amp;lt;Integer&amp;gt; total = numbers.stream()
+                .reduce((i,j)-&amp;gt;{
+                    System.out.printf(&quot;In accumulator i=%d j=%d -&amp;gt; return: %d \n&quot;, i, j, i+j);
+                    return i+j;
+                });
+total.ifPresent(s-&amp;gt;System.out.printf(&quot;total : %d&quot;,s));&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;In accumulator i=1 j=2 -&amp;gt; return: 3
+In accumulator i=3 j=3 -&amp;gt; return: 6
+total : 6&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;&lt;strong&gt;&amp;lt;U&amp;gt; U reduce​(U identity, BiFunction&amp;lt;U,? super T,U&amp;gt; accumulator, BinaryOperator&amp;lt;U&amp;gt; combiner)&lt;/strong&gt;&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;This function works on a stream of T and returns U, where as the other methods which we discussed earlier works on stream of T and returns T. For example, if we want to sum the lengths of all strings in a stream then we can use this function.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;List&amp;lt;String&amp;gt; numbers = List.of(&quot;one&quot;, &quot;two&quot;, &quot;three&quot;);
+Integer sum = numbers.stream()
+                .reduce(0,
+                        (i,s)-&amp;gt;{
+                            System.out.printf(&quot;In accumulator i=%d s=%s -&amp;gt; return: %d \n&quot;, i, s, i+s.length());
+                            return i + s.length();
+                        },
+                        (i,j)-&amp;gt;{
+                            System.out.printf(&quot;In combiner i=%d j=%d -&amp;gt; return: %d\n&quot;, i, j, i+j);
+                            return i + j;
+                        });
+System.out.printf(&quot;sum: %d\n&quot;,sum);&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;In accumulator i=0 s=one -&amp;gt; return: 3
+In accumulator i=3 s=two -&amp;gt; return: 6
+In accumulator i=6 s=three -&amp;gt; return: 11
+sum: 11&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Below are the parameters we need to pass to this function:&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;ulist&quot;&gt; 
+ &lt;ul&gt; 
+  &lt;li&gt; &lt;p&gt;identity: Initial starting value for the accumulator.&lt;/p&gt; &lt;/li&gt; 
+  &lt;li&gt; &lt;p&gt;accumulator: This is a BiFunction&amp;lt;U, ? super T, U&amp;gt;. BiFunction takes two parameters. In this case it takes two different input types U and T and returns U. In the above example we passed ‘i’ and ‘s’. ‘i’ is the previous accumulated sum and ‘s’ is the current value from the stream. We are summing ‘i’ with length of ‘s’ and returning integer. In the above output ‘i’ contains 0, 3, and 6 because ‘i’ is the accumulation of string lengths, so it is like “one”.length() + “two”.length() + “three”.length()&lt;/p&gt; &lt;/li&gt; 
+  &lt;li&gt; &lt;p&gt;combiner: It is a BinaryOperator&amp;lt;U&amp;gt;, it takes two input parameters and returns one. In the above example there is no output from combiner because this function is executed in parallel stream. In parallel stream multiple threads will accumulate to intermediate values and combiner will combine all those values and returns single result. In the above example change numbers.stream() to numbers.parallelStream() and you see below output;&lt;/p&gt; &lt;/li&gt; 
+ &lt;/ul&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;In accumulator i=0 s=three -&amp;gt; return: 5
+In accumulator i=0 s=two -&amp;gt; return: 3
+In accumulator i=0 s=one -&amp;gt; return: 3
+In combiner i=3 j=5 -&amp;gt; return: 8
+In combiner i=3 j=8 -&amp;gt; return: 11
+sum: 11&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Accumulator returns the length of the string and combiner, combines all the lengths together. Reduction to a different type requires accumulator and combiner, thats the reason first two reduce functions don’t have combiner because they always return the same type.&lt;/p&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
+    
+    <item>
+      <title>Quick way to create List, Set and Map</title>
+      <link>http://localhost:8820/blog/2018/03/21-quick-way-to-create-list-set-and-map.html</link>
+      <pubDate>Wed, 21 Mar 2018 00:00:00 -0400</pubDate>
+      <guid isPermaLink="false">blog/2018/03/21-quick-way-to-create-list-set-and-map.html</guid>
+      <description>
+      &lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Java 9 introduced of() static methods in List, Map and Set interfaces. This method will help us to create collection easily. I got surprised to see this method, it is lot easier to use and easier to remember and less verbose. Lets see some examples of using this method.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;//list contains four string objects
+List&amp;lt;String&amp;gt; numbers = List.of(&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;);&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Iterator on this list will give us the same order in which we inserted. Before java 9 we have only option to create list like this, is using Arrays.asList method. In the List interface you will see multiple overloaded of() methods, each of them takes variable number of parameters. below is the list;&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;static &amp;lt;E&amp;gt; List&amp;lt;E&amp;gt; of​()
+static &amp;lt;E&amp;gt; List&amp;lt;E&amp;gt; of​(E e1)
+static &amp;lt;E&amp;gt; List&amp;lt;E&amp;gt; of​(E e1, E e2)
+static &amp;lt;E&amp;gt; List&amp;lt;E&amp;gt; of​(E e1, E e2, E e3)
+static &amp;lt;E&amp;gt; List&amp;lt;E&amp;gt; of​(E e1, E e2, E e3, E e4)
+static &amp;lt;E&amp;gt; List&amp;lt;E&amp;gt; of​(E e1, E e2, E e3, E e4, E e5)
+static &amp;lt;E&amp;gt; List&amp;lt;E&amp;gt; of​(E e1, E e2, E e3, E e4, E e5, E e6)
+static &amp;lt;E&amp;gt; List&amp;lt;E&amp;gt; of​(E e1, E e2, E e3, E e4, E e5, E e6, E e7)
+static &amp;lt;E&amp;gt; List&amp;lt;E&amp;gt; of​(E e1, E e2, E e3, E e4, E e5, E e6, E e7, E e8)
+static &amp;lt;E&amp;gt; List&amp;lt;E&amp;gt; of​(E e1, E e2, E e3, E e4, E e5, E e6, E e7, E e8, E e9)
+static &amp;lt;E&amp;gt; List&amp;lt;E&amp;gt; of​(E e1, E e2, E e3, E e4, E e5, E e6, E e7, E e8, E e9, E e10)
+static &amp;lt;E&amp;gt; List&amp;lt;E&amp;gt; of​(E... elements)&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;There are eleven overloaded methods to handle up to ten input parameters and twelfth one takes ‘varargs’. of() is not just for List, same kind of overloaded methods are available in Set and Map as well. Except in Map there is no ‘varargs’ method.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;//set contains two string objects
+Set&amp;lt;String&amp;gt; numbers = Set.of(&quot;one&quot;, &quot;two&quot;);&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Note that if you pass duplicate object into set then it throws IllegalArgumentException, because in set, duplicates are not allowed.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;//map contains three entries
+Map&amp;lt;Integer, String&amp;gt; numbers = Map.of(1, &quot;one&quot;, 2, &quot;two&quot;, 3, &quot;three&quot;);&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;See, how easy it is to create map objects. We need to pass key and values like normal parameters to the of() method. You can also create Map with entry objects using ofEntries() method.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;Map&amp;lt;Integer, String&amp;gt; numbers = Map.ofEntries(
+Map.entry(1, &quot;one&quot;),
+Map.entry(2, &quot;two&quot;),
+Map.entry(3, &quot;three&quot;));&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Duplicate keys are not allowed in Map, it will throw IllegalArgumentException.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;This method creates immutable collection means; once created, no element can be added, removed or replaced and no nulls are allowed when creating the collection object.&lt;/p&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
+    
+    <item>
+      <title>Using consumer functional interface</title>
+      <link>http://localhost:8820/blog/2018/03/17-using-consumer-functional-interface.html</link>
+      <pubDate>Sat, 17 Mar 2018 00:00:00 -0400</pubDate>
+      <guid isPermaLink="false">blog/2018/03/17-using-consumer-functional-interface.html</guid>
+      <description>
+      &lt;div id=&quot;preamble&quot;&gt; 
+ &lt;div class=&quot;sectionbody&quot;&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;This article will explain the basics of using consumer functional interface. Consume is one of the many available functional interfaces in Java. This interface can be used when we need to take an object and process it but with out returning anything. Below image will show you how it looks in a logical way.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph text-center&quot;&gt; 
+   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/consumer.png&quot; alt=&quot;Consumer Function&quot; width=&quot;280&quot; height=&quot;130&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;As you see in the above image, it takes a value and operates on it with a side-effect. Here side-effect means, some thing like printing to console or logging to file or making call to rest service but without returning any value. This interface have single abstract method, which is ‘&lt;strong&gt;void accept(T t)&lt;/strong&gt;‘ As you can see this method takes a value but does not return anything.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Using these functional interfaces will make code standardized and code will become easier to understand. We can implement them as lambda expressions and can be used across application by passing them as behaviors. Below are two different examples; first example is with out consumer and second example uses consumer.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;public static void processJobs(List&amp;lt;Job&amp;gt; jobs){
+        for(Job job: jobs){
+            job.process();
+            System.out.println(job.getId());
+        }
+}&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock java&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;public static void processJobs(List&amp;lt;Job&amp;gt; jobs, Consumer&amp;lt;Integer&amp;gt; postProcess){
+        for(Job job: jobs){
+            job.process();
+            postProcess.accept(job.getId());
+        }
+}&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;The advantage with the second method is, I can later change postProcess behavior with out changing code in processJobs function. If I have multiple variations of prints which need to be printed based on different situations then I can pass a different consumer lambdas to it. Below example shows how I passed consumer to processJobs function.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;List&amp;lt;Job&amp;gt; jobs = List.of(new Job(2), new Job(4), new Job(5));
+Consumer&amp;lt;Integer&amp;gt; print = (i) -&amp;gt; {
+            System.out.println(i);
+        };
+processJobs(jobs, print);&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;If you want to start using consumer then one of the best place to start is using forEach method in collections. This function takes consumer.Check below example;&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;jobs.forEach(job -&amp;gt; {
+            System.out.println(job.getId());
+        });&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;composed_consumer&quot;&gt;Composed consumer&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Consumer functional interface have a default method which is:&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph text-center&quot;&gt; 
+  &lt;p&gt;&lt;strong&gt;default Consumer&amp;lt;T&amp;gt; andThen​(Consumer&amp;lt;? super T&amp;gt; after)&lt;/strong&gt;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;This method takes and returns a consumer and as the signature specifies; this is a default method, means this method is implemented by Consumer with default implementation, so we no need to implement this method and we can directly call this on any consumer instance.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;This method returns a composed consumer means, sequentially it calls accept on ‘this’ instance and then on ‘after’ instance. Along with printing job id If I also want to send an email alert, then I can call processJobs like below&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;Consumer&amp;lt;Integer&amp;gt; print = (i) -&amp;gt; {
+            System.out.println(i);
+        };
+Consumer&amp;lt;Integer&amp;gt; emailAlert = (i) -&amp;gt; {
+            System.out.printf(&quot;Sending email for job id: %d \n&quot;, i);
+        };
+processJobs(jobs, print.andThen(emailAlert));&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;There will be no code change required in processJobs function because we composed multiple consumers into single consumer and passed to it. You can compose by chaining as many as into single consumer.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;primitive_consumers&quot;&gt;Primitive Consumers&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;There are three primitive consumers available in java.util.functional package; IntConsumer, LongConsumer and DoubleConsumer. If you are operating on primitive values then use these primitive versions, because objects are expensive comparing to primitives.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;biconsumer&quot;&gt;BiConsumer&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;BiConsumer is same like Consumer except it takes two parameters. Below is the logical representation of it.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph text-center&quot;&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/biconsumer.png&quot; alt=&quot;BiConsumer Function&quot; width=&quot;280&quot; height=&quot;130&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;This interface will be handy if in case you need to consume two parameters and also it allows you to compose multiple BiConsumers. There are primitive versions of this interface; which are &lt;strong&gt;ObjIntConsumer, ObjLongConsumer&lt;/strong&gt; and &lt;strong&gt;ObjDoubleConsumer&lt;/strong&gt;, all these interfaces takes object as first parameter and primitive value as second parameter.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
+    
+    <item>
+      <title>Create Maven project in GitHub</title>
+      <link>http://localhost:8820/blog/2018/03/14-create-maven-project-in-github.html</link>
+      <pubDate>Wed, 14 Mar 2018 00:00:00 -0400</pubDate>
+      <guid isPermaLink="false">blog/2018/03/14-create-maven-project-in-github.html</guid>
+      <description>
+      &lt;div id=&quot;preamble&quot;&gt; 
+ &lt;div class=&quot;sectionbody&quot;&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;If you are looking to publish your first Maven project to gitHub then this article will help you to get started with that. I am going to explain the steps involved in creating a new maven project and pushing it to gitHub. Before creating local project its better to create empty repository in gitHub so we can later clone it.&lt;/p&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;create_new_repository_in_github&quot;&gt;Create new repository in Github&lt;/h4&gt; 
+ &lt;div class=&quot;ulist&quot;&gt; 
+  &lt;ul&gt; 
+   &lt;li&gt; &lt;p&gt;Login into your gitHub account and create new repository.&lt;/p&gt; &lt;/li&gt; 
+  &lt;/ul&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph text-center&quot;&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/new-repo-in-git.png&quot; alt=&quot;New repo in Git&quot; width=&quot;510&quot; height=&quot;90&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;ulist&quot;&gt; 
+  &lt;ul&gt; 
+   &lt;li&gt; &lt;p&gt;Provide name for repository. I am providing name as ‘my-app’.&lt;/p&gt; &lt;/li&gt; 
+  &lt;/ul&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph text-center&quot;&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/create-new-repo-in-git.png&quot; alt=&quot;Create new repo in Git&quot; width=&quot;500&quot; height=&quot;300&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;ulist&quot;&gt; 
+  &lt;ul&gt; 
+   &lt;li&gt; &lt;p&gt;Select ‘java’ from ‘Add .gitignore’ dropdown. This will generate a default .gitignore file needed for a java project.&lt;/p&gt; &lt;/li&gt; 
+   &lt;li&gt; &lt;p&gt;Click on ‘Create repository’ button. Empty repository will be created and in next section we will create Maven project.&lt;/p&gt; &lt;/li&gt; 
+  &lt;/ul&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;create_new_maven_project_in_local&quot;&gt;Create new maven project in local&lt;/h4&gt; 
+ &lt;div class=&quot;ulist&quot;&gt; 
+  &lt;ul&gt; 
+   &lt;li&gt; &lt;p&gt;Make sure you have java, maven and git installed in your local before proceeding further.&lt;/p&gt; &lt;/li&gt; 
+   &lt;li&gt; &lt;p&gt;Open command prompt (or terminal) and go to a folder where you want to create a new project.&lt;/p&gt; &lt;/li&gt; 
+   &lt;li&gt; &lt;p&gt;Execute below maven command. This command will create a simple Java project with in folder ‘my-app’. Note that this name should match with repository name in gitHub.&lt;/p&gt; &lt;/li&gt; 
+  &lt;/ul&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mvn -B archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DgroupId=com.mycompany.app -DartifactId=my-app&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;ulist&quot;&gt; 
+  &lt;ul&gt; 
+   &lt;li&gt; &lt;p&gt;Above command should show ‘BUILD SUCCESS’ message and it will create below files and folders:&lt;/p&gt; 
+    &lt;div class=&quot;ulist&quot;&gt; 
+     &lt;ul&gt; 
+      &lt;li&gt; &lt;p&gt;New folder ‘my-app’ (this is the same name we provided for repository in gitHub)&lt;/p&gt; &lt;/li&gt; 
+      &lt;li&gt; &lt;p&gt;pom.xml in my-app folder. This is the main maven file.&lt;/p&gt; &lt;/li&gt; 
+      &lt;li&gt; &lt;p&gt;Folders for java and test classes.&lt;/p&gt; &lt;/li&gt; 
+     &lt;/ul&gt; 
+    &lt;/div&gt; &lt;/li&gt; 
+   &lt;li&gt; &lt;p&gt;New maven project is created.&lt;/p&gt; &lt;/li&gt; 
+  &lt;/ul&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;clone_github_repository_and_merge_with_maven_project&quot;&gt;Clone GitHub repository and merge with Maven project&lt;/h4&gt; 
+ &lt;div class=&quot;ulist&quot;&gt; 
+  &lt;ul&gt; 
+   &lt;li&gt; &lt;p&gt;In github.com goto ‘my-app’ project.&lt;/p&gt; &lt;/li&gt; 
+   &lt;li&gt; &lt;p&gt;Click on ‘Clone or download’ drop-down and click copy icon next to repository web URL. This will copy URL into clipboard.&lt;/p&gt; &lt;/li&gt; 
+  &lt;/ul&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph text-center&quot;&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/copy-clone-repo-url.png&quot; alt=&quot;Copy clone repo&quot; width=&quot;510&quot; height=&quot;130&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;ulist&quot;&gt; 
+  &lt;ul&gt; 
+   &lt;li&gt; &lt;p&gt;Now we need to clone this project into our maven folder but git clone command will not work if already project folder exists. In our case we already created maven project folder so we will clone it into temp folder. I found this trick from this stack-overflow discussion.&lt;/p&gt; &lt;/li&gt; 
+   &lt;li&gt; &lt;p&gt;If you are in ‘my-app’ folder in CMD/termical then go to parent folder and execute below command. This command will clone gitHub repository into temp folder.&lt;/p&gt; &lt;/li&gt; 
+  &lt;/ul&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git clone &amp;lt;URL copied from gitHub&amp;gt; temp&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;ulist&quot;&gt; 
+  &lt;ul&gt; 
+   &lt;li&gt; &lt;p&gt;In temp folder you should see .git and .gitignore files downloaded. These are hidden files.&lt;/p&gt; &lt;/li&gt; 
+   &lt;li&gt; &lt;p&gt;Now copy .git and .gitignore from temp into my-app folder and then remove temp folder by executing below commands&lt;/p&gt; &lt;/li&gt; 
+  &lt;/ul&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Use below commands in Windows command prompt
+xcopy /S/H/Y temp my-app
+rmdir temp /S/Q
+
+Use below commands in Mac terminal
+cp -a temp/. my-app/
+rm -rf temp&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;ulist&quot;&gt; 
+  &lt;ul&gt; 
+   &lt;li&gt; &lt;p&gt;You should see .git, .gitignore, src and pom.xml files in my-app folder.&lt;/p&gt; &lt;/li&gt; 
+   &lt;li&gt; &lt;p&gt;Now we have maven project with git. In next section we will see how to do first commit and push to gitHub repository.&lt;/p&gt; &lt;/li&gt; 
+  &lt;/ul&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;commit_and_push_to_github_repository&quot;&gt;Commit and push to gitHub repository&lt;/h4&gt; 
+ &lt;div class=&quot;ulist&quot;&gt; 
+  &lt;ul&gt; 
+   &lt;li&gt; &lt;p&gt;‘git status’ command in gitHub project will show current check-in status of the files so execute ‘git status’ in root folder of the project.&lt;/p&gt; &lt;/li&gt; 
+  &lt;/ul&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;my-app $ git status
+On branch master
+Your branch is up-to-date with &apos;origin/master&apos;.
+Untracked files:
+  (use &quot;git add &amp;lt;file&amp;gt;...&quot; to include in what will be committed)
+
+	pom.xml
+	src/
+
+nothing added to commit but untracked files present (use &quot;git add&quot; to track)&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;ulist&quot;&gt; 
+  &lt;ul&gt; 
+   &lt;li&gt; &lt;p&gt;This command shows that pom.xml and src is not yet committed, so execute ‘git add -A’ this will add all new files to staging.&lt;/p&gt; &lt;/li&gt; 
+   &lt;li&gt; &lt;p&gt;Now again check the status ‘git status’&lt;/p&gt; &lt;/li&gt; 
+  &lt;/ul&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;my-app $ git status
+On branch master
+Your branch is up-to-date with &apos;origin/master&apos;.
+Changes to be committed:
+  (use &quot;git reset HEAD &amp;lt;file&amp;gt;...&quot; to unstage)
+
+	new file:   pom.xml
+	new file:   src/main/java/com/mycompany/app/App.java
+	new file:   src/test/java/com/mycompany/app/AppTest.java&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;ulist&quot;&gt; 
+  &lt;ul&gt; 
+   &lt;li&gt; &lt;p&gt;This time it shows all files are in staging and ready to be committed.&lt;/p&gt; &lt;/li&gt; 
+   &lt;li&gt; &lt;p&gt;Execute ‘git commit -m “initial project setup”‘ this command will commit all staged files to local gitHub repository. We are also providing comment for all these files with -m option.&lt;/p&gt; &lt;/li&gt; 
+  &lt;/ul&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;my-app $ git commit -m &quot;initial project setup&quot;
+[master e719d11] initial project setup
+ 3 files changed, 69 insertions(+)
+ create mode 100644 pom.xml
+ create mode 100644 src/main/java/com/mycompany/app/App.java
+ create mode 100644 src/test/java/com/mycompany/app/AppTest.java&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;ulist&quot;&gt; 
+  &lt;ul&gt; 
+   &lt;li&gt; &lt;p&gt;All files are checked into local repository. Now lets push them to remote gitHub repository. Execute ‘git push origin master’&lt;/p&gt; &lt;/li&gt; 
+  &lt;/ul&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;my-app $ git push origin master
+Counting objects: 16, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (16/16), 1.51 KiB | 0 bytes/s, done.
+Total 16 (delta 0), reused 0 (delta 0)
+To https://github.com/kpradeep12/my-app.git
+   62985a4..e719d11  master -&amp;gt; master&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;ulist&quot;&gt; 
+  &lt;ul&gt; 
+   &lt;li&gt; &lt;p&gt;Go to gitHub repository and you should see all your maven files uploaded there. Now any one can work on this repository. If you want to pull all new changes from remote to local repository then execute ‘git pull –all’&lt;/p&gt; &lt;/li&gt; 
+  &lt;/ul&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Now we have a full maven project setup with gitHub integration. This project is ready to be imported into any of your favorite IDE.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
+    
+    <item>
+      <title>Fixed Thread Pool using Executor framework</title>
+      <link>http://localhost:8820/blog/2018/03/10-fixed-thread-pool-using-executor-framework.html</link>
+      <pubDate>Sat, 10 Mar 2018 00:00:00 -0500</pubDate>
+      <guid isPermaLink="false">blog/2018/03/10-fixed-thread-pool-using-executor-framework.html</guid>
+      <description>
+      &lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;In this article we are looking at the Fixed thread pool implementation. This thread pool creates a fixed number of threads and reuses them as the tasks are completed and because the threads are reused so once after reaching the thread pool limit then there will not be any thread creations involved. This pool will be helpful when we want to execute long running threads. For example we can use this pool in running batch jobs or accepting HTTP client requests and so on.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph text-center&quot;&gt; 
+ &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/Fixed-thread-pool.png&quot; alt=&quot;Fixed thread pool&quot; width=&quot;490&quot; height=&quot;130&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;In the above figure, producer inserts tasks into the queue, queue contains the tasks which are ready to be executed and the pool contains the running tasks. With fixed thread pool of size two, not more than two threads can execute at any time. Threads will be reused once after the current running tasks are completed, so there will not be thread creation overhead involved after completing every task. Fixed thread pool will consume less resources because they will control the number of simultaneous thread executions.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class FixedThreadExecutor {
+
+    public static void main(String args[]){
+
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+
+        Runnable r = () -&amp;gt; {
+            try {
+                System.out.printf(&quot;Processing %s\n&quot;, Thread.currentThread().getName());
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        };
+
+        executor.execute(r);
+        executor.execute(r);
+        executor.execute(r);
+        executor.execute(r);
+        executor.execute(r);
+        executor.execute(r);
+
+        executor.shutdown();
+    }
+}&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;In above class, I created fixed thread pool of size two, so not more than two threads execute simultaneously. I created a runnable, which just prints the thread name and sleeps for three seconds. I passed this runnable instance six times, to the executer and finally shutting down the executor. We need to shutdown the executor after the use, else it will continue to execute or wait for the next thread.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Below is the output you see for the first three seconds.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Processing pool-1-thread-1
+Processing pool-1-thread-2&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Threads in the executor will have default names and it is printed in the above output, this thread names are having pool number and a thread number. As per the output two threads are executing in a single pool because the pool number is one for both the threads and each thread will take three seconds to execute and both of them are running simultaneously. Below is the full output of this class.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Processing pool-1-thread-1
+Processing pool-1-thread-2
+Processing pool-1-thread-1
+Processing pool-1-thread-2
+Processing pool-1-thread-2
+Processing pool-1-thread-1&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;‘pool-1-thread-1’ is printed three times and ‘pool-2-thread-2’ is printed three times because two threads in the pool shared the six tasks, so each thread got three tasks.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;You can continue to experiment by creating another runnable and making it to sleep longer or shorter and then pass it to the executers so you can see how threads are allocated with in the pool.&lt;/p&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
+    
+    <item>
+      <title>Producer and Consumer with Bounded Blocked Queue</title>
+      <link>http://localhost:8820/blog/2018/03/7-producer-consumer-with-bounded-blocked-queue.html</link>
+      <pubDate>Wed, 7 Mar 2018 00:00:00 -0500</pubDate>
+      <guid isPermaLink="false">blog/2018/03/7-producer-consumer-with-bounded-blocked-queue.html</guid>
+      <description>
+      &lt;div id=&quot;preamble&quot;&gt; 
+ &lt;div class=&quot;sectionbody&quot;&gt; 
+  &lt;div class=&quot;paragraph text-center&quot;&gt; 
+   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/producer-consumer.png&quot; alt=&quot;Producer consumer&quot; width=&quot;800&quot; height=&quot;180&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Producer and consumers are two independent entities works together on the queue. Producer inserts elements into the tail of the queue and consumer removes them from the head of the queue. Here elements can be tasks or data on which consumer is interested in. This design pattern will allow producer and consumer to work independently.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Queue allows data to be inserted in FIFO order. FIFO is ‘First In First Out’, in which longest waiting element will be removed first and shorted waiting element will be removed last. Queue acts as a communication channel between Producer and Consumer.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Producer and consumer will work on single queue instance and there can be multiple producers or consumers attached to this single instance. The rate of insertion and deletion from the queue will depends on the processing power of the producer and consumer. Producer and consumers works on there own pace with out depending on each other but faster producer can make queue size grow larger and which can result in a out of memory error.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;To control the size of the queue we can use BlockedQueue interface. There are various implementation available for this interface and in this article I am using ArrayBlockingQueue class. BlockedQueue can be bounded or unbounded. In bounded, queue size is limited and where as in unbounded, there will be no limit.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;The advantage of BlockedQueue is, if queue is full then it blocks the producer and it releases only when space is available and if queue is empty then it blocks the consumer and releases only when element is available. For example if we have a faster producer and slower consumer working on a blocked queue of five size; it blocks the producer if queue reaches its limit such than, it can not insert more elements into the queue. This arrangement will make producer and consumer work smoothly with out breaking the application.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;import java.util.Random;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ThreadLocalRandom;
+
+public class ProcuderConsumer {
+
+    public static void main(String args[]) throws InterruptedException {
+        BlockingQueue&amp;lt;Integer&amp;gt; queue = new ArrayBlockingQueue&amp;lt;&amp;gt;(5);
+
+        Runnable producer = () -&amp;gt; {
+            while (true) {
+                int jobId = getNewJobId();
+                try {
+                    Thread.sleep(getInterval(0, 1));
+                    queue.put(jobId);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.printf(&quot;Producer: pushed new job &apos;%d&apos; into queue:%s \n&quot;, jobId, queue);
+            }
+        };
+
+        Runnable consumer = () -&amp;gt; {
+            while (true) {
+                try {
+                    int jobId = queue.take();
+                    System.out.printf(&quot;Consumer: processing job &apos;%d&apos;\n&quot;, jobId);
+                    Thread.sleep(getInterval(3, 6));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        };
+
+        new Thread(producer).start();
+        new Thread(consumer).start();
+    }
+
+
+    //Randomly generates job id numbers between 1 to 10
+    public static int getNewJobId() {
+        Random r = new Random();
+        return r.nextInt(10);
+    }
+
+    static int[] intervals = {1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000};
+    //Randomly returns one of the value from intervals[] based on provided min and max indexes
+    public static int getInterval(int min, int max) {
+        ThreadLocalRandom r = ThreadLocalRandom.current();
+        int index = r.nextInt((max - min) + 1) + min;
+        return intervals[index];
+    }
+}&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Above example lets us to configure speed of the producer and consumer. Producer inserts random job ids into the queue by calling getNewJobId() method and consumer removes job ids from the queue to process them.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;To simulate the processing time, I am calling getInterval method at producer and consumer side. This method will return random milliseconds from intervals[] array. intervals array contains 10 millisecond intervals. getInterval takes min and max index and randomly selects one of the index with in the given range and returns the value of that index from intervals array. Processing time of creating and working on jobs can vary based on various factors like database calls, REST calls and for every job it can be different so using this method we can simulate this processing time.&lt;/p&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;fast_producer_and_slow_consumer&quot;&gt;Fast producer and slow consumer&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Producer takes 1 to 2 seconds to generates random job ids and consumer takes 4 to 7 seconds to process. So we have faster producer and slower consumer. Run this example and after some time you will see queue reaches its limit and producer gets blocked and can not insert new element until consumer removes one, but both will continue to work on there own pace.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Producer: pushed new job &apos;5&apos; into queue:[]
+Consumer: processing job &apos;5&apos;
+Producer: pushed new job &apos;4&apos; into queue:[4]
+Producer: pushed new job &apos;5&apos; into queue:[4, 5]
+Producer: pushed new job &apos;4&apos; into queue:[4, 5, 4]
+Consumer: processing job &apos;4&apos;
+Producer: pushed new job &apos;4&apos; into queue:[5, 4, 4]
+Producer: pushed new job &apos;3&apos; into queue:[5, 4, 4, 3]
+Producer: pushed new job &apos;5&apos; into queue:[5, 4, 4, 3, 5]
+Consumer: processing job &apos;5&apos;
+Producer: pushed new job &apos;0&apos; into queue:[4, 4, 3, 5, 0]
+Consumer: processing job &apos;4&apos;
+Producer: pushed new job &apos;8&apos; into queue:[4, 3, 5, 0, 8]
+Consumer: processing job &apos;4&apos;
+...&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;slow_producer_and_fast_consumer&quot;&gt;Slow producer and fast consumer&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Change above example to convert producer slower and consumer faster by passing higher index range in producers and lower index range in consumer. If you run you should never see queue size reaching its limit. For below run I passed 3 and 6 to getInterval in producer (Thread.sleep(getInterval(3, 6))). In consumer I passed 0 and 1 to getInterval to make consumer fast.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;Producer: pushed new job &apos;3&apos; into queue:[]
+Consumer: processing job &apos;3&apos;
+Producer: pushed new job &apos;0&apos; into queue:[]
+Consumer: processing job &apos;0&apos;
+Producer: pushed new job &apos;3&apos; into queue:[]
+Consumer: processing job &apos;3&apos;&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;It will take some time to see output in the console because now the producer is slower and consumer will be blocked until elements are available in the queue. As you see queue is always empty because consumer is faster and always blocked on the queue so it gets element as soon as it is inserted.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;multi_producers_and_single_consumer&quot;&gt;Multi producers and single consumer&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;We can attach multiple producers or consumers to the queue. For below run I attached five producers and single consumer.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;        //five producers
+        new Thread(producer).start();
+        new Thread(producer).start();
+        new Thread(producer).start();
+        new Thread(producer).start();
+        new Thread(producer).start();
+
+        //single consumer
+        new Thread(consumer).start();&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;When you run this code you will see queue gets filled because even though producer is slower but five of them are inserting elements into the queue. Below is the output;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Producer: pushed new job &apos;6&apos; into queue:[]
+Consumer: processing job &apos;6&apos;
+Producer: pushed new job &apos;6&apos; into queue:[6]
+Consumer: processing job &apos;6&apos;
+Producer: pushed new job &apos;1&apos; into queue:[1, 5, 9]
+Producer: pushed new job &apos;9&apos; into queue:[1, 5, 9]
+Producer: pushed new job &apos;5&apos; into queue:[1, 5, 9]
+Consumer: processing job &apos;1&apos;
+Consumer: processing job &apos;5&apos;
+Consumer: processing job &apos;9&apos;
+Producer: pushed new job &apos;5&apos; into queue:[5, 1]
+Producer: pushed new job &apos;1&apos; into queue:[5, 1]
+Producer: pushed new job &apos;7&apos; into queue:[5, 1, 7]
+Producer: pushed new job &apos;9&apos; into queue:[5, 1, 7, 9]&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;You can continue to experiment with different speeds and can also add and remove producers and consumers to check the behavior.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
+    
+    <item>
+      <title>Generate stream of random numbers</title>
+      <link>http://localhost:8820/blog/2018/03/3-generate-stream-of-random-numbers.html</link>
+      <pubDate>Sat, 3 Mar 2018 00:00:00 -0500</pubDate>
+      <guid isPermaLink="false">blog/2018/03/3-generate-stream-of-random-numbers.html</guid>
+      <description>
+      &lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Its not possible for any computer to generate real random numbers, but they can generate pseudorandom numbers. Pseudorandom numbers are generated based on an algorithm and they are nearly like random numbers. Java’s Random class uses &lt;a href=&quot;https://en.wikipedia.org/wiki/File:Linear_congruential_generator_visualisation.svg&quot;&gt;linear congruential formula&lt;/a&gt; to generate pseudorandom numbers and this formula needs initial value or called seed.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Random class have two constructors:&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;olist arabic&quot;&gt; 
+ &lt;ol class=&quot;arabic&quot;&gt; 
+  &lt;li&gt; &lt;p&gt;Random(): No need to provide seed so if you create multiple Random objects, then all of them will likely generate different pseudorandom number sequence.&lt;/p&gt; &lt;/li&gt; 
+  &lt;li&gt; &lt;p&gt;Random(long seed): Takes seed as initial value. This will be useful if you want to regenerate same sequence again.&lt;/p&gt; &lt;/li&gt; 
+ &lt;/ol&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;I will use JShell for demo because we are just working on Random class so it will be easier. so lets start JShell and create Random object.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ $ jshell
+| Welcome to JShell -- Version 9.0.4
+| For an introduction type: /help intro
+jshell&amp;gt;Random r = new Random();&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;ints() method in the Random class will return unlimited stream of pseudorandom numbers. We can limit this stream by calling limit method on the stream like below:&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;jshell&amp;gt; r.ints().limit(5).forEach(System.out::println)
+1203929932
+794148605
+836555594
+-471647802
+-1519876495&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;I used terminal operation ‘forEach’ at the end to show the output. We can make this code shorter by using ints(long streamSize) method in the Random class. This will generate limited IntStream;&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;jshell&amp;gt; r.ints(5).forEach(System.out::println)
+1748811776
+-1321337966
+-182556431
+-1551712685
+204483208&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;We can generate numbers with in a range by calling ‘ints​(long streamSize, int randomNumberOrigin, int randomNumberBound)’ method in Random;&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;jshell&amp;gt; r.ints(5,1,10).forEach(System.out::println)
+8
+6
+9
+3
+8&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;All of the above methods are available in long and double versions also, so those methods return LongStream and DoubleStream. Instead of printing it to console we can collect them into a list easily using Collectors, like below;&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;jshell&amp;gt; r.ints(5,1,10).mapToObj(Integer::valueOf).collect(Collectors.toList())
+$12 ==&amp;gt; [5, 1, 7, 4, 6]&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
+    
+    <item>
+      <title>Quick way to create, read, write and delete files in Java</title>
+      <link>http://localhost:8820/blog/2018/02/28-quickway-to-create-read-write-delete-files.html</link>
+      <pubDate>Wed, 28 Feb 2018 00:00:00 -0500</pubDate>
+      <guid isPermaLink="false">blog/2018/02/28-quickway-to-create-read-write-delete-files.html</guid>
+      <description>
+      &lt;div id=&quot;preamble&quot;&gt; 
+ &lt;div class=&quot;sectionbody&quot;&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Files class in java.nio.file package contains static utility methods to operate on files and directories. In this article I will provide information on some of these static methods. These methods will help us in writing simple and quick code to work on the files. The main advantage of using this class is that we no more need to handle lower level input/output streams.&lt;/p&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;create_file&quot;&gt;Create file&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Quick way to create a file is using createFile method by passing the path object. If file already exists then it throws FileAlreadyExistsException, so in the below example I called deleteIfExists method before creating file. I am creating a file which is located at “/Users/pradeep/temp/data.txt” in my computer, so you can create a file with different path based on your computer. If it is Microsoft OS then use \\ in the string to separate the folder paths.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;Path create() throws IOException {
+        Path path = Paths.get(&quot;/Users/pradeep/temp/data.txt&quot;);
+        //deletes the file if it exists
+        Files.deleteIfExists(path);
+
+        //creates new file and returns path
+        return Files.createFile(path);
+}&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;write_to_file&quot;&gt;Write to file&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Files class have couple of overloaded write methods. In below example I used one of the write method which takes three parameters; path of the file, list of strings to be written into the file and optional array of OpenOption objects. OpenOption tells how the file is created or opened.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;void write() throws IOException {
+        //writes list of cities into file
+        Files.write(Paths.get(&quot;/Users/pradeep/temp/data.txt&quot;),
+                Arrays.asList(&quot;New York&quot;, &quot;San Francisco&quot;, &quot;Chicago&quot;, &quot;Orlando&quot;));
+}&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;If we don’t pass OpenOption to this method then this method will use three default OpenOptions CREATE, TRUNCATE_EXISTING and WRITE which means creates file if it doesn’t exist, opens to write content, truncates all existing contents.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;There is another overloaded write method which takes byte[] instead of Iterable. This method is useful if you have large data so you can convert it to byte array, for example a string can be converted to byte arrays by calling getBytes() method on it.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;read_file&quot;&gt;Read file&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;If you want to get all lines in the file as a List&amp;lt;String&amp;gt; and want to read whole file at once, then you can use ‘readAllLines’ method as mentioned in below example.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;void read() throws IOException {
+        //readAllLines returns List&amp;lt;String&amp;gt; and forEach iterates on this list and prints to console
+        Files.readAllLines(Paths.get(&quot;/Users/pradeep/temp/data.txt&quot;))
+                .forEach(System.out::println);
+}&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;In the above example I used forEach on the returned list to print each line on the console, so which means you can process each single line separately. If in case data can not be processed line by line then we can use ‘readAllBytes’ method, this will return whole file content as byte[].&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;We can also get Stream&amp;lt;String&amp;gt; on the file by calling ‘lines’ method. This will be useful if we want to process the content line by line, but after the processing we should close the stream. Below is the example:&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;void read() throws IOException {
+        //get stream of strings from file
+        Stream&amp;lt;String&amp;gt; lines = Files.lines(Paths.get(&quot;/Users/pradeep/temp/data.txt&quot;));
+        //process each line
+        lines.forEach(System.out::println);
+        //close the stream
+        lines.close();
+}&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;delete_file&quot;&gt;Delete file&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;There are two methods available to delete a file. One of the method is ‘deleteIfExists’ which I used in create() mentioned in first example. The other method is ‘delete’&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;void delete() throws IOException{
+        //deletes the file
+        Files.delete(Paths.get(&quot;/Users/pradeep/temp/data.txt&quot;));
+}&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;All the above examples can be used to do simple file operations easily with out using any third party libraries. Go through the Java 9 Files API to see all available methods.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
+    
+    <item>
+      <title>Quick introduction to PriorityQueue</title>
+      <link>http://localhost:8820/blog/2018/02/23-quick-introduction-to-priorityQueue.html</link>
+      <pubDate>Fri, 23 Feb 2018 00:00:00 -0500</pubDate>
+      <guid isPermaLink="false">blog/2018/02/23-quick-introduction-to-priorityQueue.html</guid>
+      <description>
+      &lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;PriorityQueue is the implementation of Queue interface. Generally queue store elements in FIFO (first in first out) order but PriorityQueue is the exception. As the name specifies, elements in the priority queue are retrieved based on the priority. Priority can be low-to-high which is called min priority or high-to-low which is called max priority. Internally it uses heap data structure to store elements.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;There are two ways to set priority for the queue, either elements should implement Comparable or by passing Comparator to the PriorityQueue constructor. If not, then priority queue will throw ClassCastException.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;In this article we will see how to insert and remove elements from the priority queue. Lets assume we want to process mails based on the priority. Each mail will have a priority and it can be low, normal or high. Processor should retrieve from high to low priority elements from the queue.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Lets create a Mail class and an Enum.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+public class Mail {
+    private Priority priority;
+
+    Mail(Priority priority){
+        this.priority = priority;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;{&quot; + priority + &quot;}&quot;;
+    }
+}
+
+enum Priority{
+    LOW(-1), NORMAL(0), HIGH(1);
+
+    private int value;
+
+    Priority(int value){
+        this.value = value;
+    }
+    public int getValue(){
+        return value;
+    }
+}&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Now we have required setup. Lets create Processor class which stores some mails in a queue and retrieves mails from HiGH to LOW priority.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+public class Processor {
+    public static void main(String args[]){
+        //this is a natural ordered comparator
+        Comparator&amp;lt;Mail&amp;gt; lowToHighPriority = Comparator
+                .&amp;lt;Mail&amp;gt;comparingInt((mail) -&amp;gt; mail.getPriority().getValue());
+        //reverse the natural order to
+        Comparator&amp;lt;Mail&amp;gt; highToLowPriority = lowToHighPriority.reversed();
+
+        Queue&amp;lt;Mail&amp;gt; queue = new PriorityQueue&amp;lt;&amp;gt;(highToLowPriority);
+        queue.add(new Mail(Priority.LOW));
+        queue.add(new Mail(Priority.HIGH));
+        queue.add(new Mail(Priority.NORMAL));
+        queue.add(new Mail(Priority.HIGH));
+        queue.add(new Mail(Priority.NORMAL));
+        queue.add(new Mail(Priority.LOW));
+
+        System.out.println(queue.poll());
+        System.out.println(queue.poll());
+        System.out.println(queue.poll());
+        System.out.println(queue.poll());
+        System.out.println(queue.poll());
+        System.out.println(queue.poll());
+    }
+}&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Run this class to see below output.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;{HIGH}
+{HIGH}
+{NORMAL}
+{NORMAL}
+{LOW}
+{LOW}&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Processor used highToLowPriority comparator to retrieve elements. If we pass lowToHighPriority then we will get LOW mails first and then HIGH at last.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;As I mentioned earlier, Mail can also implement Comparable, if so, no need to pass a comparator to the queue but using comparator have a advantage, it will decouple compare logic with Mail class, so later we can customize comparator with out changing Mail class.&lt;/p&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
+    
+    <item>
+      <title>Using comparing methods in Comparator Interface</title>
+      <link>http://localhost:8820/blog/2018/02/21-using-comparing-methods-in-comparator-interface.html</link>
+      <pubDate>Wed, 21 Feb 2018 00:00:00 -0500</pubDate>
+      <guid isPermaLink="false">blog/2018/02/21-using-comparing-methods-in-comparator-interface.html</guid>
+      <description>
+      &lt;div id=&quot;preamble&quot;&gt; 
+ &lt;div class=&quot;sectionbody&quot;&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Java 8 introduced some new methods in Comparator interface. I was going through this interface to check all available methods in it and did some code experiments to understand some of them and thought comparing and thenComparing methods are very interesting. There are multiple comparing methods which can be used in various situations. I listed all comparing methods here:&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;//static comparing methods
+static &amp;lt;T,U extends Comparable&amp;lt;? super U&amp;gt;&amp;gt; Comparator&amp;lt;T&amp;gt; comparing​(Function&amp;lt;? super T,? extends U&amp;gt; keyExtractor)
+static &amp;lt;T,U&amp;gt; Comparator&amp;lt;T&amp;gt; comparing​(Function&amp;lt;? super T,? extends U&amp;gt; keyExtractor, Comparator&amp;lt;? super U&amp;gt; keyComparator)
+static &amp;lt;T&amp;gt; Comparator&amp;lt;T&amp;gt; comparingDouble​(ToDoubleFunction&amp;lt;? super T&amp;gt; keyExtractor)
+static &amp;lt;T&amp;gt; Comparator&amp;lt;T&amp;gt; comparingInt​(ToIntFunction&amp;lt;? super T&amp;gt; keyExtractor)
+static &amp;lt;T&amp;gt; Comparator&amp;lt;T&amp;gt; comparingLong​(ToLongFunction&amp;lt;? super T&amp;gt; keyExtractor)
+
+//default thenComparing methods
+default Comparator&amp;lt;T&amp;gt; thenComparing​(Comparator&amp;lt;? super T&amp;gt; other)
+default &amp;lt;U extends Comparable&amp;lt;? super U&amp;gt;&amp;gt; Comparator&amp;lt;T&amp;gt; thenComparing​(Function&amp;lt;? super T,? extends U&amp;gt; keyExtractor)
+default &amp;lt;U&amp;gt; Comparator&amp;lt;T&amp;gt; thenComparing​(Function&amp;lt;? super T,? extends U&amp;gt; keyExtractor, Comparator&amp;lt;? super U&amp;gt; keyComparator)
+default Comparator&amp;lt;T&amp;gt; thenComparingDouble​(ToDoubleFunction&amp;lt;? super T&amp;gt; keyExtractor)
+default Comparator&amp;lt;T&amp;gt; thenComparingInt​(ToIntFunction&amp;lt;? super T&amp;gt; keyExtractor)
+default Comparator&amp;lt;T&amp;gt; thenComparingLong​(ToLongFunction&amp;lt;? super T&amp;gt; keyExtractor)&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;If you can understand how these comparing methods work then you can generate a comparator object with out implementing this interface. I will go through some examples so it will be easier to understand. Lets create a Student class and add couple of students to a List.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;public class Student{
+    private int id;
+    private String grade;
+    private String firstName;
+
+    public Student(int id,String grade, String firstName) {
+        this.id = id;
+        this.grade = grade;
+        this.firstName = firstName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;[&quot; + id + &quot;-&quot; + grade +
+                &quot;-&quot; + firstName +
+                &apos;]&apos;;
+    }
+    public static void main(String args[]){
+        List&amp;lt;Student&amp;gt; students = Arrays.asList(new Student(4,&quot;B&quot;,&quot;Sandra&quot;),
+                new Student(2,&quot;A&quot;,&quot;Cary&quot;),
+                new Student(5,&quot;A&quot;,&quot;Ferne&quot;),
+                new Student(3,&quot;B&quot;,&quot;Donnell&quot;),
+                new Student(1,&quot;A&quot;,&quot;Ria&quot;));
+        //sort students
+        students.sort((s1, s2) -&amp;gt; Integer.compare(s1.getId(), s2.getId()));
+
+        //display list of students
+        students.forEach(System.out::println);
+    }
+}&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;In line number 37 we are passing Comparator implementation to sort method. In next section we will see how to generate it with out implementing Comparator interface.&lt;/p&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;generate_comparator_using_static_comparing_methods&quot;&gt;Generate comparator using static comparing methods&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;In line number 37 of above example we implemented comparator which compares integers. Here we wrote basic compare logic but instead why can’t we just pass the field on which we want to compare? This is where static comparing methods will come into picture. Static comparing methods need key extractor so comparator can be generated based on that. If we need to compare integers then use below static method to generate comparator.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;static &amp;lt;T&amp;gt; Comparator&amp;lt;T&amp;gt; comparingInt​(ToIntFunction&amp;lt;? super T&amp;gt; keyExtractor)&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;To use this method we need to pass ToIntFunction. This is a functional interface and it has single method ‘applyAsInt’, See below for the declaration of this method:&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;int applyAsInt​(T value)&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;If we want to sort based on id field of the student, which is an int then we can update line number 37 to:&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;students.sort(Comparator.comparingInts) → s.getId();&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;We are passing implementation of ToIntFunction to comparingInt method. comparingInt will get int value from ToIntFunction and creates comparator based on that. We can even use method reference to reduce the code size.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;students.sort(Comparator.comparingInt(Student::getId));&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Basic thing to understand is, instead of ‘how’ we mentioned ‘what’ by using comparingInt method. Like wise there are other overloaded methods to generate comparator for long and double values. What is the case if we have objects? then we can use below method.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;static &amp;lt;T,U extends Comparable&amp;lt;? super U&amp;gt;&amp;gt; Comparator&amp;lt;T&amp;gt; comparing​(Function&amp;lt;? super T,? extends U&amp;gt; keyExtractor)&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;This method takes a function so we can return any object and Comparator will use natural sorting on it if it implements Comparable interface else it will give compilation error. I can use this method to sort students based on there first names. First name is a String and String implements Comparable so this method works fine.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;students.sort(Comparator.comparing(Student::getFirstName));&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;There is another comparing method available to generate customized comparator which take comparator as second parameter.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;static &amp;lt;T,U&amp;gt; Comparator&amp;lt;T&amp;gt; comparing​(Function&amp;lt;? super T,? extends U&amp;gt; keyExtractor, Comparator&amp;lt;? super U&amp;gt; keyComparator)&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Using this method we can pass custom comparator. In below example we passed case insensitive string comparator.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;students.sort(Comparator.comparing(Student::getFirstName,String.CASE_INSENSITIVE_ORDER));&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;With this we covered all static comparing methods. Instead of writing our own comparing logic we just need to pass key extractors, so these methods will generate comparator for us.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;using_thencomparing_methods&quot;&gt;Using thenComparing methods&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;If we want to do sort on multiple fields then we can use ‘thenComparing’ methods. These methods will return comparator, so we can chain multiple thenComparing methods to sort multiple fields. It is like applying sorting on multiple columns in a table. For example we can do sort on grade and then on first names of the students like below.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;students.sort(Comparator.comparing(Student::getGrade)
+              .thenComparing(Student::getFirstName));&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;thenComparing comes with same set of overloaded methods as comparing methods so we can pass functions to extract keys.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;With all the above examples hope you understood the usage of these methods. Please comment if anything is missing or need more explanation.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
+    
+    <item>
       <title>Stream of dates with LocalDate</title>
-      <link>http://jbake.org/blog/2018/02/1-stream-of-dates.html</link>
+      <link>http://localhost:8820/blog/2018/02/17-stream-of-dates-with-localdate.html</link>
       <pubDate>Sat, 17 Feb 2018 00:00:00 -0500</pubDate>
-      <guid isPermaLink="false">blog/2018/02/1-stream-of-dates.html</guid>
+      <guid isPermaLink="false">blog/2018/02/17-stream-of-dates-with-localdate.html</guid>
       <description>
       &lt;div class=&quot;paragraph&quot;&gt; 
  &lt;p&gt;I want a list of all dates with starting range from Jan 15, 2018 to Feb 20, 2018. I can generate this list using the new ‘datesUntil’ method in LocalDate class. This method is introduced in Java 9 and I recently found out this method while browsing through Java API and quickly did some code experiments using JShell. I thought this is very useful method and wanted to share my experiments in this article.&lt;/p&gt; 
 &lt;/div&gt; 
 &lt;div class=&quot;paragraph&quot;&gt; 
- &lt;p&gt;Below is the definition of this method. :source-highlighter: prettify&lt;/p&gt; 
+ &lt;p&gt;Below is the definition of this method.&lt;/p&gt; 
 &lt;/div&gt; 
 &lt;div class=&quot;listingblock&quot;&gt; 
  &lt;div class=&quot;content&quot;&gt; 
-  &lt;pre class=&quot;prettyprint highlight linenums&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;public Stream&amp;lt;LocalDate&amp;gt; datesUntil​(LocalDate endExclusive)&lt;/code&gt;&lt;/pre&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;public Stream&amp;lt;LocalDate&amp;gt; datesUntil​(LocalDate endExclusive)&lt;/code&gt;&lt;/pre&gt; 
  &lt;/div&gt; 
 &lt;/div&gt; 
 &lt;div class=&quot;paragraph&quot;&gt; 
@@ -38,96 +2280,88 @@
 &lt;/div&gt; 
 &lt;div class=&quot;listingblock&quot;&gt; 
  &lt;div class=&quot;content&quot;&gt; 
-  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;~ $ jshell
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;~ $ jshell
 | Welcome to JShell -- Version 9.0.4
 | For an introduction type: /help intro
 jshell&amp;gt;&lt;/code&gt;&lt;/pre&gt; 
  &lt;/div&gt; 
-&lt;/div&gt;
-	  </description>
-    </item>
-    
-    <item>
-      <title>Fourth Post</title>
-      <link>http://jbake.org/blog/2013/fourth-post.html</link>
-      <pubDate>Thu, 17 Oct 2013 00:00:00 -0400</pubDate>
-      <guid isPermaLink="false">blog/2013/fourth-post.html</guid>
-      <description>
-      &lt;div class=&quot;paragraph&quot;&gt; 
- &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel diam purus. Curabitur ut nisi lacus.&lt;/p&gt; 
-&lt;/div&gt; 
-&lt;div class=&quot;ulist&quot;&gt; 
- &lt;ul&gt; 
-  &lt;li&gt; &lt;p&gt;&lt;a href=&quot;http://example.org&quot; class=&quot;bare&quot;&gt;http://example.org&lt;/a&gt;&lt;/p&gt; &lt;/li&gt; 
-  &lt;li&gt; &lt;p&gt;&lt;a href=&quot;http://example.org&quot;&gt;Example.org&lt;/a&gt;&lt;/p&gt; &lt;/li&gt; 
- &lt;/ul&gt; 
 &lt;/div&gt; 
 &lt;div class=&quot;paragraph&quot;&gt; 
- &lt;p&gt;Nam id nisl quam. Donec a lorem sit amet libero pretium vulputate vel ut purus. Suspendisse leo arcu, mattis et imperdiet luctus, pulvinar vitae mi. Quisque fermentum sollicitudin feugiat. Mauris nec leo ligula. Vestibulum tristique odio ut risus ultricies a hendrerit quam iaculis. Duis tempor elit sit amet ligula vehicula et iaculis sem placerat. Fusce dictum, metus at volutpat lacinia, elit massa auctor risus, id auctor arcu enim eu augue. Donec ultrices turpis in mi imperdiet ac venenatis sapien sodales. In consequat imperdiet nunc quis bibendum. Nulla semper, erat quis ornare tristique, lectus massa posuere libero, ut vehicula lectus nunc ut lorem. Aliquam erat volutpat.&lt;/p&gt; 
-&lt;/div&gt;
-	  </description>
-    </item>
-    
-    <item>
-      <title>Third Post</title>
-      <link>http://jbake.org/blog/2013/third-post.html</link>
-      <pubDate>Thu, 26 Sep 2013 00:00:00 -0400</pubDate>
-      <guid isPermaLink="false">blog/2013/third-post.html</guid>
-      <description>
-      &lt;div class=&quot;paragraph&quot;&gt; 
- &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel diam purus. Curabitur ut nisi lacus.&lt;/p&gt; 
+ &lt;p&gt;By Default java.time package is not imported in JShell so we need to import this package. (You can check all available imports by executing /imports in JShell)&lt;/p&gt; 
 &lt;/div&gt; 
-&lt;div class=&quot;ulist&quot;&gt; 
- &lt;ul&gt; 
-  &lt;li&gt; &lt;p&gt;&lt;a href=&quot;http://example.org&quot; class=&quot;bare&quot;&gt;http://example.org&lt;/a&gt;&lt;/p&gt; &lt;/li&gt; 
-  &lt;li&gt; &lt;p&gt;&lt;a href=&quot;http://example.org&quot;&gt;Example.org&lt;/a&gt;&lt;/p&gt; &lt;/li&gt; 
- &lt;/ul&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;jshell&amp;gt; import java.time.*&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
 &lt;/div&gt; 
 &lt;div class=&quot;paragraph&quot;&gt; 
- &lt;p&gt;Nam id nisl quam. Donec a lorem sit amet libero pretium vulputate vel ut purus. Suspendisse leo arcu, mattis et imperdiet luctus, pulvinar vitae mi. Quisque fermentum sollicitudin feugiat. Mauris nec leo ligula. Vestibulum tristique odio ut risus ultricies a hendrerit quam iaculis. Duis tempor elit sit amet ligula vehicula et iaculis sem placerat. Fusce dictum, metus at volutpat lacinia, elit massa auctor risus, id auctor arcu enim eu augue. Donec ultrices turpis in mi imperdiet ac venenatis sapien sodales. In consequat imperdiet nunc quis bibendum. Nulla semper, erat quis ornare tristique, lectus massa posuere libero, ut vehicula lectus nunc ut lorem. Aliquam erat volutpat.&lt;/p&gt; 
+ &lt;p&gt;Create fromDate and toDate and stream using datesUntil method&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;jshell&amp;gt; LocalDate fromDate = LocalDate.of(2018,1,15)
+fromDate ==&amp;gt; 2018-01-15
+jshell&amp;gt; LocalDate toDate = LocalDate.of(2018,2,20)
+toDate ==&amp;gt; 2018-02-20
+jshell&amp;gt; Stream&amp;lt;LocalDate&amp;gt; dates = fromDate.datesUntil(toDate)&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Now lets apply forEach to see all dates with in this range.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;jshell&amp;gt; dates.forEach(System.out::println)
+2018-01-15
+2018-01-16
+...
+...
+2018-02-18
+2018-02-19&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Nice, we got all dates with in the range. Note that toDate is not in the output because it is a endExclusive parameter. See the declaration of datesUntil method which I mentioned above. If you want to include toDate in the range then quick way to add a day is toDate.plusDays(1)&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;There is another overloaded ‘datesUntil’ method which is even more useful, it takes Period as second parameter. So we get stream with incremental steps.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;public Stream&amp;lt;LocalDate&amp;gt; datesUntil​(LocalDate endExclusive, Period step)&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;I will use same above fromDate and toDate to create another stream with weekly increments.&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;jshell&amp;gt; Stream&amp;lt;LocalDate&amp;gt; weekly = fromDate.datesUntil(toDate, Period.ofWeeks(1))
+weekly ==&amp;gt; java.util.stream.LongPipeline$1@59494225
+jshell&amp;gt; weekly.forEach(System.out::println)
+2018-01-15
+2018-01-22
+2018-01-29
+2018-02-05
+2018-02-12
+2018-02-19&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Nice, we got dates on weekly intervals. We can apply some functions on these streams and can do lot more interesting stuff like creating continues events for the calendar or scheduling jobs and many more…&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;Note: Once a stream is executed then you can not reuse it. If I execute above code again then I get IllegalStateException&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;listingblock&quot;&gt; 
+ &lt;div class=&quot;content&quot;&gt; 
+  &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;jshell&amp;gt; weekly.forEach(System.out::println)
+| java.lang.IllegalStateException thrown: stream has already been operated upon or closed&lt;/code&gt;&lt;/pre&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;paragraph&quot;&gt; 
+ &lt;p&gt;One quick way to fix this is to declare a supplier and reuse it every time. I learnt this tip from Baeldung blog. &lt;a href=&quot;http://www.baeldung.com/java-stream-operated-upon-or-closed-exception&quot;&gt;Here&lt;/a&gt; is the more information on this tip.&lt;/p&gt; 
 &lt;/div&gt;
-	  </description>
-    </item>
-    
-    <item>
-      <title>Second Post</title>
-      <link>http://jbake.org/blog/2013/second-post.html</link>
-      <pubDate>Sun, 25 Aug 2013 00:00:00 -0400</pubDate>
-      <guid isPermaLink="false">blog/2013/second-post.html</guid>
-      <description>
-      &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel diam purus. Curabitur ut nisi lacus.&lt;/p&gt; 
-&lt;ul&gt; 
- &lt;li&gt;&lt;a href=&quot;http://example.org&quot;&gt;http://example.org&lt;/a&gt;&lt;/li&gt; 
- &lt;li&gt;&lt;a href=&quot;http://example.org&quot;&gt;Example.org&lt;/a&gt;&lt;/li&gt; 
-&lt;/ul&gt; 
-&lt;p&gt;Nam id nisl quam. Donec a lorem sit amet libero pretium vulputate vel ut purus. Suspendisse leo arcu,&lt;br&gt; mattis et imperdiet luctus, pulvinar vitae mi. Quisque fermentum sollicitudin feugiat. Mauris nec leo&lt;br&gt; ligula. Vestibulum tristique odio ut risus ultricies a hendrerit quam iaculis. Duis tempor elit sit amet&lt;br&gt; ligula vehicula et iaculis sem placerat. Fusce dictum, metus at volutpat lacinia, elit massa auctor risus,&lt;br&gt; id auctor arcu enim eu augue. Donec ultrices turpis in mi imperdiet ac venenatis sapien sodales. In&lt;br&gt; consequat imperdiet nunc quis bibendum. Nulla semper, erat quis ornare tristique, lectus massa posuere&lt;br&gt; libero, ut vehicula lectus nunc ut lorem. Aliquam erat volutpat.&lt;/p&gt;
-	  </description>
-    </item>
-    
-    <item>
-      <title>First Post</title>
-      <link>http://jbake.org/blog/2013/first-post.html</link>
-      <pubDate>Wed, 24 Jul 2013 00:00:00 -0400</pubDate>
-      <guid isPermaLink="false">blog/2013/first-post.html</guid>
-      <description>
-      &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel diam purus. Curabitur ut nisi lacus.&lt;/p&gt; 
-&lt;ul&gt; 
- &lt;li&gt;&lt;a href=&quot;http://example.org&quot;&gt;http://example.org&lt;/a&gt;&lt;/li&gt; 
- &lt;li&gt;&lt;a href=&quot;http://example.org&quot;&gt;Example.org&lt;/a&gt;&lt;/li&gt; 
-&lt;/ul&gt; 
-&lt;p&gt;Nam id nisl quam. Donec a lorem sit amet libero pretium vulputate vel ut purus. Suspendisse leo arcu, mattis et imperdiet luctus, pulvinar vitae mi. Quisque fermentum sollicitudin feugiat. Mauris nec leo ligula. Vestibulum tristique odio ut risus ultricies a hendrerit quam iaculis. Duis tempor elit sit amet ligula vehicula et iaculis sem placerat. Fusce dictum, metus at volutpat lacinia, elit massa auctor risus, id auctor arcu enim eu augue. Donec ultrices turpis in mi imperdiet ac venenatis sapien sodales.&lt;/p&gt; 
-&lt;pre class=&quot;prettyprint&quot;&gt;
-&lt;code&gt;
-package org.jbake;
-
-public class Oven {
-	public static void main(String[] args) {
-		System.out.print(&quot;Baking!&quot;);
-  }
-}
-&lt;/code&gt;
-&lt;/pre&gt; 
-&lt;p&gt;In consequat imperdiet nunc quis bibendum. Nulla semper, erat quis ornare tristique, lectus massa posuere libero, ut vehicula lectus nunc ut lorem. Aliquam erat volutpat.&lt;/p&gt;
 	  </description>
     </item>
     

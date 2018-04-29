@@ -5,8 +5,8 @@
  */
 
 body {
-  font-family: 'Lora', 'Times New Roman', serif;
-  font-size: 20px;
+  font-family: 'Roboto',sans-serif;
+  font-size: 18px;
   color: #404040;
 }
 p {
@@ -145,19 +145,13 @@ hr.small {
 .intro-header .site-heading,
 .intro-header .post-heading,
 .intro-header .page-heading {
-  padding: 100px 0 50px;
   color: white;
 }
-@media only screen and (min-width: 768px) {
-  .intro-header .site-heading,
-  .intro-header .post-heading,
-  .intro-header .page-heading {
-    padding: 150px 0;
-  }
-}
+
 .intro-header .site-heading,
 .intro-header .page-heading {
   text-align: center;
+  padding: 100px 50px 50px;
 }
 .intro-header .site-heading h1,
 .intro-header .page-heading h1 {
@@ -166,18 +160,11 @@ hr.small {
 }
 .intro-header .site-heading .subheading,
 .intro-header .page-heading .subheading {
-  font-size: 24px;
   line-height: 1.1;
   display: block;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 300;
   margin: 10px 0 0;
-}
-@media only screen and (min-width: 768px) {
-  .intro-header .site-heading h1,
-  .intro-header .page-heading h1 {
-    font-size: 80px;
-  }
 }
 .intro-header .post-heading h1 {
   font-size: 35px;
@@ -189,7 +176,6 @@ hr.small {
 }
 .intro-header .post-heading .subheading {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 24px;
   margin: 10px 0 30px;
   font-weight: 600;
 }
@@ -344,9 +330,7 @@ form .row:first-child .floating-label-form-group {
   border: 1px solid #0085a1;
   color: white;
 }
-.pager {
-  margin: 20px 0 0;
-}
+
 .pager li > a,
 .pager li > span {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -371,6 +355,7 @@ form .row:first-child .floating-label-form-group {
   color: #808080;
   background-color: #404040;
   cursor: not-allowed;
+  text-decoration: none;
 }
 ::-moz-selection {
   color: white;
@@ -392,4 +377,7 @@ img::-moz-selection {
 }
 body {
   webkit-tap-highlight-color: #0085a1;
+}
+.bg-graphite{
+  background-color: #262626;
 }
