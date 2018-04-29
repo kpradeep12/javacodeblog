@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
         
-        <%published_posts.each {post ->%>
+        <%published_posts.take(6).each {post ->%>
             <div class="col-lg-4 col-sm-6 mb-3">
                 <div class="card">
                     <h1 class="card-header post-title">

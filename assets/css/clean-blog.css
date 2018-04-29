@@ -347,6 +347,7 @@ form .row:first-child .floating-label-form-group {
   color: white;
   background-color: #0085a1;
   border: 1px solid #0085a1;
+  text-decoration: none;
 }
 .pager .disabled > a,
 .pager .disabled > a:hover,
