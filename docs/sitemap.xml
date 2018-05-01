@@ -2,102 +2,102 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
     <url>
-    	<loc>http://www.techstackjava.com/contact.html</loc>
+    	<loc>http://localhost:8820contact.html</loc>
     	<lastmod>2013-09-24</lastmod>
     </url>
 
     <url>
-    	<loc>http://www.techstackjava.com/about.html</loc>
+    	<loc>http://localhost:8820about.html</loc>
     	<lastmod>2013-09-24</lastmod>
     </url>
 
     <url>
-    	<loc>http://www.techstackjava.com/blog/2018/04/22-strategy-design-pattern.html</loc>
+    	<loc>http://localhost:8820blog/2018/04/22-strategy-design-pattern.html</loc>
     	<lastmod>2018-04-22</lastmod>
     </url>
 
     <url>
-    	<loc>http://www.techstackjava.com/blog/2018/04/18-introduction-to-java-time.html</loc>
+    	<loc>http://localhost:8820blog/2018/04/18-introduction-to-java-time.html</loc>
     	<lastmod>2018-04-18</lastmod>
     </url>
 
     <url>
-    	<loc>http://www.techstackjava.com/blog/2018/04/15-how-concurrentModificationException-is-thrown.html</loc>
+    	<loc>http://localhost:8820blog/2018/04/15-how-concurrentModificationException-is-thrown.html</loc>
     	<lastmod>2018-04-15</lastmod>
     </url>
 
     <url>
-    	<loc>http://www.techstackjava.com/blog/2018/04/11-regex-tester-with-spring-shell.html</loc>
+    	<loc>http://localhost:8820blog/2018/04/11-regex-tester-with-spring-shell.html</loc>
     	<lastmod>2018-04-11</lastmod>
     </url>
 
     <url>
-    	<loc>http://www.techstackjava.com/blog/2018/04/8-infinite-streams.html</loc>
+    	<loc>http://localhost:8820blog/2018/04/8-infinite-streams.html</loc>
     	<lastmod>2018-04-08</lastmod>
     </url>
 
     <url>
-    	<loc>http://www.techstackjava.com/blog/2018/04/3-recipes-for-optional.html</loc>
+    	<loc>http://localhost:8820blog/2018/04/3-recipes-for-optional.html</loc>
     	<lastmod>2018-04-03</lastmod>
     </url>
 
     <url>
-    	<loc>http://www.techstackjava.com/blog/2018/03/28-functions-cheat-sheet.html</loc>
+    	<loc>http://localhost:8820blog/2018/03/28-functions-cheat-sheet.html</loc>
     	<lastmod>2018-03-28</lastmod>
     </url>
 
     <url>
-    	<loc>http://www.techstackjava.com/blog/2018/03/24-reduce-stream-to-single-value.html</loc>
+    	<loc>http://localhost:8820blog/2018/03/24-reduce-stream-to-single-value.html</loc>
     	<lastmod>2018-03-24</lastmod>
     </url>
 
     <url>
-    	<loc>http://www.techstackjava.com/blog/2018/03/21-quick-way-to-create-list-set-and-map.html</loc>
+    	<loc>http://localhost:8820blog/2018/03/21-quick-way-to-create-list-set-and-map.html</loc>
     	<lastmod>2018-03-21</lastmod>
     </url>
 
     <url>
-    	<loc>http://www.techstackjava.com/blog/2018/03/17-using-consumer-functional-interface.html</loc>
+    	<loc>http://localhost:8820blog/2018/03/17-using-consumer-functional-interface.html</loc>
     	<lastmod>2018-03-17</lastmod>
     </url>
 
     <url>
-    	<loc>http://www.techstackjava.com/blog/2018/03/14-create-maven-project-in-github.html</loc>
+    	<loc>http://localhost:8820blog/2018/03/14-create-maven-project-in-github.html</loc>
     	<lastmod>2018-03-14</lastmod>
     </url>
 
     <url>
-    	<loc>http://www.techstackjava.com/blog/2018/03/10-fixed-thread-pool-using-executor-framework.html</loc>
+    	<loc>http://localhost:8820blog/2018/03/10-fixed-thread-pool-using-executor-framework.html</loc>
     	<lastmod>2018-03-10</lastmod>
     </url>
 
     <url>
-    	<loc>http://www.techstackjava.com/blog/2018/03/7-producer-consumer-with-bounded-blocked-queue.html</loc>
+    	<loc>http://localhost:8820blog/2018/03/7-producer-consumer-with-bounded-blocked-queue.html</loc>
     	<lastmod>2018-03-07</lastmod>
     </url>
 
     <url>
-    	<loc>http://www.techstackjava.com/blog/2018/03/3-generate-stream-of-random-numbers.html</loc>
+    	<loc>http://localhost:8820blog/2018/03/3-generate-stream-of-random-numbers.html</loc>
     	<lastmod>2018-03-03</lastmod>
     </url>
 
     <url>
-    	<loc>http://www.techstackjava.com/blog/2018/02/28-quickway-to-create-read-write-delete-files.html</loc>
+    	<loc>http://localhost:8820blog/2018/02/28-quickway-to-create-read-write-delete-files.html</loc>
     	<lastmod>2018-02-28</lastmod>
     </url>
 
     <url>
-    	<loc>http://www.techstackjava.com/blog/2018/02/23-quick-introduction-to-priorityQueue.html</loc>
+    	<loc>http://localhost:8820blog/2018/02/23-quick-introduction-to-priorityQueue.html</loc>
     	<lastmod>2018-02-23</lastmod>
     </url>
 
     <url>
-    	<loc>http://www.techstackjava.com/blog/2018/02/21-using-comparing-methods-in-comparator-interface.html</loc>
+    	<loc>http://localhost:8820blog/2018/02/21-using-comparing-methods-in-comparator-interface.html</loc>
     	<lastmod>2018-02-21</lastmod>
     </url>
 
     <url>
-    	<loc>http://www.techstackjava.com/blog/2018/02/17-stream-of-dates-with-localdate.html</loc>
+    	<loc>http://localhost:8820blog/2018/02/17-stream-of-dates-with-localdate.html</loc>
     	<lastmod>2018-02-17</lastmod>
     </url>
 
