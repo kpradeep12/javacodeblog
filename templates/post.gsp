@@ -13,14 +13,13 @@
                     <hr>
                     <!-- Preview Image -->
                     <img class="img-fluid rounded post-image" src="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>img/${content.image}" alt="">
-
-
                     ${content.body}
                 </div>
             </div>
         </div>
+        
     </article>
-
+    
     <hr>
-
+    
 <%include "footer.gsp"%>

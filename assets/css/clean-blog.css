@@ -384,4 +384,10 @@ body {
 }
 .footer-tag-background{
   background-color: #0085a1;
+  font-weight: 200;
+}
+
+pre.prettyprint {
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
 }

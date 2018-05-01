@@ -39,11 +39,11 @@
                         <div class="card-body">
                             <h5 class="card-title">Author</h5>
                             <!--<img class="card-img-top" width="90" height="90" style="width:40%" src="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>img/author-pic.jpeg" alt="Pradeep Kundarapu">-->
-                            <p class="card-text my-2">Pradeep Kundarapu</p>
-                            
+                            <p class="card-text">Pradeep Kundarapu</p>
+                            <p class="m-0">Follow me</p>
                             <ul class="list-inline text-center list-unstyled float-left">
                                 <li class="list-inline-item">
-                                    <a href="https://twitter.com/k_pradeep4j">
+                                    <a href="https://twitter.com/k_pradeep4j"> 
                                         <span class="fa-stack fa-lg">
                                             <i class="fa fa-circle fa-stack-2x"></i>
                                             <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
