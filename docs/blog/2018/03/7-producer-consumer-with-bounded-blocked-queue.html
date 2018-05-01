@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content="JBake">
+    <meta name="google-site-verification" content="zkTSlJd8qxF4ZHbWWxyG0Prqnevef8dGSLkZeHFRW2Y" />
+    
+    <title>Producer and Consumer with Bounded Blocked Queue</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../../css/clean-blog.css" rel="stylesheet">
+    <link href="../../../css/3-portfolio-theme.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <!-- link rel="shortcut icon" href="../../../favicon.ico" -->
+  </head>
+  <body>
+   
+
+        <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="../../../index.html">Tech Stack Java</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="../../../index.html">Home</a>
+            </li>
+            <!--<li class="nav-item">
+                <a class="nav-link" href="../../../about.html">About</a>
+            </li>-->
+            <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Archive</a>
+            </li>
+            <!--<li class="nav-item">
+                <a class="nav-link" href="../../../contact.html">Contact</a>
+            </li>-->
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('../../../img/home-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="site-heading">
+                        <h1>Tech Stack Java</h1>
+                        <hr class="small">
+                        <span class="subheading">Sharing my Java experiments</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="mt-4">Producer and Consumer with Bounded Blocked Queue</h1>
+                    <p class="mt-0 small">Posted on March 07, 2018</p>
+                    <hr>
+                    <!-- Preview Image -->
+                    <img class="img-fluid rounded post-image" src="../../../img/" alt="">
+
+
+                    <div id="preamble"> 
+ <div class="sectionbody"> 
+  <div class="paragraph text-center"> 
+   <p><span class="image"><img src="http://www.techstackjava.com/img/posts/producer-consumer.png" alt="Producer consumer" width="800" height="180"></span></p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>Producer and consumers are two independent entities works together on the queue. Producer inserts elements into the tail of the queue and consumer removes them from the head of the queue. Here elements can be tasks or data on which consumer is interested in. This design pattern will allow producer and consumer to work independently.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>Queue allows data to be inserted in FIFO order. FIFO is ‘First In First Out’, in which longest waiting element will be removed first and shorted waiting element will be removed last. Queue acts as a communication channel between Producer and Consumer.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>Producer and consumer will work on single queue instance and there can be multiple producers or consumers attached to this single instance. The rate of insertion and deletion from the queue will depends on the processing power of the producer and consumer. Producer and consumers works on there own pace with out depending on each other but faster producer can make queue size grow larger and which can result in a out of memory error.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>To control the size of the queue we can use BlockedQueue interface. There are various implementation available for this interface and in this article I am using ArrayBlockingQueue class. BlockedQueue can be bounded or unbounded. In bounded, queue size is limited and where as in unbounded, there will be no limit.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>The advantage of BlockedQueue is, if queue is full then it blocks the producer and it releases only when space is available and if queue is empty then it blocks the consumer and releases only when element is available. For example if we have a faster producer and slower consumer working on a blocked queue of five size; it blocks the producer if queue reaches its limit such than, it can not insert more elements into the queue. This arrangement will make producer and consumer work smoothly with out breaking the application.</p> 
+  </div> 
+  <div class="listingblock"> 
+   <div class="content"> 
+    <pre class="prettyprint highlight"><code class="language-java" data-lang="java">import java.util.Random;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ThreadLocalRandom;
+
+public class ProcuderConsumer {
+
+    public static void main(String args[]) throws InterruptedException {
+        BlockingQueue&lt;Integer&gt; queue = new ArrayBlockingQueue&lt;&gt;(5);
+
+        Runnable producer = () -&gt; {
+            while (true) {
+                int jobId = getNewJobId();
+                try {
+                    Thread.sleep(getInterval(0, 1));
+                    queue.put(jobId);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.printf("Producer: pushed new job '%d' into queue:%s \n", jobId, queue);
+            }
+        };
+
+        Runnable consumer = () -&gt; {
+            while (true) {
+                try {
+                    int jobId = queue.take();
+                    System.out.printf("Consumer: processing job '%d'\n", jobId);
+                    Thread.sleep(getInterval(3, 6));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        };
+
+        new Thread(producer).start();
+        new Thread(consumer).start();
+    }
+
+
+    //Randomly generates job id numbers between 1 to 10
+    public static int getNewJobId() {
+        Random r = new Random();
+        return r.nextInt(10);
+    }
+
+    static int[] intervals = {1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000};
+    //Randomly returns one of the value from intervals[] based on provided min and max indexes
+    public static int getInterval(int min, int max) {
+        ThreadLocalRandom r = ThreadLocalRandom.current();
+        int index = r.nextInt((max - min) + 1) + min;
+        return intervals[index];
+    }
+}</code></pre> 
+   </div> 
+  </div> 
+  <div class="paragraph"> 
+   <p>Above example lets us to configure speed of the producer and consumer. Producer inserts random job ids into the queue by calling getNewJobId() method and consumer removes job ids from the queue to process them.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>To simulate the processing time, I am calling getInterval method at producer and consumer side. This method will return random milliseconds from intervals[] array. intervals array contains 10 millisecond intervals. getInterval takes min and max index and randomly selects one of the index with in the given range and returns the value of that index from intervals array. Processing time of creating and working on jobs can vary based on various factors like database calls, REST calls and for every job it can be different so using this method we can simulate this processing time.</p> 
+  </div> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="fast_producer_and_slow_consumer">Fast producer and slow consumer</h4> 
+ <div class="paragraph"> 
+  <p>Producer takes 1 to 2 seconds to generates random job ids and consumer takes 4 to 7 seconds to process. So we have faster producer and slower consumer. Run this example and after some time you will see queue reaches its limit and producer gets blocked and can not insert new element until consumer removes one, but both will continue to work on there own pace.</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">Producer: pushed new job '5' into queue:[]
+Consumer: processing job '5'
+Producer: pushed new job '4' into queue:[4]
+Producer: pushed new job '5' into queue:[4, 5]
+Producer: pushed new job '4' into queue:[4, 5, 4]
+Consumer: processing job '4'
+Producer: pushed new job '4' into queue:[5, 4, 4]
+Producer: pushed new job '3' into queue:[5, 4, 4, 3]
+Producer: pushed new job '5' into queue:[5, 4, 4, 3, 5]
+Consumer: processing job '5'
+Producer: pushed new job '0' into queue:[4, 4, 3, 5, 0]
+Consumer: processing job '4'
+Producer: pushed new job '8' into queue:[4, 3, 5, 0, 8]
+Consumer: processing job '4'
+...</code></pre> 
+  </div> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="slow_producer_and_fast_consumer">Slow producer and fast consumer</h4> 
+ <div class="paragraph"> 
+  <p>Change above example to convert producer slower and consumer faster by passing higher index range in producers and lower index range in consumer. If you run you should never see queue size reaching its limit. For below run I passed 3 and 6 to getInterval in producer (Thread.sleep(getInterval(3, 6))). In consumer I passed 0 and 1 to getInterval to make consumer fast.</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-java" data-lang="java">Producer: pushed new job '3' into queue:[]
+Consumer: processing job '3'
+Producer: pushed new job '0' into queue:[]
+Consumer: processing job '0'
+Producer: pushed new job '3' into queue:[]
+Consumer: processing job '3'</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>It will take some time to see output in the console because now the producer is slower and consumer will be blocked until elements are available in the queue. As you see queue is always empty because consumer is faster and always blocked on the queue so it gets element as soon as it is inserted.</p> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="multi_producers_and_single_consumer">Multi producers and single consumer</h4> 
+ <div class="paragraph"> 
+  <p>We can attach multiple producers or consumers to the queue. For below run I attached five producers and single consumer.</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-java" data-lang="java">        //five producers
+        new Thread(producer).start();
+        new Thread(producer).start();
+        new Thread(producer).start();
+        new Thread(producer).start();
+        new Thread(producer).start();
+
+        //single consumer
+        new Thread(consumer).start();</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>When you run this code you will see queue gets filled because even though producer is slower but five of them are inserting elements into the queue. Below is the output;</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">Producer: pushed new job '6' into queue:[]
+Consumer: processing job '6'
+Producer: pushed new job '6' into queue:[6]
+Consumer: processing job '6'
+Producer: pushed new job '1' into queue:[1, 5, 9]
+Producer: pushed new job '9' into queue:[1, 5, 9]
+Producer: pushed new job '5' into queue:[1, 5, 9]
+Consumer: processing job '1'
+Consumer: processing job '5'
+Consumer: processing job '9'
+Producer: pushed new job '5' into queue:[5, 1]
+Producer: pushed new job '1' into queue:[5, 1]
+Producer: pushed new job '7' into queue:[5, 1, 7]
+Producer: pushed new job '9' into queue:[5, 1, 7, 9]</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>You can continue to experiment with different speeds and can also add and remove producers and consumers to check the behavior.</p> 
+ </div> 
+</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+		<div id="push"></div>
+    
+    <!-- Footer -->
+    <footer class="bg-graphite">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6">
+                    <div class="card" style="background-color: transparent;color: #fff!important;">
+                        <div class="card-body">
+                            <h5 class="card-title">Tags</h5>
+                            <p class="card-text">
+                                
+                                    <a href="../../../tags/gof.html" class="badge badge-primary footer-tag-background">
+                                        gof
+                                    </a>
+                                
+                                    <a href="../../../tags/queue.html" class="badge badge-primary footer-tag-background">
+                                        queue
+                                    </a>
+                                
+                                    <a href="../../../tags/time.html" class="badge badge-primary footer-tag-background">
+                                        time
+                                    </a>
+                                
+                                    <a href="../../../tags/producer.html" class="badge badge-primary footer-tag-background">
+                                        producer
+                                    </a>
+                                
+                                    <a href="../../../tags/blockedqueue.html" class="badge badge-primary footer-tag-background">
+                                        blockedqueue
+                                    </a>
+                                
+                                    <a href="../../../tags/regex.html" class="badge badge-primary footer-tag-background">
+                                        regex
+                                    </a>
+                                
+                                    <a href="../../../tags/comparator.html" class="badge badge-primary footer-tag-background">
+                                        comparator
+                                    </a>
+                                
+                                    <a href="../../../tags/java10.html" class="badge badge-primary footer-tag-background">
+                                        java10
+                                    </a>
+                                
+                                    <a href="../../../tags/thread.html" class="badge badge-primary footer-tag-background">
+                                        thread
+                                    </a>
+                                
+                                    <a href="../../../tags/localdate.html" class="badge badge-primary footer-tag-background">
+                                        localdate
+                                    </a>
+                                
+                                    <a href="../../../tags/streams.html" class="badge badge-primary footer-tag-background">
+                                        streams
+                                    </a>
+                                
+                                    <a href="../../../tags/var.html" class="badge badge-primary footer-tag-background">
+                                        var
+                                    </a>
+                                
+                                    <a href="../../../tags/maven.html" class="badge badge-primary footer-tag-background">
+                                        maven
+                                    </a>
+                                
+                                    <a href="../../../tags/read.html" class="badge badge-primary footer-tag-background">
+                                        read
+                                    </a>
+                                
+                                    <a href="../../../tags/jshell.html" class="badge badge-primary footer-tag-background">
+                                        jshell
+                                    </a>
+                                
+                                    <a href="../../../tags/concurrentmodificationexception.html" class="badge badge-primary footer-tag-background">
+                                        concurrentmodificationexception
+                                    </a>
+                                
+                                    <a href="../../../tags/consumer.html" class="badge badge-primary footer-tag-background">
+                                        consumer
+                                    </a>
+                                
+                                    <a href="../../../tags/write.html" class="badge badge-primary footer-tag-background">
+                                        write
+                                    </a>
+                                
+                                    <a href="../../../tags/multithreading.html" class="badge badge-primary footer-tag-background">
+                                        multithreading
+                                    </a>
+                                
+                                    <a href="../../../tags/create.html" class="badge badge-primary footer-tag-background">
+                                        create
+                                    </a>
+                                
+                                    <a href="../../../tags/executor.html" class="badge badge-primary footer-tag-background">
+                                        executor
+                                    </a>
+                                
+                                    <a href="../../../tags/collections.html" class="badge badge-primary footer-tag-background">
+                                        collections
+                                    </a>
+                                
+                                    <a href="../../../tags/stream.html" class="badge badge-primary footer-tag-background">
+                                        stream
+                                    </a>
+                                
+                                    <a href="../../../tags/git.html" class="badge badge-primary footer-tag-background">
+                                        git
+                                    </a>
+                                
+                                    <a href="../../../tags/file.html" class="badge badge-primary footer-tag-background">
+                                        file
+                                    </a>
+                                
+                                    <a href="../../../tags/java.html" class="badge badge-primary footer-tag-background">
+                                        java
+                                    </a>
+                                
+                                    <a href="../../../tags/random.html" class="badge badge-primary footer-tag-background">
+                                        random
+                                    </a>
+                                
+                                    <a href="../../../tags/spring.html" class="badge badge-primary footer-tag-background">
+                                        spring
+                                    </a>
+                                
+                                    <a href="../../../tags/design pattern.html" class="badge badge-primary footer-tag-background">
+                                        design pattern
+                                    </a>
+                                
+                                    <a href="../../../tags/delete.html" class="badge badge-primary footer-tag-background">
+                                        delete
+                                    </a>
+                                
+                                    <a href="../../../tags/priorityqueue.html" class="badge badge-primary footer-tag-background">
+                                        priorityqueue
+                                    </a>
+                                
+                                    <a href="../../../tags/infinite.html" class="badge badge-primary footer-tag-background">
+                                        infinite
+                                    </a>
+                                
+                                    <a href="../../../tags/functional.html" class="badge badge-primary footer-tag-background">
+                                        functional
+                                    </a>
+                                
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="card" style="background-color: transparent;color: #fff!important;">
+                        <div class="card-body">
+                            <h5 class="card-title">Recent Posts</h5>
+                            <p class="card-text">
+                                <ul class="list-unstyled">
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/22-strategy-design-pattern.html" class="footer-link">Strategy design pattern</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/18-introduction-to-java-time.html" class="footer-link">Introduction to java.time</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/15-how-concurrentModificationException-is-thrown.html" class="footer-link">How ConcurrentModificationException is thrown?</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/11-regex-tester-with-spring-shell.html" class="footer-link">Regex Tester With Spring Shell</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/8-infinite-streams.html" class="footer-link">Infinite streams</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/3-recipes-for-optional.html" class="footer-link">Recipes for Optional</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/03/28-functions-cheat-sheet.html" class="footer-link">Functions cheat sheet</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/03/24-reduce-stream-to-single-value.html" class="footer-link">Reduce stream to single value</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/03/21-quick-way-to-create-list-set-and-map.html" class="footer-link">Quick way to create List, Set and Map</a>
+                                        </li>
+                                    
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="card" style="background-color: transparent;color: #fff!important;">
+                        <div class="card-body">
+                            <h5 class="card-title">Author</h5>
+                            <!--<img class="card-img-top" width="90" height="90" style="width:40%" src="../../../img/author-pic.jpeg" alt="Pradeep Kundarapu">-->
+                            <p class="card-text my-2">Pradeep Kundarapu</p>
+                            
+                            <ul class="list-inline text-center list-unstyled float-left">
+                                <li class="list-inline-item">
+                                    <a href="https://twitter.com/k_pradeep4j">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="col">
+                    
+                    <p class="copyright text-muted">Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+                </div>-->
+                
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript 
+    <script src="../../../js/clean-blog.min.js"></script>
+    -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115619272-2"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-115619272-2');
+    </script>
+
+  </body>
+</html>

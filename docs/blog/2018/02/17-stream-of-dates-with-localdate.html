@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content="JBake">
+    <meta name="google-site-verification" content="zkTSlJd8qxF4ZHbWWxyG0Prqnevef8dGSLkZeHFRW2Y" />
+    
+    <title>Stream of dates with LocalDate</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../../css/clean-blog.css" rel="stylesheet">
+    <link href="../../../css/3-portfolio-theme.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <!-- link rel="shortcut icon" href="../../../favicon.ico" -->
+  </head>
+  <body>
+   
+
+        <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="../../../index.html">Tech Stack Java</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="../../../index.html">Home</a>
+            </li>
+            <!--<li class="nav-item">
+                <a class="nav-link" href="../../../about.html">About</a>
+            </li>-->
+            <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Archive</a>
+            </li>
+            <!--<li class="nav-item">
+                <a class="nav-link" href="../../../contact.html">Contact</a>
+            </li>-->
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('../../../img/home-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="site-heading">
+                        <h1>Tech Stack Java</h1>
+                        <hr class="small">
+                        <span class="subheading">Sharing my Java experiments</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="mt-4">Stream of dates with LocalDate</h1>
+                    <p class="mt-0 small">Posted on February 17, 2018</p>
+                    <hr>
+                    <!-- Preview Image -->
+                    <img class="img-fluid rounded post-image" src="../../../img/null" alt="">
+
+
+                    <div class="paragraph"> 
+ <p>I want a list of all dates with starting range from Jan 15, 2018 to Feb 20, 2018. I can generate this list using the new ‘datesUntil’ method in LocalDate class. This method is introduced in Java 9 and I recently found out this method while browsing through Java API and quickly did some code experiments using JShell. I thought this is very useful method and wanted to share my experiments in this article.</p> 
+</div> 
+<div class="paragraph"> 
+ <p>Below is the definition of this method.</p> 
+</div> 
+<div class="listingblock"> 
+ <div class="content"> 
+  <pre class="prettyprint highlight"><code class="language-java" data-lang="java">public Stream&lt;LocalDate&gt; datesUntil​(LocalDate endExclusive)</code></pre> 
+ </div> 
+</div> 
+<div class="paragraph"> 
+ <p>This method returns stream of LocalDate objects so we can process these dates in a stream. To use this method we need fromDate and toDate so we can generate stream of LocalDate’s.</p> 
+</div> 
+<div class="paragraph"> 
+ <p>I fired up my JShell and executed below code snippets. JShell is a quick and best way to experiment small code snippets like below. I always love to use JShell for these type of experiments. I will also give some tips on JShell usage on the way while we do this experiment.</p> 
+</div> 
+<div class="paragraph"> 
+ <p>You need Java 9 to run JShell. Go to command prompt/terminal and execute ‘jshell’ command.</p> 
+</div> 
+<div class="listingblock"> 
+ <div class="content"> 
+  <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">~ $ jshell
+| Welcome to JShell -- Version 9.0.4
+| For an introduction type: /help intro
+jshell&gt;</code></pre> 
+ </div> 
+</div> 
+<div class="paragraph"> 
+ <p>By Default java.time package is not imported in JShell so we need to import this package. (You can check all available imports by executing /imports in JShell)</p> 
+</div> 
+<div class="listingblock"> 
+ <div class="content"> 
+  <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">jshell&gt; import java.time.*</code></pre> 
+ </div> 
+</div> 
+<div class="paragraph"> 
+ <p>Create fromDate and toDate and stream using datesUntil method</p> 
+</div> 
+<div class="listingblock"> 
+ <div class="content"> 
+  <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">jshell&gt; LocalDate fromDate = LocalDate.of(2018,1,15)
+fromDate ==&gt; 2018-01-15
+jshell&gt; LocalDate toDate = LocalDate.of(2018,2,20)
+toDate ==&gt; 2018-02-20
+jshell&gt; Stream&lt;LocalDate&gt; dates = fromDate.datesUntil(toDate)</code></pre> 
+ </div> 
+</div> 
+<div class="paragraph"> 
+ <p>Now lets apply forEach to see all dates with in this range.</p> 
+</div> 
+<div class="listingblock"> 
+ <div class="content"> 
+  <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">jshell&gt; dates.forEach(System.out::println)
+2018-01-15
+2018-01-16
+...
+...
+2018-02-18
+2018-02-19</code></pre> 
+ </div> 
+</div> 
+<div class="paragraph"> 
+ <p>Nice, we got all dates with in the range. Note that toDate is not in the output because it is a endExclusive parameter. See the declaration of datesUntil method which I mentioned above. If you want to include toDate in the range then quick way to add a day is toDate.plusDays(1)</p> 
+</div> 
+<div class="paragraph"> 
+ <p>There is another overloaded ‘datesUntil’ method which is even more useful, it takes Period as second parameter. So we get stream with incremental steps.</p> 
+</div> 
+<div class="listingblock"> 
+ <div class="content"> 
+  <pre class="prettyprint highlight"><code class="language-java" data-lang="java">public Stream&lt;LocalDate&gt; datesUntil​(LocalDate endExclusive, Period step)</code></pre> 
+ </div> 
+</div> 
+<div class="paragraph"> 
+ <p>I will use same above fromDate and toDate to create another stream with weekly increments.</p> 
+</div> 
+<div class="listingblock"> 
+ <div class="content"> 
+  <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">jshell&gt; Stream&lt;LocalDate&gt; weekly = fromDate.datesUntil(toDate, Period.ofWeeks(1))
+weekly ==&gt; java.util.stream.LongPipeline$1@59494225
+jshell&gt; weekly.forEach(System.out::println)
+2018-01-15
+2018-01-22
+2018-01-29
+2018-02-05
+2018-02-12
+2018-02-19</code></pre> 
+ </div> 
+</div> 
+<div class="paragraph"> 
+ <p>Nice, we got dates on weekly intervals. We can apply some functions on these streams and can do lot more interesting stuff like creating continues events for the calendar or scheduling jobs and many more…</p> 
+</div> 
+<div class="paragraph"> 
+ <p>Note: Once a stream is executed then you can not reuse it. If I execute above code again then I get IllegalStateException</p> 
+</div> 
+<div class="listingblock"> 
+ <div class="content"> 
+  <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">jshell&gt; weekly.forEach(System.out::println)
+| java.lang.IllegalStateException thrown: stream has already been operated upon or closed</code></pre> 
+ </div> 
+</div> 
+<div class="paragraph"> 
+ <p>One quick way to fix this is to declare a supplier and reuse it every time. I learnt this tip from Baeldung blog. <a href="http://www.baeldung.com/java-stream-operated-upon-or-closed-exception">Here</a> is the more information on this tip.</p> 
+</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+		<div id="push"></div>
+    
+    <!-- Footer -->
+    <footer class="bg-graphite">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6">
+                    <div class="card" style="background-color: transparent;color: #fff!important;">
+                        <div class="card-body">
+                            <h5 class="card-title">Tags</h5>
+                            <p class="card-text">
+                                
+                                    <a href="../../../tags/gof.html" class="badge badge-primary footer-tag-background">
+                                        gof
+                                    </a>
+                                
+                                    <a href="../../../tags/queue.html" class="badge badge-primary footer-tag-background">
+                                        queue
+                                    </a>
+                                
+                                    <a href="../../../tags/time.html" class="badge badge-primary footer-tag-background">
+                                        time
+                                    </a>
+                                
+                                    <a href="../../../tags/producer.html" class="badge badge-primary footer-tag-background">
+                                        producer
+                                    </a>
+                                
+                                    <a href="../../../tags/blockedqueue.html" class="badge badge-primary footer-tag-background">
+                                        blockedqueue
+                                    </a>
+                                
+                                    <a href="../../../tags/regex.html" class="badge badge-primary footer-tag-background">
+                                        regex
+                                    </a>
+                                
+                                    <a href="../../../tags/comparator.html" class="badge badge-primary footer-tag-background">
+                                        comparator
+                                    </a>
+                                
+                                    <a href="../../../tags/java10.html" class="badge badge-primary footer-tag-background">
+                                        java10
+                                    </a>
+                                
+                                    <a href="../../../tags/thread.html" class="badge badge-primary footer-tag-background">
+                                        thread
+                                    </a>
+                                
+                                    <a href="../../../tags/localdate.html" class="badge badge-primary footer-tag-background">
+                                        localdate
+                                    </a>
+                                
+                                    <a href="../../../tags/streams.html" class="badge badge-primary footer-tag-background">
+                                        streams
+                                    </a>
+                                
+                                    <a href="../../../tags/var.html" class="badge badge-primary footer-tag-background">
+                                        var
+                                    </a>
+                                
+                                    <a href="../../../tags/maven.html" class="badge badge-primary footer-tag-background">
+                                        maven
+                                    </a>
+                                
+                                    <a href="../../../tags/read.html" class="badge badge-primary footer-tag-background">
+                                        read
+                                    </a>
+                                
+                                    <a href="../../../tags/jshell.html" class="badge badge-primary footer-tag-background">
+                                        jshell
+                                    </a>
+                                
+                                    <a href="../../../tags/concurrentmodificationexception.html" class="badge badge-primary footer-tag-background">
+                                        concurrentmodificationexception
+                                    </a>
+                                
+                                    <a href="../../../tags/consumer.html" class="badge badge-primary footer-tag-background">
+                                        consumer
+                                    </a>
+                                
+                                    <a href="../../../tags/write.html" class="badge badge-primary footer-tag-background">
+                                        write
+                                    </a>
+                                
+                                    <a href="../../../tags/multithreading.html" class="badge badge-primary footer-tag-background">
+                                        multithreading
+                                    </a>
+                                
+                                    <a href="../../../tags/create.html" class="badge badge-primary footer-tag-background">
+                                        create
+                                    </a>
+                                
+                                    <a href="../../../tags/executor.html" class="badge badge-primary footer-tag-background">
+                                        executor
+                                    </a>
+                                
+                                    <a href="../../../tags/collections.html" class="badge badge-primary footer-tag-background">
+                                        collections
+                                    </a>
+                                
+                                    <a href="../../../tags/stream.html" class="badge badge-primary footer-tag-background">
+                                        stream
+                                    </a>
+                                
+                                    <a href="../../../tags/git.html" class="badge badge-primary footer-tag-background">
+                                        git
+                                    </a>
+                                
+                                    <a href="../../../tags/file.html" class="badge badge-primary footer-tag-background">
+                                        file
+                                    </a>
+                                
+                                    <a href="../../../tags/java.html" class="badge badge-primary footer-tag-background">
+                                        java
+                                    </a>
+                                
+                                    <a href="../../../tags/random.html" class="badge badge-primary footer-tag-background">
+                                        random
+                                    </a>
+                                
+                                    <a href="../../../tags/spring.html" class="badge badge-primary footer-tag-background">
+                                        spring
+                                    </a>
+                                
+                                    <a href="../../../tags/design pattern.html" class="badge badge-primary footer-tag-background">
+                                        design pattern
+                                    </a>
+                                
+                                    <a href="../../../tags/delete.html" class="badge badge-primary footer-tag-background">
+                                        delete
+                                    </a>
+                                
+                                    <a href="../../../tags/priorityqueue.html" class="badge badge-primary footer-tag-background">
+                                        priorityqueue
+                                    </a>
+                                
+                                    <a href="../../../tags/infinite.html" class="badge badge-primary footer-tag-background">
+                                        infinite
+                                    </a>
+                                
+                                    <a href="../../../tags/functional.html" class="badge badge-primary footer-tag-background">
+                                        functional
+                                    </a>
+                                
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="card" style="background-color: transparent;color: #fff!important;">
+                        <div class="card-body">
+                            <h5 class="card-title">Recent Posts</h5>
+                            <p class="card-text">
+                                <ul class="list-unstyled">
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/22-strategy-design-pattern.html" class="footer-link">Strategy design pattern</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/18-introduction-to-java-time.html" class="footer-link">Introduction to java.time</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/15-how-concurrentModificationException-is-thrown.html" class="footer-link">How ConcurrentModificationException is thrown?</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/11-regex-tester-with-spring-shell.html" class="footer-link">Regex Tester With Spring Shell</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/8-infinite-streams.html" class="footer-link">Infinite streams</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/3-recipes-for-optional.html" class="footer-link">Recipes for Optional</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/03/28-functions-cheat-sheet.html" class="footer-link">Functions cheat sheet</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/03/24-reduce-stream-to-single-value.html" class="footer-link">Reduce stream to single value</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/03/21-quick-way-to-create-list-set-and-map.html" class="footer-link">Quick way to create List, Set and Map</a>
+                                        </li>
+                                    
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="card" style="background-color: transparent;color: #fff!important;">
+                        <div class="card-body">
+                            <h5 class="card-title">Author</h5>
+                            <!--<img class="card-img-top" width="90" height="90" style="width:40%" src="../../../img/author-pic.jpeg" alt="Pradeep Kundarapu">-->
+                            <p class="card-text my-2">Pradeep Kundarapu</p>
+                            
+                            <ul class="list-inline text-center list-unstyled float-left">
+                                <li class="list-inline-item">
+                                    <a href="https://twitter.com/k_pradeep4j">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="col">
+                    
+                    <p class="copyright text-muted">Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+                </div>-->
+                
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript 
+    <script src="../../../js/clean-blog.min.js"></script>
+    -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115619272-2"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-115619272-2');
+    </script>
+
+  </body>
+</html>

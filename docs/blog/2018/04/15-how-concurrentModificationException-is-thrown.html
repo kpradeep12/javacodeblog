@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content="JBake">
+    <meta name="google-site-verification" content="zkTSlJd8qxF4ZHbWWxyG0Prqnevef8dGSLkZeHFRW2Y" />
+    
+    <title>How ConcurrentModificationException is thrown?</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../../css/clean-blog.css" rel="stylesheet">
+    <link href="../../../css/3-portfolio-theme.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <!-- link rel="shortcut icon" href="../../../favicon.ico" -->
+  </head>
+  <body>
+   
+
+        <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="../../../index.html">Tech Stack Java</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="../../../index.html">Home</a>
+            </li>
+            <!--<li class="nav-item">
+                <a class="nav-link" href="../../../about.html">About</a>
+            </li>-->
+            <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Archive</a>
+            </li>
+            <!--<li class="nav-item">
+                <a class="nav-link" href="../../../contact.html">Contact</a>
+            </li>-->
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('../../../img/home-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="site-heading">
+                        <h1>Tech Stack Java</h1>
+                        <hr class="small">
+                        <span class="subheading">Sharing my Java experiments</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="mt-4">How ConcurrentModificationException is thrown?</h1>
+                    <p class="mt-0 small">Posted on April 15, 2018</p>
+                    <hr>
+                    <!-- Preview Image -->
+                    <img class="img-fluid rounded post-image" src="../../../img/banners/blog-banner-How-ConcurrentModificationException-is-thrown_.png" alt="">
+
+
+                    <div id="preamble"> 
+ <div class="sectionbody"> 
+  <div class="paragraph"> 
+   <p>How concurrent modification detection logic works and on what basis ConcurrentModificationException is thrown? This article will explain these questions. Iterating a collection is one of the important operation we usually perform and it can be a time consuming if collection is big enough. Iterator interface is the responsible for iterating the collection. Many collection classes in Java implement iterator like List and Set. If we want to iterate through the collection we first need to get the instance of it, we can get it by calling iterate(). Refer below code, which gets iterator from list.</p> 
+  </div> 
+  <div class="listingblock"> 
+   <div class="content"> 
+    <pre class="prettyprint highlight"><code class="language-java" data-lang="java">var numList = new ArrayList&lt;&gt;(List.of(1,2,3));
+var iterator = numList.iterator();
+iterator.forEachRemaining((num) -&gt; {
+	System.out.println(num);
+});</code></pre> 
+   </div> 
+  </div> 
+  <div class="paragraph"> 
+   <p>Note that I used local variable type inference so I can declare variables with ‘var’. This is the new feature in version 10. This code gets iterator from ArrayList and iterates the list using forEachRemaining. forEachRemaining is a default method in Iterator which is introduced in Java 1.8 and we can use it to replace traditional while loop. This code just works fine and prints the numbers in the console. For your reference Iterator has below methods;</p> 
+  </div> 
+  <div class="listingblock"> 
+   <div class="content"> 
+    <pre class="prettyprint highlight"><code class="language-java" data-lang="java">default void forEachRemaining​(Consumer&lt;? super E&gt; action)
+boolean hasNext()
+E next()
+default void remove()</code></pre> 
+   </div> 
+  </div> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="adding_an_element">Adding an element</h4> 
+ <div class="paragraph"> 
+  <p>Lets see what happens when numList.iterator() is called. From now on, I refer collection as the classes which implement iterator interface like List or Set. Collections will maintain a private modification count variable and this count gets updated on every modification like addition or deletion of elements.Modification count is the internal private variable so we can not access this variable. When iterator() is called on the collection, it creates a new instance of iterator and modification count is passed to this new iterator instance. In the above example, we created a list of size 3 and an iterator, both of them will have the same modification count. Now lets add an element to the list after the iterator instance creation.</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-java" data-lang="java">var numList = newArrayList&lt;&gt;(List.of(1,2,3));
+var iterator = numList.iterator();
+numList.add(4);
+iterator.forEachRemaining((num) -&gt; {
+    System.out.println(num);
+});</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>It throws ConcurrentModificationException at line number 4. All iterator methods except hasNext() will compare modification count of iterator and collection instance. In the above case collection is modified at line number 3 so collections modification count gets updated but iterator will have old count. Counts will not match when forEachRemaining is executed so it throws ConcurrentModificationException. This approach is called fail-fast; because exception is thrown before performing the real action. Note that this modification can occur in a multi threaded environment but for simplicity purpose I not used any threads. This comparison will help the iterator to detect the modifications in the collection and in case of mismatch it throws an exception.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>I can add a new element after iterating the collection but I need to get new iterator instance to iterate again else I get exception because of different modification counts between the updated collection and old iterator instance.</p> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="removing_an_element">Removing an element</h4> 
+ <div class="paragraph"> 
+  <p>Calling remove after the creation of iterator will throw ConcurrentModificationException. Check below code;</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-java" data-lang="java">var numList = newArrayList&lt;&gt;(List.of(1,2,3));
+var iterator = numList.iterator();
+numList.remove(1);
+iterator.forEachRemaining((num) -&gt; {
+    System.out.println(num);
+});</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>At line number 3 we removed element from the collection, iterator will detect it in forEachRemaining method and throws exception because list’s modification count gets updated but it is not passed down to the iterator, so comparison fails in forEachRemaining method and it throws exception. Alternatively we can call remove() on iterator which will not throw exception because remove method will update modification count of itself and also it passes new count to its creator, in this case creator is the list instance such that iterator and collection will be in sync. Below is the updated code which removes element using remove() of iterator instance.</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-java" data-lang="java">var numList = newArrayList&lt;&gt;(List.of(1,2,3));
+var iterator = numList.iterator();
+iterator.next();
+iterator.remove();
+numList.forEach(System.out::println);</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>Because the first element is removed so this code prints 2 and 3. Note that I moved iterators position to the next element by calling next() because by default it will not point to any element. This code will not throw ConcurrentModificationException because remove() method will pass new modification count to the list.</p> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="modifications_in_listiterator">Modifications in ListIterator</h4> 
+ <div class="paragraph"> 
+  <p>ListIterator is the sub interface of Iterator and this also depends on modification count to detect concurrent modifications. Along with the behavior of iterator, it supports addition, update and reverse iteration operations. When ListIterator instance is created, it gets modification count from the collection and it validates this count on every operation. If count mismatch happens, then it throws exception. All the modification operations like add, update and remove in the ListIterator will pass the updated modification count to its creator, in this case it is the list. Below is the example;</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-java" data-lang="java">var numList = newArrayList&lt;&gt;(List.of(1,2,3));
+var iterator = numList.listIterator();
+//removes 1 from the list
+iterator.next();
+iterator.remove();
+//updates 2 with 0
+iterator.next();
+iterator.set(0);
+//adds 4 to the list
+iterator.add(4);
+numList.forEach(System.out::println);</code></pre> 
+  </div> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="exception_with_hidden_iterators">Exception with hidden iterators</h4> 
+ <div class="paragraph"> 
+  <p>Code can throw ConcurrentModificationException with out direct use of iterator because of hidden iterators. For example, for-each loop will internally creates iterator instance so concurrent modifications will make for-each to throw exception. Be cautious when using internal iterators. There are many methods which uses iterators internally. See below example;</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-java" data-lang="java">System.out.println(numList.toString());</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>toString() of list uses iterator to construct the string from each element of it. Similarly containsAll, removeAll, retainAll and constructors that take collection internally uses iterator and all of these methods can throw ConcurrentModificationException.</p> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="conclusion">Conclusion</h4> 
+ <div class="paragraph"> 
+  <p>Collection can not be modified directly once the iterator is created but we can modify indirectly using the iterator instance. ConcurrentModificationException will give us the clue that multiple parts of the application is modifying the collection so it helps us to debug the issue.</p> 
+ </div> 
+</div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+		<div id="push"></div>
+    
+    <!-- Footer -->
+    <footer class="bg-graphite">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6">
+                    <div class="card" style="background-color: transparent;color: #fff!important;">
+                        <div class="card-body">
+                            <h5 class="card-title">Tags</h5>
+                            <p class="card-text">
+                                
+                                    <a href="../../../tags/gof.html" class="badge badge-primary footer-tag-background">
+                                        gof
+                                    </a>
+                                
+                                    <a href="../../../tags/queue.html" class="badge badge-primary footer-tag-background">
+                                        queue
+                                    </a>
+                                
+                                    <a href="../../../tags/time.html" class="badge badge-primary footer-tag-background">
+                                        time
+                                    </a>
+                                
+                                    <a href="../../../tags/producer.html" class="badge badge-primary footer-tag-background">
+                                        producer
+                                    </a>
+                                
+                                    <a href="../../../tags/blockedqueue.html" class="badge badge-primary footer-tag-background">
+                                        blockedqueue
+                                    </a>
+                                
+                                    <a href="../../../tags/regex.html" class="badge badge-primary footer-tag-background">
+                                        regex
+                                    </a>
+                                
+                                    <a href="../../../tags/comparator.html" class="badge badge-primary footer-tag-background">
+                                        comparator
+                                    </a>
+                                
+                                    <a href="../../../tags/java10.html" class="badge badge-primary footer-tag-background">
+                                        java10
+                                    </a>
+                                
+                                    <a href="../../../tags/thread.html" class="badge badge-primary footer-tag-background">
+                                        thread
+                                    </a>
+                                
+                                    <a href="../../../tags/localdate.html" class="badge badge-primary footer-tag-background">
+                                        localdate
+                                    </a>
+                                
+                                    <a href="../../../tags/streams.html" class="badge badge-primary footer-tag-background">
+                                        streams
+                                    </a>
+                                
+                                    <a href="../../../tags/var.html" class="badge badge-primary footer-tag-background">
+                                        var
+                                    </a>
+                                
+                                    <a href="../../../tags/maven.html" class="badge badge-primary footer-tag-background">
+                                        maven
+                                    </a>
+                                
+                                    <a href="../../../tags/read.html" class="badge badge-primary footer-tag-background">
+                                        read
+                                    </a>
+                                
+                                    <a href="../../../tags/jshell.html" class="badge badge-primary footer-tag-background">
+                                        jshell
+                                    </a>
+                                
+                                    <a href="../../../tags/concurrentmodificationexception.html" class="badge badge-primary footer-tag-background">
+                                        concurrentmodificationexception
+                                    </a>
+                                
+                                    <a href="../../../tags/consumer.html" class="badge badge-primary footer-tag-background">
+                                        consumer
+                                    </a>
+                                
+                                    <a href="../../../tags/write.html" class="badge badge-primary footer-tag-background">
+                                        write
+                                    </a>
+                                
+                                    <a href="../../../tags/multithreading.html" class="badge badge-primary footer-tag-background">
+                                        multithreading
+                                    </a>
+                                
+                                    <a href="../../../tags/create.html" class="badge badge-primary footer-tag-background">
+                                        create
+                                    </a>
+                                
+                                    <a href="../../../tags/executor.html" class="badge badge-primary footer-tag-background">
+                                        executor
+                                    </a>
+                                
+                                    <a href="../../../tags/collections.html" class="badge badge-primary footer-tag-background">
+                                        collections
+                                    </a>
+                                
+                                    <a href="../../../tags/stream.html" class="badge badge-primary footer-tag-background">
+                                        stream
+                                    </a>
+                                
+                                    <a href="../../../tags/git.html" class="badge badge-primary footer-tag-background">
+                                        git
+                                    </a>
+                                
+                                    <a href="../../../tags/file.html" class="badge badge-primary footer-tag-background">
+                                        file
+                                    </a>
+                                
+                                    <a href="../../../tags/java.html" class="badge badge-primary footer-tag-background">
+                                        java
+                                    </a>
+                                
+                                    <a href="../../../tags/random.html" class="badge badge-primary footer-tag-background">
+                                        random
+                                    </a>
+                                
+                                    <a href="../../../tags/spring.html" class="badge badge-primary footer-tag-background">
+                                        spring
+                                    </a>
+                                
+                                    <a href="../../../tags/design pattern.html" class="badge badge-primary footer-tag-background">
+                                        design pattern
+                                    </a>
+                                
+                                    <a href="../../../tags/delete.html" class="badge badge-primary footer-tag-background">
+                                        delete
+                                    </a>
+                                
+                                    <a href="../../../tags/priorityqueue.html" class="badge badge-primary footer-tag-background">
+                                        priorityqueue
+                                    </a>
+                                
+                                    <a href="../../../tags/infinite.html" class="badge badge-primary footer-tag-background">
+                                        infinite
+                                    </a>
+                                
+                                    <a href="../../../tags/functional.html" class="badge badge-primary footer-tag-background">
+                                        functional
+                                    </a>
+                                
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="card" style="background-color: transparent;color: #fff!important;">
+                        <div class="card-body">
+                            <h5 class="card-title">Recent Posts</h5>
+                            <p class="card-text">
+                                <ul class="list-unstyled">
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/22-strategy-design-pattern.html" class="footer-link">Strategy design pattern</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/18-introduction-to-java-time.html" class="footer-link">Introduction to java.time</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/15-how-concurrentModificationException-is-thrown.html" class="footer-link">How ConcurrentModificationException is thrown?</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/11-regex-tester-with-spring-shell.html" class="footer-link">Regex Tester With Spring Shell</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/8-infinite-streams.html" class="footer-link">Infinite streams</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/3-recipes-for-optional.html" class="footer-link">Recipes for Optional</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/03/28-functions-cheat-sheet.html" class="footer-link">Functions cheat sheet</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/03/24-reduce-stream-to-single-value.html" class="footer-link">Reduce stream to single value</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/03/21-quick-way-to-create-list-set-and-map.html" class="footer-link">Quick way to create List, Set and Map</a>
+                                        </li>
+                                    
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="card" style="background-color: transparent;color: #fff!important;">
+                        <div class="card-body">
+                            <h5 class="card-title">Author</h5>
+                            <!--<img class="card-img-top" width="90" height="90" style="width:40%" src="../../../img/author-pic.jpeg" alt="Pradeep Kundarapu">-->
+                            <p class="card-text my-2">Pradeep Kundarapu</p>
+                            
+                            <ul class="list-inline text-center list-unstyled float-left">
+                                <li class="list-inline-item">
+                                    <a href="https://twitter.com/k_pradeep4j">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="col">
+                    
+                    <p class="copyright text-muted">Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+                </div>-->
+                
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript 
+    <script src="../../../js/clean-blog.min.js"></script>
+    -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115619272-2"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-115619272-2');
+    </script>
+
+  </body>
+</html>
