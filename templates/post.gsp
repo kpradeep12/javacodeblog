@@ -21,5 +21,6 @@
     </article>
     
     <hr>
+    <%include "share.gsp"%>
     
 <%include "footer.gsp"%>

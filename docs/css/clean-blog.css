@@ -314,8 +314,7 @@ form .row:first-child .floating-label-form-group {
   font-size: 14px;
   font-weight: 800;
   letter-spacing: 1px;
-  border-radius: 0;
-  padding: 15px 25px;
+  padding: 8px 25px;
 }
 .btn-lg {
   font-size: 16px;
@@ -390,4 +389,17 @@ body {
 pre.prettyprint {
   border: 1px solid #e6e6e6;
   border-radius: 5px;
+}
+
+.btn-twitter {background: #00aced;border-color:#043d52}
+.btn-facebook {background: #3b5998;border-color:#172d5e}
+.btn-linkedin {background: #0976b4;border-color:#004269}
+
+.socialButtons a {
+	color: white; 
+	opacity:0.9;
+}
+.socialButtons a:hover {
+  color: white;
+	opacity:1;    	
 }
