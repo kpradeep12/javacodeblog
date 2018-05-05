@@ -6,8 +6,8 @@
     <atom:link href="http://www.techstackjava.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Fri, 4 May 2018 15:32:17 -0400</pubDate>
-    <lastBuildDate>Fri, 4 May 2018 15:32:17 -0400</lastBuildDate>
+    <pubDate>Sat, 5 May 2018 07:39:26 -0400</pubDate>
+    <lastBuildDate>Sat, 5 May 2018 07:39:26 -0400</lastBuildDate>
 
     
     <item>
@@ -32,7 +32,7 @@
   &lt;p&gt;Each thread in the pool will have its own queue. This queue will gets filled with the tasks. For example, if we have two threads in the pool then each thread will have its own queue. Internally ForkJoinPool uses work-stealing algorithm. Using this algorithm, threads will first clean up there queue and if there are no more tasks left then it steals work from the queue of other threads. For example, if thread A completed its tasks in the queue then instead of waiting for the next task it will steal from thread B. ForkJoin framework is the best when we have processor intensive tasks because it keeps processor busy by not keeping threads idle.&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/fork-joi-pool-threads.png&quot; alt=&quot;Fork Join pool threads&quot; width=&quot;550&quot; height=&quot;400&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/fork-joi-pool-threads.png&quot; alt=&quot;Fork Join pool threads&quot; width=&quot;550&quot; height=&quot;400&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph&quot;&gt; 
   &lt;p&gt;Above image shows two threads. Thread B is not having tasks to execute so it is stealing tasks from Thread A’s queue.&lt;/p&gt; 
@@ -53,7 +53,7 @@
   &lt;p&gt;This works like a divide and conquer problem. First the task is divided in to small enough to work and then all subtasks are joined back to get the result. Below image shows it in the detail;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/fork-join-execution.png&quot; alt=&quot;Fork Join framework task execution&quot; width=&quot;650&quot; height=&quot;550&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/fork-join-execution.png&quot; alt=&quot;Fork Join framework task execution&quot; width=&quot;650&quot; height=&quot;550&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph&quot;&gt; 
   &lt;p&gt;In the above image, an array of twenty elements need to be processed. We configured threshold as five, so input array is forked until each sub-array get five elements. Each sub-array is passed to ForkJoinPool for execution. After the execution all sub-arrays are joined back to get result of fully processed array.&lt;/p&gt; 
@@ -71,7 +71,7 @@
   &lt;p&gt;ForkJoinTask is an abstract class so we can not directly use it, instead we can extend any of the three abstract classes which extends ForkJoinTask. Based on the type of the task we can extend any one of these three classes.&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/forkjointask-classes.png&quot; alt=&quot;Fork Join task classes&quot; width=&quot;550&quot; height=&quot;350&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/forkjointask-classes.png&quot; alt=&quot;Fork Join task classes&quot; width=&quot;550&quot; height=&quot;350&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;ulist&quot;&gt; 
   &lt;ul&gt; 
@@ -486,13 +486,13 @@ numList.forEach(System.out::println);&lt;/code&gt;&lt;/pre&gt;
    &lt;p&gt;In this article I will show the steps needed to create a Spring shell project which tests the regex string provided at the command line. Easier way to create spring project is using &lt;a href=&quot;https://start.spring.io/&quot;&gt;start.spring.io&lt;/a&gt; Go to the site and select you choice of configuration with ‘Spring Shell’ as dependency. See below screenshot for the reference.&lt;/p&gt; 
   &lt;/div&gt; 
   &lt;div class=&quot;paragraph text-center&quot;&gt; 
-   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/Post-Regex-tester-spring-starter.png&quot; alt=&quot;Regex tester spring starter&quot; width=&quot;550&quot; height=&quot;300&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/Post-Regex-tester-spring-starter.png&quot; alt=&quot;Regex tester spring starter&quot; width=&quot;550&quot; height=&quot;300&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
   &lt;/div&gt; 
   &lt;div class=&quot;paragraph&quot;&gt; 
    &lt;p&gt;Click on ‘Generate Project’ which will download the pre-configured spring project. Unzip and import it into your favorite java editor.&lt;/p&gt; 
   &lt;/div&gt; 
   &lt;div class=&quot;paragraph text-center&quot;&gt; 
-   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/Post-Regex-tester-spring-shell-pom.png&quot; alt=&quot;Regex tester spring shell&quot; width=&quot;570&quot; height=&quot;300&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/Post-Regex-tester-spring-shell-pom.png&quot; alt=&quot;Regex tester spring shell&quot; width=&quot;570&quot; height=&quot;300&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
   &lt;/div&gt; 
   &lt;div class=&quot;paragraph&quot;&gt; 
    &lt;p&gt;Now we have empty spring shell project ready.&lt;/p&gt; 
@@ -564,7 +564,7 @@ public class RegexTester {
   &lt;p&gt;You should see a prompt saying ‘shell:&amp;gt;’ As I mentioned earlier, spring shell provides the required infrastructure for the command line interface so this prompt is provided by the spring shell and it is ready to take the commands. lets execute some commands on the shell prompt.&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/Post-Regex-tester-regex-cli.png&quot; alt=&quot;Regex tester cli&quot; width=&quot;500&quot; height=&quot;140&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/Post-Regex-tester-regex-cli.png&quot; alt=&quot;Regex tester cli&quot; width=&quot;500&quot; height=&quot;140&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph&quot;&gt; 
   &lt;p&gt;I passed ‘ab’ as the pattern and ‘abcabc’ as the test string to regex command. Spring will internally execute regex method and passes provided arguments to it. The output of the method will be printed in the console. We can continue to test regex command multiple times with different strings and it can be used as regex utility in local.&lt;/p&gt; 
@@ -822,7 +822,7 @@ es.getEmployee(2)
   &lt;p&gt;Consumer takes input and always returns void. You can use this to perform some action with out returning anything.&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/consumer-function.png&quot; alt=&quot;Consumer Function&quot; width=&quot;590&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/consumer-function.png&quot; alt=&quot;Consumer Function&quot; width=&quot;590&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;table class=&quot;tableblock frame-all grid-all spread&quot;&gt; 
   &lt;colgroup&gt; 
@@ -871,7 +871,7 @@ es.getEmployee(2)
   &lt;p&gt;Function takes input and produces different kind of output.&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/function.png&quot; alt=&quot;Function&quot; width=&quot;590&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/function.png&quot; alt=&quot;Function&quot; width=&quot;590&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;table class=&quot;tableblock frame-all grid-all spread&quot;&gt; 
   &lt;colgroup&gt; 
@@ -956,7 +956,7 @@ es.getEmployee(2)
   &lt;p&gt;Operator is a special kind of function where it always accepts and produces same type.&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/operator-function.png&quot; alt=&quot;Operator Function&quot; width=&quot;590&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/operator-function.png&quot; alt=&quot;Operator Function&quot; width=&quot;590&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;table class=&quot;tableblock frame-all grid-all spread&quot;&gt; 
   &lt;colgroup&gt; 
@@ -1005,7 +1005,7 @@ es.getEmployee(2)
   &lt;p&gt;Predicate always returns a boolean so you can this in conditional evaluations.&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/predicate-function.png&quot; alt=&quot;Predicate Function&quot; width=&quot;590&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/predicate-function.png&quot; alt=&quot;Predicate Function&quot; width=&quot;590&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;table class=&quot;tableblock frame-all grid-all spread&quot;&gt; 
   &lt;colgroup&gt; 
@@ -1042,7 +1042,7 @@ es.getEmployee(2)
   &lt;p&gt;Supplier always returns a value. This can be used to generate random values or data from some source.&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/supplier-function.png&quot; alt=&quot;Supplier Function&quot; width=&quot;290&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/supplier-function.png&quot; alt=&quot;Supplier Function&quot; width=&quot;290&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;table class=&quot;tableblock frame-all grid-all spread&quot;&gt; 
   &lt;colgroup&gt; 
@@ -1307,7 +1307,7 @@ Map.entry(3, &quot;three&quot;));&lt;/code&gt;&lt;/pre&gt;
    &lt;p&gt;This article will explain the basics of using consumer functional interface. Consume is one of the many available functional interfaces in Java. This interface can be used when we need to take an object and process it but with out returning anything. Below image will show you how it looks in a logical way.&lt;/p&gt; 
   &lt;/div&gt; 
   &lt;div class=&quot;paragraph text-center&quot;&gt; 
-   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/consumer.png&quot; alt=&quot;Consumer Function&quot; width=&quot;280&quot; height=&quot;130&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/consumer.png&quot; alt=&quot;Consumer Function&quot; width=&quot;280&quot; height=&quot;130&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
   &lt;/div&gt; 
   &lt;div class=&quot;paragraph&quot;&gt; 
    &lt;p&gt;As you see in the above image, it takes a value and operates on it with a side-effect. Here side-effect means, some thing like printing to console or logging to file or making call to rest service but without returning any value. This interface have single abstract method, which is ‘&lt;strong&gt;void accept(T t)&lt;/strong&gt;‘ As you can see this method takes a value but does not return anything.&lt;/p&gt; 
@@ -1400,7 +1400,7 @@ processJobs(jobs, print.andThen(emailAlert));&lt;/code&gt;&lt;/pre&gt;
   &lt;p&gt;BiConsumer is same like Consumer except it takes two parameters. Below is the logical representation of it.&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/biconsumer.png&quot; alt=&quot;BiConsumer Function&quot; width=&quot;280&quot; height=&quot;130&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/biconsumer.png&quot; alt=&quot;BiConsumer Function&quot; width=&quot;280&quot; height=&quot;130&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph&quot;&gt; 
   &lt;p&gt;This interface will be handy if in case you need to consume two parameters and also it allows you to compose multiple BiConsumers. There are primitive versions of this interface; which are &lt;strong&gt;ObjIntConsumer, ObjLongConsumer&lt;/strong&gt; and &lt;strong&gt;ObjDoubleConsumer&lt;/strong&gt;, all these interfaces takes object as first parameter and primitive value as second parameter.&lt;/p&gt; 
@@ -1430,7 +1430,7 @@ processJobs(jobs, print.andThen(emailAlert));&lt;/code&gt;&lt;/pre&gt;
   &lt;/ul&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/new-repo-in-git.png&quot; alt=&quot;New repo in Git&quot; width=&quot;510&quot; height=&quot;90&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/new-repo-in-git.png&quot; alt=&quot;New repo in Git&quot; width=&quot;510&quot; height=&quot;90&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;ulist&quot;&gt; 
   &lt;ul&gt; 
@@ -1438,7 +1438,7 @@ processJobs(jobs, print.andThen(emailAlert));&lt;/code&gt;&lt;/pre&gt;
   &lt;/ul&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/create-new-repo-in-git.png&quot; alt=&quot;Create new repo in Git&quot; width=&quot;500&quot; height=&quot;300&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/create-new-repo-in-git.png&quot; alt=&quot;Create new repo in Git&quot; width=&quot;500&quot; height=&quot;300&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;ulist&quot;&gt; 
   &lt;ul&gt; 
@@ -1484,7 +1484,7 @@ processJobs(jobs, print.andThen(emailAlert));&lt;/code&gt;&lt;/pre&gt;
   &lt;/ul&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/copy-clone-repo-url.png&quot; alt=&quot;Copy clone repo&quot; width=&quot;510&quot; height=&quot;130&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/copy-clone-repo-url.png&quot; alt=&quot;Copy clone repo&quot; width=&quot;510&quot; height=&quot;130&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;ulist&quot;&gt; 
   &lt;ul&gt; 
@@ -1616,7 +1616,7 @@ To https://github.com/kpradeep12/my-app.git
  &lt;p&gt;In this article we are looking at the Fixed thread pool implementation. This thread pool creates a fixed number of threads and reuses them as the tasks are completed and because the threads are reused so once after reaching the thread pool limit then there will not be any thread creations involved. This pool will be helpful when we want to execute long running threads. For example we can use this pool in running batch jobs or accepting HTTP client requests and so on.&lt;/p&gt; 
 &lt;/div&gt; 
 &lt;div class=&quot;paragraph text-center&quot;&gt; 
- &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/Fixed-thread-pool.png&quot; alt=&quot;Fixed thread pool&quot; width=&quot;490&quot; height=&quot;130&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+ &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/Fixed-thread-pool.png&quot; alt=&quot;Fixed thread pool&quot; width=&quot;490&quot; height=&quot;130&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
 &lt;/div&gt; 
 &lt;div class=&quot;paragraph&quot;&gt; 
  &lt;p&gt;In the above figure, producer inserts tasks into the queue, queue contains the tasks which are ready to be executed and the pool contains the running tasks. With fixed thread pool of size two, not more than two threads can execute at any time. Threads will be reused once after the current running tasks are completed, so there will not be thread creation overhead involved after completing every task. Fixed thread pool will consume less resources because they will control the number of simultaneous thread executions.&lt;/p&gt; 
@@ -1696,7 +1696,7 @@ Processing pool-1-thread-1&lt;/code&gt;&lt;/pre&gt;
       &lt;div id=&quot;preamble&quot;&gt; 
  &lt;div class=&quot;sectionbody&quot;&gt; 
   &lt;div class=&quot;paragraph text-center&quot;&gt; 
-   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/producer-consumer.png&quot; alt=&quot;Producer consumer&quot; width=&quot;800&quot; height=&quot;180&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/producer-consumer.png&quot; alt=&quot;Producer consumer&quot; width=&quot;800&quot; height=&quot;180&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
   &lt;/div&gt; 
   &lt;div class=&quot;paragraph&quot;&gt; 
    &lt;p&gt;Producer and consumers are two independent entities works together on the queue. Producer inserts elements into the tail of the queue and consumer removes them from the head of the queue. Here elements can be tasks or data on which consumer is interested in. This design pattern will allow producer and consumer to work independently.&lt;/p&gt; 

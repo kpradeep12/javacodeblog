@@ -101,13 +101,13 @@
    <p>In this article I will show the steps needed to create a Spring shell project which tests the regex string provided at the command line. Easier way to create spring project is using <a href="https://start.spring.io/">start.spring.io</a> Go to the site and select you choice of configuration with ‘Spring Shell’ as dependency. See below screenshot for the reference.</p> 
   </div> 
   <div class="paragraph text-center"> 
-   <p><span class="image"><img src="http://www.techstackjava.com/img/posts/Post-Regex-tester-spring-starter.png" alt="Regex tester spring starter" width="550" height="300"></span></p> 
+   <p><span class="image"><img src="http://localhost:8820/img/posts/Post-Regex-tester-spring-starter.png" alt="Regex tester spring starter" width="550" height="300"></span></p> 
   </div> 
   <div class="paragraph"> 
    <p>Click on ‘Generate Project’ which will download the pre-configured spring project. Unzip and import it into your favorite java editor.</p> 
   </div> 
   <div class="paragraph text-center"> 
-   <p><span class="image"><img src="http://www.techstackjava.com/img/posts/Post-Regex-tester-spring-shell-pom.png" alt="Regex tester spring shell" width="570" height="300"></span></p> 
+   <p><span class="image"><img src="http://localhost:8820/img/posts/Post-Regex-tester-spring-shell-pom.png" alt="Regex tester spring shell" width="570" height="300"></span></p> 
   </div> 
   <div class="paragraph"> 
    <p>Now we have empty spring shell project ready.</p> 
@@ -179,7 +179,7 @@ public class RegexTester {
   <p>You should see a prompt saying ‘shell:&gt;’ As I mentioned earlier, spring shell provides the required infrastructure for the command line interface so this prompt is provided by the spring shell and it is ready to take the commands. lets execute some commands on the shell prompt.</p> 
  </div> 
  <div class="paragraph text-center"> 
-  <p><span class="image"><img src="http://www.techstackjava.com/img/posts/Post-Regex-tester-regex-cli.png" alt="Regex tester cli" width="500" height="140"></span></p> 
+  <p><span class="image"><img src="http://localhost:8820/img/posts/Post-Regex-tester-regex-cli.png" alt="Regex tester cli" width="500" height="140"></span></p> 
  </div> 
  <div class="paragraph"> 
   <p>I passed ‘ab’ as the pattern and ‘abcabc’ as the test string to regex command. Spring will internally execute regex method and passes provided arguments to it. The output of the method will be printed in the console. We can continue to test regex command multiple times with different strings and it can be used as regex utility in local.</p> 
@@ -195,9 +195,10 @@ public class RegexTester {
     </article>
     
     <hr>
-        <div class="container">
+    <div class="container">
         <div class="row">    
             <div class="col-lg-12">
+                
                 <ul class="list-inline text-center list-unstyled float-left socialButtons">
                     <li class="list-inline-item">
                         <a href="javascript:tweetPage()" class="btn btn-twitter" data-toggle="tooltip" data-placement="top" title="Twitter">
@@ -211,17 +212,45 @@ public class RegexTester {
                             <span class="hidden-xs"></span>
                         </a>
                     </li>
-                    <!--<li class="list-inline-item">
+                    <li class="list-inline-item">
                         <a href="javascript:shareOnLinkedIn()" class="btn btn-linkedin" data-toggle="tooltip" data-placement="top" title="LinkedIn">
                             <i class="fa fa-linkedin fa-2x"></i>
                             <span class="hidden-xs"></span>
                         </a>
-                    </li>-->
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="javascript:shareOnReddit()" class="btn btn-reddit" data-toggle="tooltip" data-placement="top" title="Reddit">
+                            <i class="fa fa-reddit-alien fa-2x"></i>
+                            <span class="hidden-xs"></span>
+                        </a>
+                    </li>
                 </ul>
-            </div>
+
+                
+                <div id="disqus_thread"></div>
+            </div
         </div>
     </div>
     
+    
+
+    <script type="text/javascript">
+        var disqus_shortname = 'null'; 
+        var disqus_identifier = 'blog/2018/04/11-regex-tester-with-spring-shell.html';
+        var disqus_title = "Regex Tester With Spring Shell";
+        var disqus_url = 'http://localhost:8820blog/2018/04/11-regex-tester-with-spring-shell.html';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+    <noscript>
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
 		<div id="push"></div>
     
     <!-- Footer -->
@@ -471,6 +500,18 @@ public class RegexTester {
         gtag('js', new Date());
 
         gtag('config', 'UA-115619272-2');
+    </script>
+
+    <script type="text/javascript">
+        var disqus_shortname = 'null';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
     </script>
 
   </body>

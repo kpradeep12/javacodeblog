@@ -98,7 +98,7 @@
    <p>This article will explain the basics of using consumer functional interface. Consume is one of the many available functional interfaces in Java. This interface can be used when we need to take an object and process it but with out returning anything. Below image will show you how it looks in a logical way.</p> 
   </div> 
   <div class="paragraph text-center"> 
-   <p><span class="image"><img src="http://www.techstackjava.com/img/posts/consumer.png" alt="Consumer Function" width="280" height="130"></span></p> 
+   <p><span class="image"><img src="http://localhost:8820/img/posts/consumer.png" alt="Consumer Function" width="280" height="130"></span></p> 
   </div> 
   <div class="paragraph"> 
    <p>As you see in the above image, it takes a value and operates on it with a side-effect. Here side-effect means, some thing like printing to console or logging to file or making call to rest service but without returning any value. This interface have single abstract method, which is ‘<strong>void accept(T t)</strong>‘ As you can see this method takes a value but does not return anything.</p> 
@@ -191,7 +191,7 @@ processJobs(jobs, print.andThen(emailAlert));</code></pre>
   <p>BiConsumer is same like Consumer except it takes two parameters. Below is the logical representation of it.</p> 
  </div> 
  <div class="paragraph text-center"> 
-  <p><span class="image"><img src="http://www.techstackjava.com/img/posts/biconsumer.png" alt="BiConsumer Function" width="280" height="130"></span></p> 
+  <p><span class="image"><img src="http://localhost:8820/img/posts/biconsumer.png" alt="BiConsumer Function" width="280" height="130"></span></p> 
  </div> 
  <div class="paragraph"> 
   <p>This interface will be handy if in case you need to consume two parameters and also it allows you to compose multiple BiConsumers. There are primitive versions of this interface; which are <strong>ObjIntConsumer, ObjLongConsumer</strong> and <strong>ObjDoubleConsumer</strong>, all these interfaces takes object as first parameter and primitive value as second parameter.</p> 
@@ -204,9 +204,10 @@ processJobs(jobs, print.andThen(emailAlert));</code></pre>
     </article>
     
     <hr>
-        <div class="container">
+    <div class="container">
         <div class="row">    
             <div class="col-lg-12">
+                
                 <ul class="list-inline text-center list-unstyled float-left socialButtons">
                     <li class="list-inline-item">
                         <a href="javascript:tweetPage()" class="btn btn-twitter" data-toggle="tooltip" data-placement="top" title="Twitter">
@@ -220,17 +221,45 @@ processJobs(jobs, print.andThen(emailAlert));</code></pre>
                             <span class="hidden-xs"></span>
                         </a>
                     </li>
-                    <!--<li class="list-inline-item">
+                    <li class="list-inline-item">
                         <a href="javascript:shareOnLinkedIn()" class="btn btn-linkedin" data-toggle="tooltip" data-placement="top" title="LinkedIn">
                             <i class="fa fa-linkedin fa-2x"></i>
                             <span class="hidden-xs"></span>
                         </a>
-                    </li>-->
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="javascript:shareOnReddit()" class="btn btn-reddit" data-toggle="tooltip" data-placement="top" title="Reddit">
+                            <i class="fa fa-reddit-alien fa-2x"></i>
+                            <span class="hidden-xs"></span>
+                        </a>
+                    </li>
                 </ul>
-            </div>
+
+                
+                <div id="disqus_thread"></div>
+            </div
         </div>
     </div>
     
+    
+
+    <script type="text/javascript">
+        var disqus_shortname = 'null'; 
+        var disqus_identifier = 'blog/2018/03/17-using-consumer-functional-interface.html';
+        var disqus_title = "Using consumer functional interface";
+        var disqus_url = 'http://localhost:8820blog/2018/03/17-using-consumer-functional-interface.html';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+    <noscript>
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
 		<div id="push"></div>
     
     <!-- Footer -->
@@ -480,6 +509,18 @@ processJobs(jobs, print.andThen(emailAlert));</code></pre>
         gtag('js', new Date());
 
         gtag('config', 'UA-115619272-2');
+    </script>
+
+    <script type="text/javascript">
+        var disqus_shortname = 'null';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
     </script>
 
   </body>

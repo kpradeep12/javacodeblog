@@ -9,7 +9,7 @@
         <div class="card text-white bg-secondary mb-4 text-center w-100">
             <div class="card-body">
                 <p class="text-white m-0">
-                    I am excited to announce that thetechstack.net is now <span class="font-weight-bold">techstackjava.com</span>
+                    thetechstack.net is now <span class="font-weight-bold">techstackjava.com</span>
                 </p>
             </div>
         </div>

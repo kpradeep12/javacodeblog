@@ -105,7 +105,7 @@
   <p>Consumer takes input and always returns void. You can use this to perform some action with out returning anything.</p> 
  </div> 
  <div class="paragraph text-center"> 
-  <p><span class="image"><img src="http://www.techstackjava.com/img/posts/consumer-function.png" alt="Consumer Function" width="590" height="110"></span></p> 
+  <p><span class="image"><img src="http://localhost:8820/img/posts/consumer-function.png" alt="Consumer Function" width="590" height="110"></span></p> 
  </div> 
  <table class="tableblock frame-all grid-all spread"> 
   <colgroup> 
@@ -154,7 +154,7 @@
   <p>Function takes input and produces different kind of output.</p> 
  </div> 
  <div class="paragraph text-center"> 
-  <p><span class="image"><img src="http://www.techstackjava.com/img/posts/function.png" alt="Function" width="590" height="110"></span></p> 
+  <p><span class="image"><img src="http://localhost:8820/img/posts/function.png" alt="Function" width="590" height="110"></span></p> 
  </div> 
  <table class="tableblock frame-all grid-all spread"> 
   <colgroup> 
@@ -239,7 +239,7 @@
   <p>Operator is a special kind of function where it always accepts and produces same type.</p> 
  </div> 
  <div class="paragraph text-center"> 
-  <p><span class="image"><img src="http://www.techstackjava.com/img/posts/operator-function.png" alt="Operator Function" width="590" height="110"></span></p> 
+  <p><span class="image"><img src="http://localhost:8820/img/posts/operator-function.png" alt="Operator Function" width="590" height="110"></span></p> 
  </div> 
  <table class="tableblock frame-all grid-all spread"> 
   <colgroup> 
@@ -288,7 +288,7 @@
   <p>Predicate always returns a boolean so you can this in conditional evaluations.</p> 
  </div> 
  <div class="paragraph text-center"> 
-  <p><span class="image"><img src="http://www.techstackjava.com/img/posts/predicate-function.png" alt="Predicate Function" width="590" height="110"></span></p> 
+  <p><span class="image"><img src="http://localhost:8820/img/posts/predicate-function.png" alt="Predicate Function" width="590" height="110"></span></p> 
  </div> 
  <table class="tableblock frame-all grid-all spread"> 
   <colgroup> 
@@ -325,7 +325,7 @@
   <p>Supplier always returns a value. This can be used to generate random values or data from some source.</p> 
  </div> 
  <div class="paragraph text-center"> 
-  <p><span class="image"><img src="http://www.techstackjava.com/img/posts/supplier-function.png" alt="Supplier Function" width="290" height="110"></span></p> 
+  <p><span class="image"><img src="http://localhost:8820/img/posts/supplier-function.png" alt="Supplier Function" width="290" height="110"></span></p> 
  </div> 
  <table class="tableblock frame-all grid-all spread"> 
   <colgroup> 
@@ -363,9 +363,10 @@
     </article>
     
     <hr>
-        <div class="container">
+    <div class="container">
         <div class="row">    
             <div class="col-lg-12">
+                
                 <ul class="list-inline text-center list-unstyled float-left socialButtons">
                     <li class="list-inline-item">
                         <a href="javascript:tweetPage()" class="btn btn-twitter" data-toggle="tooltip" data-placement="top" title="Twitter">
@@ -379,17 +380,45 @@
                             <span class="hidden-xs"></span>
                         </a>
                     </li>
-                    <!--<li class="list-inline-item">
+                    <li class="list-inline-item">
                         <a href="javascript:shareOnLinkedIn()" class="btn btn-linkedin" data-toggle="tooltip" data-placement="top" title="LinkedIn">
                             <i class="fa fa-linkedin fa-2x"></i>
                             <span class="hidden-xs"></span>
                         </a>
-                    </li>-->
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="javascript:shareOnReddit()" class="btn btn-reddit" data-toggle="tooltip" data-placement="top" title="Reddit">
+                            <i class="fa fa-reddit-alien fa-2x"></i>
+                            <span class="hidden-xs"></span>
+                        </a>
+                    </li>
                 </ul>
-            </div>
+
+                
+                <div id="disqus_thread"></div>
+            </div
         </div>
     </div>
     
+    
+
+    <script type="text/javascript">
+        var disqus_shortname = 'null'; 
+        var disqus_identifier = 'blog/2018/03/28-functions-cheat-sheet.html';
+        var disqus_title = "Functions cheat sheet";
+        var disqus_url = 'http://localhost:8820blog/2018/03/28-functions-cheat-sheet.html';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+    <noscript>
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
 		<div id="push"></div>
     
     <!-- Footer -->
@@ -639,6 +668,18 @@
         gtag('js', new Date());
 
         gtag('config', 'UA-115619272-2');
+    </script>
+
+    <script type="text/javascript">
+        var disqus_shortname = 'null';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
     </script>
 
   </body>
