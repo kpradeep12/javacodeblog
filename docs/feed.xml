@@ -6,9 +6,201 @@
     <atom:link href="http://www.techstackjava.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Sat, 5 May 2018 07:51:57 -0400</pubDate>
-    <lastBuildDate>Sat, 5 May 2018 07:51:57 -0400</lastBuildDate>
+    <pubDate>Tue, 8 May 2018 06:24:18 -0400</pubDate>
+    <lastBuildDate>Tue, 8 May 2018 06:24:18 -0400</lastBuildDate>
 
+    
+    <item>
+      <title>Simple Introduction to ForkJoin Framework - Part 2</title>
+      <link>http://www.techstackjava.com/blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html</link>
+      <pubDate>Sun, 6 May 2018 00:00:00 -0400</pubDate>
+      <guid isPermaLink="false">blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html</guid>
+      <description>
+      &lt;div id=&quot;preamble&quot;&gt; 
+ &lt;div class=&quot;sectionbody&quot;&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;In the &lt;strong&gt;&lt;a href=&quot;http://www.techstackjava.com/blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html&quot;&gt;first part&lt;/a&gt;&lt;/strong&gt; of this series we went through the introduction on ForkJoin framework. In this article we will go through code example to create a ForkJoinTask using RecursiveAction. RecursiveAction is an abstract class and it is one of the subclass of ForkJoinTask. In order to create a divisible task we need to extend RecursiveAction and implement compute() method.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;In this article we will go through an array incrementor example. We declare a class ArrayIncrementor and this class will increment numbers in the given array and this class extends RecursiveAction. RecursiveAction has one abstract method, compute(), we implement this method. Instead of incrementing each element sequentially we will divide array into sub-arrays and threads in the pool will increment values in these sub-arrays. We need to take care of dividing array and ForkJoin framework will handle remaining things like execution of compute method and managing the threads.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;To make it simple, lets start coding with small part of the class and then add code to it.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;import java.util.Arrays;
+import java.util.concurrent.*;
+
+public class ArrayIncrementor extends RecursiveAction{ &lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;(1)&lt;/b&gt;
+    int[] data; &lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;(2)&lt;/b&gt;
+    int hi,lo;
+    static int THRESHOLD = 5;
+
+    public ArrayIncrementor(int[] data, int lo, int hi) { &lt;i class=&quot;conum&quot; data-value=&quot;3&quot;&gt;&lt;/i&gt;&lt;b&gt;(3)&lt;/b&gt;
+        this.data = data;
+        this.lo = lo;
+        this.hi = hi;
+    }
+
+    @Override
+    protected void compute() { &lt;i class=&quot;conum&quot; data-value=&quot;4&quot;&gt;&lt;/i&gt;&lt;b&gt;(4)&lt;/b&gt;
+        if(hi - lo &amp;lt;= THRESHOLD) {
+            //increment elements in array
+        }else{
+            //divide array further to make it smaller
+        }
+    }
+
+    public static void main(String[] args){
+
+    }
+}&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;colist arabic&quot;&gt; 
+   &lt;table&gt; 
+    &lt;tbody&gt;
+     &lt;tr&gt; 
+      &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;1&lt;/b&gt;&lt;/td&gt; 
+      &lt;td&gt;Class ArrayIncrementor extends abstract RecursiveAction class. This class has abstract method compute() and we are going to implement it.&lt;/td&gt; 
+     &lt;/tr&gt; 
+     &lt;tr&gt; 
+      &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;2&lt;/b&gt;&lt;/td&gt; 
+      &lt;td&gt;This class increments values in the array so we declared integer array and also two integer fields &apos;lo&apos; and &apos;hi&apos; which contains lower and upper index limit of the array. Increments happens only with in this range. THRESHOLD is static and we maintain minimum sub-array size in it.&lt;/td&gt; 
+     &lt;/tr&gt; 
+     &lt;tr&gt; 
+      &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;3&quot;&gt;&lt;/i&gt;&lt;b&gt;3&lt;/b&gt;&lt;/td&gt; 
+      &lt;td&gt;ArrayIncrementor constructor gets input array, lower and higher indexes of array.&lt;/td&gt; 
+     &lt;/tr&gt; 
+     &lt;tr&gt; 
+      &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;4&quot;&gt;&lt;/i&gt;&lt;b&gt;4&lt;/b&gt;&lt;/td&gt; 
+      &lt;td&gt;Implements compute() method. This method is not yet fully implemented. We need to increment elements in the array only if &apos;lo&apos; and &apos;hi&apos; index is lower or equal to THRESHOLD else divide the array to make it smaller. This means computation happens only when task is small enough, else task is divided further.&lt;/td&gt; 
+     &lt;/tr&gt; 
+    &lt;/tbody&gt;
+   &lt;/table&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;In above code we created basic shell of the class. It is taking integer array with lo and hi index as input, now lets implement compute() method.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;@Override
+protected void compute() {
+    if(hi - lo &amp;lt;= THRESHOLD) {
+        System.out.printf(&quot;compute: %d - %d %n&quot;, lo, hi);
+        for (int i = lo; i &amp;lt; hi; i++) { &lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;(1)&lt;/b&gt;
+            data[i]++;
+        }
+    }else{
+        int mid = (hi-lo)/2 + lo; &lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;(2)&lt;/b&gt;
+        System.out.printf(&quot;fork: %d - %d, %d - %d %n&quot;,lo, mid, mid, hi);
+        invokeAll(new ArrayIncrementor(data, lo, mid),
+                new ArrayIncrementor(data, mid, hi)); &lt;i class=&quot;conum&quot; data-value=&quot;3&quot;&gt;&lt;/i&gt;&lt;b&gt;(3)&lt;/b&gt;
+        System.out.printf(&quot;join: %d - %d %n&quot;, lo, hi);
+    }
+}&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;colist arabic&quot;&gt; 
+   &lt;table&gt; 
+    &lt;tbody&gt;
+     &lt;tr&gt; 
+      &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;1&lt;/b&gt;&lt;/td&gt; 
+      &lt;td&gt;If index range is equal or lower than THRESHOLD then, iterate array between lo and hi index and increment values. Note that &apos;lo&apos; is inclusive and &apos;hi&apos; is exclusive in the for loop.&lt;/td&gt; 
+     &lt;/tr&gt; 
+     &lt;tr&gt; 
+      &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;2&lt;/b&gt;&lt;/td&gt; 
+      &lt;td&gt;Calculating the mid index, if index range is greater than THRESHOLD. mid index will help us to divide array into two parts.&lt;/td&gt; 
+     &lt;/tr&gt; 
+     &lt;tr&gt; 
+      &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;3&quot;&gt;&lt;/i&gt;&lt;b&gt;3&lt;/b&gt;&lt;/td&gt; 
+      &lt;td&gt;Fork input array into two parts by calling invokeAll. We are passing two ArrayIncrementor objects to it, first object takes index range of lo to mid and second object takes mid to hi. Each ArrayIncrementor object can be forked further, if range is not in THRESHOLD limit, this call works like recursive call.&lt;/td&gt; 
+     &lt;/tr&gt; 
+    &lt;/tbody&gt;
+   &lt;/table&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;We implemented compute(), now lets create ForkJoinPool and pass this task to it.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;public static void main(String[] args) throws ExecutionException, InterruptedException {
+    int[] input = new int[]{5,2,6,1,4,5,6,9,8,5,5,2,6,1,4,5,6,9,8,5};
+    ForkJoinPool fjp = new ForkJoinPool();
+    fjp.invoke(new ArrayIncrementor(input,0,input.length)); &lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;(1)&lt;/b&gt;
+    fjp.shutdown();
+    System.out.printf(&quot;result: %s&quot;,Arrays.toString(input));
+}&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;colist arabic&quot;&gt; 
+   &lt;table&gt; 
+    &lt;tbody&gt;
+     &lt;tr&gt; 
+      &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;1&lt;/b&gt;&lt;/td&gt; 
+      &lt;td&gt;call invoke on ForkJoinPool by passing ArrayIncrementor object with array, lo and hi range. invoke() takes ForkJoinTask and because our ArrayIncrementor extends it, so we can pass it directly. In the next line we called shutdown to stop ForkJoinPool and then printed array.&lt;/td&gt; 
+     &lt;/tr&gt; 
+    &lt;/tbody&gt;
+   &lt;/table&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Below will show the output&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Submitting task
+fork: 0 - 10, 10 - 20  &lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;(1)&lt;/b&gt;
+fork: 0 - 5, 5 - 10
+fork: 10 - 15, 15 - 20
+compute: 5 - 10  &lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;(2)&lt;/b&gt;
+compute: 15 - 20
+compute: 0 - 5
+compute: 10 - 15
+join: 10 - 20 &lt;i class=&quot;conum&quot; data-value=&quot;3&quot;&gt;&lt;/i&gt;&lt;b&gt;(3)&lt;/b&gt;
+join: 0 - 10
+join: 0 - 20
+result: [6, 3, 7, 2, 5, 6, 7, 10, 9, 6, 6, 3, 7, 2, 5, 6, 7, 10, 9, 6] &lt;i class=&quot;conum&quot; data-value=&quot;4&quot;&gt;&lt;/i&gt;&lt;b&gt;(4)&lt;/b&gt;&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;colist arabic&quot;&gt; 
+   &lt;table&gt; 
+    &lt;tbody&gt;
+     &lt;tr&gt; 
+      &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;1&lt;/b&gt;&lt;/td&gt; 
+      &lt;td&gt;Input is having 20 elements and the THRESHOLD is 5 so array is forked until size reaches five.&lt;/td&gt; 
+     &lt;/tr&gt; 
+     &lt;tr&gt; 
+      &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;2&lt;/b&gt;&lt;/td&gt; 
+      &lt;td&gt;compute happens only for five element range. The order of the compute is not sequential like 0-5 then 5-10 because they are executed by threads in parallel so there will no order in execution.&lt;/td&gt; 
+     &lt;/tr&gt; 
+     &lt;tr&gt; 
+      &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;3&quot;&gt;&lt;/i&gt;&lt;b&gt;3&lt;/b&gt;&lt;/td&gt; 
+      &lt;td&gt;join statement printed after invokeAll execution.&lt;/td&gt; 
+     &lt;/tr&gt; 
+     &lt;tr&gt; 
+      &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;4&quot;&gt;&lt;/i&gt;&lt;b&gt;4&lt;/b&gt;&lt;/td&gt; 
+      &lt;td&gt;Final output shows incremented array values.&lt;/td&gt; 
+     &lt;/tr&gt; 
+    &lt;/tbody&gt;
+   &lt;/table&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;I added system outs in the code to show the flow of execution. In the above example there are four compute statements means those four tasks are executed in parallel. Below image which I posted in part 1 will help more in understanding this example.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph text-center&quot;&gt; 
+   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/fork-join-execution.png&quot; alt=&quot;Fork Join framework task execution&quot; width=&quot;650&quot; height=&quot;550&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;We implemented RecursiveAction to for and increment array values. This is a simple example of using ForkJoin framework.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
     
     <item>
       <title>Simple Introduction to ForkJoin Framework - Part 1</title>

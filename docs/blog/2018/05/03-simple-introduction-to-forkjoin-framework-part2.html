@@ -10,7 +10,7 @@
     <meta name="generator" content="JBake">
     <meta name="google-site-verification" content="zkTSlJd8qxF4ZHbWWxyG0Prqnevef8dGSLkZeHFRW2Y" />
     
-    <title>Regex Tester With Spring Shell</title>
+    <title>Simple Introduction to ForkJoin Framework - Part 2</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
@@ -90,105 +90,192 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="mt-4">Regex Tester With Spring Shell</h1>
-                    <p class="mt-0 small">Posted on April 11, 2018</p>
+                    <h1 class="mt-4">Simple Introduction to ForkJoin Framework - Part 2</h1>
+                    <p class="mt-0 small">Posted on May 06, 2018</p>
                     <hr>
                     <!-- Preview Image -->
-                    <img class="img-fluid rounded post-image" src="../../../img/banners/blog-banner-regex-tester-with-spring-shell.png" alt="">
+                    <img class="img-fluid rounded post-image" src="../../../img/banners/simple-introduction-to-forkjoin-framework-part2.png" alt="">
                     <div id="preamble"> 
  <div class="sectionbody"> 
   <div class="paragraph"> 
-   <p>Spring framework is the suite of many projects, using which we can develop wide variety of applications. These applications may need user interaction, the most common way is to have a web interface. Not all applications need to have a web interface, a simple command line interface can be suffice for some type of applications. Spring Shell is a simple project which provides the infrastructure to build command line interface applications easily and quickly.</p> 
+   <p>In the <strong><a href="http://www.techstackjava.com/blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html">first part</a></strong> of this series we went through the introduction on ForkJoin framework. In this article we will go through code example to create a ForkJoinTask using RecursiveAction. RecursiveAction is an abstract class and it is one of the subclass of ForkJoinTask. In order to create a divisible task we need to extend RecursiveAction and implement compute() method.</p> 
   </div> 
   <div class="paragraph"> 
-   <p>In this article I will show the steps needed to create a Spring shell project which tests the regex string provided at the command line. Easier way to create spring project is using <a href="https://start.spring.io/">start.spring.io</a> Go to the site and select you choice of configuration with ‘Spring Shell’ as dependency. See below screenshot for the reference.</p> 
-  </div> 
-  <div class="paragraph text-center"> 
-   <p><span class="image"><img src="http://www.techstackjava.com/img/posts/Post-Regex-tester-spring-starter.png" alt="Regex tester spring starter" width="550" height="300"></span></p> 
+   <p>In this article we will go through an array incrementor example. We declare a class ArrayIncrementor and this class will increment numbers in the given array and this class extends RecursiveAction. RecursiveAction has one abstract method, compute(), we implement this method. Instead of incrementing each element sequentially we will divide array into sub-arrays and threads in the pool will increment values in these sub-arrays. We need to take care of dividing array and ForkJoin framework will handle remaining things like execution of compute method and managing the threads.</p> 
   </div> 
   <div class="paragraph"> 
-   <p>Click on ‘Generate Project’ which will download the pre-configured spring project. Unzip and import it into your favorite java editor.</p> 
+   <p>To make it simple, lets start coding with small part of the class and then add code to it.</p> 
   </div> 
-  <div class="paragraph text-center"> 
-   <p><span class="image"><img src="http://www.techstackjava.com/img/posts/Post-Regex-tester-spring-shell-pom.png" alt="Regex tester spring shell" width="570" height="300"></span></p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>Now we have empty spring shell project ready.</p> 
-  </div> 
- </div> 
-</div> 
-<div class="sect3"> 
- <h4 id="create_command_for_regex_tester">Create command for Regex tester</h4> 
- <div class="paragraph"> 
-  <p>Creating a command is as simple as creating a class and method in Spring shell. Lets first create a class ‘RegexTester.java’ and annotate it will @ShellComponent.All command related classes need to be annotated with ShellComponent, this is a stereotype annotation which helps spring to configure component for the command interface. Add a method in this class and annotate with @ShellMethod. See code below;</p> 
- </div> 
- <div class="listingblock"> 
-  <div class="content"> 
-   <pre class="prettyprint highlight"><code class="language-java" data-lang="java">package com.regex.regextester;
+  <div class="listingblock"> 
+   <div class="content"> 
+    <pre class="prettyprint highlight"><code class="language-java" data-lang="java">import java.util.Arrays;
+import java.util.concurrent.*;
 
-import org.springframework.shell.standard.ShellComponent;
-import org.springframework.shell.standard.ShellMethod;
-import java.util.regex.Pattern;
+public class ArrayIncrementor extends RecursiveAction{ <i class="conum" data-value="1"></i><b>(1)</b>
+    int[] data; <i class="conum" data-value="2"></i><b>(2)</b>
+    int hi,lo;
+    static int THRESHOLD = 5;
 
-@ShellComponent
-public class RegexTester {
+    public ArrayIncrementor(int[] data, int lo, int hi) { <i class="conum" data-value="3"></i><b>(3)</b>
+        this.data = data;
+        this.lo = lo;
+        this.hi = hi;
+    }
 
-    @ShellMethod("Regex tester")
-    public void regex(String pattern, String text){
-        Pattern.compile(pattern)
-                .matcher(text)
-                .results()
-                .forEach(mr -&gt; {
-                    System.out.printf("Match: %s\n",
-                            text.substring(0,mr.start())+
-                                    "'"+
-                                    mr.group()+
-                                    "'"+
-                                    text.substring(mr.end(),text.length()));
-                });
+    @Override
+    protected void compute() { <i class="conum" data-value="4"></i><b>(4)</b>
+        if(hi - lo &lt;= THRESHOLD) {
+            //increment elements in array
+        }else{
+            //divide array further to make it smaller
+        }
+    }
+
+    public static void main(String[] args){
+
     }
 }</code></pre> 
+   </div> 
   </div> 
- </div> 
- <div class="paragraph"> 
-  <p>A method annotated with @ShellMethod becomes the command. In the example above, ‘regex’ becomes the command name and it expects two parameters. First parameter is the regex pattern and second one is the text on which regex pattern will be tested.</p> 
+  <div class="colist arabic"> 
+   <table> 
+    <tbody>
+     <tr> 
+      <td><i class="conum" data-value="1"></i><b>1</b></td> 
+      <td>Class ArrayIncrementor extends abstract RecursiveAction class. This class has abstract method compute() and we are going to implement it.</td> 
+     </tr> 
+     <tr> 
+      <td><i class="conum" data-value="2"></i><b>2</b></td> 
+      <td>This class increments values in the array so we declared integer array and also two integer fields 'lo' and 'hi' which contains lower and upper index limit of the array. Increments happens only with in this range. THRESHOLD is static and we maintain minimum sub-array size in it.</td> 
+     </tr> 
+     <tr> 
+      <td><i class="conum" data-value="3"></i><b>3</b></td> 
+      <td>ArrayIncrementor constructor gets input array, lower and higher indexes of array.</td> 
+     </tr> 
+     <tr> 
+      <td><i class="conum" data-value="4"></i><b>4</b></td> 
+      <td>Implements compute() method. This method is not yet fully implemented. We need to increment elements in the array only if 'lo' and 'hi' index is lower or equal to THRESHOLD else divide the array to make it smaller. This means computation happens only when task is small enough, else task is divided further.</td> 
+     </tr> 
+    </tbody>
+   </table> 
+  </div> 
+  <div class="paragraph"> 
+   <p>In above code we created basic shell of the class. It is taking integer array with lo and hi index as input, now lets implement compute() method.</p> 
+  </div> 
+  <div class="listingblock"> 
+   <div class="content"> 
+    <pre class="prettyprint highlight"><code class="language-java" data-lang="java">@Override
+protected void compute() {
+    if(hi - lo &lt;= THRESHOLD) {
+        System.out.printf("compute: %d - %d %n", lo, hi);
+        for (int i = lo; i &lt; hi; i++) { <i class="conum" data-value="1"></i><b>(1)</b>
+            data[i]++;
+        }
+    }else{
+        int mid = (hi-lo)/2 + lo; <i class="conum" data-value="2"></i><b>(2)</b>
+        System.out.printf("fork: %d - %d, %d - %d %n",lo, mid, mid, hi);
+        invokeAll(new ArrayIncrementor(data, lo, mid),
+                new ArrayIncrementor(data, mid, hi)); <i class="conum" data-value="3"></i><b>(3)</b>
+        System.out.printf("join: %d - %d %n", lo, hi);
+    }
+}</code></pre> 
+   </div> 
+  </div> 
+  <div class="colist arabic"> 
+   <table> 
+    <tbody>
+     <tr> 
+      <td><i class="conum" data-value="1"></i><b>1</b></td> 
+      <td>If index range is equal or lower than THRESHOLD then, iterate array between lo and hi index and increment values. Note that 'lo' is inclusive and 'hi' is exclusive in the for loop.</td> 
+     </tr> 
+     <tr> 
+      <td><i class="conum" data-value="2"></i><b>2</b></td> 
+      <td>Calculating the mid index, if index range is greater than THRESHOLD. mid index will help us to divide array into two parts.</td> 
+     </tr> 
+     <tr> 
+      <td><i class="conum" data-value="3"></i><b>3</b></td> 
+      <td>Fork input array into two parts by calling invokeAll. We are passing two ArrayIncrementor objects to it, first object takes index range of lo to mid and second object takes mid to hi. Each ArrayIncrementor object can be forked further, if range is not in THRESHOLD limit, this call works like recursive call.</td> 
+     </tr> 
+    </tbody>
+   </table> 
+  </div> 
+  <div class="paragraph"> 
+   <p>We implemented compute(), now lets create ForkJoinPool and pass this task to it.</p> 
+  </div> 
+  <div class="listingblock"> 
+   <div class="content"> 
+    <pre class="prettyprint highlight"><code class="language-java" data-lang="java">public static void main(String[] args) throws ExecutionException, InterruptedException {
+    int[] input = new int[]{5,2,6,1,4,5,6,9,8,5,5,2,6,1,4,5,6,9,8,5};
+    ForkJoinPool fjp = new ForkJoinPool();
+    fjp.invoke(new ArrayIncrementor(input,0,input.length)); <i class="conum" data-value="1"></i><b>(1)</b>
+    fjp.shutdown();
+    System.out.printf("result: %s",Arrays.toString(input));
+}</code></pre> 
+   </div> 
+  </div> 
+  <div class="colist arabic"> 
+   <table> 
+    <tbody>
+     <tr> 
+      <td><i class="conum" data-value="1"></i><b>1</b></td> 
+      <td>call invoke on ForkJoinPool by passing ArrayIncrementor object with array, lo and hi range. invoke() takes ForkJoinTask and because our ArrayIncrementor extends it, so we can pass it directly. In the next line we called shutdown to stop ForkJoinPool and then printed array.</td> 
+     </tr> 
+    </tbody>
+   </table> 
+  </div> 
+  <div class="paragraph"> 
+   <p>Below will show the output</p> 
+  </div> 
+  <div class="listingblock"> 
+   <div class="content"> 
+    <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">Submitting task
+fork: 0 - 10, 10 - 20  <i class="conum" data-value="1"></i><b>(1)</b>
+fork: 0 - 5, 5 - 10
+fork: 10 - 15, 15 - 20
+compute: 5 - 10  <i class="conum" data-value="2"></i><b>(2)</b>
+compute: 15 - 20
+compute: 0 - 5
+compute: 10 - 15
+join: 10 - 20 <i class="conum" data-value="3"></i><b>(3)</b>
+join: 0 - 10
+join: 0 - 20
+result: [6, 3, 7, 2, 5, 6, 7, 10, 9, 6, 6, 3, 7, 2, 5, 6, 7, 10, 9, 6] <i class="conum" data-value="4"></i><b>(4)</b></code></pre> 
+   </div> 
+  </div> 
+  <div class="colist arabic"> 
+   <table> 
+    <tbody>
+     <tr> 
+      <td><i class="conum" data-value="1"></i><b>1</b></td> 
+      <td>Input is having 20 elements and the THRESHOLD is 5 so array is forked until size reaches five.</td> 
+     </tr> 
+     <tr> 
+      <td><i class="conum" data-value="2"></i><b>2</b></td> 
+      <td>compute happens only for five element range. The order of the compute is not sequential like 0-5 then 5-10 because they are executed by threads in parallel so there will no order in execution.</td> 
+     </tr> 
+     <tr> 
+      <td><i class="conum" data-value="3"></i><b>3</b></td> 
+      <td>join statement printed after invokeAll execution.</td> 
+     </tr> 
+     <tr> 
+      <td><i class="conum" data-value="4"></i><b>4</b></td> 
+      <td>Final output shows incremented array values.</td> 
+     </tr> 
+    </tbody>
+   </table> 
+  </div> 
+  <div class="paragraph"> 
+   <p>I added system outs in the code to show the flow of execution. In the above example there are four compute statements means those four tasks are executed in parallel. Below image which I posted in part 1 will help more in understanding this example.</p> 
+  </div> 
+  <div class="paragraph text-center"> 
+   <p><span class="image"><img src="http://www.techstackjava.com/img/posts/fork-join-execution.png" alt="Fork Join framework task execution" width="650" height="550"></span></p> 
+  </div> 
  </div> 
 </div> 
 <div class="sect3"> 
- <h4 id="build_project">Build project</h4> 
+ <h4 id="conclusion">Conclusion</h4> 
  <div class="paragraph"> 
-  <p>I used Maven to build the application. In the project folder execute below command to execute maven build;</p> 
- </div> 
- <div class="listingblock"> 
-  <div class="content"> 
-   <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">./mvnw clean install -DskipTests</code></pre> 
-  </div> 
- </div> 
- <div class="paragraph"> 
-  <p>Maven will download the required dependencies and builds the project. Packaged jar will be created in target folder.</p> 
- </div> 
-</div> 
-<div class="sect3"> 
- <h4 id="run_regex_tester">Run Regex tester</h4> 
- <div class="paragraph"> 
-  <p>Maven build zipped all the required dependencies into regex-tester-0.0.1-SNAPSHOT.jar it even contains Spring Shell in it. Lets run this jar with java command. In the command prompt, go to the project folder and execute below command.</p> 
- </div> 
- <div class="listingblock"> 
-  <div class="content"> 
-   <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">java -jar target/regex-tester-0.0.1-SNAPSHOT.jar</code></pre> 
-  </div> 
- </div> 
- <div class="paragraph"> 
-  <p>You should see a prompt saying ‘shell:&gt;’ As I mentioned earlier, spring shell provides the required infrastructure for the command line interface so this prompt is provided by the spring shell and it is ready to take the commands. lets execute some commands on the shell prompt.</p> 
- </div> 
- <div class="paragraph text-center"> 
-  <p><span class="image"><img src="http://www.techstackjava.com/img/posts/Post-Regex-tester-regex-cli.png" alt="Regex tester cli" width="500" height="140"></span></p> 
- </div> 
- <div class="paragraph"> 
-  <p>I passed ‘ab’ as the pattern and ‘abcabc’ as the test string to regex command. Spring will internally execute regex method and passes provided arguments to it. The output of the method will be printed in the console. We can continue to test regex command multiple times with different strings and it can be used as regex utility in local.</p> 
- </div> 
- <div class="paragraph"> 
-  <p>For the same ShellController class we can add multiple methods and use them as different commands. After completing the regex testing, type ‘exit’ to quit from the shell. We have completed spring shell project with simple regex tester. You can continue to explore and learn more on Spring shell at this <a href="https://docs.spring.io/spring-shell/docs/2.0.1.BUILD-SNAPSHOT/reference/htmlsingle/#_what_is_spring_shell">link</a>. Happy Coding!</p> 
+  <p>We implemented RecursiveAction to for and increment array values. This is a simple example of using ForkJoin framework.</p> 
  </div> 
 </div>
                 </div>
@@ -239,9 +326,9 @@ public class RegexTester {
 
     <script type="text/javascript">
         var disqus_shortname = 'null'; 
-        var disqus_identifier = 'blog/2018/04/11-regex-tester-with-spring-shell.html';
-        var disqus_title = "Regex Tester With Spring Shell";
-        var disqus_url = 'http://www.techstackjava.comblog/2018/04/11-regex-tester-with-spring-shell.html';
+        var disqus_identifier = 'blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html';
+        var disqus_title = "Simple Introduction to ForkJoin Framework - Part 2";
+        var disqus_url = 'http://www.techstackjava.comblog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {

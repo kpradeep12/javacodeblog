@@ -23,7 +23,9 @@ h6 {
   font-weight: 800;
 }
 a {
+  transition: all .2s ease-in-out;
   color: #404040;
+  text-decoration: none;
 }
 a:hover,
 a:focus {
@@ -402,4 +404,14 @@ pre.prettyprint {
 .socialButtons a:hover {
   color: white;
 	opacity:1;    	
+}
+p.lead, .paragraph.lead > p, #preamble > .sectionbody > .paragraph:first-of-type p {
+  line-height: unset !important;
+  font-size: unset !important;
+}
+article a{
+  color: #bd5d38;
+}
+article a:active, article a:focus, article a:hover {
+  color: #824027;
 }
