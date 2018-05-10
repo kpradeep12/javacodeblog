@@ -88,7 +88,7 @@ public static void main(String[] args) throws ExecutionException, InterruptedExc
 <1> call invoke on ForkJoinPool by passing ArrayIncrementor object with array, lo and hi range. invoke() takes ForkJoinTask and because our ArrayIncrementor extends it, so we can pass it directly. In the next line we called shutdown to stop ForkJoinPool and then printed array.
 
 Below will show the output
-[source, bash]
+[source,bash]
 ----
 Submitting task
 fork: 0 - 10, 10 - 20  // <1>

@@ -19,10 +19,12 @@
 
     <link href="../../../css/asciidoctor.css" rel="stylesheet">
     <link href="../../../css/prettify.css" rel="stylesheet">
+    <link href="../../../css/1-col-portfolio.css" rel="stylesheet">
     <link href="../../../css/clean-blog.css" rel="stylesheet">
     <link href="../../../css/3-portfolio-theme.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Libre+Franklin:400,100,100italic,200,200italic,300,300italic,400italic,500,600,500italic,600italic,700,700italic,800,900,800italic,900italic' rel='stylesheet' type='text/css'>
     <!--<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -71,7 +73,8 @@
     </nav>
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('../../../img/home-bg.jpg')">
+    
+    <header class="intro-header mb-4" style="background: #4b535a;">
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -85,17 +88,32 @@
         </div>
     </header>
 
-    <!-- Post Content -->
-    <article>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="mt-4">Fixed Thread Pool using Executor framework</h1>
-                    <p class="mt-0 small">Posted on March 10, 2018</p>
-                    <hr>
-                    <!-- Preview Image -->
-                    <img class="img-fluid rounded post-image" src="../../../img/" alt="">
-                    <div class="paragraph"> 
+    <header class="">
+      <!--<div class="container text-center">
+        <h1>Welcome to Scrolling Nav</h1>
+        <p class="lead">A landing page template freshly redesigned for Bootstrap 4</p>
+      </div>-->
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="bg-white rounded shadow mb-4">
+                    <div class="p-3">
+                        <article>
+                            <!-- Title -->
+                            <h3 class="mb-0">Fixed Thread Pool using Executor framework</h3>
+                            
+                            <!-- Author -->
+                            <p class="small-font mb-0">
+                                published by <a href="#">Pradeep</a> on March 10, 2018
+                            </p>
+                            <hr>
+
+                            <!-- Preview Image -->
+                            <img class="img-fluid rounded d-block mr-auto ml-auto shadow" src="../../../img/" alt="">
+                            <hr>
+                            <div class="paragraph"> 
  <p>In this article we are looking at the Fixed thread pool implementation. This thread pool creates a fixed number of threads and reuses them as the tasks are completed and because the threads are reused so once after reaching the thread pool limit then there will not be any thread creations involved. This pool will be helpful when we want to execute long running threads. For example we can use this pool in running batch jobs or accepting HTTP client requests and so on.</p> 
 </div> 
 <div class="paragraph text-center"> 
@@ -167,18 +185,76 @@ Processing pool-1-thread-1</code></pre>
 <div class="paragraph"> 
  <p>You can continue to experiment by creating another runnable and making it to sleep longer or shorter and then pass it to the executers so you can see how threads are allocated with in the pool.</p> 
 </div>
-                </div>
-            </div>
-        </div>
-        
-    </article>
-    
-    <hr>
-    <div class="container">
-        <div class="row">    
-            <div class="col-lg-12">
-                
-                <ul class="list-inline text-center list-unstyled float-left socialButtons">
+
+                        </article>
+                    </div>
+                    
+                    <!--post footer-->
+                    <!--<div class="container mb-5">
+                        <div class="row">    
+                            <div class="col-lg-8" style="    background: #444;    color: #fff;">
+                                <div class="card my-4 border-0" style="background: #444;">
+                                    <p class="card-header p-0 border-0" style="background: #444;">Share</p>
+                                    <div class="card-body p-0">
+                                        <div class="input-group">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4" style="    background: #3f4854;    color: #fff;">
+                                <div class="card my-4 border-0" style="background: #3f4854;">
+                                    <p class="card-header p-0 border-0" style="background: #3f4854;">Tags</p>
+                                    <div class="card-body p-0">
+                                        <div class="input-group">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="container mb-5 social-share">
+                        <div class="row">    
+                            <div class="col-lg-12">
+                                <div class="card my-4 border-0">
+                                    <p class="m-0 text-center small-font">Share this post</p>
+<ul class="list-inline text-center list-unstyled float-left m-0">
+    <li class="list-inline-item">
+        <a href="javascript:tweetPage()"> 
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+    </li>
+    <li class="list-inline-item">
+        <a href="javascript:shareOnFacebook()"> 
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+    </li>
+    <li class="list-inline-item">
+        <a href="javascript:shareOnLinkedIn()"> 
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+    </li>
+    <!--<li class="list-inline-item">
+        <a href="javascript:shareOnReddit()"> 
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-reddit-alien fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+    </li>-->
+</ul>
+
+<!--
+                <ul class="list-inline text-center list-unstyled float-left socialButtons m-0">
                     <li class="list-inline-item">
                         <a href="javascript:tweetPage()" class="btn btn-twitter" data-toggle="tooltip" data-placement="top" title="Twitter">
                             <i class="fa fa-twitter fa-2x"></i>
@@ -204,14 +280,224 @@ Processing pool-1-thread-1</code></pre>
                         </a>
                     </li>
                 </ul>
+-->
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--post footer-->
 
-                
-                <div id="disqus_thread"></div>
+                    <div class="container">
+                        <div class="row">    
+                            <div class="col-lg-12 mx-auto">
+                                <div id="disqus_thread"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!--side bar-->
+            <div class="col-lg-4 sidebar">
+                <div class="bg-white rounded p-3 shadow mb-4">
+                    <div class="card my-4 border-0">
+                        <div class="card-body p-2">
+                            <h4 class="">Recent Posts</h4>
+                            <div class="input-group">
+                                <ul class="list-unstyled ml-0 break-word">
+                                    
+                                        <li class="mb-2">
+                                            <a href="../../../blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html" class="footer-link"> Simple Introduction to ForkJoin Framework - Part 2</a>
+                                        </li>
+                                    
+                                        <li class="mb-2">
+                                            <a href="../../../blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html" class="footer-link"> Simple Introduction to ForkJoin Framework - Part 1</a>
+                                        </li>
+                                    
+                                        <li class="mb-2">
+                                            <a href="../../../blog/2018/04/22-strategy-design-pattern.html" class="footer-link"> Strategy design pattern</a>
+                                        </li>
+                                    
+                                        <li class="mb-2">
+                                            <a href="../../../blog/2018/04/18-introduction-to-java-time.html" class="footer-link"> Introduction to java.time</a>
+                                        </li>
+                                    
+                                        <li class="mb-2">
+                                            <a href="../../../blog/2018/04/15-how-concurrentModificationException-is-thrown.html" class="footer-link"> How ConcurrentModificationException is thrown?</a>
+                                        </li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card my-4 border-0">
+                        <div class="card-body p-2">
+                            <h4>Tags</h4>
+                            <div class="input-group">
+                                
+                                    <a href="../../../tags/gof.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        gof
+                                    </a>
+                                
+                                    <a href="../../../tags/queue.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        queue
+                                    </a>
+                                
+                                    <a href="../../../tags/time.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        time
+                                    </a>
+                                
+                                    <a href="../../../tags/producer.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        producer
+                                    </a>
+                                
+                                    <a href="../../../tags/blockedqueue.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        blockedqueue
+                                    </a>
+                                
+                                    <a href="../../../tags/regex.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        regex
+                                    </a>
+                                
+                                    <a href="../../../tags/comparator.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        comparator
+                                    </a>
+                                
+                                    <a href="../../../tags/java10.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        java10
+                                    </a>
+                                
+                                    <a href="../../../tags/thread.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        thread
+                                    </a>
+                                
+                                    <a href="../../../tags/localdate.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        localdate
+                                    </a>
+                                
+                                    <a href="../../../tags/streams.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        streams
+                                    </a>
+                                
+                                    <a href="../../../tags/var.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        var
+                                    </a>
+                                
+                                    <a href="../../../tags/maven.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        maven
+                                    </a>
+                                
+                                    <a href="../../../tags/read.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        read
+                                    </a>
+                                
+                                    <a href="../../../tags/jshell.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        jshell
+                                    </a>
+                                
+                                    <a href="../../../tags/concurrentmodificationexception.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        concurrentmodificationexception
+                                    </a>
+                                
+                                    <a href="../../../tags/consumer.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        consumer
+                                    </a>
+                                
+                                    <a href="../../../tags/write.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        write
+                                    </a>
+                                
+                                    <a href="../../../tags/multithreading.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        multithreading
+                                    </a>
+                                
+                                    <a href="../../../tags/create.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        create
+                                    </a>
+                                
+                                    <a href="../../../tags/executor.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        executor
+                                    </a>
+                                
+                                    <a href="../../../tags/collections.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        collections
+                                    </a>
+                                
+                                    <a href="../../../tags/stream.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        stream
+                                    </a>
+                                
+                                    <a href="../../../tags/git.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        git
+                                    </a>
+                                
+                                    <a href="../../../tags/file.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        file
+                                    </a>
+                                
+                                    <a href="../../../tags/java.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        java
+                                    </a>
+                                
+                                    <a href="../../../tags/random.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        random
+                                    </a>
+                                
+                                    <a href="../../../tags/spring.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        spring
+                                    </a>
+                                
+                                    <a href="../../../tags/design pattern.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        design pattern
+                                    </a>
+                                
+                                    <a href="../../../tags/delete.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        delete
+                                    </a>
+                                
+                                    <a href="../../../tags/priorityqueue.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        priorityqueue
+                                    </a>
+                                
+                                    <a href="../../../tags/infinite.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        infinite
+                                    </a>
+                                
+                                    <a href="../../../tags/forkjoin.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        forkjoin
+                                    </a>
+                                
+                                    <a href="../../../tags/functional.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        functional
+                                    </a>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card my-4 border-0">
+                        <div class="card-body p-2">
+                            <h4>Author</h4>
+                            <div class="input-group">
+                                <p class="mb-0">Pradeep Kundarapu</p>
+                                <!--<a id="follow-button" class="follow-btn" title="Follow @k_pradeep4j on Twitter" href="https://twitter.com/k_pradeep4j">
+                                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                                    <span class="label" id="l">Follow <b>@k_pradeep4j</b></span>
+                                </a>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
         </div>
     </div>
-    
-    
+
 
     <script type="text/javascript">
         var disqus_shortname = 'null'; 
@@ -231,9 +517,18 @@ Processing pool-1-thread-1</code></pre>
         Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
     </noscript>
     
-		<div id="push"></div>
+<!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; www.techstackjava.com 2018</p>
+        <p class="m-0 text-center text-muted">Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+      </div>
+      <!-- /.container -->
+    </footer>
     
-    <!-- Footer -->
+<!--
+	<div id="push"></div>
+    
     <footer class="bg-graphite">
         <div class="container">
             <div class="row">
@@ -388,42 +683,42 @@ Processing pool-1-thread-1</code></pre>
                         <div class="card-body">
                             <h5 class="card-title">Recent Posts</h5>
                             <p class="card-text">
-                                <ul class="list-unstyled">
+                                <ul class="list-unstyled ml-0">
                                     
                                         <li>
-                                            <a href="../../../blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html" class="footer-link">Simple Introduction to ForkJoin Framework - Part 2</a>
+                                            <a href="../../../blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Simple Introduction to ForkJoin Framework - Part 2</a>
                                         </li>
                                     
                                         <li>
-                                            <a href="../../../blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html" class="footer-link">Simple Introduction to ForkJoin Framework - Part 1</a>
+                                            <a href="../../../blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Simple Introduction to ForkJoin Framework - Part 1</a>
                                         </li>
                                     
                                         <li>
-                                            <a href="../../../blog/2018/04/22-strategy-design-pattern.html" class="footer-link">Strategy design pattern</a>
+                                            <a href="../../../blog/2018/04/22-strategy-design-pattern.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Strategy design pattern</a>
                                         </li>
                                     
                                         <li>
-                                            <a href="../../../blog/2018/04/18-introduction-to-java-time.html" class="footer-link">Introduction to java.time</a>
+                                            <a href="../../../blog/2018/04/18-introduction-to-java-time.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Introduction to java.time</a>
                                         </li>
                                     
                                         <li>
-                                            <a href="../../../blog/2018/04/15-how-concurrentModificationException-is-thrown.html" class="footer-link">How ConcurrentModificationException is thrown?</a>
+                                            <a href="../../../blog/2018/04/15-how-concurrentModificationException-is-thrown.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> How ConcurrentModificationException is thrown?</a>
                                         </li>
                                     
                                         <li>
-                                            <a href="../../../blog/2018/04/11-regex-tester-with-spring-shell.html" class="footer-link">Regex Tester With Spring Shell</a>
+                                            <a href="../../../blog/2018/04/11-regex-tester-with-spring-shell.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Regex Tester With Spring Shell</a>
                                         </li>
                                     
                                         <li>
-                                            <a href="../../../blog/2018/04/8-infinite-streams.html" class="footer-link">Infinite streams</a>
+                                            <a href="../../../blog/2018/04/8-infinite-streams.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Infinite streams</a>
                                         </li>
                                     
                                         <li>
-                                            <a href="../../../blog/2018/04/3-recipes-for-optional.html" class="footer-link">Recipes for Optional</a>
+                                            <a href="../../../blog/2018/04/3-recipes-for-optional.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Recipes for Optional</a>
                                         </li>
                                     
                                         <li>
-                                            <a href="../../../blog/2018/03/28-functions-cheat-sheet.html" class="footer-link">Functions cheat sheet</a>
+                                            <a href="../../../blog/2018/03/28-functions-cheat-sheet.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Functions cheat sheet</a>
                                         </li>
                                     
                                 </ul>
@@ -435,7 +730,6 @@ Processing pool-1-thread-1</code></pre>
                     <div class="card" style="background-color: transparent;color: #fff!important;">
                         <div class="card-body">
                             <h5 class="card-title">Author</h5>
-                            <!--<img class="card-img-top" width="90" height="90" style="width:40%" src="../../../img/author-pic.jpeg" alt="Pradeep Kundarapu">-->
                             <p class="card-text">Pradeep Kundarapu</p>
                             <p class="m-0">Follow me</p>
                             <ul class="list-inline text-center list-unstyled float-left">
@@ -451,15 +745,15 @@ Processing pool-1-thread-1</code></pre>
                         </div>
                     </div>
                 </div>
-                <!--<div class="col">
+                <div class="col">
                     
                     <p class="copyright text-muted">Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
-                </div>-->
+                </div>
                 
             </div>
         </div>
     </footer>
-
+-->
     <!-- jQuery -->
     <script src="../../../js/jquery.js"></script>
 

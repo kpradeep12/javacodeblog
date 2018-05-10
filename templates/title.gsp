@@ -1,6 +1,7 @@
 <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>img/home-bg.jpg')">
+    
+    <header class="intro-header mb-4" style="background: #4b535a;">
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -12,4 +13,11 @@
                 </div>
             </div>
         </div>
+    </header>
+
+    <header class="">
+      <!--<div class="container text-center">
+        <h1>Welcome to Scrolling Nav</h1>
+        <p class="lead">A landing page template freshly redesigned for Bootstrap 4</p>
+      </div>-->
     </header>

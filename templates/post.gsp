@@ -3,35 +3,88 @@
     <%include "menu.gsp"%>
     <%include "title.gsp"%>
 
-    <!-- Post Content -->
-    <article>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="mt-4">${content.title}</h1>
-                    <p class="mt-0 small">Posted on ${content.date.format("MMMM dd, yyyy")}</p>
-                    <hr>
-                    <!-- Preview Image -->
-                    <img class="img-fluid rounded post-image" src="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>img/${content.image}" alt="">
-                    ${content.body}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="bg-white rounded shadow mb-4">
+                    <div class="p-3">
+                        <article>
+                            <!-- Title -->
+                            <h3 class="mb-0">${content.title}</h3>
+                            
+                            <!-- Author -->
+                            <p class="small-font mb-0">
+                                published by <a href="#">Pradeep</a> on ${content.date.format("MMMM dd, yyyy")}
+                            </p>
+                            <hr>
+
+                            <!-- Preview Image -->
+                            <img class="img-fluid rounded d-block mr-auto ml-auto shadow" src="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>img/${content.image}" alt="">
+                            <hr>
+                            ${content.body}
+
+                        </article>
+                    </div>
+                    
+                    <!--post footer-->
+                    <!--<div class="container mb-5">
+                        <div class="row">    
+                            <div class="col-lg-8" style="    background: #444;    color: #fff;">
+                                <div class="card my-4 border-0" style="background: #444;">
+                                    <p class="card-header p-0 border-0" style="background: #444;">Share</p>
+                                    <div class="card-body p-0">
+                                        <div class="input-group">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4" style="    background: #3f4854;    color: #fff;">
+                                <div class="card my-4 border-0" style="background: #3f4854;">
+                                    <p class="card-header p-0 border-0" style="background: #3f4854;">Tags</p>
+                                    <div class="card-body p-0">
+                                        <div class="input-group">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="container mb-5 social-share">
+                        <div class="row">    
+                            <div class="col-lg-12">
+                                <div class="card my-4 border-0">
+                                    <%include "share.gsp"%>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--post footer-->
+
+                    <div class="container">
+                        <div class="row">    
+                            <div class="col-lg-12 mx-auto">
+                                <div id="disqus_thread"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-    </article>
-    
-    <hr>
-    <div class="container">
-        <div class="row">    
-            <div class="col-lg-12">
-                <%include "share.gsp"%>
-                
-                <div id="disqus_thread"></div>
+
+            <!--side bar-->
+            <div class="col-lg-4 sidebar">
+                <div class="bg-white rounded p-3 shadow mb-4">
+                    <%include "sidebar.gsp"%>
+                </div>
             </div>
+
+
+
+
         </div>
     </div>
-    
-    
+
 
     <script type="text/javascript">
         var disqus_shortname = '${config.disqus_username}'; 

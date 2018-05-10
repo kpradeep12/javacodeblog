@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Roboto',sans-serif;
-  font-size: 18px;
+  font-size: 20px;
   color: #404040;
 }
 p {
@@ -382,6 +382,7 @@ body {
 }
 .footer-link{
   color: #0085a1;
+  text-decoration: none;
 }
 .footer-tag-background{
   background-color: #0085a1;

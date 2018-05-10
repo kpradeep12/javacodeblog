@@ -1,6 +1,15 @@
-		<div id="push"></div>
+<!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; www.techstackjava.com 2018</p>
+        <p class="m-0 text-center text-muted">Baked with <a href="http://jbake.org">JBake ${version}</a></p>
+      </div>
+      <!-- /.container -->
+    </footer>
     
-    <!-- Footer -->
+<!--
+	<div id="push"></div>
+    
     <footer class="bg-graphite">
         <div class="container">
             <div class="row">
@@ -23,10 +32,10 @@
                         <div class="card-body">
                             <h5 class="card-title">Recent Posts</h5>
                             <p class="card-text">
-                                <ul class="list-unstyled">
+                                <ul class="list-unstyled ml-0">
                                     <%published_posts.take(9).each{post ->%>
                                         <li>
-                                            <a href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>${post.uri}" class="footer-link">${post.title}</a>
+                                            <a href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>${post.uri}" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> ${post.title}</a>
                                         </li>
                                     <%}%>
                                 </ul>
@@ -38,7 +47,6 @@
                     <div class="card" style="background-color: transparent;color: #fff!important;">
                         <div class="card-body">
                             <h5 class="card-title">Author</h5>
-                            <!--<img class="card-img-top" width="90" height="90" style="width:40%" src="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>img/author-pic.jpeg" alt="Pradeep Kundarapu">-->
                             <p class="card-text">Pradeep Kundarapu</p>
                             <p class="m-0">Follow me</p>
                             <ul class="list-inline text-center list-unstyled float-left">
@@ -54,15 +62,15 @@
                         </div>
                     </div>
                 </div>
-                <!--<div class="col">
+                <div class="col">
                     
                     <p class="copyright text-muted">Baked with <a href="http://jbake.org">JBake ${version}</a></p>
-                </div>-->
+                </div>
                 
             </div>
         </div>
     </footer>
-
+-->
     <!-- jQuery -->
     <script src="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>js/jquery.js"></script>
 

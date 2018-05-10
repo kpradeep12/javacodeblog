@@ -19,10 +19,12 @@
 
     <link href="css/asciidoctor.css" rel="stylesheet">
     <link href="css/prettify.css" rel="stylesheet">
+    <link href="css/1-col-portfolio.css" rel="stylesheet">
     <link href="css/clean-blog.css" rel="stylesheet">
     <link href="css/3-portfolio-theme.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Libre+Franklin:400,100,100italic,200,200italic,300,300italic,400italic,500,600,500italic,600italic,700,700italic,800,900,800italic,900italic' rel='stylesheet' type='text/css'>
     <!--<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -70,7 +72,8 @@
     </nav>
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('img/home-bg.jpg')">
+    
+    <header class="intro-header mb-4" style="background: #4b535a;">
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -84,133 +87,241 @@
         </div>
     </header>
 
+    <header class="">
+      <!--<div class="container text-center">
+        <h1>Welcome to Scrolling Nav</h1>
+        <p class="lead">A landing page template freshly redesigned for Bootstrap 4</p>
+      </div>-->
+    </header>
+
     <!-- Main Content -->
     <div class="container">
+        <!--Info-->
+        <!--<div class="row">
+            <div class="card text-white bg-secondary mb-4 text-center w-100">
+                <div class="card-body">
+                    <p class="text-white m-0">
+                        thetechstack.net is now <span class="font-weight-bold">techstackjava.com</span>
+                    </p>
+                </div>
+            </div>
+        </div>-->
+
         <div class="row">
+            <!--posts-->
+            <!--<div class="col-md-12">
+                <div class="container">
+                    
+                        <div class="row p-3 mb-3">
+                            <div class="col-md-5">
+                                <a href="blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html">
+                                    <img class="img-fluid rounded mb-3 mb-md-0 shadow" src="img/banners/simple-introduction-to-forkjoin-framework-part2.png" alt="">
+                                </a>
+                            </div>
+                            <div class="col-md-7">
+                                <p>In the first part of this series we went through the introduction on ForkJoin framework. In this article we will go through code example to create a ForkJoinTask using RecursiveAction.</p>
+                                <p class="text-muted mb-1 small-font">
+                                    Posted on 06 May 2018
+                                </p>
+                                <a class="btn btn-secondary" href="blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html">Read more...</a>
+                            </div>
+                        </div>
+                        <hr>
+                    
+                        <div class="row p-3 mb-3">
+                            <div class="col-md-5">
+                                <a href="blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html">
+                                    <img class="img-fluid rounded mb-3 mb-md-0 shadow" src="img/banners/simple-introduction-to-forkjoin-framework-part1.png" alt="">
+                                </a>
+                            </div>
+                            <div class="col-md-7">
+                                <p>ForkJoin framework allows us to execute tasks in a thread based environment. We need to pass tasks to this framework and this framework will execute them efficiently.</p>
+                                <p class="text-muted mb-1 small-font">
+                                    Posted on 03 May 2018
+                                </p>
+                                <a class="btn btn-secondary" href="blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html">Read more...</a>
+                            </div>
+                        </div>
+                        <hr>
+                    
+                        <div class="row p-3 mb-3">
+                            <div class="col-md-5">
+                                <a href="blog/2018/04/22-strategy-design-pattern.html">
+                                    <img class="img-fluid rounded mb-3 mb-md-0 shadow" src="img/banners/blog-banner-strategy-design-pattern.png" alt="">
+                                </a>
+                            </div>
+                            <div class="col-md-7">
+                                <p>This article will explain the strategy design pattern using functional interfaces. Sometimes application may need to execute an algorithm conditionally. Here the algorithm means nothing but a strategy, execution of this strategy depends on runtime conditions or it depends on the input received from the user.</p>
+                                <p class="text-muted mb-1 small-font">
+                                    Posted on 22 April 2018
+                                </p>
+                                <a class="btn btn-secondary" href="blog/2018/04/22-strategy-design-pattern.html">Read more...</a>
+                            </div>
+                        </div>
+                        <hr>
+                    
+                        <div class="row p-3 mb-3">
+                            <div class="col-md-5">
+                                <a href="blog/2018/04/18-introduction-to-java-time.html">
+                                    <img class="img-fluid rounded mb-3 mb-md-0 shadow" src="img/banners/blog-banner-introduction-to-java-time.png" alt="">
+                                </a>
+                            </div>
+                            <div class="col-md-7">
+                                <p>This article will provide introduction to the java.time package. This package is introduced in Java 8 version and it contains many classes and interfaces to represent and process dates and times.</p>
+                                <p class="text-muted mb-1 small-font">
+                                    Posted on 18 April 2018
+                                </p>
+                                <a class="btn btn-secondary" href="blog/2018/04/18-introduction-to-java-time.html">Read more...</a>
+                            </div>
+                        </div>
+                        <hr>
+                    
+                        <div class="row p-3 mb-3">
+                            <div class="col-md-5">
+                                <a href="blog/2018/04/15-how-concurrentModificationException-is-thrown.html">
+                                    <img class="img-fluid rounded mb-3 mb-md-0 shadow" src="img/banners/blog-banner-How-ConcurrentModificationException-is-thrown_.png" alt="">
+                                </a>
+                            </div>
+                            <div class="col-md-7">
+                                <p>How concurrent modification detection logic works and on what basis ConcurrentModificationException is thrown? This article will explain these questions. Iterating a collection is one of the important operation we usually perform and it can be a time consuming if collection is big enough.</p>
+                                <p class="text-muted mb-1 small-font">
+                                    Posted on 15 April 2018
+                                </p>
+                                <a class="btn btn-secondary" href="blog/2018/04/15-how-concurrentModificationException-is-thrown.html">Read more...</a>
+                            </div>
+                        </div>
+                        <hr>
+                    
+                        <div class="row p-3 mb-3">
+                            <div class="col-md-5">
+                                <a href="blog/2018/04/11-regex-tester-with-spring-shell.html">
+                                    <img class="img-fluid rounded mb-3 mb-md-0 shadow" src="img/banners/blog-banner-regex-tester-with-spring-shell.png" alt="">
+                                </a>
+                            </div>
+                            <div class="col-md-7">
+                                <p>Spring framework is the suite of many projects, using which we can develop wide variety of applications. These applications may need user interaction, the most common way is to have a web interface.</p>
+                                <p class="text-muted mb-1 small-font">
+                                    Posted on 11 April 2018
+                                </p>
+                                <a class="btn btn-secondary" href="blog/2018/04/11-regex-tester-with-spring-shell.html">Read more...</a>
+                            </div>
+                        </div>
+                        <hr>
+                    
 
-        <div class="card text-white bg-secondary mb-4 text-center w-100">
-            <div class="card-body">
-                <p class="text-white m-0">
-                    thetechstack.net is now <span class="font-weight-bold">techstackjava.com</span>
-                </p>
-            </div>
-        </div>
-
-        
+                </div>
+            </div> -->
+            
+            
             <div class="col-lg-4 col-sm-6 mb-3">
-                <div class="card">
-                    <h1 class="card-header post-title">
-                        <a href="blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html">Simple Introduction to ForkJoin Framework - Part 2</a>
-                    </h1>
+                <div class="card h-100 shadow">
                     <a href="blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html">
-                        <img class="card-img-top portfolio-image" src="img/banners/simple-introduction-to-forkjoin-framework-part2.png" alt="">
+                        <img class="banner card-img-top img-fluid rounded mb-3 mb-md-0 shadow" src="img/banners/simple-introduction-to-forkjoin-framework-part2.png" alt="">
                     </a>
                     <div class="card-body">
-                        <p class="card-text m-0">In the first part of this series we went through the introduction on ForkJoin framework. In this article we will go through code example to create a ForkJoinTask using RecursiveAction.</p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">
-                            <p class="post-meta my-1 font-weight-bold"><i class="fa fa-clock-o" aria-hidden="true"></i> 06 May 2018</p>
-                        </small>
+                        <p class="card-text">In the first part of this series we went through the introduction on ForkJoin framework. In this article we will go through code example to create a ForkJoinTask using RecursiveAction.</p>
+                        <p class="text-muted mb-1 small-font">
+                                        Posted on 06 May 2018
+                        </p>
+                        <a class="btn btn-secondary" href="blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html">Read more...</a>
                     </div>
                 </div>
             </div>
-        
+            
             <div class="col-lg-4 col-sm-6 mb-3">
-                <div class="card">
-                    <h1 class="card-header post-title">
-                        <a href="blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html">Simple Introduction to ForkJoin Framework - Part 1</a>
-                    </h1>
+                <div class="card h-100 shadow">
                     <a href="blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html">
-                        <img class="card-img-top portfolio-image" src="img/banners/simple-introduction-to-forkjoin-framework-part1.png" alt="">
+                        <img class="banner card-img-top img-fluid rounded mb-3 mb-md-0 shadow" src="img/banners/simple-introduction-to-forkjoin-framework-part1.png" alt="">
                     </a>
                     <div class="card-body">
-                        <p class="card-text m-0">ForkJoin framework allows us to execute tasks in a thread based environment. We need to pass tasks to this framework and this framework will execute them efficiently.</p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">
-                            <p class="post-meta my-1 font-weight-bold"><i class="fa fa-clock-o" aria-hidden="true"></i> 03 May 2018</p>
-                        </small>
+                        <p class="card-text">ForkJoin framework allows us to execute tasks in a thread based environment. We need to pass tasks to this framework and this framework will execute them efficiently.</p>
+                        <p class="text-muted mb-1 small-font">
+                                        Posted on 03 May 2018
+                        </p>
+                        <a class="btn btn-secondary" href="blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html">Read more...</a>
                     </div>
                 </div>
             </div>
-        
+            
             <div class="col-lg-4 col-sm-6 mb-3">
-                <div class="card">
-                    <h1 class="card-header post-title">
-                        <a href="blog/2018/04/22-strategy-design-pattern.html">Strategy design pattern</a>
-                    </h1>
+                <div class="card h-100 shadow">
                     <a href="blog/2018/04/22-strategy-design-pattern.html">
-                        <img class="card-img-top portfolio-image" src="img/banners/blog-banner-strategy-design-pattern.png" alt="">
+                        <img class="banner card-img-top img-fluid rounded mb-3 mb-md-0 shadow" src="img/banners/blog-banner-strategy-design-pattern.png" alt="">
                     </a>
                     <div class="card-body">
-                        <p class="card-text m-0">This article will explain the strategy design pattern using functional interfaces. Sometimes application may need to execute an algorithm conditionally. Here the algorithm means nothing but a strategy, execution of this strategy depends on runtime conditions or it depends on the input received from the user.</p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">
-                            <p class="post-meta my-1 font-weight-bold"><i class="fa fa-clock-o" aria-hidden="true"></i> 22 April 2018</p>
-                        </small>
+                        <p class="card-text">This article will explain the strategy design pattern using functional interfaces. Sometimes application may need to execute an algorithm conditionally. Here the algorithm means nothing but a strategy, execution of this strategy depends on runtime conditions or it depends on the input received from the user.</p>
+                        <p class="text-muted mb-1 small-font">
+                                        Posted on 22 April 2018
+                        </p>
+                        <a class="btn btn-secondary" href="blog/2018/04/22-strategy-design-pattern.html">Read more...</a>
                     </div>
                 </div>
             </div>
-        
+            
             <div class="col-lg-4 col-sm-6 mb-3">
-                <div class="card">
-                    <h1 class="card-header post-title">
-                        <a href="blog/2018/04/18-introduction-to-java-time.html">Introduction to java.time</a>
-                    </h1>
+                <div class="card h-100 shadow">
                     <a href="blog/2018/04/18-introduction-to-java-time.html">
-                        <img class="card-img-top portfolio-image" src="img/banners/blog-banner-introduction-to-java-time.png" alt="">
+                        <img class="banner card-img-top img-fluid rounded mb-3 mb-md-0 shadow" src="img/banners/blog-banner-introduction-to-java-time.png" alt="">
                     </a>
                     <div class="card-body">
-                        <p class="card-text m-0">This article will provide introduction to the java.time package. This package is introduced in Java 8 version and it contains many classes and interfaces to represent and process dates and times.</p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">
-                            <p class="post-meta my-1 font-weight-bold"><i class="fa fa-clock-o" aria-hidden="true"></i> 18 April 2018</p>
-                        </small>
+                        <p class="card-text">This article will provide introduction to the java.time package. This package is introduced in Java 8 version and it contains many classes and interfaces to represent and process dates and times.</p>
+                        <p class="text-muted mb-1 small-font">
+                                        Posted on 18 April 2018
+                        </p>
+                        <a class="btn btn-secondary" href="blog/2018/04/18-introduction-to-java-time.html">Read more...</a>
                     </div>
                 </div>
             </div>
-        
+            
             <div class="col-lg-4 col-sm-6 mb-3">
-                <div class="card">
-                    <h1 class="card-header post-title">
-                        <a href="blog/2018/04/15-how-concurrentModificationException-is-thrown.html">How ConcurrentModificationException is thrown?</a>
-                    </h1>
+                <div class="card h-100 shadow">
                     <a href="blog/2018/04/15-how-concurrentModificationException-is-thrown.html">
-                        <img class="card-img-top portfolio-image" src="img/banners/blog-banner-How-ConcurrentModificationException-is-thrown_.png" alt="">
+                        <img class="banner card-img-top img-fluid rounded mb-3 mb-md-0 shadow" src="img/banners/blog-banner-How-ConcurrentModificationException-is-thrown_.png" alt="">
                     </a>
                     <div class="card-body">
-                        <p class="card-text m-0">How concurrent modification detection logic works and on what basis ConcurrentModificationException is thrown? This article will explain these questions. Iterating a collection is one of the important operation we usually perform and it can be a time consuming if collection is big enough.</p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">
-                            <p class="post-meta my-1 font-weight-bold"><i class="fa fa-clock-o" aria-hidden="true"></i> 15 April 2018</p>
-                        </small>
+                        <p class="card-text">How concurrent modification detection logic works and on what basis ConcurrentModificationException is thrown? This article will explain these questions. Iterating a collection is one of the important operation we usually perform and it can be a time consuming if collection is big enough.</p>
+                        <p class="text-muted mb-1 small-font">
+                                        Posted on 15 April 2018
+                        </p>
+                        <a class="btn btn-secondary" href="blog/2018/04/15-how-concurrentModificationException-is-thrown.html">Read more...</a>
                     </div>
                 </div>
             </div>
-        
+            
             <div class="col-lg-4 col-sm-6 mb-3">
-                <div class="card">
-                    <h1 class="card-header post-title">
-                        <a href="blog/2018/04/11-regex-tester-with-spring-shell.html">Regex Tester With Spring Shell</a>
-                    </h1>
+                <div class="card h-100 shadow">
                     <a href="blog/2018/04/11-regex-tester-with-spring-shell.html">
-                        <img class="card-img-top portfolio-image" src="img/banners/blog-banner-regex-tester-with-spring-shell.png" alt="">
+                        <img class="banner card-img-top img-fluid rounded mb-3 mb-md-0 shadow" src="img/banners/blog-banner-regex-tester-with-spring-shell.png" alt="">
                     </a>
                     <div class="card-body">
-                        <p class="card-text m-0">Spring framework is the suite of many projects, using which we can develop wide variety of applications. These applications may need user interaction, the most common way is to have a web interface.</p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">
-                            <p class="post-meta my-1 font-weight-bold"><i class="fa fa-clock-o" aria-hidden="true"></i> 11 April 2018</p>
-                        </small>
+                        <p class="card-text">Spring framework is the suite of many projects, using which we can develop wide variety of applications. These applications may need user interaction, the most common way is to have a web interface.</p>
+                        <p class="text-muted mb-1 small-font">
+                                        Posted on 11 April 2018
+                        </p>
+                        <a class="btn btn-secondary" href="blog/2018/04/11-regex-tester-with-spring-shell.html">Read more...</a>
                     </div>
                 </div>
             </div>
-        
+            
+
+            <!--sidebar-->
+            <!--<div class="col-md-3">
+                <div class="card my-4">
+                    <h5 class="card-header">Categories</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                            
+                            </div>
+                            <div class="col-lg-6">
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+
+
         </div>
     </div>
 
@@ -227,9 +338,18 @@
     </div>
 
 
-		<div id="push"></div>
+<!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; www.techstackjava.com 2018</p>
+        <p class="m-0 text-center text-muted">Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+      </div>
+      <!-- /.container -->
+    </footer>
     
-    <!-- Footer -->
+<!--
+	<div id="push"></div>
+    
     <footer class="bg-graphite">
         <div class="container">
             <div class="row">
@@ -384,42 +504,42 @@
                         <div class="card-body">
                             <h5 class="card-title">Recent Posts</h5>
                             <p class="card-text">
-                                <ul class="list-unstyled">
+                                <ul class="list-unstyled ml-0">
                                     
                                         <li>
-                                            <a href="blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html" class="footer-link">Simple Introduction to ForkJoin Framework - Part 2</a>
+                                            <a href="blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Simple Introduction to ForkJoin Framework - Part 2</a>
                                         </li>
                                     
                                         <li>
-                                            <a href="blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html" class="footer-link">Simple Introduction to ForkJoin Framework - Part 1</a>
+                                            <a href="blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Simple Introduction to ForkJoin Framework - Part 1</a>
                                         </li>
                                     
                                         <li>
-                                            <a href="blog/2018/04/22-strategy-design-pattern.html" class="footer-link">Strategy design pattern</a>
+                                            <a href="blog/2018/04/22-strategy-design-pattern.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Strategy design pattern</a>
                                         </li>
                                     
                                         <li>
-                                            <a href="blog/2018/04/18-introduction-to-java-time.html" class="footer-link">Introduction to java.time</a>
+                                            <a href="blog/2018/04/18-introduction-to-java-time.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Introduction to java.time</a>
                                         </li>
                                     
                                         <li>
-                                            <a href="blog/2018/04/15-how-concurrentModificationException-is-thrown.html" class="footer-link">How ConcurrentModificationException is thrown?</a>
+                                            <a href="blog/2018/04/15-how-concurrentModificationException-is-thrown.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> How ConcurrentModificationException is thrown?</a>
                                         </li>
                                     
                                         <li>
-                                            <a href="blog/2018/04/11-regex-tester-with-spring-shell.html" class="footer-link">Regex Tester With Spring Shell</a>
+                                            <a href="blog/2018/04/11-regex-tester-with-spring-shell.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Regex Tester With Spring Shell</a>
                                         </li>
                                     
                                         <li>
-                                            <a href="blog/2018/04/8-infinite-streams.html" class="footer-link">Infinite streams</a>
+                                            <a href="blog/2018/04/8-infinite-streams.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Infinite streams</a>
                                         </li>
                                     
                                         <li>
-                                            <a href="blog/2018/04/3-recipes-for-optional.html" class="footer-link">Recipes for Optional</a>
+                                            <a href="blog/2018/04/3-recipes-for-optional.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Recipes for Optional</a>
                                         </li>
                                     
                                         <li>
-                                            <a href="blog/2018/03/28-functions-cheat-sheet.html" class="footer-link">Functions cheat sheet</a>
+                                            <a href="blog/2018/03/28-functions-cheat-sheet.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Functions cheat sheet</a>
                                         </li>
                                     
                                 </ul>
@@ -431,7 +551,6 @@
                     <div class="card" style="background-color: transparent;color: #fff!important;">
                         <div class="card-body">
                             <h5 class="card-title">Author</h5>
-                            <!--<img class="card-img-top" width="90" height="90" style="width:40%" src="img/author-pic.jpeg" alt="Pradeep Kundarapu">-->
                             <p class="card-text">Pradeep Kundarapu</p>
                             <p class="m-0">Follow me</p>
                             <ul class="list-inline text-center list-unstyled float-left">
@@ -447,15 +566,15 @@
                         </div>
                     </div>
                 </div>
-                <!--<div class="col">
+                <div class="col">
                     
                     <p class="copyright text-muted">Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
-                </div>-->
+                </div>
                 
             </div>
         </div>
     </footer>
-
+-->
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 
