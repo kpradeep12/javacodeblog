@@ -25,7 +25,7 @@ Above image shows two threads. Thread B is not having tasks to execute so it is 
 
 ForkJoinTask can be any task which can be divisible into subtasks. This division is called fork. This forking happens until the task is small enough to work on. For example, if a task is based on an array then we can configure threshold, so up to which an array can be forked. 
 
-Once the task is divided into small enough, then this subtask will sit in a waiting queue of any one of the thread in a pool to get executed.
+Once the task is divided into small enough, then all subtasks will sit in a waiting queue and they all get executed in the pool.
 
 Once the subtasks are executed, then the result of each subtasks are joined together. This joining goes until it reaches the first forked task where the join will produce the result of the main task.
 
@@ -52,4 +52,4 @@ image:img/posts/forkjointask-classes.png[Fork Join task classes,550,350]
 
 ==== Conclusion
 
-This article introduced internals of ForkJoinPool and ForkJoinTask classes. In the next part of this article I will show code examples. I will post next article soon.
+This article introduced internals of ForkJoinPool and ForkJoinTask classes. In the *link:http://www.techstackjava.com/blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html[next part]* of this article we will go through the code examples.

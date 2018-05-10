@@ -104,7 +104,7 @@ join: 0 - 20
 result: [6, 3, 7, 2, 5, 6, 7, 10, 9, 6, 6, 3, 7, 2, 5, 6, 7, 10, 9, 6] // <4>
 ----
 <1> Input is having 20 elements and the THRESHOLD is 5 so array is forked until size reaches five.
-<2> compute happens only for five element range. The order of the compute is not sequential like 0-5 then 5-10 because they are executed by threads in parallel so there will no order in execution.
+<2> compute happens only for five element range. The order of the compute is not sequential like 0-5 then 5-10 because they are executed by threads in parallel so there will be no order in execution.
 <3> join statement printed after invokeAll execution.
 <4> Final output shows incremented array values.
 

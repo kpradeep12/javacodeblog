@@ -6,8 +6,8 @@
     <atom:link href="http://www.techstackjava.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Tue, 8 May 2018 06:24:18 -0400</pubDate>
-    <lastBuildDate>Tue, 8 May 2018 06:24:18 -0400</lastBuildDate>
+    <pubDate>Wed, 9 May 2018 20:04:17 -0400</pubDate>
+    <lastBuildDate>Wed, 9 May 2018 20:04:17 -0400</lastBuildDate>
 
     
     <item>
@@ -172,7 +172,7 @@ result: [6, 3, 7, 2, 5, 6, 7, 10, 9, 6, 6, 3, 7, 2, 5, 6, 7, 10, 9, 6] &lt;i cla
      &lt;/tr&gt; 
      &lt;tr&gt; 
       &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;2&lt;/b&gt;&lt;/td&gt; 
-      &lt;td&gt;compute happens only for five element range. The order of the compute is not sequential like 0-5 then 5-10 because they are executed by threads in parallel so there will no order in execution.&lt;/td&gt; 
+      &lt;td&gt;compute happens only for five element range. The order of the compute is not sequential like 0-5 then 5-10 because they are executed by threads in parallel so there will be no order in execution.&lt;/td&gt; 
      &lt;/tr&gt; 
      &lt;tr&gt; 
       &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;3&quot;&gt;&lt;/i&gt;&lt;b&gt;3&lt;/b&gt;&lt;/td&gt; 
@@ -236,7 +236,7 @@ result: [6, 3, 7, 2, 5, 6, 7, 10, 9, 6, 6, 3, 7, 2, 5, 6, 7, 10, 9, 6] &lt;i cla
   &lt;p&gt;ForkJoinTask can be any task which can be divisible into subtasks. This division is called fork. This forking happens until the task is small enough to work on. For example, if a task is based on an array then we can configure threshold, so up to which an array can be forked.&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph&quot;&gt; 
-  &lt;p&gt;Once the task is divided into small enough, then this subtask will sit in a waiting queue of any one of the thread in a pool to get executed.&lt;/p&gt; 
+  &lt;p&gt;Once the task is divided into small enough, then all subtasks will sit in a waiting queue and they all get executed in the pool.&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph&quot;&gt; 
   &lt;p&gt;Once the subtasks are executed, then the result of each subtasks are joined together. This joining goes until it reaches the first forked task where the join will produce the result of the main task.&lt;/p&gt; 
@@ -276,7 +276,7 @@ result: [6, 3, 7, 2, 5, 6, 7, 10, 9, 6, 6, 3, 7, 2, 5, 6, 7, 10, 9, 6] &lt;i cla
 &lt;div class=&quot;sect3&quot;&gt; 
  &lt;h4 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h4&gt; 
  &lt;div class=&quot;paragraph&quot;&gt; 
-  &lt;p&gt;This article introduced internals of ForkJoinPool and ForkJoinTask classes. In the next part of this article I will show code examples. I will post next article soon.&lt;/p&gt; 
+  &lt;p&gt;This article introduced internals of ForkJoinPool and ForkJoinTask classes. In the &lt;strong&gt;&lt;a href=&quot;http://www.techstackjava.com/blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html&quot;&gt;next part&lt;/a&gt;&lt;/strong&gt; of this article we will go through the code examples.&lt;/p&gt; 
  &lt;/div&gt; 
 &lt;/div&gt;
 	  </description>
