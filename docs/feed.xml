@@ -6,9 +6,68 @@
     <atom:link href="http://www.techstackjava.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Thu, 10 May 2018 11:10:32 -0400</pubDate>
-    <lastBuildDate>Thu, 10 May 2018 11:10:32 -0400</lastBuildDate>
+    <pubDate>Sun, 13 May 2018 20:54:59 -0400</pubDate>
+    <lastBuildDate>Sun, 13 May 2018 20:54:59 -0400</lastBuildDate>
 
+    
+    <item>
+      <title>Introduction to java.time - Part 2</title>
+      <link>http://www.techstackjava.com/blog/2018/05/13-introduction-to-java-time-part2.html</link>
+      <pubDate>Sun, 13 May 2018 00:00:00 -0400</pubDate>
+      <guid isPermaLink="false">blog/2018/05/13-introduction-to-java-time-part2.html</guid>
+      <description>
+      &lt;div id=&quot;preamble&quot;&gt; 
+ &lt;div class=&quot;sectionbody&quot;&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://www.techstackjava.com/blog/2018/04/18-introduction-to-java-time-part1.html&quot;&gt;Part 1&lt;/a&gt;&lt;/strong&gt; of this series explained the basic time related classes in java.time package and different approaches to create them. In this post we will see how to retrieve time values from these classes.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Once the date and time objects are created, we can get information from it using various getter methods. Below code shows some examples of the LocalDate.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;LocalDate todayDate = LocalDate.now();
+todayDate.getYear(); //returns year as int
+todayDate.getMonth().getValue(); //returns Month object
+todayDate.getDayOfMonth(); //returns day as int&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;LocaTime contains getters to get hour, minute and seconds. LocalDateTime and ZonedDateTime contains the getters to get year, month, day, hour, minute and seconds. ZonedDateTime also supports getters to get zone information. Instant class contains getters to get epoch seconds or nanoseconds information. Below are more examples of getters using different classes.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;LocalTime.now().getHour(); //returns hour
+LocalDateTime.now().getSecond(); //returns seconds
+ZonedDateTime.now().getZone(); //returns zoneid
+Instant.now().getEpochSecond(); //returns epoch second&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Along with the specific getter methods, all of the above classes also supports a generic get method. This method accepts a TemporalField instance. Temporal field represents the date and time property, it can be anything like hour, day, year, month and so on. For example, if we need to get year from the LocalDate then we can pass TemporalField which represents the year. TemporalField is the interface but we no need to implement it because by default the constants in the Enum ChronoField implemented this interface so we can directly use them. In below example I used various ChronoField’s.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;LocalDate.now().get(ChronoField.YEAR);
+LocalTime.now().get(ChronoField.CLOCK_HOUR_OF_DAY);
+LocalDateTime.now().get(ChronoField.AMPM_OF_DAY);
+ZonedDateTime.now().get(ChronoField.MINUTE_OF_HOUR);
+Instant.now().get(ChronoField.MILLI_OF_SECOND);&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Be cautious when passing the ChronoField’s to the get method because LocalDate can not return hour if you pass ChronoField.HOUR_OF_DAY to it, because it only supports year, month and day. Compilation will succeed but at runtime we will get UnsupportedTemporalTypeException, means the passed field is not supported by the class. At runtime we can use isSupported method to verify if the temporal field is supported or not. Go through documentation of isSupported method to see the list of all supported temporal fields.&lt;/p&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;In this post we went through the getter methods and TemporalField to access time fields.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
     
     <item>
       <title>Simple Introduction to ForkJoin Framework - Part 2</title>
@@ -427,10 +486,10 @@ interface EncryptionStrategy{
     </item>
     
     <item>
-      <title>Introduction to java.time</title>
-      <link>http://www.techstackjava.com/blog/2018/04/18-introduction-to-java-time.html</link>
+      <title>Introduction to java.time - Part 1</title>
+      <link>http://www.techstackjava.com/blog/2018/04/18-introduction-to-java-time-part1.html</link>
       <pubDate>Wed, 18 Apr 2018 00:00:00 -0400</pubDate>
-      <guid isPermaLink="false">blog/2018/04/18-introduction-to-java-time.html</guid>
+      <guid isPermaLink="false">blog/2018/04/18-introduction-to-java-time-part1.html</guid>
       <description>
       &lt;div id=&quot;preamble&quot;&gt; 
  &lt;div class=&quot;sectionbody&quot;&gt; 
@@ -527,7 +586,7 @@ public static Instant parse​(CharSequence text)&lt;/code&gt;&lt;/pre&gt;
 &lt;div class=&quot;sect3&quot;&gt; 
  &lt;h4 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h4&gt; 
  &lt;div class=&quot;paragraph&quot;&gt; 
-  &lt;p&gt;This article provided information about the basic classes in java.time package and the different ways to create there instances.&lt;/p&gt; 
+  &lt;p&gt;This article provided information about the basic classes in java.time package and the different ways to create there instances. Go through the &lt;strong&gt;&lt;a href=&quot;http://www.techstackjava.com/blog/2018/04/13-introduction-to-java-time-part2&quot;&gt;second part&lt;/a&gt;&lt;/strong&gt; of this post to learn about accessing time fields.&lt;/p&gt; 
  &lt;/div&gt; 
 &lt;/div&gt;
 	  </description>

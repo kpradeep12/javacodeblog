@@ -1,11 +1,11 @@
-= Introduction to java.time
+= Introduction to java.time - Part 1
 Pradeep
 2018-04-18
 :jbake-type: post
 :jbake-status: published
 :jbake-tags: java, time
 :jbake-summary: This article will provide introduction to the java.time package. This package is introduced in Java 8 version and it contains many classes and interfaces to represent and process dates and times.
-:jbake-image: banners/blog-banner-introduction-to-java-time.png
+:jbake-image: banners/blog-banner-intro-to-java-time-part1.png
 :idprefix:
 
 This article will provide introduction to the java.time package. This package is introduced in Java 8 version and it contains many classes and interfaces to represent and process dates and times. Below are the five most basic classes you need to know in this package.
@@ -82,4 +82,4 @@ LocalDate.parse("1 Jan 2018", DateTimeFormatter.ofPattern("d MMM uuuu"));
 Above example shows the basic usage of parsing with DateTimeFormatter. In this article I am not providing much information on DateTimeFormatter because it is a huge class with lot of methods.
 
 ==== Conclusion
-This article provided information about the basic classes in java.time package and the different ways to create there instances.
+This article provided information about the basic classes in java.time package and the different ways to create there instances. Go through the *link:http://www.techstackjava.com/blog/2018/04/13-introduction-to-java-time-part2[second part]* of this post to learn about accessing time fields.
