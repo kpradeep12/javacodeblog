@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>JBake</title>
-    <link>http://www.techstackjava.com</link>
-    <atom:link href="http://www.techstackjava.com/feed.xml" rel="self" type="application/rss+xml" />
+    <link>http://www.techstackjava.com/</link>
+    <atom:link href="http://www.techstackjava.com//feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Sat, 19 May 2018 07:50:39 -0400</pubDate>
-    <lastBuildDate>Sat, 19 May 2018 07:50:39 -0400</lastBuildDate>
+    <pubDate>Sun, 20 May 2018 16:10:11 -0400</pubDate>
+    <lastBuildDate>Sun, 20 May 2018 16:10:11 -0400</lastBuildDate>
 
     
     <item>
       <title>Chain of responsibility</title>
-      <link>http://www.techstackjava.com/blog/2018/05/17-chain-of-responsibility-design-pattern.html</link>
+      <link>http://www.techstackjava.com//blog/2018/05/17-chain-of-responsibility-design-pattern.html</link>
       <pubDate>Fri, 18 May 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/05/17-chain-of-responsibility-design-pattern.html</guid>
       <description>
@@ -217,7 +217,7 @@ transaction amount 500000.0 is higher than approval limit!&lt;/pre&gt;
     
     <item>
       <title>Introduction to java.time - Part 2</title>
-      <link>http://www.techstackjava.com/blog/2018/05/13-introduction-to-java-time-part2.html</link>
+      <link>http://www.techstackjava.com//blog/2018/05/13-introduction-to-java-time-part2.html</link>
       <pubDate>Sun, 13 May 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/05/13-introduction-to-java-time-part2.html</guid>
       <description>
@@ -276,7 +276,7 @@ Instant.now().get(ChronoField.MILLI_OF_SECOND);&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Simple Introduction to ForkJoin Framework - Part 2</title>
-      <link>http://www.techstackjava.com/blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html</link>
+      <link>http://www.techstackjava.com//blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html</link>
       <pubDate>Sun, 6 May 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html</guid>
       <description>
@@ -468,7 +468,7 @@ result: [6, 3, 7, 2, 5, 6, 7, 10, 9, 6, 6, 3, 7, 2, 5, 6, 7, 10, 9, 6] &lt;i cla
     
     <item>
       <title>Simple Introduction to ForkJoin Framework - Part 1</title>
-      <link>http://www.techstackjava.com/blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html</link>
+      <link>http://www.techstackjava.com//blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html</link>
       <pubDate>Thu, 3 May 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html</guid>
       <description>
@@ -548,7 +548,7 @@ result: [6, 3, 7, 2, 5, 6, 7, 10, 9, 6, 6, 3, 7, 2, 5, 6, 7, 10, 9, 6] &lt;i cla
     
     <item>
       <title>Strategy design pattern</title>
-      <link>http://www.techstackjava.com/blog/2018/04/22-strategy-design-pattern.html</link>
+      <link>http://www.techstackjava.com//blog/2018/04/22-strategy-design-pattern.html</link>
       <pubDate>Sun, 22 Apr 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/04/22-strategy-design-pattern.html</guid>
       <description>
@@ -692,7 +692,7 @@ interface EncryptionStrategy{
     
     <item>
       <title>Introduction to java.time - Part 1</title>
-      <link>http://www.techstackjava.com/blog/2018/04/18-introduction-to-java-time-part1.html</link>
+      <link>http://www.techstackjava.com//blog/2018/04/18-introduction-to-java-time-part1.html</link>
       <pubDate>Wed, 18 Apr 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/04/18-introduction-to-java-time-part1.html</guid>
       <description>
@@ -799,7 +799,7 @@ public static Instant parse​(CharSequence text)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>How ConcurrentModificationException is thrown?</title>
-      <link>http://www.techstackjava.com/blog/2018/04/15-how-concurrentModificationException-is-thrown.html</link>
+      <link>http://www.techstackjava.com//blog/2018/04/15-how-concurrentModificationException-is-thrown.html</link>
       <pubDate>Sun, 15 Apr 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/04/15-how-concurrentModificationException-is-thrown.html</guid>
       <description>
@@ -929,7 +929,7 @@ numList.forEach(System.out::println);&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Regex Tester With Spring Shell</title>
-      <link>http://www.techstackjava.com/blog/2018/04/11-regex-tester-with-spring-shell.html</link>
+      <link>http://www.techstackjava.com//blog/2018/04/11-regex-tester-with-spring-shell.html</link>
       <pubDate>Wed, 11 Apr 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/04/11-regex-tester-with-spring-shell.html</guid>
       <description>
@@ -1034,7 +1034,7 @@ public class RegexTester {
     
     <item>
       <title>Infinite streams</title>
-      <link>http://www.techstackjava.com/blog/2018/04/8-infinite-streams.html</link>
+      <link>http://www.techstackjava.com//blog/2018/04/8-infinite-streams.html</link>
       <pubDate>Sun, 8 Apr 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/04/8-infinite-streams.html</guid>
       <description>
@@ -1092,7 +1092,7 @@ r.ints(10, 30)
     
     <item>
       <title>Recipes for Optional</title>
-      <link>http://www.techstackjava.com/blog/2018/04/3-recipes-for-optional.html</link>
+      <link>http://www.techstackjava.com//blog/2018/04/3-recipes-for-optional.html</link>
       <pubDate>Tue, 3 Apr 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/04/3-recipes-for-optional.html</guid>
       <description>
@@ -1261,7 +1261,7 @@ es.getEmployee(2)
     
     <item>
       <title>Functions cheat sheet</title>
-      <link>http://www.techstackjava.com/blog/2018/03/28-functions-cheat-sheet.html</link>
+      <link>http://www.techstackjava.com//blog/2018/03/28-functions-cheat-sheet.html</link>
       <pubDate>Wed, 28 Mar 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/03/28-functions-cheat-sheet.html</guid>
       <description>
@@ -1534,7 +1534,7 @@ es.getEmployee(2)
     
     <item>
       <title>Reduce stream to single value</title>
-      <link>http://www.techstackjava.com/blog/2018/03/24-reduce-stream-to-single-value.html</link>
+      <link>http://www.techstackjava.com//blog/2018/03/24-reduce-stream-to-single-value.html</link>
       <pubDate>Sat, 24 Mar 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/03/24-reduce-stream-to-single-value.html</guid>
       <description>
@@ -1681,7 +1681,7 @@ sum: 11&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Quick way to create List, Set and Map</title>
-      <link>http://www.techstackjava.com/blog/2018/03/21-quick-way-to-create-list-set-and-map.html</link>
+      <link>http://www.techstackjava.com//blog/2018/03/21-quick-way-to-create-list-set-and-map.html</link>
       <pubDate>Wed, 21 Mar 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/03/21-quick-way-to-create-list-set-and-map.html</guid>
       <description>
@@ -1753,7 +1753,7 @@ Map.entry(3, &quot;three&quot;));&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Using consumer functional interface</title>
-      <link>http://www.techstackjava.com/blog/2018/03/17-using-consumer-functional-interface.html</link>
+      <link>http://www.techstackjava.com//blog/2018/03/17-using-consumer-functional-interface.html</link>
       <pubDate>Sat, 17 Mar 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/03/17-using-consumer-functional-interface.html</guid>
       <description>
@@ -1867,7 +1867,7 @@ processJobs(jobs, print.andThen(emailAlert));&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Create Maven project in GitHub</title>
-      <link>http://www.techstackjava.com/blog/2018/03/14-create-maven-project-in-github.html</link>
+      <link>http://www.techstackjava.com//blog/2018/03/14-create-maven-project-in-github.html</link>
       <pubDate>Wed, 14 Mar 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/03/14-create-maven-project-in-github.html</guid>
       <description>
@@ -2064,7 +2064,7 @@ To https://github.com/kpradeep12/my-app.git
     
     <item>
       <title>Fixed Thread Pool using Executor framework</title>
-      <link>http://www.techstackjava.com/blog/2018/03/10-fixed-thread-pool-using-executor-framework.html</link>
+      <link>http://www.techstackjava.com//blog/2018/03/10-fixed-thread-pool-using-executor-framework.html</link>
       <pubDate>Sat, 10 Mar 2018 00:00:00 -0500</pubDate>
       <guid isPermaLink="false">blog/2018/03/10-fixed-thread-pool-using-executor-framework.html</guid>
       <description>
@@ -2145,7 +2145,7 @@ Processing pool-1-thread-1&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Producer and Consumer with Bounded Blocked Queue</title>
-      <link>http://www.techstackjava.com/blog/2018/03/7-producer-consumer-with-bounded-blocked-queue.html</link>
+      <link>http://www.techstackjava.com//blog/2018/03/7-producer-consumer-with-bounded-blocked-queue.html</link>
       <pubDate>Wed, 7 Mar 2018 00:00:00 -0500</pubDate>
       <guid isPermaLink="false">blog/2018/03/7-producer-consumer-with-bounded-blocked-queue.html</guid>
       <description>
@@ -2329,7 +2329,7 @@ Producer: pushed new job &apos;9&apos; into queue:[5, 1, 7, 9]&lt;/code&gt;&lt;/
     
     <item>
       <title>Generate stream of random numbers</title>
-      <link>http://www.techstackjava.com/blog/2018/03/3-generate-stream-of-random-numbers.html</link>
+      <link>http://www.techstackjava.com//blog/2018/03/3-generate-stream-of-random-numbers.html</link>
       <pubDate>Sat, 3 Mar 2018 00:00:00 -0500</pubDate>
       <guid isPermaLink="false">blog/2018/03/3-generate-stream-of-random-numbers.html</guid>
       <description>
@@ -2409,7 +2409,7 @@ $12 ==&amp;gt; [5, 1, 7, 4, 6]&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Quick way to create, read, write and delete files in Java</title>
-      <link>http://www.techstackjava.com/blog/2018/02/28-quickway-to-create-read-write-delete-files.html</link>
+      <link>http://www.techstackjava.com//blog/2018/02/28-quickway-to-create-read-write-delete-files.html</link>
       <pubDate>Wed, 28 Feb 2018 00:00:00 -0500</pubDate>
       <guid isPermaLink="false">blog/2018/02/28-quickway-to-create-read-write-delete-files.html</guid>
       <description>
@@ -2517,7 +2517,7 @@ $12 ==&amp;gt; [5, 1, 7, 4, 6]&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Quick introduction to PriorityQueue</title>
-      <link>http://www.techstackjava.com/blog/2018/02/23-quick-introduction-to-priorityQueue.html</link>
+      <link>http://www.techstackjava.com//blog/2018/02/23-quick-introduction-to-priorityQueue.html</link>
       <pubDate>Fri, 23 Feb 2018 00:00:00 -0500</pubDate>
       <guid isPermaLink="false">blog/2018/02/23-quick-introduction-to-priorityQueue.html</guid>
       <description>
@@ -2629,7 +2629,7 @@ public class Processor {
     
     <item>
       <title>Using comparing methods in Comparator Interface</title>
-      <link>http://www.techstackjava.com/blog/2018/02/21-using-comparing-methods-in-comparator-interface.html</link>
+      <link>http://www.techstackjava.com//blog/2018/02/21-using-comparing-methods-in-comparator-interface.html</link>
       <pubDate>Wed, 21 Feb 2018 00:00:00 -0500</pubDate>
       <guid isPermaLink="false">blog/2018/02/21-using-comparing-methods-in-comparator-interface.html</guid>
       <description>
@@ -2790,7 +2790,7 @@ default Comparator&amp;lt;T&amp;gt; thenComparingLong​(ToLongFunction&amp;lt;?
     
     <item>
       <title>Stream of dates with LocalDate</title>
-      <link>http://www.techstackjava.com/blog/2018/02/17-stream-of-dates-with-localdate.html</link>
+      <link>http://www.techstackjava.com//blog/2018/02/17-stream-of-dates-with-localdate.html</link>
       <pubDate>Sat, 17 Feb 2018 00:00:00 -0500</pubDate>
       <guid isPermaLink="false">blog/2018/02/17-stream-of-dates-with-localdate.html</guid>
       <description>
