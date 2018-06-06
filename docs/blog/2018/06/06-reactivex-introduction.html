@@ -10,7 +10,7 @@
     <meta name="generator" content="JBake">
     <meta name="google-site-verification" content="zkTSlJd8qxF4ZHbWWxyG0Prqnevef8dGSLkZeHFRW2Y" />
     
-    <title>Regex Tester With Spring Shell</title>
+    <title>ReactiveX Introduction</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
@@ -97,111 +97,78 @@
                     <div class="p-3">
                         <article>
                             <!-- Title -->
-                            <h3 class="mb-0">Regex Tester With Spring Shell</h3>
+                            <h3 class="mb-0">ReactiveX Introduction</h3>
                             
                             <!-- Author -->
                             <p class="small-font mb-0">
-                                published by <a href="#">Pradeep</a> on April 11, 2018
+                                published by <a href="#">Pradeep</a> on June 06, 2018
                             </p>
                             <hr>
 
                             <!-- Preview Image -->
-                            <img class="img-fluid rounded d-block mr-auto ml-auto shadow" src="../../../img/banners/blog-banner-regex-tester-with-spring-shell.png" alt="">
+                            <img class="img-fluid rounded d-block mr-auto ml-auto shadow" src="../../../img/banners/reactiveX-introduction.png" alt="">
                             <hr>
                             <div id="preamble"> 
  <div class="sectionbody"> 
   <div class="paragraph"> 
-   <p>Spring framework is the suite of many projects, using which we can develop wide variety of applications. These applications may need user interaction, the most common way is to have a web interface. Not all applications need to have a web interface, a simple command line interface can be suffice for some type of applications. Spring Shell is a simple project which provides the infrastructure to build command line interface applications easily and quickly.</p> 
+   <p>ReactiveX library helps us to write applications to handle asynchronous events emitted over the time. Before understanding how to handle these events, lets go through some examples to see why we need this library.</p> 
   </div> 
   <div class="paragraph"> 
-   <p>In this article I will show the steps needed to create a Spring shell project which tests the regex string provided at the command line. Easier way to create spring project is using <a href="https://start.spring.io/">start.spring.io</a> Go to the site and select you choice of configuration with ‘Spring Shell’ as dependency. See below screenshot for the reference.</p> 
+   <p>Lets assume we want to list out all the users who logged in to an application. To achieve this, we can declare a method which returns Future like below.</p> 
   </div> 
-  <div class="paragraph text-center"> 
-   <p><span class="image"><img src="http://www.techstackjava.com/img/posts/Post-Regex-tester-spring-starter.png" alt="Regex tester spring starter" width="550" height="300"></span></p> 
-  </div> 
-  <div class="paragraph"> 
-   <p>Click on ‘Generate Project’ which will download the pre-configured spring project. Unzip and import it into your favorite java editor.</p> 
-  </div> 
-  <div class="paragraph text-center"> 
-   <p><span class="image"><img src="http://www.techstackjava.com/img/posts/Post-Regex-tester-spring-shell-pom.png" alt="Regex tester spring shell" width="570" height="300"></span></p> 
+  <div class="listingblock"> 
+   <div class="content"> 
+    <pre class="prettyprint highlight"><code class="language-java" data-lang="java">Future&lt;List&lt;User&gt;&gt; getUsers()</code></pre> 
+   </div> 
   </div> 
   <div class="paragraph"> 
-   <p>Now we have empty spring shell project ready.</p> 
+   <p>getUsers is asynchronous method because it returns Future. Asynchronous operations will not block the caller, instead they allows us to register a callback and this callback is executed when the response is returned. Instead of waiting for the response caller will get a chance to execute some other code. Internally getUsers() may make database or rest call on a different thread. Callback is executed when the list of users are available.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>Within the callback we can iterate the list of users. Lets say below is the list of users we got in the list;</p> 
+  </div> 
+  <div class="listingblock"> 
+   <div class="content"> 
+    <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">John
+Kate
+Williams</code></pre> 
+   </div> 
+  </div> 
+  <div class="paragraph"> 
+   <p>Till now it is good, but what if a new user logs into the application? for example, Bob just logged-in, but our method will not return Bob because our method returns only the users logged in at the time of method execution. How to get Bob in our list? not only just Bob, how to get users who continue to login? Future is not helpful in this case because it is executed and returned only once.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>To achieve this, we need a caller and callee to be connected to each other because users can login at any time and callee can notify caller whenever a new user logs into the application, means we need a push based mechanism, callee will push data to the caller and because both are connected so callee can push data whenever a new user logs in.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>Future is a pull based because caller will call getUsers to pull the list of users.</p> 
   </div> 
  </div> 
 </div> 
 <div class="sect3"> 
- <h4 id="create_command_for_regex_tester">Create command for Regex tester</h4> 
+ <h4 id="_observables">Observables</h4> 
  <div class="paragraph"> 
-  <p>Creating a command is as simple as creating a class and method in Spring shell. Lets first create a class ‘RegexTester.java’ and annotate it will @ShellComponent.All command related classes need to be annotated with ShellComponent, this is a stereotype annotation which helps spring to configure component for the command interface. Add a method in this class and annotate with @ShellMethod. See code below;</p> 
+  <p>Observables will help us to achieve our goal to process continuous events asynchronously. We will need to understand two important entities; Observable and Observer. Observable is the one who pushes data and observer will listen and process the data.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>We can change getUsers method like below, which returns the Observable.</p> 
  </div> 
  <div class="listingblock"> 
   <div class="content"> 
-   <pre class="prettyprint highlight"><code class="language-java" data-lang="java">package com.regex.regextester;
-
-import org.springframework.shell.standard.ShellComponent;
-import org.springframework.shell.standard.ShellMethod;
-import java.util.regex.Pattern;
-
-@ShellComponent
-public class RegexTester {
-
-    @ShellMethod("Regex tester")
-    public void regex(String pattern, String text){
-        Pattern.compile(pattern)
-                .matcher(text)
-                .results()
-                .forEach(mr -&gt; {
-                    System.out.printf("Match: %s\n",
-                            text.substring(0,mr.start())+
-                                    "'"+
-                                    mr.group()+
-                                    "'"+
-                                    text.substring(mr.end(),text.length()));
-                });
-    }
-}</code></pre> 
+   <pre class="prettyprint highlight"><code class="language-java" data-lang="java">Observable&lt;User&gt; getUsers()</code></pre> 
   </div> 
  </div> 
  <div class="paragraph"> 
-  <p>A method annotated with @ShellMethod becomes the command. In the example above, ‘regex’ becomes the command name and it expects two parameters. First parameter is the regex pattern and second one is the text on which regex pattern will be tested.</p> 
+  <p>Observable allows observer to subscribe on it so when ever a new user logs into the application then observer gets the notification. Observable is based on Observer design pattern in Gang of Four’s patterns but the only difference is reactiveX observable can send error and complete notifications. Connection between observable and observer continues to stay active until either error or completion occurs. Error and Complete are two special events Observable can push to the observer.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>Observable will send an error notification if any error occurs and terminates the connection. This error notification will help the observer to get more information about the error. If everything is fine and at the end, observable will send a complete notification to let observer know that there are no more values available to send.</p> 
  </div> 
 </div> 
 <div class="sect3"> 
- <h4 id="build_project">Build project</h4> 
+ <h4 id="_conclusion">Conclusion</h4> 
  <div class="paragraph"> 
-  <p>I used Maven to build the application. In the project folder execute below command to execute maven build;</p> 
- </div> 
- <div class="listingblock"> 
-  <div class="content"> 
-   <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">./mvnw clean install -DskipTests</code></pre> 
-  </div> 
- </div> 
- <div class="paragraph"> 
-  <p>Maven will download the required dependencies and builds the project. Packaged jar will be created in target folder.</p> 
- </div> 
-</div> 
-<div class="sect3"> 
- <h4 id="run_regex_tester">Run Regex tester</h4> 
- <div class="paragraph"> 
-  <p>Maven build zipped all the required dependencies into regex-tester-0.0.1-SNAPSHOT.jar it even contains Spring Shell in it. Lets run this jar with java command. In the command prompt, go to the project folder and execute below command.</p> 
- </div> 
- <div class="listingblock"> 
-  <div class="content"> 
-   <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">java -jar target/regex-tester-0.0.1-SNAPSHOT.jar</code></pre> 
-  </div> 
- </div> 
- <div class="paragraph"> 
-  <p>You should see a prompt saying ‘shell:&gt;’ As I mentioned earlier, spring shell provides the required infrastructure for the command line interface so this prompt is provided by the spring shell and it is ready to take the commands. lets execute some commands on the shell prompt.</p> 
- </div> 
- <div class="paragraph text-center"> 
-  <p><span class="image"><img src="http://www.techstackjava.com/img/posts/Post-Regex-tester-regex-cli.png" alt="Regex tester cli" width="500" height="140"></span></p> 
- </div> 
- <div class="paragraph"> 
-  <p>I passed ‘ab’ as the pattern and ‘abcabc’ as the test string to regex command. Spring will internally execute regex method and passes provided arguments to it. The output of the method will be printed in the console. We can continue to test regex command multiple times with different strings and it can be used as regex utility in local.</p> 
- </div> 
- <div class="paragraph"> 
-  <p>For the same ShellController class we can add multiple methods and use them as different commands. After completing the regex testing, type ‘exit’ to quit from the shell. We have completed spring shell project with simple regex tester. You can continue to explore and learn more on Spring shell at this <a href="https://docs.spring.io/spring-shell/docs/2.0.1.BUILD-SNAPSHOT/reference/htmlsingle/#_what_is_spring_shell">link</a>. Happy Coding!</p> 
+  <p>ReactiveX library uses Observables to operate on discrete values that are emitted over the time. These emitted values are independent of each other and these values are handled asynchronously. ReactiveX will take care of all low-level threading mechanisms and this library supports various types of operators, some of them are like filter, merge, max and map, these operators will help us to process the incoming values. ReactiveX is a polyglot implementation, means it is implemented in various languages.</p> 
  </div> 
 </div>
 
@@ -524,9 +491,9 @@ public class RegexTester {
 
     <script type="text/javascript">
         var disqus_shortname = 'null'; 
-        var disqus_identifier = 'blog/2018/04/11-regex-tester-with-spring-shell.html';
-        var disqus_title = "Regex Tester With Spring Shell";
-        var disqus_url = 'http://www.techstackjava.com/blog/2018/04/11-regex-tester-with-spring-shell.html';
+        var disqus_identifier = 'blog/2018/06/06-reactivex-introduction.html';
+        var disqus_title = "ReactiveX Introduction";
+        var disqus_url = 'http://www.techstackjava.com/blog/2018/06/06-reactivex-introduction.html';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {

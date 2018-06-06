@@ -19,8 +19,6 @@ Chain of responsibility acts like a if..else condition but in a object oriented 
 
 In the transaction processing application, approval process acts like a chain of responsibilities. First, manager acts on the transaction, if the amount is higher than his approval limit then the transaction is transferred to vice president and so on. 
 
-image
-
 We need to design processing and command objects. Based on the above example, processing objects are employees like Manager, Vice President because they process the transaction by approving and command object is the transaction. Once processing objects are created then we need to chain them together like manager -> vice president -> CEO and pass the transaction at the beginning of the chain. Transaction continues to flow in the chain until it reaches the employee, who's limit allows to approve it.
 
 Lets get in to the coding part. We will first create an abstract class for processing the transactions: 

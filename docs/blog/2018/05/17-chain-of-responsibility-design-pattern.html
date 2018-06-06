@@ -126,9 +126,6 @@
    <p>In the transaction processing application, approval process acts like a chain of responsibilities. First, manager acts on the transaction, if the amount is higher than his approval limit then the transaction is transferred to vice president and so on.</p> 
   </div> 
   <div class="paragraph"> 
-   <p>image</p> 
-  </div> 
-  <div class="paragraph"> 
    <p>We need to design processing and command objects. Based on the above example, processing objects are employees like Manager, Vice President because they process the transaction by approving and command object is the transaction. Once processing objects are created then we need to chain them together like manager → vice president → CEO and pass the transaction at the beginning of the chain. Transaction continues to flow in the chain until it reaches the employee, who’s limit allows to approve it.</p> 
   </div> 
   <div class="paragraph"> 
@@ -427,6 +424,10 @@ transaction amount 500000.0 is higher than approval limit!</pre>
                                 <ul class="list-unstyled ml-0 break-word">
                                     
                                         <li class="mb-2">
+                                            <a href="../../../blog/2018/06/06-reactivex-introduction.html" class="footer-link"> ReactiveX Introduction</a>
+                                        </li>
+                                    
+                                        <li class="mb-2">
                                             <a href="../../../blog/2018/05/17-chain-of-responsibility-design-pattern.html" class="footer-link"> Chain of responsibility</a>
                                         </li>
                                     
@@ -440,10 +441,6 @@ transaction amount 500000.0 is higher than approval limit!</pre>
                                     
                                         <li class="mb-2">
                                             <a href="../../../blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html" class="footer-link"> Simple Introduction to ForkJoin Framework - Part 1</a>
-                                        </li>
-                                    
-                                        <li class="mb-2">
-                                            <a href="../../../blog/2018/04/22-strategy-design-pattern.html" class="footer-link"> Strategy design pattern</a>
                                         </li>
                                     
                                 </ul>
@@ -482,6 +479,10 @@ transaction amount 500000.0 is higher than approval limit!</pre>
                                 
                                     <a href="../../../tags/comparator.html" class="badge tag m-1 p-2" style="font-size:90%">
                                         comparator
+                                    </a>
+                                
+                                    <a href="../../../tags/reactiveX.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        reactiveX
                                     </a>
                                 
                                     <a href="../../../tags/java10.html" class="badge tag m-1 p-2" style="font-size:90%">
@@ -685,6 +686,10 @@ transaction amount 500000.0 is higher than approval limit!</pre>
                                         comparator
                                     </a>
                                 
+                                    <a href="../../../tags/reactiveX.html" class="badge badge-primary footer-tag-background">
+                                        reactiveX
+                                    </a>
+                                
                                     <a href="../../../tags/java10.html" class="badge badge-primary footer-tag-background">
                                         java10
                                     </a>
@@ -805,6 +810,10 @@ transaction amount 500000.0 is higher than approval limit!</pre>
                                 <ul class="list-unstyled ml-0">
                                     
                                         <li>
+                                            <a href="../../../blog/2018/06/06-reactivex-introduction.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> ReactiveX Introduction</a>
+                                        </li>
+                                    
+                                        <li>
                                             <a href="../../../blog/2018/05/17-chain-of-responsibility-design-pattern.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Chain of responsibility</a>
                                         </li>
                                     
@@ -834,10 +843,6 @@ transaction amount 500000.0 is higher than approval limit!</pre>
                                     
                                         <li>
                                             <a href="../../../blog/2018/04/11-regex-tester-with-spring-shell.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Regex Tester With Spring Shell</a>
-                                        </li>
-                                    
-                                        <li>
-                                            <a href="../../../blog/2018/04/8-infinite-streams.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Infinite streams</a>
                                         </li>
                                     
                                 </ul>

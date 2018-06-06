@@ -67,7 +67,8 @@ article a:active, article a:focus, article a:hover {
 
 pre.prettyprint {
   border: 1px solid #e6e6e6;
-  border-radius: 5px;
+  border-radius: 5px !important;
+  background-color: lightgray;
 }
 
 .social-share a{
@@ -148,3 +149,20 @@ pre.prettyprint {
   font-weight: 300;
   margin: 10px 0 0;
 }
+
+
+/*static footer styles*/
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 110px; /* Margin bottom by footer height */
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 110px; /* Set the fixed height of the footer here */
+}
+/*static footer styles end*/
