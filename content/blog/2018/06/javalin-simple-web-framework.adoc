@@ -1,0 +1,15 @@
+= Javalin - A simple web framework
+Pradeep
+2018-06-06
+:jbake-type: post
+:jbake-status: draft
+:jbake-tags: javalin, microservices
+:jake-category: microservices
+:jbake-summary: ..
+:jbake-image: 
+
+Imagine we want to develop a simple and lightweight microservice, which just manages 'Person' entity with some REST endpoints to add, update, delete and get persons. We can achieve this with Spring boot but our goal is to have a simple and lightweight microservice, Spring boot adds lot of unnecessary dependencies and is a huge framework for a simple microservice.
+
+==== Javalin
+
+Javalin is a simple, lightweight and flexible web framework and this is one of the option we have in Java world to write simple microservice. It has very small learning-curve. 

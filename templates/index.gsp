@@ -40,7 +40,7 @@
                 </div>
             </div> -->
             
-            <%published_posts.take(6).each {post ->%>
+            <%published_posts.take(9).each {post ->%>
             <div class="col-lg-4 col-sm-6 mb-3">
                 <div class="card h-100 shadow">
                     <a href="${post.uri}">
@@ -57,30 +57,11 @@
             </div>
             <%}%>
 
-            <!--sidebar-->
-            <!--<div class="col-md-3">
-                <div class="card my-4">
-                    <h5 class="card-header">Categories</h5>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                            
-                            </div>
-                            <div class="col-lg-6">
-                            
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
-
-
         </div>
     </div>
 
     <div class="container py-4">
         <div class="row">
-
             <!-- Pager -->
             <ul class="col pager list-unstyled">
                 <li class="next">

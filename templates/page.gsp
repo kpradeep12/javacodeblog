@@ -1,10 +1,9 @@
 <%include "header.gsp"%>
 
-	<%include "menu.gsp"%>
+    <%include "menu.gsp"%>
+    <%include "title.gsp"%>
 	
     <!-- Page Header -->
-    <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>img/<%if (content.background) {%>${content.background}<% } else { %>about-bg.jpg<% }%>')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -18,7 +17,6 @@
                 </div>
             </div>
         </div>
-    </header>
 
     <!-- Main Content -->
     <div class="container">

@@ -1,9 +1,8 @@
 <%include "header.gsp"%>
 
     <%include "menu.gsp"%>
-    <%include "title.gsp"%>
 
-    <div class="container">
+    <div class="container pt-2">
         <div class="row">
             <div class="col-lg-8">
                 <div class="bg-white rounded shadow mb-4">
