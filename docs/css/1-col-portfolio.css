@@ -1,0 +1,168 @@
+/*!
+ * Start Bootstrap - 1 Col Portfolio (https://startbootstrap.com/template-overviews/1-col-portfolio)
+ * Copyright 2013-2018 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-1-col-portfolio/blob/master/LICENSE)
+ */
+
+body {
+  padding-top: 54px;
+  font-family:libre franklin,Helvetica,Arial,sans-serif;
+  background: #f1f1f1;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+
+.pagination {
+  margin-bottom: 15px;
+}
+
+.shadow{
+  box-shadow: 0 1px 4px rgba(0,0,0,.1);
+}
+
+.small-font{
+  font-size: small;
+}
+
+.break-word{
+  word-break: break-all;
+}
+
+
+
+.banner{
+  opacity: 1;
+  transition: opacity 0.3s;
+  -webkit-transition: opacity 0.3s;
+}
+.banner:hover{
+  opacity: 0.85;
+}
+
+
+
+
+
+p.lead, .paragraph.lead > p, #preamble > .sectionbody > .paragraph:first-of-type p {
+  line-height: unset !important;
+  font-size: unset !important;
+}
+
+article{
+  line-height: 32.4px;
+  font-size:18px;
+}
+article a{
+  color: #bd5d38;
+  text-decoration: none;
+}
+article a:active, article a:focus, article a:hover {
+  color: #824027;
+  text-decoration: none;
+}
+
+pre.prettyprint {
+  border: 1px solid #e6e6e6;
+  border-radius: 5px !important;
+  background-color: lightgray;
+}
+
+.social-share a{
+    color: rgb(33, 37, 41);
+    transition: all 0.2s;
+}
+::selection {
+  color: rgb(255, 255, 255);
+  text-shadow: none;
+  background: rgb(0, 133, 161);
+}
+
+.btn-twitter {background: #00aced;width: 90px;height:45px;}
+.btn-facebook {background: #3b5998;width: 90px;height:45px;}
+.btn-linkedin {background: #0976b4;width: 90px;height:45px;}
+
+.socialButtons a {
+	color: white; 
+	opacity:0.9;
+}
+.socialButtons a:hover {
+  color: white;
+	opacity:1;    	
+}
+
+
+
+
+.sidebar a{
+  text-decoration: none;
+  color: #b84d45;
+  background-color: transparent;
+}
+.sidebar a:active, .sidebar a:focus, .sidebar a:hover {
+  text-decoration: none;
+}
+.sidebar .tag{
+    color: #4b5359;
+    background-color: #f5eeee;
+    font-weight: unset;
+    -webkit-transition: color .1s ease-in-out,background-color .1s ease-in-out;
+    transition: color .1s ease-in-out,background-color .1s ease-in-out;
+}
+.sidebar .follow-btn {
+  position: relative;
+  height: 25px;
+  box-sizing: border-box;
+  padding: 1px 8px 1px 6px;
+  background-color: #1b95e0;
+  color: #fff;
+  border-radius: 3px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+.site-heading{
+  color: white;
+}
+.site-heading{
+  text-align: center;
+  padding: 60px 50px 50px;
+}
+.site-heading h1{
+  margin-top: 0;
+  font-size: 50px;
+  font-weight: bold;
+}
+.site-heading .subheading{
+  line-height: 1.1;
+  display: block;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  margin: 10px 0 0;
+}
+
+
+/*static footer styles*/
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 110px; /* Margin bottom by footer height */
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 110px; /* Set the fixed height of the footer here */
+}
+/*static footer styles end*/

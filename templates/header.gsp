@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
-    <meta name="google-site-verification" content="zkTSlJd8qxF4ZHbWWxyG0Prqnevef8dGSLkZeHFRW2Y" />
+    <meta name="google-site-verification" content="tuMqCtGo9Q2zjZ6e2k1iswdB1R56vqiqYfbSrrzlyRE" />
     
     <title><%if (content.title) {%>${content.title}<% } else { %>Tech Stack Java<% }%></title>
 

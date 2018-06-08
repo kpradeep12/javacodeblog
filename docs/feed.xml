@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>JBake</title>
-    <link>http://localhost:8820</link>
-    <atom:link href="http://localhost:8820/feed.xml" rel="self" type="application/rss+xml" />
+    <link>http://www.techstackjava.com/</link>
+    <atom:link href="http://www.techstackjava.com//feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Fri, 8 Jun 2018 09:33:01 -0400</pubDate>
-    <lastBuildDate>Fri, 8 Jun 2018 09:33:01 -0400</lastBuildDate>
+    <pubDate>Fri, 8 Jun 2018 09:34:50 -0400</pubDate>
+    <lastBuildDate>Fri, 8 Jun 2018 09:34:50 -0400</lastBuildDate>
 
     
     <item>
       <title>ReactiveX Introduction</title>
-      <link>http://localhost:8820/blog/2018/06/06-reactivex-introduction.html</link>
+      <link>http://www.techstackjava.com//blog/2018/06/06-reactivex-introduction.html</link>
       <pubDate>Wed, 6 Jun 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/06/06-reactivex-introduction.html</guid>
       <description>
@@ -84,7 +84,7 @@ Williams&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Chain of responsibility</title>
-      <link>http://localhost:8820/blog/2018/05/17-chain-of-responsibility-design-pattern.html</link>
+      <link>http://www.techstackjava.com//blog/2018/05/17-chain-of-responsibility-design-pattern.html</link>
       <pubDate>Fri, 18 May 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/05/17-chain-of-responsibility-design-pattern.html</guid>
       <description>
@@ -286,7 +286,7 @@ transaction amount 500000.0 is higher than approval limit!&lt;/pre&gt;
     
     <item>
       <title>Introduction to java.time - Part 2</title>
-      <link>http://localhost:8820/blog/2018/05/13-introduction-to-java-time-part2.html</link>
+      <link>http://www.techstackjava.com//blog/2018/05/13-introduction-to-java-time-part2.html</link>
       <pubDate>Sun, 13 May 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/05/13-introduction-to-java-time-part2.html</guid>
       <description>
@@ -345,7 +345,7 @@ Instant.now().get(ChronoField.MILLI_OF_SECOND);&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Simple Introduction to ForkJoin Framework - Part 2</title>
-      <link>http://localhost:8820/blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html</link>
+      <link>http://www.techstackjava.com//blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html</link>
       <pubDate>Sun, 6 May 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html</guid>
       <description>
@@ -522,7 +522,7 @@ result: [6, 3, 7, 2, 5, 6, 7, 10, 9, 6, 6, 3, 7, 2, 5, 6, 7, 10, 9, 6] &lt;i cla
    &lt;p&gt;I added system outs in the code to show the flow of execution. In the above example there are four compute statements means those four tasks are executed in parallel. Below image which I posted in part 1 will help more in understanding this example.&lt;/p&gt; 
   &lt;/div&gt; 
   &lt;div class=&quot;paragraph text-center&quot;&gt; 
-   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/fork-join-execution.png&quot; alt=&quot;Fork Join framework task execution&quot; width=&quot;650&quot; height=&quot;550&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/fork-join-execution.png&quot; alt=&quot;Fork Join framework task execution&quot; width=&quot;650&quot; height=&quot;550&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
   &lt;/div&gt; 
  &lt;/div&gt; 
 &lt;/div&gt; 
@@ -537,7 +537,7 @@ result: [6, 3, 7, 2, 5, 6, 7, 10, 9, 6, 6, 3, 7, 2, 5, 6, 7, 10, 9, 6] &lt;i cla
     
     <item>
       <title>Simple Introduction to ForkJoin Framework - Part 1</title>
-      <link>http://localhost:8820/blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html</link>
+      <link>http://www.techstackjava.com//blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html</link>
       <pubDate>Thu, 3 May 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html</guid>
       <description>
@@ -557,7 +557,7 @@ result: [6, 3, 7, 2, 5, 6, 7, 10, 9, 6, 6, 3, 7, 2, 5, 6, 7, 10, 9, 6] &lt;i cla
   &lt;p&gt;Each thread in the pool will have its own queue. This queue will gets filled with the tasks. For example, if we have two threads in the pool then each thread will have its own queue. Internally ForkJoinPool uses work-stealing algorithm. Using this algorithm, threads will first clean up there queue and if there are no more tasks left then it steals work from the queue of other threads. For example, if thread A completed its tasks in the queue then instead of waiting for the next task it will steal from thread B. ForkJoin framework is the best when we have processor intensive tasks because it keeps processor busy by not keeping threads idle.&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/fork-joi-pool-threads.png&quot; alt=&quot;Fork Join pool threads&quot; width=&quot;550&quot; height=&quot;400&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/fork-joi-pool-threads.png&quot; alt=&quot;Fork Join pool threads&quot; width=&quot;550&quot; height=&quot;400&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph&quot;&gt; 
   &lt;p&gt;Above image shows two threads. Thread B is not having tasks to execute so it is stealing tasks from Thread A’s queue.&lt;/p&gt; 
@@ -578,7 +578,7 @@ result: [6, 3, 7, 2, 5, 6, 7, 10, 9, 6, 6, 3, 7, 2, 5, 6, 7, 10, 9, 6] &lt;i cla
   &lt;p&gt;This works like a divide and conquer problem. First the task is divided in to small enough to work and then all subtasks are joined back to get the result. Below image shows it in the detail;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/fork-join-execution.png&quot; alt=&quot;Fork Join framework task execution&quot; width=&quot;650&quot; height=&quot;550&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/fork-join-execution.png&quot; alt=&quot;Fork Join framework task execution&quot; width=&quot;650&quot; height=&quot;550&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph&quot;&gt; 
   &lt;p&gt;In the above image, an array of twenty elements need to be processed. We configured threshold as five, so input array is forked until each sub-array get five elements. Each sub-array is passed to ForkJoinPool for execution. After the execution all sub-arrays are joined back to get result of fully processed array.&lt;/p&gt; 
@@ -596,7 +596,7 @@ result: [6, 3, 7, 2, 5, 6, 7, 10, 9, 6, 6, 3, 7, 2, 5, 6, 7, 10, 9, 6] &lt;i cla
   &lt;p&gt;ForkJoinTask is an abstract class so we can not directly use it, instead we can extend any of the three abstract classes which extends ForkJoinTask. Based on the type of the task we can extend any one of these three classes.&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/forkjointask-classes.png&quot; alt=&quot;Fork Join task classes&quot; width=&quot;550&quot; height=&quot;350&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/forkjointask-classes.png&quot; alt=&quot;Fork Join task classes&quot; width=&quot;550&quot; height=&quot;350&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;ulist&quot;&gt; 
   &lt;ul&gt; 
@@ -617,7 +617,7 @@ result: [6, 3, 7, 2, 5, 6, 7, 10, 9, 6, 6, 3, 7, 2, 5, 6, 7, 10, 9, 6] &lt;i cla
     
     <item>
       <title>Strategy design pattern</title>
-      <link>http://localhost:8820/blog/2018/04/22-strategy-design-pattern.html</link>
+      <link>http://www.techstackjava.com//blog/2018/04/22-strategy-design-pattern.html</link>
       <pubDate>Sun, 22 Apr 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/04/22-strategy-design-pattern.html</guid>
       <description>
@@ -761,7 +761,7 @@ interface EncryptionStrategy{
     
     <item>
       <title>Introduction to java.time - Part 1</title>
-      <link>http://localhost:8820/blog/2018/04/18-introduction-to-java-time-part1.html</link>
+      <link>http://www.techstackjava.com//blog/2018/04/18-introduction-to-java-time-part1.html</link>
       <pubDate>Wed, 18 Apr 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/04/18-introduction-to-java-time-part1.html</guid>
       <description>
@@ -868,7 +868,7 @@ public static Instant parse​(CharSequence text)&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>How ConcurrentModificationException is thrown?</title>
-      <link>http://localhost:8820/blog/2018/04/15-how-concurrentModificationException-is-thrown.html</link>
+      <link>http://www.techstackjava.com//blog/2018/04/15-how-concurrentModificationException-is-thrown.html</link>
       <pubDate>Sun, 15 Apr 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/04/15-how-concurrentModificationException-is-thrown.html</guid>
       <description>
@@ -998,7 +998,7 @@ numList.forEach(System.out::println);&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Regex Tester With Spring Shell</title>
-      <link>http://localhost:8820/blog/2018/04/11-regex-tester-with-spring-shell.html</link>
+      <link>http://www.techstackjava.com//blog/2018/04/11-regex-tester-with-spring-shell.html</link>
       <pubDate>Wed, 11 Apr 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/04/11-regex-tester-with-spring-shell.html</guid>
       <description>
@@ -1011,13 +1011,13 @@ numList.forEach(System.out::println);&lt;/code&gt;&lt;/pre&gt;
    &lt;p&gt;In this article I will show the steps needed to create a Spring shell project which tests the regex string provided at the command line. Easier way to create spring project is using &lt;a href=&quot;https://start.spring.io/&quot;&gt;start.spring.io&lt;/a&gt; Go to the site and select you choice of configuration with ‘Spring Shell’ as dependency. See below screenshot for the reference.&lt;/p&gt; 
   &lt;/div&gt; 
   &lt;div class=&quot;paragraph text-center&quot;&gt; 
-   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/Post-Regex-tester-spring-starter.png&quot; alt=&quot;Regex tester spring starter&quot; width=&quot;550&quot; height=&quot;300&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/Post-Regex-tester-spring-starter.png&quot; alt=&quot;Regex tester spring starter&quot; width=&quot;550&quot; height=&quot;300&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
   &lt;/div&gt; 
   &lt;div class=&quot;paragraph&quot;&gt; 
    &lt;p&gt;Click on ‘Generate Project’ which will download the pre-configured spring project. Unzip and import it into your favorite java editor.&lt;/p&gt; 
   &lt;/div&gt; 
   &lt;div class=&quot;paragraph text-center&quot;&gt; 
-   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/Post-Regex-tester-spring-shell-pom.png&quot; alt=&quot;Regex tester spring shell&quot; width=&quot;570&quot; height=&quot;300&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/Post-Regex-tester-spring-shell-pom.png&quot; alt=&quot;Regex tester spring shell&quot; width=&quot;570&quot; height=&quot;300&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
   &lt;/div&gt; 
   &lt;div class=&quot;paragraph&quot;&gt; 
    &lt;p&gt;Now we have empty spring shell project ready.&lt;/p&gt; 
@@ -1089,7 +1089,7 @@ public class RegexTester {
   &lt;p&gt;You should see a prompt saying ‘shell:&amp;gt;’ As I mentioned earlier, spring shell provides the required infrastructure for the command line interface so this prompt is provided by the spring shell and it is ready to take the commands. lets execute some commands on the shell prompt.&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/Post-Regex-tester-regex-cli.png&quot; alt=&quot;Regex tester cli&quot; width=&quot;500&quot; height=&quot;140&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/Post-Regex-tester-regex-cli.png&quot; alt=&quot;Regex tester cli&quot; width=&quot;500&quot; height=&quot;140&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph&quot;&gt; 
   &lt;p&gt;I passed ‘ab’ as the pattern and ‘abcabc’ as the test string to regex command. Spring will internally execute regex method and passes provided arguments to it. The output of the method will be printed in the console. We can continue to test regex command multiple times with different strings and it can be used as regex utility in local.&lt;/p&gt; 
@@ -1103,7 +1103,7 @@ public class RegexTester {
     
     <item>
       <title>Infinite streams</title>
-      <link>http://localhost:8820/blog/2018/04/8-infinite-streams.html</link>
+      <link>http://www.techstackjava.com//blog/2018/04/8-infinite-streams.html</link>
       <pubDate>Sun, 8 Apr 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/04/8-infinite-streams.html</guid>
       <description>
@@ -1161,7 +1161,7 @@ r.ints(10, 30)
     
     <item>
       <title>Recipes for Optional</title>
-      <link>http://localhost:8820/blog/2018/04/3-recipes-for-optional.html</link>
+      <link>http://www.techstackjava.com//blog/2018/04/3-recipes-for-optional.html</link>
       <pubDate>Tue, 3 Apr 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/04/3-recipes-for-optional.html</guid>
       <description>
@@ -1330,7 +1330,7 @@ es.getEmployee(2)
     
     <item>
       <title>Functions cheat sheet</title>
-      <link>http://localhost:8820/blog/2018/03/28-functions-cheat-sheet.html</link>
+      <link>http://www.techstackjava.com//blog/2018/03/28-functions-cheat-sheet.html</link>
       <pubDate>Wed, 28 Mar 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/03/28-functions-cheat-sheet.html</guid>
       <description>
@@ -1347,7 +1347,7 @@ es.getEmployee(2)
   &lt;p&gt;Consumer takes input and always returns void. You can use this to perform some action with out returning anything.&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/consumer-function.png&quot; alt=&quot;Consumer Function&quot; width=&quot;590&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/consumer-function.png&quot; alt=&quot;Consumer Function&quot; width=&quot;590&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;table class=&quot;tableblock frame-all grid-all spread&quot;&gt; 
   &lt;colgroup&gt; 
@@ -1396,7 +1396,7 @@ es.getEmployee(2)
   &lt;p&gt;Function takes input and produces different kind of output.&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/function.png&quot; alt=&quot;Function&quot; width=&quot;590&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/function.png&quot; alt=&quot;Function&quot; width=&quot;590&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;table class=&quot;tableblock frame-all grid-all spread&quot;&gt; 
   &lt;colgroup&gt; 
@@ -1481,7 +1481,7 @@ es.getEmployee(2)
   &lt;p&gt;Operator is a special kind of function where it always accepts and produces same type.&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/operator-function.png&quot; alt=&quot;Operator Function&quot; width=&quot;590&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/operator-function.png&quot; alt=&quot;Operator Function&quot; width=&quot;590&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;table class=&quot;tableblock frame-all grid-all spread&quot;&gt; 
   &lt;colgroup&gt; 
@@ -1530,7 +1530,7 @@ es.getEmployee(2)
   &lt;p&gt;Predicate always returns a boolean so you can this in conditional evaluations.&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/predicate-function.png&quot; alt=&quot;Predicate Function&quot; width=&quot;590&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/predicate-function.png&quot; alt=&quot;Predicate Function&quot; width=&quot;590&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;table class=&quot;tableblock frame-all grid-all spread&quot;&gt; 
   &lt;colgroup&gt; 
@@ -1567,7 +1567,7 @@ es.getEmployee(2)
   &lt;p&gt;Supplier always returns a value. This can be used to generate random values or data from some source.&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/supplier-function.png&quot; alt=&quot;Supplier Function&quot; width=&quot;290&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/supplier-function.png&quot; alt=&quot;Supplier Function&quot; width=&quot;290&quot; height=&quot;110&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;table class=&quot;tableblock frame-all grid-all spread&quot;&gt; 
   &lt;colgroup&gt; 
@@ -1603,7 +1603,7 @@ es.getEmployee(2)
     
     <item>
       <title>Reduce stream to single value</title>
-      <link>http://localhost:8820/blog/2018/03/24-reduce-stream-to-single-value.html</link>
+      <link>http://www.techstackjava.com//blog/2018/03/24-reduce-stream-to-single-value.html</link>
       <pubDate>Sat, 24 Mar 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/03/24-reduce-stream-to-single-value.html</guid>
       <description>
@@ -1750,7 +1750,7 @@ sum: 11&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Quick way to create List, Set and Map</title>
-      <link>http://localhost:8820/blog/2018/03/21-quick-way-to-create-list-set-and-map.html</link>
+      <link>http://www.techstackjava.com//blog/2018/03/21-quick-way-to-create-list-set-and-map.html</link>
       <pubDate>Wed, 21 Mar 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/03/21-quick-way-to-create-list-set-and-map.html</guid>
       <description>
@@ -1822,7 +1822,7 @@ Map.entry(3, &quot;three&quot;));&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Using consumer functional interface</title>
-      <link>http://localhost:8820/blog/2018/03/17-using-consumer-functional-interface.html</link>
+      <link>http://www.techstackjava.com//blog/2018/03/17-using-consumer-functional-interface.html</link>
       <pubDate>Sat, 17 Mar 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/03/17-using-consumer-functional-interface.html</guid>
       <description>
@@ -1832,7 +1832,7 @@ Map.entry(3, &quot;three&quot;));&lt;/code&gt;&lt;/pre&gt;
    &lt;p&gt;This article will explain the basics of using consumer functional interface. Consume is one of the many available functional interfaces in Java. This interface can be used when we need to take an object and process it but with out returning anything. Below image will show you how it looks in a logical way.&lt;/p&gt; 
   &lt;/div&gt; 
   &lt;div class=&quot;paragraph text-center&quot;&gt; 
-   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/consumer.png&quot; alt=&quot;Consumer Function&quot; width=&quot;280&quot; height=&quot;130&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/consumer.png&quot; alt=&quot;Consumer Function&quot; width=&quot;280&quot; height=&quot;130&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
   &lt;/div&gt; 
   &lt;div class=&quot;paragraph&quot;&gt; 
    &lt;p&gt;As you see in the above image, it takes a value and operates on it with a side-effect. Here side-effect means, some thing like printing to console or logging to file or making call to rest service but without returning any value. This interface have single abstract method, which is ‘&lt;strong&gt;void accept(T t)&lt;/strong&gt;‘ As you can see this method takes a value but does not return anything.&lt;/p&gt; 
@@ -1925,7 +1925,7 @@ processJobs(jobs, print.andThen(emailAlert));&lt;/code&gt;&lt;/pre&gt;
   &lt;p&gt;BiConsumer is same like Consumer except it takes two parameters. Below is the logical representation of it.&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/biconsumer.png&quot; alt=&quot;BiConsumer Function&quot; width=&quot;280&quot; height=&quot;130&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/biconsumer.png&quot; alt=&quot;BiConsumer Function&quot; width=&quot;280&quot; height=&quot;130&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph&quot;&gt; 
   &lt;p&gt;This interface will be handy if in case you need to consume two parameters and also it allows you to compose multiple BiConsumers. There are primitive versions of this interface; which are &lt;strong&gt;ObjIntConsumer, ObjLongConsumer&lt;/strong&gt; and &lt;strong&gt;ObjDoubleConsumer&lt;/strong&gt;, all these interfaces takes object as first parameter and primitive value as second parameter.&lt;/p&gt; 
@@ -1936,7 +1936,7 @@ processJobs(jobs, print.andThen(emailAlert));&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Create Maven project in GitHub</title>
-      <link>http://localhost:8820/blog/2018/03/14-create-maven-project-in-github.html</link>
+      <link>http://www.techstackjava.com//blog/2018/03/14-create-maven-project-in-github.html</link>
       <pubDate>Wed, 14 Mar 2018 00:00:00 -0400</pubDate>
       <guid isPermaLink="false">blog/2018/03/14-create-maven-project-in-github.html</guid>
       <description>
@@ -1955,7 +1955,7 @@ processJobs(jobs, print.andThen(emailAlert));&lt;/code&gt;&lt;/pre&gt;
   &lt;/ul&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/new-repo-in-git.png&quot; alt=&quot;New repo in Git&quot; width=&quot;510&quot; height=&quot;90&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/new-repo-in-git.png&quot; alt=&quot;New repo in Git&quot; width=&quot;510&quot; height=&quot;90&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;ulist&quot;&gt; 
   &lt;ul&gt; 
@@ -1963,7 +1963,7 @@ processJobs(jobs, print.andThen(emailAlert));&lt;/code&gt;&lt;/pre&gt;
   &lt;/ul&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/create-new-repo-in-git.png&quot; alt=&quot;Create new repo in Git&quot; width=&quot;500&quot; height=&quot;300&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/create-new-repo-in-git.png&quot; alt=&quot;Create new repo in Git&quot; width=&quot;500&quot; height=&quot;300&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;ulist&quot;&gt; 
   &lt;ul&gt; 
@@ -2009,7 +2009,7 @@ processJobs(jobs, print.andThen(emailAlert));&lt;/code&gt;&lt;/pre&gt;
   &lt;/ul&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;paragraph text-center&quot;&gt; 
-  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/copy-clone-repo-url.png&quot; alt=&quot;Copy clone repo&quot; width=&quot;510&quot; height=&quot;130&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/copy-clone-repo-url.png&quot; alt=&quot;Copy clone repo&quot; width=&quot;510&quot; height=&quot;130&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
  &lt;/div&gt; 
  &lt;div class=&quot;ulist&quot;&gt; 
   &lt;ul&gt; 
@@ -2133,7 +2133,7 @@ To https://github.com/kpradeep12/my-app.git
     
     <item>
       <title>Fixed Thread Pool using Executor framework</title>
-      <link>http://localhost:8820/blog/2018/03/10-fixed-thread-pool-using-executor-framework.html</link>
+      <link>http://www.techstackjava.com//blog/2018/03/10-fixed-thread-pool-using-executor-framework.html</link>
       <pubDate>Sat, 10 Mar 2018 00:00:00 -0500</pubDate>
       <guid isPermaLink="false">blog/2018/03/10-fixed-thread-pool-using-executor-framework.html</guid>
       <description>
@@ -2141,7 +2141,7 @@ To https://github.com/kpradeep12/my-app.git
  &lt;p&gt;In this article we are looking at the Fixed thread pool implementation. This thread pool creates a fixed number of threads and reuses them as the tasks are completed and because the threads are reused so once after reaching the thread pool limit then there will not be any thread creations involved. This pool will be helpful when we want to execute long running threads. For example we can use this pool in running batch jobs or accepting HTTP client requests and so on.&lt;/p&gt; 
 &lt;/div&gt; 
 &lt;div class=&quot;paragraph text-center&quot;&gt; 
- &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/Fixed-thread-pool.png&quot; alt=&quot;Fixed thread pool&quot; width=&quot;490&quot; height=&quot;130&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+ &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/Fixed-thread-pool.png&quot; alt=&quot;Fixed thread pool&quot; width=&quot;490&quot; height=&quot;130&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
 &lt;/div&gt; 
 &lt;div class=&quot;paragraph&quot;&gt; 
  &lt;p&gt;In the above figure, producer inserts tasks into the queue, queue contains the tasks which are ready to be executed and the pool contains the running tasks. With fixed thread pool of size two, not more than two threads can execute at any time. Threads will be reused once after the current running tasks are completed, so there will not be thread creation overhead involved after completing every task. Fixed thread pool will consume less resources because they will control the number of simultaneous thread executions.&lt;/p&gt; 
@@ -2214,14 +2214,14 @@ Processing pool-1-thread-1&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Producer and Consumer with Bounded Blocked Queue</title>
-      <link>http://localhost:8820/blog/2018/03/7-producer-consumer-with-bounded-blocked-queue.html</link>
+      <link>http://www.techstackjava.com//blog/2018/03/7-producer-consumer-with-bounded-blocked-queue.html</link>
       <pubDate>Wed, 7 Mar 2018 00:00:00 -0500</pubDate>
       <guid isPermaLink="false">blog/2018/03/7-producer-consumer-with-bounded-blocked-queue.html</guid>
       <description>
       &lt;div id=&quot;preamble&quot;&gt; 
  &lt;div class=&quot;sectionbody&quot;&gt; 
   &lt;div class=&quot;paragraph text-center&quot;&gt; 
-   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://localhost:8820/img/posts/producer-consumer.png&quot; alt=&quot;Producer consumer&quot; width=&quot;800&quot; height=&quot;180&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/producer-consumer.png&quot; alt=&quot;Producer consumer&quot; width=&quot;800&quot; height=&quot;180&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
   &lt;/div&gt; 
   &lt;div class=&quot;paragraph&quot;&gt; 
    &lt;p&gt;Producer and consumers are two independent entities works together on the queue. Producer inserts elements into the tail of the queue and consumer removes them from the head of the queue. Here elements can be tasks or data on which consumer is interested in. This design pattern will allow producer and consumer to work independently.&lt;/p&gt; 
@@ -2398,7 +2398,7 @@ Producer: pushed new job &apos;9&apos; into queue:[5, 1, 7, 9]&lt;/code&gt;&lt;/
     
     <item>
       <title>Generate stream of random numbers</title>
-      <link>http://localhost:8820/blog/2018/03/3-generate-stream-of-random-numbers.html</link>
+      <link>http://www.techstackjava.com//blog/2018/03/3-generate-stream-of-random-numbers.html</link>
       <pubDate>Sat, 3 Mar 2018 00:00:00 -0500</pubDate>
       <guid isPermaLink="false">blog/2018/03/3-generate-stream-of-random-numbers.html</guid>
       <description>
@@ -2478,7 +2478,7 @@ $12 ==&amp;gt; [5, 1, 7, 4, 6]&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Quick way to create, read, write and delete files in Java</title>
-      <link>http://localhost:8820/blog/2018/02/28-quickway-to-create-read-write-delete-files.html</link>
+      <link>http://www.techstackjava.com//blog/2018/02/28-quickway-to-create-read-write-delete-files.html</link>
       <pubDate>Wed, 28 Feb 2018 00:00:00 -0500</pubDate>
       <guid isPermaLink="false">blog/2018/02/28-quickway-to-create-read-write-delete-files.html</guid>
       <description>
@@ -2586,7 +2586,7 @@ $12 ==&amp;gt; [5, 1, 7, 4, 6]&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Quick introduction to PriorityQueue</title>
-      <link>http://localhost:8820/blog/2018/02/23-quick-introduction-to-priorityQueue.html</link>
+      <link>http://www.techstackjava.com//blog/2018/02/23-quick-introduction-to-priorityQueue.html</link>
       <pubDate>Fri, 23 Feb 2018 00:00:00 -0500</pubDate>
       <guid isPermaLink="false">blog/2018/02/23-quick-introduction-to-priorityQueue.html</guid>
       <description>
@@ -2698,7 +2698,7 @@ public class Processor {
     
     <item>
       <title>Using comparing methods in Comparator Interface</title>
-      <link>http://localhost:8820/blog/2018/02/21-using-comparing-methods-in-comparator-interface.html</link>
+      <link>http://www.techstackjava.com//blog/2018/02/21-using-comparing-methods-in-comparator-interface.html</link>
       <pubDate>Wed, 21 Feb 2018 00:00:00 -0500</pubDate>
       <guid isPermaLink="false">blog/2018/02/21-using-comparing-methods-in-comparator-interface.html</guid>
       <description>
@@ -2859,7 +2859,7 @@ default Comparator&amp;lt;T&amp;gt; thenComparingLong​(ToLongFunction&amp;lt;?
     
     <item>
       <title>Stream of dates with LocalDate</title>
-      <link>http://localhost:8820/blog/2018/02/17-stream-of-dates-with-localdate.html</link>
+      <link>http://www.techstackjava.com//blog/2018/02/17-stream-of-dates-with-localdate.html</link>
       <pubDate>Sat, 17 Feb 2018 00:00:00 -0500</pubDate>
       <guid isPermaLink="false">blog/2018/02/17-stream-of-dates-with-localdate.html</guid>
       <description>

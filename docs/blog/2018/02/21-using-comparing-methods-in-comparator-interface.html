@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content="JBake">
+    <meta name="google-site-verification" content="tuMqCtGo9Q2zjZ6e2k1iswdB1R56vqiqYfbSrrzlyRE" />
+    
+    <title>Using comparing methods in Comparator Interface</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+
+    <link href="../../../css/asciidoctor.css" rel="stylesheet">
+    <link href="../../../css/prettify.css" rel="stylesheet">
+    <link href="../../../css/1-col-portfolio.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Libre+Franklin:400,100,100italic,200,200italic,300,300italic,400italic,500,600,500italic,600italic,700,700italic,800,900,800italic,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <!-- link rel="shortcut icon" href="../../../favicon.ico" -->
+  </head>
+  <body onload="prettyPrint()">
+   
+
+        <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="../../../index.html">Tech Stack Java</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="../../../index.html">Home</a>
+            </li>
+            <!--<li class="nav-item">
+                <a class="nav-link" href="../../../about.html">About</a>
+            </li>-->
+            <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Archive</a>
+            </li>
+            <!--<li class="nav-item">
+                <a class="nav-link" href="../../../contact.html">Contact</a>
+            </li>-->
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container pt-2">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="bg-white rounded shadow mb-4">
+                    <div class="p-3">
+                        <article>
+                            <!-- Title -->
+                            <h3 class="mb-0">Using comparing methods in Comparator Interface</h3>
+                            
+                            <!-- Author -->
+                            <p class="small-font mb-0">
+                                published by <a href="#">Pradeep</a> on February 21, 2018
+                            </p>
+                            <hr>
+
+                            <!-- Preview Image -->
+                            <img class="img-fluid rounded d-block mr-auto ml-auto shadow" src="../../../img/" alt="">
+                            <hr>
+                            <div id="preamble"> 
+ <div class="sectionbody"> 
+  <div class="paragraph"> 
+   <p>Java 8 introduced some new methods in Comparator interface. I was going through this interface to check all available methods in it and did some code experiments to understand some of them and thought comparing and thenComparing methods are very interesting. There are multiple comparing methods which can be used in various situations. I listed all comparing methods here:</p> 
+  </div> 
+  <div class="listingblock"> 
+   <div class="content"> 
+    <pre class="prettyprint highlight"><code class="language-java" data-lang="java">//static comparing methods
+static &lt;T,U extends Comparable&lt;? super U&gt;&gt; Comparator&lt;T&gt; comparing​(Function&lt;? super T,? extends U&gt; keyExtractor)
+static &lt;T,U&gt; Comparator&lt;T&gt; comparing​(Function&lt;? super T,? extends U&gt; keyExtractor, Comparator&lt;? super U&gt; keyComparator)
+static &lt;T&gt; Comparator&lt;T&gt; comparingDouble​(ToDoubleFunction&lt;? super T&gt; keyExtractor)
+static &lt;T&gt; Comparator&lt;T&gt; comparingInt​(ToIntFunction&lt;? super T&gt; keyExtractor)
+static &lt;T&gt; Comparator&lt;T&gt; comparingLong​(ToLongFunction&lt;? super T&gt; keyExtractor)
+
+//default thenComparing methods
+default Comparator&lt;T&gt; thenComparing​(Comparator&lt;? super T&gt; other)
+default &lt;U extends Comparable&lt;? super U&gt;&gt; Comparator&lt;T&gt; thenComparing​(Function&lt;? super T,? extends U&gt; keyExtractor)
+default &lt;U&gt; Comparator&lt;T&gt; thenComparing​(Function&lt;? super T,? extends U&gt; keyExtractor, Comparator&lt;? super U&gt; keyComparator)
+default Comparator&lt;T&gt; thenComparingDouble​(ToDoubleFunction&lt;? super T&gt; keyExtractor)
+default Comparator&lt;T&gt; thenComparingInt​(ToIntFunction&lt;? super T&gt; keyExtractor)
+default Comparator&lt;T&gt; thenComparingLong​(ToLongFunction&lt;? super T&gt; keyExtractor)</code></pre> 
+   </div> 
+  </div> 
+  <div class="paragraph"> 
+   <p>If you can understand how these comparing methods work then you can generate a comparator object with out implementing this interface. I will go through some examples so it will be easier to understand. Lets create a Student class and add couple of students to a List.</p> 
+  </div> 
+  <div class="listingblock"> 
+   <div class="content"> 
+    <pre class="prettyprint highlight"><code class="language-java" data-lang="java">public class Student{
+    private int id;
+    private String grade;
+    private String firstName;
+
+    public Student(int id,String grade, String firstName) {
+        this.id = id;
+        this.grade = grade;
+        this.firstName = firstName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + id + "-" + grade +
+                "-" + firstName +
+                ']';
+    }
+    public static void main(String args[]){
+        List&lt;Student&gt; students = Arrays.asList(new Student(4,"B","Sandra"),
+                new Student(2,"A","Cary"),
+                new Student(5,"A","Ferne"),
+                new Student(3,"B","Donnell"),
+                new Student(1,"A","Ria"));
+        //sort students
+        students.sort((s1, s2) -&gt; Integer.compare(s1.getId(), s2.getId()));
+
+        //display list of students
+        students.forEach(System.out::println);
+    }
+}</code></pre> 
+   </div> 
+  </div> 
+  <div class="paragraph"> 
+   <p>In line number 37 we are passing Comparator implementation to sort method. In next section we will see how to generate it with out implementing Comparator interface.</p> 
+  </div> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="generate_comparator_using_static_comparing_methods">Generate comparator using static comparing methods</h4> 
+ <div class="paragraph"> 
+  <p>In line number 37 of above example we implemented comparator which compares integers. Here we wrote basic compare logic but instead why can’t we just pass the field on which we want to compare? This is where static comparing methods will come into picture. Static comparing methods need key extractor so comparator can be generated based on that. If we need to compare integers then use below static method to generate comparator.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>static &lt;T&gt; Comparator&lt;T&gt; comparingInt​(ToIntFunction&lt;? super T&gt; keyExtractor)</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>To use this method we need to pass ToIntFunction. This is a functional interface and it has single method ‘applyAsInt’, See below for the declaration of this method:</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>int applyAsInt​(T value)</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>If we want to sort based on id field of the student, which is an int then we can update line number 37 to:</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>students.sort(Comparator.comparingInts) → s.getId();</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>We are passing implementation of ToIntFunction to comparingInt method. comparingInt will get int value from ToIntFunction and creates comparator based on that. We can even use method reference to reduce the code size.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>students.sort(Comparator.comparingInt(Student::getId));</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>Basic thing to understand is, instead of ‘how’ we mentioned ‘what’ by using comparingInt method. Like wise there are other overloaded methods to generate comparator for long and double values. What is the case if we have objects? then we can use below method.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>static &lt;T,U extends Comparable&lt;? super U&gt;&gt; Comparator&lt;T&gt; comparing​(Function&lt;? super T,? extends U&gt; keyExtractor)</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>This method takes a function so we can return any object and Comparator will use natural sorting on it if it implements Comparable interface else it will give compilation error. I can use this method to sort students based on there first names. First name is a String and String implements Comparable so this method works fine.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>students.sort(Comparator.comparing(Student::getFirstName));</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>There is another comparing method available to generate customized comparator which take comparator as second parameter.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>static &lt;T,U&gt; Comparator&lt;T&gt; comparing​(Function&lt;? super T,? extends U&gt; keyExtractor, Comparator&lt;? super U&gt; keyComparator)</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>Using this method we can pass custom comparator. In below example we passed case insensitive string comparator.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>students.sort(Comparator.comparing(Student::getFirstName,String.CASE_INSENSITIVE_ORDER));</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>With this we covered all static comparing methods. Instead of writing our own comparing logic we just need to pass key extractors, so these methods will generate comparator for us.</p> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="using_thencomparing_methods">Using thenComparing methods</h4> 
+ <div class="paragraph"> 
+  <p>If we want to do sort on multiple fields then we can use ‘thenComparing’ methods. These methods will return comparator, so we can chain multiple thenComparing methods to sort multiple fields. It is like applying sorting on multiple columns in a table. For example we can do sort on grade and then on first names of the students like below.</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-java" data-lang="java">students.sort(Comparator.comparing(Student::getGrade)
+              .thenComparing(Student::getFirstName));</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>thenComparing comes with same set of overloaded methods as comparing methods so we can pass functions to extract keys.</p> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="conclusion">Conclusion</h4> 
+ <div class="paragraph"> 
+  <p>With all the above examples hope you understood the usage of these methods. Please comment if anything is missing or need more explanation.</p> 
+ </div> 
+</div>
+
+                        </article>
+                    </div>
+                    
+                    <!--post footer-->
+                    <!--<div class="container mb-5">
+                        <div class="row">    
+                            <div class="col-lg-8" style="    background: #444;    color: #fff;">
+                                <div class="card my-4 border-0" style="background: #444;">
+                                    <p class="card-header p-0 border-0" style="background: #444;">Share</p>
+                                    <div class="card-body p-0">
+                                        <div class="input-group">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4" style="    background: #3f4854;    color: #fff;">
+                                <div class="card my-4 border-0" style="background: #3f4854;">
+                                    <p class="card-header p-0 border-0" style="background: #3f4854;">Tags</p>
+                                    <div class="card-body p-0">
+                                        <div class="input-group">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="container mb-5 social-share">
+                        <div class="row">    
+                            <div class="col-lg-12">
+                                <div class="card my-4 border-0">
+                                    <p class="m-0 text-center small-font">Share this post</p>
+<ul class="list-inline text-center list-unstyled float-left m-0">
+    <li class="list-inline-item">
+        <a href="javascript:tweetPage()"> 
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+    </li>
+    <li class="list-inline-item">
+        <a href="javascript:shareOnFacebook()"> 
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+    </li>
+    <li class="list-inline-item">
+        <a href="javascript:shareOnLinkedIn()"> 
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+    </li>
+    <!--<li class="list-inline-item">
+        <a href="javascript:shareOnReddit()"> 
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-reddit-alien fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+    </li>-->
+</ul>
+
+<!--
+                <ul class="list-inline text-center list-unstyled float-left socialButtons m-0">
+                    <li class="list-inline-item">
+                        <a href="javascript:tweetPage()" class="btn btn-twitter" data-toggle="tooltip" data-placement="top" title="Twitter">
+                            <i class="fa fa-twitter fa-2x"></i>
+                            <span class="hidden-xs"></span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="javascript:shareOnFacebook()" class="btn btn-facebook" data-toggle="tooltip" data-placement="top" title="Facebook">
+                            <i class="fa fa-facebook fa-2x"></i>
+                            <span class="hidden-xs"></span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="javascript:shareOnLinkedIn()" class="btn btn-linkedin" data-toggle="tooltip" data-placement="top" title="LinkedIn">
+                            <i class="fa fa-linkedin fa-2x"></i>
+                            <span class="hidden-xs"></span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="javascript:shareOnReddit()" class="btn btn-reddit" data-toggle="tooltip" data-placement="top" title="Reddit">
+                            <i class="fa fa-reddit-alien fa-2x"></i>
+                            <span class="hidden-xs"></span>
+                        </a>
+                    </li>
+                </ul>
+-->
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--post footer-->
+
+                    <div class="container">
+                        <div class="row">    
+                            <div class="col-lg-12 mx-auto">
+                                <div id="disqus_thread"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--side bar-->
+            <div class="col-lg-4 sidebar">
+                <div class="bg-white rounded p-3 shadow mb-4">
+                    <div class="card my-4 border-0">
+                        <div class="card-body p-2">
+                            <h4 class="">Recent Posts</h4>
+                            <div class="input-group">
+                                <ul class="list-unstyled ml-0 break-word">
+                                    
+                                        <li class="mb-2">
+                                            <a href="../../../blog/2018/06/06-reactivex-introduction.html" class="footer-link"> ReactiveX Introduction</a>
+                                        </li>
+                                    
+                                        <li class="mb-2">
+                                            <a href="../../../blog/2018/05/17-chain-of-responsibility-design-pattern.html" class="footer-link"> Chain of responsibility</a>
+                                        </li>
+                                    
+                                        <li class="mb-2">
+                                            <a href="../../../blog/2018/05/13-introduction-to-java-time-part2.html" class="footer-link"> Introduction to java.time - Part 2</a>
+                                        </li>
+                                    
+                                        <li class="mb-2">
+                                            <a href="../../../blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html" class="footer-link"> Simple Introduction to ForkJoin Framework - Part 2</a>
+                                        </li>
+                                    
+                                        <li class="mb-2">
+                                            <a href="../../../blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html" class="footer-link"> Simple Introduction to ForkJoin Framework - Part 1</a>
+                                        </li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card my-4 border-0">
+                        <div class="card-body p-2">
+                            <h4>Tags</h4>
+                            <div class="input-group">
+                                
+                                    <a href="../../../tags/gof.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        gof
+                                    </a>
+                                
+                                    <a href="../../../tags/queue.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        queue
+                                    </a>
+                                
+                                    <a href="../../../tags/time.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        time
+                                    </a>
+                                
+                                    <a href="../../../tags/producer.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        producer
+                                    </a>
+                                
+                                    <a href="../../../tags/blockedqueue.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        blockedqueue
+                                    </a>
+                                
+                                    <a href="../../../tags/regex.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        regex
+                                    </a>
+                                
+                                    <a href="../../../tags/comparator.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        comparator
+                                    </a>
+                                
+                                    <a href="../../../tags/reactiveX.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        reactiveX
+                                    </a>
+                                
+                                    <a href="../../../tags/java10.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        java10
+                                    </a>
+                                
+                                    <a href="../../../tags/thread.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        thread
+                                    </a>
+                                
+                                    <a href="../../../tags/localdate.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        localdate
+                                    </a>
+                                
+                                    <a href="../../../tags/streams.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        streams
+                                    </a>
+                                
+                                    <a href="../../../tags/var.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        var
+                                    </a>
+                                
+                                    <a href="../../../tags/maven.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        maven
+                                    </a>
+                                
+                                    <a href="../../../tags/read.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        read
+                                    </a>
+                                
+                                    <a href="../../../tags/jshell.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        jshell
+                                    </a>
+                                
+                                    <a href="../../../tags/concurrentmodificationexception.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        concurrentmodificationexception
+                                    </a>
+                                
+                                    <a href="../../../tags/consumer.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        consumer
+                                    </a>
+                                
+                                    <a href="../../../tags/write.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        write
+                                    </a>
+                                
+                                    <a href="../../../tags/multithreading.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        multithreading
+                                    </a>
+                                
+                                    <a href="../../../tags/create.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        create
+                                    </a>
+                                
+                                    <a href="../../../tags/executor.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        executor
+                                    </a>
+                                
+                                    <a href="../../../tags/collections.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        collections
+                                    </a>
+                                
+                                    <a href="../../../tags/stream.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        stream
+                                    </a>
+                                
+                                    <a href="../../../tags/git.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        git
+                                    </a>
+                                
+                                    <a href="../../../tags/file.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        file
+                                    </a>
+                                
+                                    <a href="../../../tags/java.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        java
+                                    </a>
+                                
+                                    <a href="../../../tags/random.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        random
+                                    </a>
+                                
+                                    <a href="../../../tags/spring.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        spring
+                                    </a>
+                                
+                                    <a href="../../../tags/design pattern.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        design pattern
+                                    </a>
+                                
+                                    <a href="../../../tags/delete.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        delete
+                                    </a>
+                                
+                                    <a href="../../../tags/priorityqueue.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        priorityqueue
+                                    </a>
+                                
+                                    <a href="../../../tags/infinite.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        infinite
+                                    </a>
+                                
+                                    <a href="../../../tags/forkjoin.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        forkjoin
+                                    </a>
+                                
+                                    <a href="../../../tags/functional.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        functional
+                                    </a>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card my-4 border-0">
+                        <div class="card-body p-2">
+                            <h4>Author</h4>
+                            <div class="input-group">
+                                <p class="mb-0">Pradeep Kundarapu</p>
+                                <!--<a id="follow-button" class="follow-btn" title="Follow @k_pradeep4j on Twitter" href="https://twitter.com/k_pradeep4j">
+                                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                                    <span class="label" id="l">Follow <b>@k_pradeep4j</b></span>
+                                </a>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        var disqus_shortname = 'null'; 
+        var disqus_identifier = 'blog/2018/02/21-using-comparing-methods-in-comparator-interface.html';
+        var disqus_title = "Using comparing methods in Comparator Interface";
+        var disqus_url = 'http://www.techstackjava.com/blog/2018/02/21-using-comparing-methods-in-comparator-interface.html';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+    <noscript>
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
+    
+<!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; www.techstackjava.com 2018</p>
+        <p class="m-0 text-center text-muted">Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+      </div>
+      <!-- /.container -->
+    </footer>
+    
+<!--
+	<div id="push"></div>
+    
+    <footer class="bg-graphite">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6">
+                    <div class="card" style="background-color: transparent;color: #fff!important;">
+                        <div class="card-body">
+                            <h5 class="card-title">Tags</h5>
+                            <p class="card-text">
+                                
+                                    <a href="../../../tags/gof.html" class="badge badge-primary footer-tag-background">
+                                        gof
+                                    </a>
+                                
+                                    <a href="../../../tags/queue.html" class="badge badge-primary footer-tag-background">
+                                        queue
+                                    </a>
+                                
+                                    <a href="../../../tags/time.html" class="badge badge-primary footer-tag-background">
+                                        time
+                                    </a>
+                                
+                                    <a href="../../../tags/producer.html" class="badge badge-primary footer-tag-background">
+                                        producer
+                                    </a>
+                                
+                                    <a href="../../../tags/blockedqueue.html" class="badge badge-primary footer-tag-background">
+                                        blockedqueue
+                                    </a>
+                                
+                                    <a href="../../../tags/regex.html" class="badge badge-primary footer-tag-background">
+                                        regex
+                                    </a>
+                                
+                                    <a href="../../../tags/comparator.html" class="badge badge-primary footer-tag-background">
+                                        comparator
+                                    </a>
+                                
+                                    <a href="../../../tags/reactiveX.html" class="badge badge-primary footer-tag-background">
+                                        reactiveX
+                                    </a>
+                                
+                                    <a href="../../../tags/java10.html" class="badge badge-primary footer-tag-background">
+                                        java10
+                                    </a>
+                                
+                                    <a href="../../../tags/thread.html" class="badge badge-primary footer-tag-background">
+                                        thread
+                                    </a>
+                                
+                                    <a href="../../../tags/localdate.html" class="badge badge-primary footer-tag-background">
+                                        localdate
+                                    </a>
+                                
+                                    <a href="../../../tags/streams.html" class="badge badge-primary footer-tag-background">
+                                        streams
+                                    </a>
+                                
+                                    <a href="../../../tags/var.html" class="badge badge-primary footer-tag-background">
+                                        var
+                                    </a>
+                                
+                                    <a href="../../../tags/maven.html" class="badge badge-primary footer-tag-background">
+                                        maven
+                                    </a>
+                                
+                                    <a href="../../../tags/read.html" class="badge badge-primary footer-tag-background">
+                                        read
+                                    </a>
+                                
+                                    <a href="../../../tags/jshell.html" class="badge badge-primary footer-tag-background">
+                                        jshell
+                                    </a>
+                                
+                                    <a href="../../../tags/concurrentmodificationexception.html" class="badge badge-primary footer-tag-background">
+                                        concurrentmodificationexception
+                                    </a>
+                                
+                                    <a href="../../../tags/consumer.html" class="badge badge-primary footer-tag-background">
+                                        consumer
+                                    </a>
+                                
+                                    <a href="../../../tags/write.html" class="badge badge-primary footer-tag-background">
+                                        write
+                                    </a>
+                                
+                                    <a href="../../../tags/multithreading.html" class="badge badge-primary footer-tag-background">
+                                        multithreading
+                                    </a>
+                                
+                                    <a href="../../../tags/create.html" class="badge badge-primary footer-tag-background">
+                                        create
+                                    </a>
+                                
+                                    <a href="../../../tags/executor.html" class="badge badge-primary footer-tag-background">
+                                        executor
+                                    </a>
+                                
+                                    <a href="../../../tags/collections.html" class="badge badge-primary footer-tag-background">
+                                        collections
+                                    </a>
+                                
+                                    <a href="../../../tags/stream.html" class="badge badge-primary footer-tag-background">
+                                        stream
+                                    </a>
+                                
+                                    <a href="../../../tags/git.html" class="badge badge-primary footer-tag-background">
+                                        git
+                                    </a>
+                                
+                                    <a href="../../../tags/file.html" class="badge badge-primary footer-tag-background">
+                                        file
+                                    </a>
+                                
+                                    <a href="../../../tags/java.html" class="badge badge-primary footer-tag-background">
+                                        java
+                                    </a>
+                                
+                                    <a href="../../../tags/random.html" class="badge badge-primary footer-tag-background">
+                                        random
+                                    </a>
+                                
+                                    <a href="../../../tags/spring.html" class="badge badge-primary footer-tag-background">
+                                        spring
+                                    </a>
+                                
+                                    <a href="../../../tags/design pattern.html" class="badge badge-primary footer-tag-background">
+                                        design pattern
+                                    </a>
+                                
+                                    <a href="../../../tags/delete.html" class="badge badge-primary footer-tag-background">
+                                        delete
+                                    </a>
+                                
+                                    <a href="../../../tags/priorityqueue.html" class="badge badge-primary footer-tag-background">
+                                        priorityqueue
+                                    </a>
+                                
+                                    <a href="../../../tags/infinite.html" class="badge badge-primary footer-tag-background">
+                                        infinite
+                                    </a>
+                                
+                                    <a href="../../../tags/forkjoin.html" class="badge badge-primary footer-tag-background">
+                                        forkjoin
+                                    </a>
+                                
+                                    <a href="../../../tags/functional.html" class="badge badge-primary footer-tag-background">
+                                        functional
+                                    </a>
+                                
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="card" style="background-color: transparent;color: #fff!important;">
+                        <div class="card-body">
+                            <h5 class="card-title">Recent Posts</h5>
+                            <p class="card-text">
+                                <ul class="list-unstyled ml-0">
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/06/06-reactivex-introduction.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> ReactiveX Introduction</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/05/17-chain-of-responsibility-design-pattern.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Chain of responsibility</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/05/13-introduction-to-java-time-part2.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Introduction to java.time - Part 2</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Simple Introduction to ForkJoin Framework - Part 2</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Simple Introduction to ForkJoin Framework - Part 1</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/22-strategy-design-pattern.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Strategy design pattern</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/18-introduction-to-java-time-part1.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Introduction to java.time - Part 1</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/15-how-concurrentModificationException-is-thrown.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> How ConcurrentModificationException is thrown?</a>
+                                        </li>
+                                    
+                                        <li>
+                                            <a href="../../../blog/2018/04/11-regex-tester-with-spring-shell.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Regex Tester With Spring Shell</a>
+                                        </li>
+                                    
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="card" style="background-color: transparent;color: #fff!important;">
+                        <div class="card-body">
+                            <h5 class="card-title">Author</h5>
+                            <p class="card-text">Pradeep Kundarapu</p>
+                            <p class="m-0">Follow me</p>
+                            <ul class="list-inline text-center list-unstyled float-left">
+                                <li class="list-inline-item">
+                                    <a href="https://twitter.com/k_pradeep4j"> 
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    
+                    <p class="copyright text-muted">Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+                </div>
+                
+            </div>
+        </div>
+    </footer>
+-->
+    <!-- jQuery -->
+    <script src="../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../js/bootstrap.min.js"></script>
+
+    <script src="../../../js/prettify.js"></script>
+    <!-- Custom Theme JavaScript 
+    <script src="../../../js/clean-blog.min.js"></script>
+    -->
+    <script src="../../../js/techstackjava.js"></script>
+    <!--<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>-->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115619272-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-115619272-2');
+    </script>
+
+    <script type="text/javascript">
+        var disqus_shortname = 'null';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+
+  </body>
+</html>
