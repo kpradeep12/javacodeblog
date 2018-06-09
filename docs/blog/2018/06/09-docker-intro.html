@@ -88,10 +88,10 @@
                             <div id="preamble"> 
  <div class="sectionbody"> 
   <div class="paragraph"> 
-   <p>Lets say we have a Java based reservation application, which needs a JRE, MySQL and Tomcat to run. To have this application setup we need to install all these dependencies, configure and then run the application. Not just on single environment, we need to do this setup in multiple environments like in development, testing and production. This setup and configuration process needs lot of maintenance and also time consuming.</p> 
+   <p>Lets say we have a Java based reservation application which depends on JRE, MySQL and Tomcat to run. To have this application setup we need to install all these dependencies, configure and then run the application. Not just on single environment, we need to do this setup in multiple environments like in development, testing and production. This setup and configuration process needs a lot of maintenance and also time consuming.</p> 
   </div> 
   <div class="paragraph"> 
-   <p>Docker provides an alternative way to setup applications using containers. Instead of installing application on the operating system we can install them on the container. We can install multiple applications in a container. Container is a runtime instance on which we can run multiple applications. Each container runs on a separate process. We can have multiple containers running at same time and docker will manages these containers.</p> 
+   <p>Docker provides an alternative way to setup applications using containers. Instead of installing application on the operating system we can install them on the docker containers. We can install multiple applications in a container. Container is a runtime instance on which we can run multiple applications. Each container runs on a separate process. We can have multiple containers running at same time and docker will manages these containers.</p> 
   </div> 
   <div class="paragraph"> 
    <p>For example, you can assume container as something like JRE. JRE provides a runtime layer on top of operating system and java applications with out the knowledge of underlying operating system and hardware runs on this JRE. Likewise, container is a linux kernel which can be executed on any operating system and we can run any docker supported application on top it and these applications gets an illusion as they are running on there own machine.</p> 
@@ -105,24 +105,30 @@
  </div> 
 </div> 
 <div class="sect3"> 
- <h4 id="_docker_image">Docker Image</h4> 
+ <h4 id="_docker_terminology">Docker Terminology</h4> 
  <div class="paragraph"> 
-  <p>How to create containers? we can create containers using image file. Containers are instances of image file. Docker image acts something like a java source file. Image file contains a set of commands which docker can understand and when we run this file, docker will create a container instance.</p> 
+  <p>Les go through three main concepts in the docker;</p> 
  </div> 
- <div class="paragraph"> 
-  <p>We may no need to write image files for most of the basic requirements because already there are many image files hosted on <strong><a href="www.hub.docker.com">Docker Hub</a></strong>. Docker hub acts like a maven repository in java world but instead of repositories it will have docker image files. It is recommended to have a docker hub account so we can browse, download or create one.</p> 
+ <div class="sect4"> 
+  <h5 id="_docker_image">Docker Image</h5> 
+  <div class="paragraph"> 
+   <p>How to create containers? we can create containers using image file and containers are instances of this image file. Docker image acts something like a java source file. Image file contains a set of commands which docker can understand and when we run this file, docker will execute these command and creates a container instance.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>We may no need to write image files for most of the basic requirements because already there are many image files hosted on <strong><a href="www.hub.docker.com">Docker Hub</a></strong>. Docker hub acts like a maven repository in java world but instead of repositories it will have docker image files. It is recommended to have a docker hub account so we can browse, download or create one.</p> 
+  </div> 
  </div> 
-</div> 
-<div class="sect3"> 
- <h4 id="_docker_engine_daemon">Docker Engine/daemon</h4> 
- <div class="paragraph"> 
-  <p>Docker engine/daemon is a background process which creates, runs and manages containers. We use docker CLI to interact with the engine.</p> 
+ <div class="sect4"> 
+  <h5 id="_docker_engine_daemon">Docker Engine/daemon</h5> 
+  <div class="paragraph"> 
+   <p>Docker engine/daemon is a background process which creates, runs and manages containers. We use docker CLI to interact with the engine.</p> 
+  </div> 
  </div> 
-</div> 
-<div class="sect3"> 
- <h4 id="_docker_cli">Docker CLI</h4> 
- <div class="paragraph"> 
-  <p>Docker provides a CLI interface. We can interact with the engine by passing commands through the CLI. CLI passes our commands to the engine and displays output from the engine. CLI uses REST API to connect the engine and this network layer make engine and CLI work independently. Because CLI and engine communicate based on the REST so CLI can also pass commands to the remote docker engine.</p> 
+ <div class="sect4"> 
+  <h5 id="_docker_cli">Docker CLI</h5> 
+  <div class="paragraph"> 
+   <p>Docker provides a CLI interface. We can interact with the engine by passing commands through the CLI. CLI passes our commands back to the engine and displays output from the engine. CLI uses REST API to connect the engine and this network layer make engine and CLI work independently, because CLI and engine communicate based on the REST so CLI can also pass commands to the remote docker engine.</p> 
+  </div> 
  </div> 
 </div> 
 <div class="sect3"> 
@@ -139,7 +145,7 @@
 <div class="sect3"> 
  <h4 id="_conclusion">Conclusion</h4> 
  <div class="paragraph"> 
-  <p>We can get a fully configured application in a container when we run a docker image. Now we can take this image and execute it on multiple environments or run multiple instances in same machine. This makes its easy to setup and configure applications. In the next docker articles which I post soon will contain more information.</p> 
+  <p>We can get a fully configured application in a container when we run a docker image. We can run this image on multiple environments or run multiple images in same machine. Docker makes its easy to setup and configure applications.</p> 
  </div> 
 </div>
 
@@ -265,6 +271,10 @@
                                 <ul class="list-unstyled ml-0 break-word">
                                     
                                         <li class="mb-2">
+                                            <a href="../../../blog/2018/06/09-docker-intro.html" class="footer-link"> Docker Introduction</a>
+                                        </li>
+                                    
+                                        <li class="mb-2">
                                             <a href="../../../blog/2018/06/06-reactivex-introduction.html" class="footer-link"> ReactiveX Introduction</a>
                                         </li>
                                     
@@ -278,10 +288,6 @@
                                     
                                         <li class="mb-2">
                                             <a href="../../../blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html" class="footer-link"> Simple Introduction to ForkJoin Framework - Part 2</a>
-                                        </li>
-                                    
-                                        <li class="mb-2">
-                                            <a href="../../../blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html" class="footer-link"> Simple Introduction to ForkJoin Framework - Part 1</a>
                                         </li>
                                     
                                 </ul>
@@ -390,12 +396,12 @@
                                         stream
                                     </a>
                                 
-                                    <a href="../../../tags/git.html" class="badge tag m-1 p-2" style="font-size:90%">
-                                        git
-                                    </a>
-                                
                                     <a href="../../../tags/file.html" class="badge tag m-1 p-2" style="font-size:90%">
                                         file
+                                    </a>
+                                
+                                    <a href="../../../tags/git.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        git
                                     </a>
                                 
                                     <a href="../../../tags/java.html" class="badge tag m-1 p-2" style="font-size:90%">
@@ -408,6 +414,10 @@
                                 
                                     <a href="../../../tags/spring.html" class="badge tag m-1 p-2" style="font-size:90%">
                                         spring
+                                    </a>
+                                
+                                    <a href="../../../tags/docker.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        docker
                                     </a>
                                 
                                     <a href="../../../tags/design pattern.html" class="badge tag m-1 p-2" style="font-size:90%">
@@ -462,9 +472,9 @@
 
     <script type="text/javascript">
         var disqus_shortname = 'null'; 
-        var disqus_identifier = 'blog/2018/06/docker-intro.html';
+        var disqus_identifier = 'blog/2018/06/09-docker-intro.html';
         var disqus_title = "Docker Introduction";
-        var disqus_url = 'http://www.techstackjava.com/blog/2018/06/docker-intro.html';
+        var disqus_url = 'http://www.techstackjava.com/blog/2018/06/09-docker-intro.html';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {
@@ -595,12 +605,12 @@
                                         stream
                                     </a>
                                 
-                                    <a href="../../../tags/git.html" class="badge badge-primary footer-tag-background">
-                                        git
-                                    </a>
-                                
                                     <a href="../../../tags/file.html" class="badge badge-primary footer-tag-background">
                                         file
+                                    </a>
+                                
+                                    <a href="../../../tags/git.html" class="badge badge-primary footer-tag-background">
+                                        git
                                     </a>
                                 
                                     <a href="../../../tags/java.html" class="badge badge-primary footer-tag-background">
@@ -613,6 +623,10 @@
                                 
                                     <a href="../../../tags/spring.html" class="badge badge-primary footer-tag-background">
                                         spring
+                                    </a>
+                                
+                                    <a href="../../../tags/docker.html" class="badge badge-primary footer-tag-background">
+                                        docker
                                     </a>
                                 
                                     <a href="../../../tags/design pattern.html" class="badge badge-primary footer-tag-background">
@@ -651,6 +665,10 @@
                                 <ul class="list-unstyled ml-0">
                                     
                                         <li>
+                                            <a href="../../../blog/2018/06/09-docker-intro.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Docker Introduction</a>
+                                        </li>
+                                    
+                                        <li>
                                             <a href="../../../blog/2018/06/06-reactivex-introduction.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> ReactiveX Introduction</a>
                                         </li>
                                     
@@ -680,10 +698,6 @@
                                     
                                         <li>
                                             <a href="../../../blog/2018/04/15-how-concurrentModificationException-is-thrown.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> How ConcurrentModificationException is thrown?</a>
-                                        </li>
-                                    
-                                        <li>
-                                            <a href="../../../blog/2018/04/11-regex-tester-with-spring-shell.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Regex Tester With Spring Shell</a>
                                         </li>
                                     
                                 </ul>

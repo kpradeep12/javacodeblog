@@ -85,7 +85,61 @@
                             <!-- Preview Image -->
                             <img class="img-fluid rounded d-block mr-auto ml-auto shadow" src="../../../img/" alt="">
                             <hr>
-                            
+                            <div id="preamble"> 
+ <div class="sectionbody"> 
+  <div class="paragraph"> 
+   <p>Observable emit values over the time and observer, who is interested to receive these values should subscribe for it. On the availability of values observable will push them to subscribers/observers. Observer will not wait for the values so they are non-blocking and they only act when a value is pushed towards them.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>Other than the values, observable will pass error or complete notification to the observer and once these notification is received then the subscription closes and no more values will be passed.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>Marble diagrams are the best way to show the flow of values between observable and observer. Below image show a observable which emits even numbers.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>&lt;image&gt;</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p><strong><a href="http://rxmarbles.com">rxmarbles</a></strong> is the best site to play with observables. This site provides an interactive graphics to show how values change from observables to observer.</p> 
+  </div> 
+  <div class="paragraph"> 
+   <p>Imagine observable is like a water tap, where the water flows continuously.</p> 
+  </div> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="_observable_chains">Observable chains</h4> 
+ <div class="paragraph"> 
+  <p>Values traversing between observable and observer can be changed by introducing an intermediate observable. This is the more powerful way to change the values before they reach observer, instead of observer changing by itself. Adding and removing intermediate observables makes the flow flexible.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>In this chain an observable acts like an observer to its parent Observable and finally this chain terminates at the subscriber.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>&lt;image&gt;</p> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="_hot_and_cold_observables">Hot and Cold Observables</h4> 
+ <div class="paragraph"> 
+  <p>An hot observable emits values as soon as it is created. Observers who joined later will receive values from middle.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>&lt;image&gt;</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>Cold observable waits for observer to subscribe before emitting values. Observer will see all emitted values.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>&lt;image&gt;</p> 
+ </div> 
+</div> 
+<div class="sect3"> 
+ <h4 id="_observable_operators">Observable operators</h4> 
+ <div class="paragraph"> 
+  <p>ReactiveX provides wide variety of operators. We can apply these operators on the emitted values from observables to transform, filter, aggregate, merge and many more.</p> 
+ </div> 
+</div>
 
                         </article>
                     </div>
@@ -209,6 +263,10 @@
                                 <ul class="list-unstyled ml-0 break-word">
                                     
                                         <li class="mb-2">
+                                            <a href="../../../blog/2018/06/09-docker-intro.html" class="footer-link"> Docker Introduction</a>
+                                        </li>
+                                    
+                                        <li class="mb-2">
                                             <a href="../../../blog/2018/06/06-reactivex-introduction.html" class="footer-link"> ReactiveX Introduction</a>
                                         </li>
                                     
@@ -222,10 +280,6 @@
                                     
                                         <li class="mb-2">
                                             <a href="../../../blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html" class="footer-link"> Simple Introduction to ForkJoin Framework - Part 2</a>
-                                        </li>
-                                    
-                                        <li class="mb-2">
-                                            <a href="../../../blog/2018/05/03-simple-introduction-to-forkjoin-framework-part1.html" class="footer-link"> Simple Introduction to ForkJoin Framework - Part 1</a>
                                         </li>
                                     
                                 </ul>
@@ -334,12 +388,12 @@
                                         stream
                                     </a>
                                 
-                                    <a href="../../../tags/git.html" class="badge tag m-1 p-2" style="font-size:90%">
-                                        git
-                                    </a>
-                                
                                     <a href="../../../tags/file.html" class="badge tag m-1 p-2" style="font-size:90%">
                                         file
+                                    </a>
+                                
+                                    <a href="../../../tags/git.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        git
                                     </a>
                                 
                                     <a href="../../../tags/java.html" class="badge tag m-1 p-2" style="font-size:90%">
@@ -352,6 +406,10 @@
                                 
                                     <a href="../../../tags/spring.html" class="badge tag m-1 p-2" style="font-size:90%">
                                         spring
+                                    </a>
+                                
+                                    <a href="../../../tags/docker.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        docker
                                     </a>
                                 
                                     <a href="../../../tags/design pattern.html" class="badge tag m-1 p-2" style="font-size:90%">
@@ -539,12 +597,12 @@
                                         stream
                                     </a>
                                 
-                                    <a href="../../../tags/git.html" class="badge badge-primary footer-tag-background">
-                                        git
-                                    </a>
-                                
                                     <a href="../../../tags/file.html" class="badge badge-primary footer-tag-background">
                                         file
+                                    </a>
+                                
+                                    <a href="../../../tags/git.html" class="badge badge-primary footer-tag-background">
+                                        git
                                     </a>
                                 
                                     <a href="../../../tags/java.html" class="badge badge-primary footer-tag-background">
@@ -557,6 +615,10 @@
                                 
                                     <a href="../../../tags/spring.html" class="badge badge-primary footer-tag-background">
                                         spring
+                                    </a>
+                                
+                                    <a href="../../../tags/docker.html" class="badge badge-primary footer-tag-background">
+                                        docker
                                     </a>
                                 
                                     <a href="../../../tags/design pattern.html" class="badge badge-primary footer-tag-background">
@@ -595,6 +657,10 @@
                                 <ul class="list-unstyled ml-0">
                                     
                                         <li>
+                                            <a href="../../../blog/2018/06/09-docker-intro.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Docker Introduction</a>
+                                        </li>
+                                    
+                                        <li>
                                             <a href="../../../blog/2018/06/06-reactivex-introduction.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> ReactiveX Introduction</a>
                                         </li>
                                     
@@ -624,10 +690,6 @@
                                     
                                         <li>
                                             <a href="../../../blog/2018/04/15-how-concurrentModificationException-is-thrown.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> How ConcurrentModificationException is thrown?</a>
-                                        </li>
-                                    
-                                        <li>
-                                            <a href="../../../blog/2018/04/11-regex-tester-with-spring-shell.html" class="footer-link"><i class="fa fa-arrow-right" aria-hidden="true"></i> Regex Tester With Spring Shell</a>
                                         </li>
                                     
                                 </ul>
