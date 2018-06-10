@@ -17,41 +17,19 @@
 
         <div class="row">
             <!--posts-->
-            <!--<div class="col-md-12">
-                <div class="container">
-                    <%published_posts.take(6).each {post ->%>
-                        <div class="row p-3 mb-3">
-                            <div class="col-md-5">
-                                <a href="${post.uri}">
-                                    <img class="img-fluid rounded mb-3 mb-md-0 shadow" src="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>img/${post.image}" alt="">
-                                </a>
-                            </div>
-                            <div class="col-md-7">
-                                <p>${post.summary}</p>
-                                <p class="text-muted mb-1 small-font">
-                                    Posted on ${post.date.format("dd MMMM yyyy")}
-                                </p>
-                                <a class="btn btn-secondary" href="${post.uri}">Read more...</a>
-                            </div>
-                        </div>
-                        <hr>
-                    <%}%>
-
-                </div>
-            </div> -->
-            
             <%published_posts.take(9).each {post ->%>
             <div class="col-lg-4 col-sm-6 mb-3">
                 <div class="card h-100 shadow">
-                    <a href="${post.uri}">
+                    <a href="${post.uri}" class="banner-link">
                         <img class="banner card-img-top img-fluid rounded mb-3 mb-md-0 shadow" src="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>img/${post.image}" alt="">
                     </a>
                     <div class="card-body">
-                        <p class="card-text">${post.summary}</p>
-                        <p class="text-muted mb-1 small-font">
-                                        Posted on ${post.date.format("dd MMMM yyyy")}
+                        <p class="card-text">${post.summary} <a class="" href="${post.uri}">Read more...</a></p>
+                        <p class="text-muted mb-1 small-font font-weight-bold">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            Posted on ${post.date.format("dd MMMM yyyy")}
                         </p>
-                        <a class="btn btn-secondary" href="${post.uri}">Read more...</a>
+                        
                     </div>
                 </div>
             </div>

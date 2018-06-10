@@ -26,29 +26,6 @@
                     </div>
                     
                     <!--post footer-->
-                    <!--<div class="container mb-5">
-                        <div class="row">    
-                            <div class="col-lg-8" style="    background: #444;    color: #fff;">
-                                <div class="card my-4 border-0" style="background: #444;">
-                                    <p class="card-header p-0 border-0" style="background: #444;">Share</p>
-                                    <div class="card-body p-0">
-                                        <div class="input-group">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4" style="    background: #3f4854;    color: #fff;">
-                                <div class="card my-4 border-0" style="background: #3f4854;">
-                                    <p class="card-header p-0 border-0" style="background: #3f4854;">Tags</p>
-                                    <div class="card-body p-0">
-                                        <div class="input-group">
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
                     <div class="container mb-5 social-share">
                         <div class="row">    
                             <div class="col-lg-12">
