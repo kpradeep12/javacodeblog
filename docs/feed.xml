@@ -6,9 +6,141 @@
     <atom:link href="http://www.techstackjava.com//feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Sun, 10 Jun 2018 09:43:56 -0400</pubDate>
-    <lastBuildDate>Sun, 10 Jun 2018 09:43:56 -0400</lastBuildDate>
+    <pubDate>Wed, 13 Jun 2018 06:55:02 -0400</pubDate>
+    <lastBuildDate>Wed, 13 Jun 2018 06:55:02 -0400</lastBuildDate>
 
+    
+    <item>
+      <title>Using SDKMAN to manage SDK&#8217;s</title>
+      <link>http://www.techstackjava.com//blog/2018/06/13-using-sdkman-to-manage-sdks.html</link>
+      <pubDate>Wed, 13 Jun 2018 00:00:00 -0400</pubDate>
+      <guid isPermaLink="false">blog/2018/06/13-using-sdkman-to-manage-sdks.html</guid>
+      <description>
+      &lt;div id=&quot;preamble&quot;&gt; 
+ &lt;div class=&quot;sectionbody&quot;&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Some times we may want multiple java versions on our computer. Lets say we want to have java 8 to run a personal application and java 7 to run a old tool. We can install both of them but depending on what we working on, we may need to switch PATH and JAVA_HOME. It doesn’t just stop at java, what about if application depends on some old maven but we also need latest version of maven for some other project, then we need to manage multiple maven versions.&lt;/p&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;_sdkman&quot;&gt;SDKMAN&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://sdkman.io/&quot;&gt;SDKMAN&lt;/a&gt;&lt;/strong&gt; is a Software Development Kit Manager for java developers. It provides a CLI interface to manage multiple SDK’s like java or maven in the above example. Using this tool we can easily switch, install, uninstall or update candidates. Candidates are nothing but the java SDK’s managed by SDKMAN.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Installation of SDKMAN is easy on linux based operation systems because it is written in bash but for Windows we need to have Cygwin or MSYS+MinGW. Go through this &lt;strong&gt;&lt;a href=&quot;https://sdkman.io/install&quot;&gt;link&lt;/a&gt;&lt;/strong&gt; for installation steps.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Note that SDKMAN will not manage pre-existing SDK’s. So either you need to uninstall them and reinstall with SDKMAN or you can continue to keep them.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;After the installation you can see a hidden folder &apos;.sdkman&apos; in users home directory. This contains a sub-folder named &apos;candidates&apos; which is used to store all installed candidates. We no need to learn about these directories but these folders will give us an idea of how SDKMAN works internally.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;If we install multiple java versions then candidates folder will contain more than one java sub-folder. IDE’s like Eclipse or IntelliJ Idea allows us to add multiple JDK’s so we can provide java folders in the candidates to add multiple versions.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Go through this &lt;strong&gt;&lt;a href=&quot;https://sdkman.io/sdks&quot;&gt;link&lt;/a&gt;&lt;/strong&gt; to see the list of all SDK’s which SDKMAN can install.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;_cli&quot;&gt;CLI&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Lets open a terminal and fire up some commands to see how SDKMAN works. I provided some basic commands, we can also go through this &lt;strong&gt;&lt;a href=&quot;https://sdkman.io/usage:&quot;&gt;link&lt;/a&gt;&lt;/strong&gt; to learn all available options.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;sect4&quot;&gt; 
+  &lt;h5 id=&quot;_list_all_available_versions&quot;&gt;List all available versions&lt;/h5&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Below command will list all available java versions.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;$ sdk list java
+
+================================================================================
+Available Java Versions
+================================================================================
+     9.0.7-zulu
+     9.0.4-openjdk
+   * 8.0.172-zulu
+     8.0.171-oracle
+     7.0.181-zulu
+     10.0.1-zulu
+     10.0.1-oracle
+ &amp;gt; * 10.0.0-openjdk
+================================================================================
++ - local version
+* - installed
+&amp;gt; - currently in use
+================================================================================&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Above output is from my local machine. In the list, it indicates that I have two java versions already available on my machine (8.0.172-zulu and 10.0.0-openjdk) out of them java 10 is currently in use.&lt;/p&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;sect4&quot;&gt; 
+  &lt;h5 id=&quot;_install&quot;&gt;Install&lt;/h5&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;No need to mention version if we want to install latest stable release. Below command will install latest stable java version.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sdk install java&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;While installing it asks if we want this version to be set as default. If we say Yes then it will update the PATH so this effects in all new terminal windows.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;To install specific java version:&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sdk install java 9.0.7-zulu&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;sect4&quot;&gt; 
+  &lt;h5 id=&quot;_switching_versions&quot;&gt;Switching versions&lt;/h5&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Switch to different version temporarily in current shell window.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sdk use java 8.0.172-zulu&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Switch to different version permanently. This command will update PATH.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sdk default java 8.0.172-zulu&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;_list_current_versions&quot;&gt;List current versions&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;To see all installed SDK’s&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sdk current&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;_conclusion&quot;&gt;Conclusion&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;SDKMAN is a small and easy utility to manage multiple SDK’s in our computer. Its really useful for Java developers and it makes life easier.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
     
     <item>
       <title>Docker Introduction</title>

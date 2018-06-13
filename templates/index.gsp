@@ -14,28 +14,34 @@
                 </div>
             </div>
         </div>-->
-
+        
+        <!--posts-->
         <div class="row">
-            <!--posts-->
             <%published_posts.take(9).each {post ->%>
-            <div class="col-lg-4 col-sm-6 mb-3">
-                <div class="card h-100 shadow">
-                    <a href="${post.uri}" class="banner-link">
-                        <img class="banner card-img-top img-fluid rounded mb-3 mb-md-0 shadow" src="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>img/${post.image}" alt="">
-                    </a>
-                    <div class="card-body">
-                        <p class="card-text">${post.summary} <a class="" href="${post.uri}">Read more...</a></p>
-                        <p class="text-muted mb-1 small-font font-weight-bold">
-                            <i class="fa fa-clock-o" aria-hidden="true"></i>
-                            Posted on ${post.date.format("dd MMMM yyyy")}
-                        </p>
-                        
+                <div class="col-lg-4 col-sm-6 mb-3">
+                    <div class="card h-100 shadow">
+                        <a href="${post.uri}" class="banner-link">
+                            <img class="banner card-img-top img-fluid rounded mb-3 mb-md-0 shadow" src="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>img/${post.image}" alt="">
+                        </a>
+                        <div class="card-body">
+                            <p class="card-text">${post.summary} <a class="" href="${post.uri}">Read more...</a></p>
+                            <p class="text-muted mb-1 small-font font-weight-bold">
+                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                Posted on ${post.date.format("dd MMMM yyyy")}
+                            </p>
+                            <!--<p class="text-muted mb-1 small-font font-weight-bold index-tags">
+                                <%post.tags.each {tag ->%>
+                                    <a  class="badge tag mb-1 p-2" style="font-size:90%">
+                                        <i class="fa fa-tag" aria-hidden="true"></i> ${tag}
+                                    </a>
+                                <%}%>
+                            </p>-->
+                        </div>
                     </div>
                 </div>
-            </div>
             <%}%>
-
         </div>
+
     </div>
 
     <div class="container py-4">

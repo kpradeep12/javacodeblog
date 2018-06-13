@@ -103,15 +103,15 @@ pre.prettyprint {
 
 
 
-.sidebar a{
+.sidebar a, .index-tags .tag{
   text-decoration: none;
   color: #b84d45;
   background-color: transparent;
 }
-.sidebar a:active, .sidebar a:focus, .sidebar a:hover {
+.sidebar a:active, .sidebar a:focus, .sidebar a:hover, .index-tags a:active, .index-tags a:focus,.index-tags a:hover {
   text-decoration: none;
 }
-.sidebar .tag{
+.sidebar .tag, .index-tags .tag{
     color: #4b5359;
     background-color: #f5eeee;
     font-weight: unset;

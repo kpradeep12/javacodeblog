@@ -10,7 +10,7 @@
     <meta name="generator" content="JBake">
     <meta name="google-site-verification" content="tuMqCtGo9Q2zjZ6e2k1iswdB1R56vqiqYfbSrrzlyRE" />
     
-    <title>SDKMAN - for developers</title>
+    <title>Using SDKMAN to manage SDK&#8217;s</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
@@ -74,51 +74,54 @@
                     <div class="p-3">
                         <article>
                             <!-- Title -->
-                            <h3 class="mb-0">SDKMAN - for developers</h3>
+                            <h3 class="mb-0">Using SDKMAN to manage SDK&#8217;s</h3>
                             
                             <!-- Author -->
                             <p class="small-font mb-0">
-                                published by <a href="#">Pradeep</a> on June 06, 2018
+                                published by <a href="#">Pradeep</a> on June 13, 2018
                             </p>
                             <hr>
 
                             <!-- Preview Image -->
-                            <img class="img-fluid rounded d-block mr-auto ml-auto shadow" src="../../../img/" alt="">
+                            <img class="img-fluid rounded d-block mr-auto ml-auto shadow" src="../../../img/banners/using-sdkman-to-manage-sdks.png" alt="">
                             <hr>
                             <div id="preamble"> 
  <div class="sectionbody"> 
   <div class="paragraph"> 
-   <p>As a developers we may some times want multiple java versions on our computers. Lets say we want to have java 8 to run a reservation application and java 10 to learn new stuff. We can install both of them but we need to keep switch PATHS based on the requirement. These lower level changes can become more complex if we want to add more java versions. It doesn’t just stop at java, reservation application depends on some old maven but we also need latest version of maven for other projects, then we need to manage multiple maven versions.</p> 
+   <p>Some times we may want multiple java versions on our computer. Lets say we want to have java 8 to run a personal application and java 7 to run a old tool. We can install both of them but depending on what we working on, we may need to switch PATH and JAVA_HOME. It doesn’t just stop at java, what about if application depends on some old maven but we also need latest version of maven for some other project, then we need to manage multiple maven versions.</p> 
   </div> 
  </div> 
 </div> 
 <div class="sect3"> 
  <h4 id="_sdkman">SDKMAN</h4> 
  <div class="paragraph"> 
-  <p><strong><a href="https://sdkman.io/">SDKMAN</a></strong> is a Software Development Kit Manager for java developers. It provides a CLI interface to manage multiple versions of Java SDK’s. Using this tool we can easily switch, add, remove or update candidates. Candidates are nothing but the java SDK’s managed by SDKMAN.</p> 
+  <p><strong><a href="https://sdkman.io/">SDKMAN</a></strong> is a Software Development Kit Manager for java developers. It provides a CLI interface to manage multiple SDK’s like java or maven in the above example. Using this tool we can easily switch, install, uninstall or update candidates. Candidates are nothing but the java SDK’s managed by SDKMAN.</p> 
  </div> 
  <div class="paragraph"> 
   <p>Installation of SDKMAN is easy on linux based operation systems because it is written in bash but for Windows we need to have Cygwin or MSYS+MinGW. Go through this <strong><a href="https://sdkman.io/install">link</a></strong> for installation steps.</p> 
  </div> 
  <div class="paragraph"> 
-  <p>Note that SDKMAN will not manage pre-existing candidates. So either you need to uninstall them and reinstall with SDKMAN or you can continue to keep them.</p> 
+  <p>Note that SDKMAN will not manage pre-existing SDK’s. So either you need to uninstall them and reinstall with SDKMAN or you can continue to keep them.</p> 
  </div> 
  <div class="paragraph"> 
-  <p>After the installation you can see a hidden folder '.sdkman' in users home directory. This contains a sub-folder named 'candidates' which is used to store all installed candidates. We no need to learn about this directories but this folders will give us an idea of how SDKMAN works internally.</p> 
+  <p>After the installation you can see a hidden folder '.sdkman' in users home directory. This contains a sub-folder named 'candidates' which is used to store all installed candidates. We no need to learn about these directories but these folders will give us an idea of how SDKMAN works internally.</p> 
  </div> 
  <div class="paragraph"> 
-  <p>Candidates folder can contain more than one java sub-folder if we installed multiple java versions and we can add these folders as installed JDK’s in Java IDE’s (like Eclipse or IntelliJ Idea) so we no need to install java externally for just IDE purpose.</p> 
+  <p>If we install multiple java versions then candidates folder will contain more than one java sub-folder. IDE’s like Eclipse or IntelliJ Idea allows us to add multiple JDK’s so we can provide java folders in the candidates to add multiple versions.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>Go through this <strong><a href="https://sdkman.io/sdks">link</a></strong> to see the list of all SDK’s which SDKMAN can install.</p> 
  </div> 
 </div> 
 <div class="sect3"> 
  <h4 id="_cli">CLI</h4> 
  <div class="paragraph"> 
-  <p>Lets open a terminal and fire up some commands to see how SDKMAN works. I provides some basic commands which we regularly use but we can also go through this <strong><a href="https://sdkman.io/usage:">link</a></strong> to learn all available options.</p> 
+  <p>Lets open a terminal and fire up some commands to see how SDKMAN works. I provided some basic commands, we can also go through this <strong><a href="https://sdkman.io/usage:">link</a></strong> to learn all available options.</p> 
  </div> 
  <div class="sect4"> 
-  <h5 id="_list_all_available">List all available</h5> 
+  <h5 id="_list_all_available_versions">List all available versions</h5> 
   <div class="paragraph"> 
-   <p>List out all available java versions we can install with SDKMAN</p> 
+   <p>Below command will list all available java versions.</p> 
   </div> 
   <div class="listingblock"> 
    <div class="content"> 
@@ -135,7 +138,6 @@ Available Java Versions
      10.0.1-zulu
      10.0.1-oracle
  &gt; * 10.0.0-openjdk
-
 ================================================================================
 + - local version
 * - installed
@@ -144,13 +146,13 @@ Available Java Versions
    </div> 
   </div> 
   <div class="paragraph"> 
-   <p>Above output is from my local machine. Along with the list, it indicates that I have two java versions available on my machine (8.0.172-zulu and 10.0.0-openjdk) out of them java 10 is currently in use.</p> 
+   <p>Above output is from my local machine. In the list, it indicates that I have two java versions already available on my machine (8.0.172-zulu and 10.0.0-openjdk) out of them java 10 is currently in use.</p> 
   </div> 
  </div> 
  <div class="sect4"> 
-  <h5 id="_install_candidates">Install candidates</h5> 
+  <h5 id="_install">Install</h5> 
   <div class="paragraph"> 
-   <p>No need to mention version if we want to install latest stable release. In the below example, it installs latest stable java version.</p> 
+   <p>No need to mention version if we want to install latest stable release. Below command will install latest stable java version.</p> 
   </div> 
   <div class="listingblock"> 
    <div class="content"> 
@@ -161,44 +163,38 @@ Available Java Versions
    <p>While installing it asks if we want this version to be set as default. If we say Yes then it will update the PATH so this effects in all new terminal windows.</p> 
   </div> 
   <div class="paragraph"> 
-   <p>Install specific java version</p> 
+   <p>To install specific java version:</p> 
   </div> 
   <div class="listingblock"> 
    <div class="content"> 
     <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">sdk install java 9.0.7-zulu</code></pre> 
    </div> 
   </div> 
-  <div class="paragraph"> 
-   <p>Installs java 9.0.7-zulu</p> 
-  </div> 
  </div> 
  <div class="sect4"> 
   <h5 id="_switching_versions">Switching versions</h5> 
   <div class="paragraph"> 
-   <p>To temporarily switch to different version in current shell window</p> 
+   <p>Switch to different version temporarily in current shell window.</p> 
   </div> 
   <div class="listingblock"> 
    <div class="content"> 
     <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">sdk use java 8.0.172-zulu</code></pre> 
    </div> 
   </div> 
- </div> 
-</div> 
-<div class="sect3"> 
- <h4 id="_change_default_version">Change default version</h4> 
- <div class="paragraph"> 
-  <p>To set default version</p> 
- </div> 
- <div class="listingblock"> 
-  <div class="content"> 
-   <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">sdk default java 8.0.172-zulu</code></pre> 
+  <div class="paragraph"> 
+   <p>Switch to different version permanently. This command will update PATH.</p> 
+  </div> 
+  <div class="listingblock"> 
+   <div class="content"> 
+    <pre class="prettyprint highlight"><code class="language-bash" data-lang="bash">sdk default java 8.0.172-zulu</code></pre> 
+   </div> 
   </div> 
  </div> 
 </div> 
 <div class="sect3"> 
  <h4 id="_list_current_versions">List current versions</h4> 
  <div class="paragraph"> 
-  <p>To see all current versions</p> 
+  <p>To see all installed SDK’s</p> 
  </div> 
  <div class="listingblock"> 
   <div class="content"> 
@@ -209,7 +205,7 @@ Available Java Versions
 <div class="sect3"> 
  <h4 id="_conclusion">Conclusion</h4> 
  <div class="paragraph"> 
-  <p>SDKMAN is</p> 
+  <p>SDKMAN is a small and easy utility to manage multiple SDK’s in our computer. Its really useful for Java developers and it makes life easier.</p> 
  </div> 
 </div>
 
@@ -312,6 +308,10 @@ Available Java Versions
                                 <ul class="list-unstyled ml-0 break-word">
                                     
                                         <li class="mb-2">
+                                            <a href="../../../blog/2018/06/13-using-sdkman-to-manage-sdks.html" class="footer-link"> Using SDKMAN to manage SDK&#8217;s</a>
+                                        </li>
+                                    
+                                        <li class="mb-2">
                                             <a href="../../../blog/2018/06/09-docker-intro.html" class="footer-link"> Docker Introduction</a>
                                         </li>
                                     
@@ -325,10 +325,6 @@ Available Java Versions
                                     
                                         <li class="mb-2">
                                             <a href="../../../blog/2018/05/13-introduction-to-java-time-part2.html" class="footer-link"> Introduction to java.time - Part 2</a>
-                                        </li>
-                                    
-                                        <li class="mb-2">
-                                            <a href="../../../blog/2018/05/03-simple-introduction-to-forkjoin-framework-part2.html" class="footer-link"> Simple Introduction to ForkJoin Framework - Part 2</a>
                                         </li>
                                     
                                 </ul>
@@ -453,6 +449,10 @@ Available Java Versions
                                         random
                                     </a>
                                 
+                                    <a href="../../../tags/sdkman.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        sdkman
+                                    </a>
+                                
                                     <a href="../../../tags/spring.html" class="badge tag m-1 p-2" style="font-size:90%">
                                         spring
                                     </a>
@@ -463,6 +463,10 @@ Available Java Versions
                                 
                                     <a href="../../../tags/design pattern.html" class="badge tag m-1 p-2" style="font-size:90%">
                                         design pattern
+                                    </a>
+                                
+                                    <a href="../../../tags/tools.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        tools
                                     </a>
                                 
                                     <a href="../../../tags/delete.html" class="badge tag m-1 p-2" style="font-size:90%">
@@ -513,9 +517,9 @@ Available Java Versions
 
     <script type="text/javascript">
         var disqus_shortname = 'null'; 
-        var disqus_identifier = 'blog/2018/06/sdkman.html';
-        var disqus_title = "SDKMAN - for developers";
-        var disqus_url = 'http://www.techstackjava.com/blog/2018/06/sdkman.html';
+        var disqus_identifier = 'blog/2018/06/13-using-sdkman-to-manage-sdks.html';
+        var disqus_title = "Using SDKMAN to manage SDK&#8217;s";
+        var disqus_url = 'http://www.techstackjava.com/blog/2018/06/13-using-sdkman-to-manage-sdks.html';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {
