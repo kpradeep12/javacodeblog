@@ -6,9 +6,158 @@
     <atom:link href="http://www.techstackjava.com//feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Fri, 15 Jun 2018 15:04:34 -0400</pubDate>
-    <lastBuildDate>Fri, 15 Jun 2018 15:04:34 -0400</lastBuildDate>
+    <pubDate>Wed, 27 Jun 2018 12:09:20 -0400</pubDate>
+    <lastBuildDate>Wed, 27 Jun 2018 12:09:20 -0400</lastBuildDate>
 
+    
+    <item>
+      <title>Spring Cloud Configuration - Part 1</title>
+      <link>http://www.techstackjava.com//blog/2018/06/spring-cloud-config-basics-part-1.html</link>
+      <pubDate>Wed, 27 Jun 2018 00:00:00 -0400</pubDate>
+      <guid isPermaLink="false">blog/2018/06/spring-cloud-config-basics-part-1.html</guid>
+      <description>
+      &lt;div id=&quot;preamble&quot;&gt; 
+ &lt;div class=&quot;sectionbody&quot;&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Configuration can be any key value pair information needed by the application at runtime. Spring applications accepts configuration in many ways like command line arguments, OS environment variables or application properties and so on. In the context of microservices we can have multiple applications running together and if each application maintains its own set of configuration then a simple change in the configuration needs deployment or restart. If we have to change configuration in multiple applications then this approach is a time consuming and not efficient.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Alternative way is to have a config server application. The main purpose of this application is to manage configuration for all applications. All other applications on the startup will request configuration from the config server. Applications which request configuration are called config clients. Config server and config clients, both are the spring based applications.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;With the config server and clients in the place now the config changes we make on the server will reflect on the client application with out deployment or restart. In the microservices environment this is a very useful setup because configuration for all applications are maintained at single location and the changes are reflected on the client applications with out restart or deployment.&lt;/p&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect2&quot;&gt; 
+ &lt;h3 id=&quot;_config_server_setup&quot;&gt;Config server setup&lt;/h3&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Config server is just another spring application which runs on its own port and manages config repository. Config repository is a location in which we can store application properties. Config server can support many types of repositories like git, local file system, database or vault back-end. By-default config server uses git folder as the repository.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;sect3&quot;&gt; 
+  &lt;h4 id=&quot;_create_local_git_repository&quot;&gt;Create local Git repository&lt;/h4&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;To create a local git repository make sure your computer have git installed. Open a terminal and create a git repository by executing below command;&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;git init pet-store-repository&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;In this repository folder, create a configuration file for pet-store application. In the next part of this article we will create a pet-store application which uses config server to get configuration from this repository. To create a pet-store configuration for a dev profile we need to name file as &lt;strong&gt;pet-store-dev.properties&lt;/strong&gt;. We can have multiple configurations for same application but different profiles. Lets just have a single property in it.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;title&quot;&gt;
+    pet-store-dev.properties
+   &lt;/div&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;message=Hello!&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Add and commit this file to local repository by executing below commands;&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;git add -A
+git commit -m &quot;config&quot;&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Now our local git repository contains single configuration file. Lets create a config server.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Go to &lt;strong&gt;&lt;a href=&quot;https://start.spring.io/&quot;&gt;start.spring.io&lt;/a&gt;&lt;/strong&gt; to generate spring project&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;ulist&quot;&gt; 
+   &lt;ul&gt; 
+    &lt;li&gt; &lt;p&gt;Change Artifact to &lt;strong&gt;config-server-demo&lt;/strong&gt;&lt;/p&gt; &lt;/li&gt; 
+    &lt;li&gt; &lt;p&gt;Select &lt;strong&gt;Config Server&lt;/strong&gt; as dependency&lt;/p&gt; &lt;/li&gt; 
+    &lt;li&gt; &lt;p&gt;Click on &lt;strong&gt;Generate Project&lt;/strong&gt;&lt;/p&gt; &lt;/li&gt; 
+   &lt;/ul&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph text-center&quot;&gt; 
+   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/2018/06/spring-starter-config-server-demo.png&quot; alt=&quot;Config server demo&quot; width=&quot;650&quot; height=&quot;500&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Unzip and open project in any IDE.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Open ConfigServerDemoApplication.java and add &lt;strong&gt;@EnableConfigServer&lt;/strong&gt; annotation, like below;&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;@SpringBootApplication
+@EnableConfigServer
+public class ConfigServerDemoApplication {
+	public static void main(String[] args) {
+		SpringApplication.run(ConfigServerDemoApplication.class, args);
+	}
+}&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;&lt;strong&gt;@EnableConfigServer&lt;/strong&gt; annotation will add configuration server features to the application. Update application.properties with below configuration;&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;title&quot;&gt;
+    application.properties
+   &lt;/div&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;server.port= 8888
+spring.cloud.config.server.git.uri= file://${user.home}/code/spring/pet-store-repository&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Config server will startup on the port 8888. spring.cloud.config.server.git.uri property is for the path to the repository location. On my computer repository is located at /&amp;lt;user&amp;gt;/code/spring/pet-store-repository. If it is windows computer then provide three forward slashes &lt;strong&gt;&lt;a href=&quot;file:///&quot; class=&quot;bare&quot;&gt;file:///&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Start config-server-demo application and access URL &lt;strong&gt;&lt;a href=&quot;http://localhost:8888/pet-store/dev&quot; class=&quot;bare&quot;&gt;http://localhost:8888/pet-store/dev&lt;/a&gt;&lt;/strong&gt; in the browser. This should return below JSON&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;listingblock&quot;&gt; 
+   &lt;div class=&quot;content&quot;&gt; 
+    &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;// 20180626222509
+// http://localhost:8888/pet-store/dev
+
+{
+  &quot;name&quot;: &quot;pet-store&quot;,
+  &quot;profiles&quot;: [
+    &quot;dev&quot;
+  ],
+  &quot;label&quot;: null,
+  &quot;version&quot;: &quot;1738976280ccd3ba3c776f28cffe8f5ecbd800fd&quot;,
+  &quot;state&quot;: null,
+  &quot;propertySources&quot;: [
+    {
+      &quot;name&quot;: &quot;file:///Users/pradeep/code/spring/pet-store-repository/pet-store-dev.properties&quot;,
+      &quot;source&quot;: {
+        &quot;message&quot;: &quot;Hello!&quot;
+      }
+    }
+  ]
+}&lt;/code&gt;&lt;/pre&gt; 
+   &lt;/div&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;We can see &lt;strong&gt;message&lt;/strong&gt; property in the JSON. Config server wraps properties with some meta information, like version and profile. We can access this JSON with various URL combinations. Look for the config server startup logs to see all URL end points server can accept. If we update properties and refresh the browser we should see new changes in the JSON response. Config server will always serve updated properties from the repository&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Below image shows the link between server, repository and client applications.&lt;/p&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;paragraph text-center&quot;&gt; 
+   &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/2018/06/config-server-with-clients.jpg&quot; alt=&quot;Config server with client applications&quot; width=&quot;650&quot; height=&quot;500&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect2&quot;&gt; 
+ &lt;h3 id=&quot;_conclusion&quot;&gt;Conclusion&lt;/h3&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;In this post we created git repository with single configuration file and a config server. In the next part we will create a pet-store application which will request properties from the config server.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
     
     <item>
       <title>ReactiveX Observables</title>

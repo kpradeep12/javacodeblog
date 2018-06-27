@@ -22,8 +22,8 @@
     <link href="<%if (content.rootpath) {%>${content.rootpath}<% } else { %><% }%>css/1-col-portfolio.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href='https://fonts.googleapis.com/css?family=Libre+Franklin:400,100,100italic,200,200italic,300,300italic,400italic,500,600,500italic,600italic,700,700italic,800,900,800italic,900italic' rel='stylesheet' type='text/css'>
-
+    <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

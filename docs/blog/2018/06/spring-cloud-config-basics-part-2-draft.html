@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content="JBake">
+    <meta name="google-site-verification" content="tuMqCtGo9Q2zjZ6e2k1iswdB1R56vqiqYfbSrrzlyRE" />
+    
+    <title>Spring Cloud Configuration - Part 2</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+
+    <link href="../../../css/asciidoctor.css" rel="stylesheet">
+    <link href="../../../css/prettify.css" rel="stylesheet">
+    <link href="../../../css/1-col-portfolio.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <!-- link rel="shortcut icon" href="../../../favicon.ico" -->
+  </head>
+  <body onload="prettyPrint()">
+   
+
+        <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="../../../index.html">Tech Stack Java</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="../../../index.html">Home</a>
+            </li>
+            <!--<li class="nav-item">
+                <a class="nav-link" href="../../../about.html">About</a>
+            </li>-->
+            <li class="nav-item">
+                <a class="nav-link" href="/archive.html">Archive</a>
+            </li>
+            <!--<li class="nav-item">
+                <a class="nav-link" href="../../../contact.html">Contact</a>
+            </li>-->
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container pt-2">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="bg-white rounded shadow mb-4">
+                    <div class="p-3">
+                        <article>
+                            <!-- Title -->
+                            <h3 class="mb-0">Spring Cloud Configuration - Part 2</h3>
+                            
+                            <!-- Author -->
+                            <p class="small-font mb-0">
+                                published by <a href="#">Pradeep</a> on June 23, 2018
+                            </p>
+                            <hr>
+
+                            <!-- Preview Image -->
+                            <img class="img-fluid rounded d-block mr-auto ml-auto shadow" src="../../../img/" alt="">
+                            <hr>
+                            <div class="paragraph"> 
+ <p>When other applications starts they will contact config server to get</p> 
+</div> 
+<div class="paragraph"> 
+ <p>&lt;image&gt;</p> 
+</div> 
+<div class="paragraph"> 
+ <p>Lets create a basic spring application with out cloud configuration and then we introduce config Spring application by default loads configuration from application properties, which can be found at src/main/resources folder.</p> 
+</div> 
+<div class="paragraph"> 
+ <p>Lets create and configure a spring web application. Go to <strong><a href="https://start.spring.io/">start.spring.io</a></strong> and generate a pet-store project with <strong>web</strong> as dependency. See below screenshot for the reference.</p> 
+</div> 
+<div class="paragraph"> 
+ <p>&lt;image&gt;</p> 
+</div> 
+<div class="paragraph"> 
+ <p>Unzip and open spring project in an IDE. You should see an empty application.properties at src/main/resources and single application initializer class PetStoreApplication.java at src/main/java/com/example/petstore.</p> 
+</div> 
+<div class="paragraph"> 
+ <p>Owner of the pet-store wants to publish an alert message on some rest-end point so there customers can access this message. Lets add an alert-message property in the configuration file like below; .application.properties</p> 
+</div> 
+<div class="listingblock"> 
+ <div class="content"> 
+  <pre>alert-message=Due to inclement weather conditions pet store is closed tomorrow.</pre> 
+ </div> 
+</div> 
+<div class="paragraph"> 
+ <p>To publish this message on a rest-end point lets create a controller and inject this property into it.</p> 
+</div> 
+<div class="listingblock"> 
+ <div class="content"> 
+  <pre class="prettyprint highlight"><code class="language-java" data-lang="java">package com.example.petstore;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class AlertMessageController {
+
+    @Value("${alert-message}")
+    String alertMessage; <i class="conum" data-value="1"></i><b>(1)</b>
+
+    @RequestMapping("/alert-message")
+    public String getMessage(){ <i class="conum" data-value="2"></i><b>(2)</b>
+        return alertMessage;
+    }
+}</code></pre> 
+ </div> 
+</div> 
+<div class="colist arabic"> 
+ <table> 
+  <tbody>
+   <tr> 
+    <td><i class="conum" data-value="1"></i><b>1</b></td> 
+    <td>Spring injects <strong>alert-message</strong> property value from configuration.</td> 
+   </tr> 
+   <tr> 
+    <td><i class="conum" data-value="2"></i><b>2</b></td> 
+    <td>REST end point for the customers to get alert-message</td> 
+   </tr> 
+  </tbody>
+ </table> 
+</div> 
+<div class="paragraph"> 
+ <p>Start the spring application, by default spring application starts on 8080 port so hit <a href="http://localhost:8080/alert-message" class="bare">http://localhost:8080/alert-message</a> in the browser and expect to see message 'Due to inclement weather conditions pet store is closed tomorrow.' as the result.</p> 
+</div> 
+<div class="paragraph"> 
+ <p>Lets create a rest controller which listens on <strong>/alert</strong> end-point and returns pre-configured message from application properties. So</p> 
+</div>
+
+                        </article>
+                    </div>
+                    
+                    <!--post footer-->
+                    <div class="container mb-5 social-share">
+                        <div class="row">    
+                            <div class="col-lg-12">
+                                <div class="card my-4 border-0">
+                                    <p class="m-0 text-center small-font">Share this post</p>
+<ul class="list-inline text-center list-unstyled float-left m-0">
+    <li class="list-inline-item">
+        <a href="javascript:tweetPage()"> 
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+    </li>
+    <li class="list-inline-item">
+        <a href="javascript:shareOnFacebook()"> 
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+    </li>
+    <li class="list-inline-item">
+        <a href="javascript:shareOnLinkedIn()"> 
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+    </li>
+    <!--<li class="list-inline-item">
+        <a href="javascript:shareOnReddit()"> 
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-reddit-alien fa-stack-1x fa-inverse"></i>
+            </span>
+        </a>
+    </li>-->
+</ul>
+
+<!--
+                <ul class="list-inline text-center list-unstyled float-left socialButtons m-0">
+                    <li class="list-inline-item">
+                        <a href="javascript:tweetPage()" class="btn btn-twitter" data-toggle="tooltip" data-placement="top" title="Twitter">
+                            <i class="fa fa-twitter fa-2x"></i>
+                            <span class="hidden-xs"></span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="javascript:shareOnFacebook()" class="btn btn-facebook" data-toggle="tooltip" data-placement="top" title="Facebook">
+                            <i class="fa fa-facebook fa-2x"></i>
+                            <span class="hidden-xs"></span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="javascript:shareOnLinkedIn()" class="btn btn-linkedin" data-toggle="tooltip" data-placement="top" title="LinkedIn">
+                            <i class="fa fa-linkedin fa-2x"></i>
+                            <span class="hidden-xs"></span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="javascript:shareOnReddit()" class="btn btn-reddit" data-toggle="tooltip" data-placement="top" title="Reddit">
+                            <i class="fa fa-reddit-alien fa-2x"></i>
+                            <span class="hidden-xs"></span>
+                        </a>
+                    </li>
+                </ul>
+-->
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--post footer-->
+
+                    <div class="container">
+                        <div class="row">    
+                            <div class="col-lg-12 mx-auto">
+                                <div id="disqus_thread"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--side bar-->
+            <div class="col-lg-4 sidebar">
+                <div class="bg-white rounded p-3 shadow mb-4">
+                    <div class="card my-4 border-0">
+                        <div class="card-body p-2">
+                            <h4 class="">Recent Posts</h4>
+                            <div class="input-group">
+                                <ul class="list-unstyled ml-0 break-word">
+                                    
+                                        <li class="mb-2">
+                                            <a href="../../../blog/2018/06/spring-cloud-config-basics-part-1.html" class="footer-link"> Spring Cloud Configuration - Part 1</a>
+                                        </li>
+                                    
+                                        <li class="mb-2">
+                                            <a href="../../../blog/2018/06/15-reactivex-observables.html" class="footer-link"> ReactiveX Observables</a>
+                                        </li>
+                                    
+                                        <li class="mb-2">
+                                            <a href="../../../blog/2018/06/13-using-sdkman-to-manage-sdks.html" class="footer-link"> Using SDKMAN to manage SDK&#8217;s</a>
+                                        </li>
+                                    
+                                        <li class="mb-2">
+                                            <a href="../../../blog/2018/06/09-docker-intro.html" class="footer-link"> Docker Introduction</a>
+                                        </li>
+                                    
+                                        <li class="mb-2">
+                                            <a href="../../../blog/2018/06/06-reactivex-introduction.html" class="footer-link"> ReactiveX Introduction</a>
+                                        </li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card my-4 border-0">
+                        <div class="card-body p-2">
+                            <h4>Tags</h4>
+                            <div class="input-group">
+                                
+                                    <a href="../../../tags/gof.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        gof
+                                    </a>
+                                
+                                    <a href="../../../tags/queue.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        queue
+                                    </a>
+                                
+                                    <a href="../../../tags/config.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        config
+                                    </a>
+                                
+                                    <a href="../../../tags/time.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        time
+                                    </a>
+                                
+                                    <a href="../../../tags/producer.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        producer
+                                    </a>
+                                
+                                    <a href="../../../tags/files.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        files
+                                    </a>
+                                
+                                    <a href="../../../tags/blockedqueue.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        blockedqueue
+                                    </a>
+                                
+                                    <a href="../../../tags/regex.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        regex
+                                    </a>
+                                
+                                    <a href="../../../tags/comparator.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        comparator
+                                    </a>
+                                
+                                    <a href="../../../tags/reactiveX.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        reactiveX
+                                    </a>
+                                
+                                    <a href="../../../tags/java10.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        java10
+                                    </a>
+                                
+                                    <a href="../../../tags/thread.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        thread
+                                    </a>
+                                
+                                    <a href="../../../tags/localdate.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        localdate
+                                    </a>
+                                
+                                    <a href="../../../tags/streams.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        streams
+                                    </a>
+                                
+                                    <a href="../../../tags/var.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        var
+                                    </a>
+                                
+                                    <a href="../../../tags/maven.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        maven
+                                    </a>
+                                
+                                    <a href="../../../tags/jshell.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        jshell
+                                    </a>
+                                
+                                    <a href="../../../tags/concurrentmodificationexception.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        concurrentmodificationexception
+                                    </a>
+                                
+                                    <a href="../../../tags/consumer.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        consumer
+                                    </a>
+                                
+                                    <a href="../../../tags/multithreading.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        multithreading
+                                    </a>
+                                
+                                    <a href="../../../tags/executor.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        executor
+                                    </a>
+                                
+                                    <a href="../../../tags/collections.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        collections
+                                    </a>
+                                
+                                    <a href="../../../tags/stream.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        stream
+                                    </a>
+                                
+                                    <a href="../../../tags/git.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        git
+                                    </a>
+                                
+                                    <a href="../../../tags/java.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        java
+                                    </a>
+                                
+                                    <a href="../../../tags/observables.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        observables
+                                    </a>
+                                
+                                    <a href="../../../tags/random.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        random
+                                    </a>
+                                
+                                    <a href="../../../tags/sdkman.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        sdkman
+                                    </a>
+                                
+                                    <a href="../../../tags/cloud.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        cloud
+                                    </a>
+                                
+                                    <a href="../../../tags/spring.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        spring
+                                    </a>
+                                
+                                    <a href="../../../tags/docker.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        docker
+                                    </a>
+                                
+                                    <a href="../../../tags/design pattern.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        design pattern
+                                    </a>
+                                
+                                    <a href="../../../tags/tools.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        tools
+                                    </a>
+                                
+                                    <a href="../../../tags/priorityqueue.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        priorityqueue
+                                    </a>
+                                
+                                    <a href="../../../tags/infinite.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        infinite
+                                    </a>
+                                
+                                    <a href="../../../tags/forkjoin.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        forkjoin
+                                    </a>
+                                
+                                    <a href="../../../tags/functional.html" class="badge tag m-1 p-2" style="font-size:90%">
+                                        functional
+                                    </a>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card my-4 border-0">
+                        <div class="card-body p-2">
+                            <h4>Author</h4>
+                            <div class="input-group">
+                                <p class="mb-0">Pradeep Kundarapu</p>
+                                <!--<a id="follow-button" class="follow-btn" title="Follow @k_pradeep4j on Twitter" href="https://twitter.com/k_pradeep4j">
+                                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                                    <span class="label" id="l">Follow <b>@k_pradeep4j</b></span>
+                                </a>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        var disqus_shortname = 'null'; 
+        var disqus_identifier = 'blog/2018/06/spring-cloud-config-basics-part-2.html';
+        var disqus_title = "Spring Cloud Configuration - Part 2";
+        var disqus_url = 'http://www.techstackjava.com/blog/2018/06/spring-cloud-config-basics-part-2.html';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+    <noscript>
+        Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
+    
+<!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; www.techstackjava.com 2018</p>
+        <p class="m-0 text-center text-muted">Baked with <a href="http://jbake.org">JBake v2.6.1</a></p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- jQuery -->
+    <script src="../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../js/bootstrap.min.js"></script>
+
+    <script src="../../../js/prettify.js"></script>
+    <!-- Custom Theme JavaScript 
+    <script src="../../../js/clean-blog.min.js"></script>
+    -->
+    <script src="../../../js/techstackjava.js"></script>
+    <!--<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>-->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115619272-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-115619272-2');
+    </script>
+
+    <script type="text/javascript">
+        var disqus_shortname = 'null';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+
+  </body>
+</html>
