@@ -6,15 +6,168 @@
     <atom:link href="http://www.techstackjava.com//feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Wed, 27 Jun 2018 12:09:20 -0400</pubDate>
-    <lastBuildDate>Wed, 27 Jun 2018 12:09:20 -0400</lastBuildDate>
+    <pubDate>Wed, 11 Jul 2018 06:19:26 -0400</pubDate>
+    <lastBuildDate>Wed, 11 Jul 2018 06:19:26 -0400</lastBuildDate>
 
     
     <item>
+      <title>Spring Cloud Configuration - Part 2</title>
+      <link>http://www.techstackjava.com//blog/2018/07/11-spring-cloud-config-basics-part-2.html</link>
+      <pubDate>Wed, 11 Jul 2018 00:00:00 -0400</pubDate>
+      <guid isPermaLink="false">blog/2018/07/11-spring-cloud-config-basics-part-2.html</guid>
+      <description>
+      &lt;div id=&quot;preamble&quot;&gt; 
+ &lt;div class=&quot;sectionbody&quot;&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;In &lt;strong&gt;&lt;a href=&quot;../06/27-spring-cloud-config-basics-part-1.html&quot;&gt;Part 1&lt;/a&gt;&lt;/strong&gt; we created git repository and config server. In this article we will create a pet-store application which is also a client for the configuration server, because pet-store will request application properties from config server.&lt;/p&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;_create_configuration_client&quot;&gt;Create Configuration Client&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Go to &lt;strong&gt;&lt;a href=&quot;https://start.spring.io/&quot;&gt;start.spring.io&lt;/a&gt;&lt;/strong&gt; to generate spring project with &lt;strong&gt;web&lt;/strong&gt;, &lt;strong&gt;config-client&lt;/strong&gt; and &lt;strong&gt;actuator&lt;/strong&gt; as dependencies, see below image for reference.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph text-center&quot;&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/2018/07/pet-store-config-client.png&quot; alt=&quot;pet store config client&quot; width=&quot;650&quot; height=&quot;500&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Unzip and open the project in any IDE. We are going to configure pet-store app to load properties from config server so we no more need application.properties located at src/main/resources folder.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;In-order for pet-store app to load properties from config server it needs config server connection details, because with out server machine name and port, pet-store can not connect to it. We can use bootstrap.properties to provide these details. Spring will load bootstrap.properties if it is available. bootstrap properties file should be used for only properties which are needed at application startup time, in our case we need server connection details so pet-store will use these details to connect and get properties from server at startup time.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Rename application.properties to bootstrap.properties and add below three properties in it.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;title&quot;&gt;
+   bootstrap.properties
+  &lt;/div&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;spring.application.name = pet-store &lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;(1)&lt;/b&gt;
+spring.profiles.active = dev &lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;(2)&lt;/b&gt;
+spring.cloud.config.uri = http://localhost:8888 &lt;i class=&quot;conum&quot; data-value=&quot;3&quot;&gt;&lt;/i&gt;&lt;b&gt;(3)&lt;/b&gt;&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Above three properties are needed for config client to connect server.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;colist arabic&quot;&gt; 
+  &lt;table&gt; 
+   &lt;tbody&gt;
+    &lt;tr&gt; 
+     &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;1&lt;/b&gt;&lt;/td&gt; 
+     &lt;td&gt;In a microservices environment multiple applications work together and this property will allow us to provide unique name for each application.&lt;/td&gt; 
+    &lt;/tr&gt; 
+    &lt;tr&gt; 
+     &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;2&lt;/b&gt;&lt;/td&gt; 
+     &lt;td&gt;Multiple instances of an application can exist like; dev, uat or prod so each of them are profiled with this property.&lt;/td&gt; 
+    &lt;/tr&gt; 
+    &lt;tr&gt; 
+     &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;3&quot;&gt;&lt;/i&gt;&lt;b&gt;3&lt;/b&gt;&lt;/td&gt; 
+     &lt;td&gt;Client will make HTTP call using this URL to get properties from config server.&lt;/td&gt; 
+    &lt;/tr&gt; 
+   &lt;/tbody&gt;
+  &lt;/table&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Using all of the above properties client will construct the URL and it looks like this; &lt;strong&gt;&lt;a href=&quot;http://localhost:8888/pet-store/dev&quot; class=&quot;bare&quot;&gt;http://localhost:8888/pet-store/dev&lt;/a&gt;&lt;/strong&gt; this URL contains all of the above mentioned three properties; config url, application name and profile.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;To verify if everything is working, we can create a REST end point which will return &lt;strong&gt;message&lt;/strong&gt; property as response. Note that in &lt;strong&gt;&lt;a href=&quot;../06/27-spring-cloud-config-basics-part-1.html&quot;&gt;Part 1&lt;/a&gt;&lt;/strong&gt; we added &lt;strong&gt;message&lt;/strong&gt; property in &lt;strong&gt;pet-store-dev.properties&lt;/strong&gt;. Config client will use above three properties to request properties from the server on startup and client gets &lt;strong&gt;message&lt;/strong&gt; as part of the response from server.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Below is the REST controller which returns message;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;@RestController
+class MessageController{
+	@Value(&quot;${message}&quot;)
+	String message;
+
+	@RequestMapping(&quot;/message&quot;)
+	public String getMessage(){
+		return message;
+	}
+}&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Start pet-store application and in the browser open &lt;strong&gt;&lt;a href=&quot;http://localhost:8080/message&quot; class=&quot;bare&quot;&gt;http://localhost:8080/message&lt;/a&gt;&lt;/strong&gt; to get &lt;strong&gt;Hello!&lt;/strong&gt; as response.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph text-center&quot;&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/2018/07/pet-store-hello.png&quot; alt=&quot;pet store hello&quot; width=&quot;500&quot; height=&quot;150&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;_update_properties&quot;&gt;Update properties&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;In your local perform a small test; change &lt;strong&gt;message&lt;/strong&gt; property in &lt;strong&gt;pet-store-dev.properties&lt;/strong&gt; and save, then open &lt;strong&gt;&lt;a href=&quot;http://localhost:8080/message&quot; class=&quot;bare&quot;&gt;http://localhost:8080/message&lt;/a&gt;&lt;/strong&gt; it will not show updated property instead it returns old value. This is because changes to the property files are not automatically propagated to the clients. On the client side we need to manually trigger a refresh event which will request fresh copy again from the server and refreshes only the classes which are declared with &lt;strong&gt;@RefreshScope&lt;/strong&gt; annotation.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;In our case we update &lt;strong&gt;MessageController&lt;/strong&gt; class to include &lt;strong&gt;@RefreshScope&lt;/strong&gt; annotation so its &lt;strong&gt;message&lt;/strong&gt; fields gets updated with new value.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;@RestController
+@RefreshScope
+class MessageController{
+	@Value(&quot;${message}&quot;)
+	String message;
+
+	@RequestMapping(&quot;/message&quot;)
+	public String getMessage(){
+		return message;
+	}
+}&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Start pet-store application and open &lt;strong&gt;&lt;a href=&quot;http://localhost:8080/message&quot; class=&quot;bare&quot;&gt;http://localhost:8080/message&lt;/a&gt;&lt;/strong&gt; to see current value in the &lt;strong&gt;pet-store-dev.properties&lt;/strong&gt; file. Lets update &lt;strong&gt;message&lt;/strong&gt; in the properties file like below;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;title&quot;&gt;
+   pet-store-dev.properties
+  &lt;/div&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;message=Hello World!
+management.endpoints.web.exposure.include=refresh&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;We will not see updated &lt;strong&gt;message&lt;/strong&gt; value on &lt;strong&gt;&lt;a href=&quot;http://localhost:8080/message&quot; class=&quot;bare&quot;&gt;http://localhost:8080/message&lt;/a&gt;&lt;/strong&gt;. To get updated value we need to manually trigger refresh event. To trigger this event we need to make a HTTP POST request to pet-store client on &lt;strong&gt;/actuator/refresh&lt;/strong&gt; end-point. I used &lt;strong&gt;curl&lt;/strong&gt; command to make this request;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;curl -X POST http://localhost:8080/actuator/refresh&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;This curl command will make a POST request, which will make client to again request the properties and these properties are only applied on the classes which are declared with &lt;strong&gt;@RefreshScope&lt;/strong&gt; annotation.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Open &lt;strong&gt;&lt;a href=&quot;http://localhost:8080/message&quot; class=&quot;bare&quot;&gt;http://localhost:8080/message&lt;/a&gt;&lt;/strong&gt; to see &lt;strong&gt;Hello World!&lt;/strong&gt;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph text-center&quot;&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/2018/07/pet-store-hello-world.png&quot; alt=&quot;pet store hello world&quot; width=&quot;500&quot; height=&quot;150&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;_conclusion&quot;&gt;Conclusion&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;In this post we created a client application which depends on the config server to get properties and also used @RefreshScope annotation to update properties.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
+    
+    <item>
       <title>Spring Cloud Configuration - Part 1</title>
-      <link>http://www.techstackjava.com//blog/2018/06/spring-cloud-config-basics-part-1.html</link>
+      <link>http://www.techstackjava.com//blog/2018/06/27-spring-cloud-config-basics-part-1.html</link>
       <pubDate>Wed, 27 Jun 2018 00:00:00 -0400</pubDate>
-      <guid isPermaLink="false">blog/2018/06/spring-cloud-config-basics-part-1.html</guid>
+      <guid isPermaLink="false">blog/2018/06/27-spring-cloud-config-basics-part-1.html</guid>
       <description>
       &lt;div id=&quot;preamble&quot;&gt; 
  &lt;div class=&quot;sectionbody&quot;&gt; 

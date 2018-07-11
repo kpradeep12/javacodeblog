@@ -78,82 +78,156 @@
                             
                             <!-- Author -->
                             <p class="small-font mb-0">
-                                published by <a href="#">Pradeep</a> on June 23, 2018
+                                published by <a href="#">Pradeep</a> on July 11, 2018
                             </p>
                             <hr>
 
                             <!-- Preview Image -->
-                            <img class="img-fluid rounded d-block mr-auto ml-auto shadow" src="../../../img/" alt="">
+                            <img class="img-fluid rounded d-block mr-auto ml-auto shadow" src="../../../img/banners/spring-cloud-config-basics-part-2.png" alt="">
                             <hr>
-                            <div class="paragraph"> 
- <p>When other applications starts they will contact config server to get</p> 
-</div> 
-<div class="paragraph"> 
- <p>&lt;image&gt;</p> 
-</div> 
-<div class="paragraph"> 
- <p>Lets create a basic spring application with out cloud configuration and then we introduce config Spring application by default loads configuration from application properties, which can be found at src/main/resources folder.</p> 
-</div> 
-<div class="paragraph"> 
- <p>Lets create and configure a spring web application. Go to <strong><a href="https://start.spring.io/">start.spring.io</a></strong> and generate a pet-store project with <strong>web</strong> as dependency. See below screenshot for the reference.</p> 
-</div> 
-<div class="paragraph"> 
- <p>&lt;image&gt;</p> 
-</div> 
-<div class="paragraph"> 
- <p>Unzip and open spring project in an IDE. You should see an empty application.properties at src/main/resources and single application initializer class PetStoreApplication.java at src/main/java/com/example/petstore.</p> 
-</div> 
-<div class="paragraph"> 
- <p>Owner of the pet-store wants to publish an alert message on some rest-end point so there customers can access this message. Lets add an alert-message property in the configuration file like below; .application.properties</p> 
-</div> 
-<div class="listingblock"> 
- <div class="content"> 
-  <pre>alert-message=Due to inclement weather conditions pet store is closed tomorrow.</pre> 
+                            <div id="preamble"> 
+ <div class="sectionbody"> 
+  <div class="paragraph"> 
+   <p>In <strong><a href="../06/27-spring-cloud-config-basics-part-1.html">Part 1</a></strong> we created git repository and config server. In this article we will create a pet-store application which is also a client for the configuration server, because pet-store will request application properties from config server.</p> 
+  </div> 
  </div> 
 </div> 
-<div class="paragraph"> 
- <p>To publish this message on a rest-end point lets create a controller and inject this property into it.</p> 
-</div> 
-<div class="listingblock"> 
- <div class="content"> 
-  <pre class="prettyprint highlight"><code class="language-java" data-lang="java">package com.example.petstore;
+<div class="sect3"> 
+ <h4 id="_create_configuration_client">Create Configuration Client</h4> 
+ <div class="paragraph"> 
+  <p>Go to <strong><a href="https://start.spring.io/">start.spring.io</a></strong> to generate spring project with <strong>web</strong>, <strong>config-client</strong> and <strong>actuator</strong> as dependencies, see below image for reference.</p> 
+ </div> 
+ <div class="paragraph text-center"> 
+  <p><span class="image"><img src="http://www.techstackjava.com/img/posts/2018/07/pet-store-config-client.png" alt="pet store config client" width="650" height="500"></span></p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>Unzip and open the project in any IDE. We are going to configure pet-store app to load properties from config server so we no more need application.properties located at src/main/resources folder.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>In-order for pet-store app to load properties from config server it needs config server connection details, because with out server machine name and port, pet-store can not connect to it. We can use bootstrap.properties to provide these details. Spring will load bootstrap.properties if it is available. bootstrap properties file should be used for only properties which are needed at application startup time, in our case we need server connection details so pet-store will use these details to connect and get properties from server at startup time.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>Rename application.properties to bootstrap.properties and add below three properties in it.</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="title">
+   bootstrap.properties
+  </div> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code>spring.application.name = pet-store <i class="conum" data-value="1"></i><b>(1)</b>
+spring.profiles.active = dev <i class="conum" data-value="2"></i><b>(2)</b>
+spring.cloud.config.uri = http://localhost:8888 <i class="conum" data-value="3"></i><b>(3)</b></code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>Above three properties are needed for config client to connect server.</p> 
+ </div> 
+ <div class="colist arabic"> 
+  <table> 
+   <tbody>
+    <tr> 
+     <td><i class="conum" data-value="1"></i><b>1</b></td> 
+     <td>In a microservices environment multiple applications work together and this property will allow us to provide unique name for each application.</td> 
+    </tr> 
+    <tr> 
+     <td><i class="conum" data-value="2"></i><b>2</b></td> 
+     <td>Multiple instances of an application can exist like; dev, uat or prod so each of them are profiled with this property.</td> 
+    </tr> 
+    <tr> 
+     <td><i class="conum" data-value="3"></i><b>3</b></td> 
+     <td>Client will make HTTP call using this URL to get properties from config server.</td> 
+    </tr> 
+   </tbody>
+  </table> 
+ </div> 
+ <div class="paragraph"> 
+  <p>Using all of the above properties client will construct the URL and it looks like this; <strong><a href="http://localhost:8888/pet-store/dev" class="bare">http://localhost:8888/pet-store/dev</a></strong> this URL contains all of the above mentioned three properties; config url, application name and profile.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>To verify if everything is working, we can create a REST end point which will return <strong>message</strong> property as response. Note that in <strong><a href="../06/27-spring-cloud-config-basics-part-1.html">Part 1</a></strong> we added <strong>message</strong> property in <strong>pet-store-dev.properties</strong>. Config client will use above three properties to request properties from the server on startup and client gets <strong>message</strong> as part of the response from server.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>Below is the REST controller which returns message;</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-java" data-lang="java">@RestController
+class MessageController{
+	@Value("${message}")
+	String message;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-@RestController
-public class AlertMessageController {
-
-    @Value("${alert-message}")
-    String alertMessage; <i class="conum" data-value="1"></i><b>(1)</b>
-
-    @RequestMapping("/alert-message")
-    public String getMessage(){ <i class="conum" data-value="2"></i><b>(2)</b>
-        return alertMessage;
-    }
+	@RequestMapping("/message")
+	public String getMessage(){
+		return message;
+	}
 }</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>Start pet-store application and in the browser open <strong><a href="http://localhost:8080/message" class="bare">http://localhost:8080/message</a></strong> to get <strong>Hello!</strong> as response.</p> 
+ </div> 
+ <div class="paragraph text-center"> 
+  <p><span class="image"><img src="http://www.techstackjava.com/img/posts/2018/07/pet-store-hello.png" alt="pet store hello" width="500" height="150"></span></p> 
  </div> 
 </div> 
-<div class="colist arabic"> 
- <table> 
-  <tbody>
-   <tr> 
-    <td><i class="conum" data-value="1"></i><b>1</b></td> 
-    <td>Spring injects <strong>alert-message</strong> property value from configuration.</td> 
-   </tr> 
-   <tr> 
-    <td><i class="conum" data-value="2"></i><b>2</b></td> 
-    <td>REST end point for the customers to get alert-message</td> 
-   </tr> 
-  </tbody>
- </table> 
+<div class="sect3"> 
+ <h4 id="_update_properties">Update properties</h4> 
+ <div class="paragraph"> 
+  <p>In your local perform a small test; change <strong>message</strong> property in <strong>pet-store-dev.properties</strong> and save, then open <strong><a href="http://localhost:8080/message" class="bare">http://localhost:8080/message</a></strong> it will not show updated property instead it returns old value. This is because changes to the property files are not automatically propagated to the clients. On the client side we need to manually trigger a refresh event which will request fresh copy again from the server and refreshes only the classes which are declared with <strong>@RefreshScope</strong> annotation.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>In our case we update <strong>MessageController</strong> class to include <strong>@RefreshScope</strong> annotation so its <strong>message</strong> fields gets updated with new value.</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code class="language-java" data-lang="java">@RestController
+@RefreshScope
+class MessageController{
+	@Value("${message}")
+	String message;
+
+	@RequestMapping("/message")
+	public String getMessage(){
+		return message;
+	}
+}</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>Start pet-store application and open <strong><a href="http://localhost:8080/message" class="bare">http://localhost:8080/message</a></strong> to see current value in the <strong>pet-store-dev.properties</strong> file. Lets update <strong>message</strong> in the properties file like below;</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="title">
+   pet-store-dev.properties
+  </div> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code>message=Hello World!
+management.endpoints.web.exposure.include=refresh</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>We will not see updated <strong>message</strong> value on <strong><a href="http://localhost:8080/message" class="bare">http://localhost:8080/message</a></strong>. To get updated value we need to manually trigger refresh event. To trigger this event we need to make a HTTP POST request to pet-store client on <strong>/actuator/refresh</strong> end-point. I used <strong>curl</strong> command to make this request;</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code>curl -X POST http://localhost:8080/actuator/refresh</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>This curl command will make a POST request, which will make client to again request the properties and these properties are only applied on the classes which are declared with <strong>@RefreshScope</strong> annotation.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>Open <strong><a href="http://localhost:8080/message" class="bare">http://localhost:8080/message</a></strong> to see <strong>Hello World!</strong></p> 
+ </div> 
+ <div class="paragraph text-center"> 
+  <p><span class="image"><img src="http://www.techstackjava.com/img/posts/2018/07/pet-store-hello-world.png" alt="pet store hello world" width="500" height="150"></span></p> 
+ </div> 
 </div> 
-<div class="paragraph"> 
- <p>Start the spring application, by default spring application starts on 8080 port so hit <a href="http://localhost:8080/alert-message" class="bare">http://localhost:8080/alert-message</a> in the browser and expect to see message 'Due to inclement weather conditions pet store is closed tomorrow.' as the result.</p> 
-</div> 
-<div class="paragraph"> 
- <p>Lets create a rest controller which listens on <strong>/alert</strong> end-point and returns pre-configured message from application properties. So</p> 
+<div class="sect3"> 
+ <h4 id="_conclusion">Conclusion</h4> 
+ <div class="paragraph"> 
+  <p>In this post we created a client application which depends on the config server to get properties and also used @RefreshScope annotation to update properties.</p> 
+ </div> 
 </div>
 
                         </article>
@@ -255,7 +329,11 @@ public class AlertMessageController {
                                 <ul class="list-unstyled ml-0 break-word">
                                     
                                         <li class="mb-2">
-                                            <a href="../../../blog/2018/06/spring-cloud-config-basics-part-1.html" class="footer-link"> Spring Cloud Configuration - Part 1</a>
+                                            <a href="../../../blog/2018/07/11-spring-cloud-config-basics-part-2.html" class="footer-link"> Spring Cloud Configuration - Part 2</a>
+                                        </li>
+                                    
+                                        <li class="mb-2">
+                                            <a href="../../../blog/2018/06/27-spring-cloud-config-basics-part-1.html" class="footer-link"> Spring Cloud Configuration - Part 1</a>
                                         </li>
                                     
                                         <li class="mb-2">
@@ -268,10 +346,6 @@ public class AlertMessageController {
                                     
                                         <li class="mb-2">
                                             <a href="../../../blog/2018/06/09-docker-intro.html" class="footer-link"> Docker Introduction</a>
-                                        </li>
-                                    
-                                        <li class="mb-2">
-                                            <a href="../../../blog/2018/06/06-reactivex-introduction.html" class="footer-link"> ReactiveX Introduction</a>
                                         </li>
                                     
                                 </ul>
@@ -460,9 +534,9 @@ public class AlertMessageController {
 
     <script type="text/javascript">
         var disqus_shortname = 'null'; 
-        var disqus_identifier = 'blog/2018/06/spring-cloud-config-basics-part-2.html';
+        var disqus_identifier = 'blog/2018/07/11-spring-cloud-config-basics-part-2.html';
         var disqus_title = "Spring Cloud Configuration - Part 2";
-        var disqus_url = 'http://www.techstackjava.com/blog/2018/06/spring-cloud-config-basics-part-2.html';
+        var disqus_url = 'http://www.techstackjava.com/blog/2018/07/11-spring-cloud-config-basics-part-2.html';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {
