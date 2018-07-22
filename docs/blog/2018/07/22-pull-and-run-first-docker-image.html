@@ -10,7 +10,7 @@
     <meta name="generator" content="JBake">
     <meta name="google-site-verification" content="tuMqCtGo9Q2zjZ6e2k1iswdB1R56vqiqYfbSrrzlyRE" />
     
-    <title>Recipes for Optional</title>
+    <title>Pull And Run First Docker Image</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
@@ -74,175 +74,223 @@
                     <div class="p-3">
                         <article>
                             <!-- Title -->
-                            <h3 class="mb-0">Recipes for Optional</h3>
+                            <h3 class="mb-0">Pull And Run First Docker Image</h3>
                             
                             <!-- Author -->
                             <p class="small-font mb-0">
-                                published by <a href="#">Pradeep</a> on April 03, 2018
+                                published by <a href="#">Pradeep</a> on July 22, 2018
                             </p>
                             <hr>
 
                             <!-- Preview Image -->
-                            <img class="img-fluid rounded d-block mr-auto ml-auto shadow" src="../../../img/banners/blog-banner-recipes-for-optional.png" alt="">
+                            <img class="img-fluid rounded d-block mr-auto ml-auto shadow" src="../../../img/banners/pull-and-run-first-docker-image.png" alt="">
                             <hr>
-                            <div class="paragraph"> 
- <p>Optional allows us to wrap a nullable object in it so we can make a method to return Optional instead of bare object. There is a possibility that below method can return null; so we need to explicitly do the null check on the returned object before using it.</p> 
-</div> 
-<div class="listingblock"> 
- <div class="content"> 
-  <pre class="prettyprint highlight"><code class="language-java" data-lang="java">Employee getEmployee(Integer id){
- //return employee;
-}</code></pre> 
+                            <div id="preamble"> 
+ <div class="sectionbody"> 
+  <div class="paragraph"> 
+   <p>Docker image is a file, which contains set of commands. When these commands are executed, instance of the image is created and this instance is called <strong>Container</strong>. We can assume image files are like Java’s class files and objects are container instances.</p> 
+  </div> 
  </div> 
 </div> 
-<div class="paragraph"> 
- <p>Check below modified method which returns Optional&lt;Employee&gt; and it communicates very well, saying that the result can be null.</p> 
-</div> 
-<div class="listingblock"> 
- <div class="content"> 
-  <pre class="prettyprint highlight"><code class="language-java" data-lang="java">Optional&lt;Employee&gt; getEmployee(Integer id){
- // return optional employee
-}</code></pre> 
+<div class="sect3"> 
+ <h4 id="_pull_docker_image">Pull docker image</h4> 
+ <div class="paragraph"> 
+  <p><a href="https://store.docker.com/">Docker Store</a> is a central repository for docker image files. This repository is maintained by Docker and it contains images of many major applications. In this section we will pull <strong>mysql</strong> image from docker store and then run it to create a container instance.</p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>We can search for mysql-server in <strong><a href="https://store.docker.com/">docker store</a></strong>. Here is the direct link of <a href="https://store.docker.com/community/images/mysql/mysql-server">mysql-server</a> page in docker store. All image files will have a dedicated page in docker store which provides basic information about the image and instructions to pull, run and configure it, also it shows contents of image file. Below image shows the structure of the page.</p> 
+ </div> 
+ <div class="paragraph text-center"> 
+  <p><span class="image"><img src="http://www.techstackjava.com/img/posts/2018/07/docker-image-page.png" alt="pet store hello" width="500" height="450"></span></p> 
+ </div> 
+ <div class="paragraph"> 
+  <p>Lets pull mysql image from docker store. Open terminal and execute below command. Before executing this command make sure that docker is running. Refer <strong><a href="../06/09-docker-intro.html">Docker introduction</a></strong> for more details on Docker setup.</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code>docker pull mysql/mysql-server</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>This command will download mysql image and while downloading it prints some information on the console. On my terminal it printed below text;</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code>Using default tag: latest <i class="conum" data-value="1"></i><b>(1)</b>
+latest: Pulling from mysql/mysql-server
+b0efbbec3b2e: Pull complete
+4d06a7b7ca82: Pull complete
+7ddc24d9f468: Pull complete
+8b211b61b1a0: Pull complete
+Digest: sha256:f1cb1e3f0124601b1496f485e9f4401ad10138294b5a38d932089daafd555e34 <i class="conum" data-value="2"></i><b>(2)</b>
+Status: Downloaded newer image for mysql/mysql-server:latest <i class="conum" data-value="3"></i><b>(3)</b></code></pre> 
+  </div> 
+ </div> 
+ <div class="colist arabic"> 
+  <table> 
+   <tbody>
+    <tr> 
+     <td><i class="conum" data-value="1"></i><b>1</b></td> 
+     <td><strong>tag</strong> is like version number. If we don’t mention the version then docker will download <strong>latest</strong> version by default. In the docker image page go to the <strong>tags</strong> tab to check all available versions/tags. Check point <strong>3</strong> below for more details on downloading specific tag.</td> 
+    </tr> 
+    <tr> 
+     <td><i class="conum" data-value="2"></i><b>2</b></td> 
+     <td>Docker image files are immutable, means once the image is build its content will never change. Each image will have unique digest value. This shows the digest of mysql image which we downloaded.</td> 
+    </tr> 
+    <tr> 
+     <td><i class="conum" data-value="3"></i><b>3</b></td> 
+     <td>In the pull command we didn’t mentioned the version so by default docker downloads <strong>latest</strong> version. We can provide specific version in the pull command, for example to pull <strong>8.0</strong> we can execute <strong>docker pull mysql/mysql-server:8.0</strong></td> 
+    </tr> 
+   </tbody>
+  </table> 
  </div> 
 </div> 
-<div class="paragraph"> 
- <p>I will go through some recipes to handle Optional results, before that lets create an EmployeeService which returns Employee object.</p> 
-</div> 
-<div class="listingblock"> 
- <div class="content"> 
-  <pre class="prettyprint highlight"><code class="language-java" data-lang="java">class Employee{
-    private Integer id;
-    private String name;
-    private Integer age;
-
-    Employee(Integer id, String name, Integer age) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-    }
-
-    public Integer getId() { return id; }
-    public String getName() { return name; }
-    public Integer getAge() { return age; }
-
-    @Override
-    public String toString() {
-        return "Employee{ id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age + '}';
-    }
-}
-
-public class EmployeeService {
-    Map&lt;Integer, Employee&gt; store = Map.of(1, new Employee(1, "Peter", 34),
-            2, new Employee(2, "John", 28),
-            3, new Employee(3, "Bill", 42));
-
-    Optional&lt;Employee&gt; getEmployee(Integer id){
-        return Optional.ofNullable(store.get(id));
-    }
-}</code></pre> 
+<div class="sect3"> 
+ <h4 id="_run_image_file">Run image file</h4> 
+ <div class="paragraph"> 
+  <p>In the previous section we downloaded mysql image. In this section we will run this image. Execute below command, which will create mysql container instance.</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code>docker run mysql/mysql-server</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>We use <strong>run</strong> sub-command to execute image files. If we downloaded multiple tags then we can provide specific tag name like <strong>docker run mysql/mysql-server:&lt;tag&gt;</strong>. Run command takes some time to execute and while execution it prints text in the terminal. Look for below two important lines in the output;</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code>...
+...
+Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
+[Entrypoint] GENERATED ROOT PASSWORD: ILOvILAt20fIwSYlMEtKoruNEzk <i class="conum" data-value="1"></i><b>(1)</b>
+[Server] 'user' entry 'healthchecker@localhost' ignored in --skip-name-resolve mode.
+...
+...
+...
+[System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.11'  socket: '/var/lib/mysql/mysql.sock'  port: 3306  MySQL Community Server - GPL. <i class="conum" data-value="2"></i><b>(2)</b></code></pre> 
+  </div> 
+ </div> 
+ <div class="colist arabic"> 
+  <table> 
+   <tbody>
+    <tr> 
+     <td><i class="conum" data-value="1"></i><b>1</b></td> 
+     <td>Some where in the center of the logs, we should see generated root password. Note down this password, it will be different on your machine. We need this password to connect mysql. If we want to provide our own password then we can provide it in run command like this <strong>docker run -e MYSQL_ROOT_PASSWORD=root mysql/mysql-server</strong>. Here I provided 'root' as the password.</td> 
+    </tr> 
+    <tr> 
+     <td><i class="conum" data-value="2"></i><b>2</b></td> 
+     <td>At the end of the logs we should see message saying <strong>ready for connections</strong> and also it shows <strong>version</strong> and <strong>port number</strong>.</td> 
+    </tr> 
+   </tbody>
+  </table> 
  </div> 
 </div> 
-<div class="paragraph"> 
- <p><strong>Recipe 1:</strong> Check if result is present in the Optional using isPresent() and if it present then get the result using get() function.</p> 
-</div> 
-<div class="listingblock"> 
- <div class="content"> 
-  <pre class="prettyprint highlight"><code class="language-java" data-lang="java">EmployeeService es = new EmployeeService();
-Optional&lt;Employee&gt; emp = es.getEmployee(2);
-if(emp.isPresent()){
-    System.out.println(emp.get());
-}
-//Output: Employee{id=2, name='John', age=28}</code></pre> 
+<div class="sect3"> 
+ <h4 id="_stop_container">Stop container</h4> 
+ <div class="paragraph"> 
+  <p>In the above section we ran mysql as foreground process means terminal is taken up by the run command and we can not get prompt to enter other commands. To stop current running container first we need to execute below command in other terminal.</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code>docker ps</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>This command will list all running containers with some basic information for each container. Below are the some of the details it provides;</p> 
+ </div> 
+ <div class="ulist"> 
+  <ul> 
+   <li> <p>Container Id: Randomly generated unique Id to identify this container.</p> </li> 
+   <li> <p>Ports: Ports exposed by this container.</p> </li> 
+   <li> <p>Names: Random name assigned to this container.</p> </li> 
+  </ul> 
+ </div> 
+ <div class="paragraph"> 
+  <p>Now we have the container id, we use this to stop the container. Execute below command;</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code>docker stop b1b681db49f2</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>b1b681db49f2 is the container id assigned to mysql container executing on my machine, this id will be different on your machine because it is a randomly generated id. Get this id from the result of <strong>docker ps</strong> command. Verify if container was stopped by running <strong>docker ps</strong> again, this time you should not see the mysql container in the result.</p> 
  </div> 
 </div> 
-<div class="paragraph"> 
- <p>Its not a good practice to use isPresent and get methods because this code is doing regular null check and then performing action on it. Instead follow the next recipes which will show you different ways to use Optional result. I used these methods to show available functions in the Optional class.</p> 
-</div> 
-<div class="paragraph"> 
- <p><strong>Recipe 2:</strong> Consume the result with out checking null. ifPresent() takes a consumer and it is executed only if the result is not null. We no need to explicitly check the null.</p> 
-</div> 
-<div class="listingblock"> 
- <div class="content"> 
-  <pre class="prettyprint highlight"><code class="language-java" data-lang="java">EmployeeService es = new EmployeeService();
-es.getEmployee(2)
-    .ifPresent(System.out::println);
-//Output: Employee{id=2, name='John', age=28}</code></pre> 
+<div class="sect3"> 
+ <h4 id="_connect_to_mysql_container">Connect to mysql container</h4> 
+ <div class="paragraph"> 
+  <p>In the previous sections we went through the process of starting and stopping containers. In this section we will test mysql container by connecting to it.</p> 
+ </div> 
+ <div class="admonitionblock important"> 
+  <table> 
+   <tbody>
+    <tr> 
+     <td class="icon"> <i class="fa icon-important" title="Important"></i> </td> 
+     <td class="content"> Every container is different. Steps in this section explains the verification process of mysql container if we want verify any other container then we need to follow the process mentioned in the docker store page for that container. </td> 
+    </tr> 
+   </tbody>
+  </table> 
+ </div> 
+ <div class="paragraph"> 
+  <p>Lets start the mysql container;</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code>docker run --name mysql -e MYSQL_ROOT_PASSWORD=root -d mysql/mysql-server</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>I used below options in the run command:</p> 
+ </div> 
+ <div class="ulist"> 
+  <ul> 
+   <li> <p><strong>--name</strong>: We can provide custom name to the container</p> </li> 
+   <li> <p><strong>-e</strong>: This flag helps us to set environment variables for the container. In this case we used this to set mysql root password. Check mysql docker store page for all available environment options for mysql.</p> </li> 
+   <li> <p><strong>-d</strong>: Runs container in the background so we can continue to use the prompt in this terminal.</p> </li> 
+  </ul> 
+ </div> 
+ <div class="paragraph"> 
+  <p>Because we are running container in the background we can not see the output logs on the terminal. We can see these logs by executing below command;</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code>docker logs mysql</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p><strong>docker logs</strong> takes the container name and I provided <strong>mysql</strong> because in the previous run command I provided container name as <strong>mysql</strong>. We are having a running mysql container now lets execute bash in the mysql container so we can connect and execute some queries.</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code>docker exec -it mysql bash</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p><strong>docker exec</strong> command runs the provided command with in the container. In this case we want <strong>bash</strong> to run in the mysql container. This will provide a bash prompt which is running in the mysql container. Now connect to the mysql like below;</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code>mysql -u "root" -p</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>This command prompts for the mysql password, enter the password. Now we can execute sql queries on mysql container. Below query lists all available databases.</p> 
+ </div> 
+ <div class="listingblock"> 
+  <div class="content"> 
+   <pre class="prettyprint highlight"><code>mysql&gt; show databases;</code></pre> 
+  </div> 
+ </div> 
+ <div class="paragraph"> 
+  <p>You can continue to execute mysql queries here.</p> 
  </div> 
 </div> 
-<div class="paragraph"> 
- <p><strong>Recipe 3:</strong> Consume and perform action if the result is present and if not present then perform empty action. ifPresentOrElse function takes two parameters, first parameter is consumer which will be executed if the result is present and second parameter is a runnable which will be executed when the result is null.</p> 
-</div> 
-<div class="listingblock"> 
- <div class="content"> 
-  <pre class="prettyprint highlight"><code class="language-java" data-lang="java">EmployeeService es = new EmployeeService();
-//Employee id 5 is not available.
-es.getEmployee(5)
-    .ifPresentOrElse(System.out::println,
-                     () -&gt; {System.out.println("No object present");});
-//Output: No object present</code></pre> 
- </div> 
-</div> 
-<div class="paragraph"> 
- <p><strong>Recipe 4:</strong> Perform filter before consuming the result. Filter function takes predicate and returns Optional. We can test the result before processing. Filter function returns empty Optional if predicate returns false.</p> 
-</div> 
-<div class="listingblock"> 
- <div class="content"> 
-  <pre class="prettyprint highlight"><code class="language-java" data-lang="java">EmployeeService es = new EmployeeService();
-es.getEmployee(3)
-      .filter(emp -&gt; emp.getAge() &gt; 40)
-      .ifPresent(System.out::println);
-//Output: Employee{ id=3, name='Bill', age=42}</code></pre> 
- </div> 
-</div> 
-<div class="paragraph"> 
- <p><strong>Recipe 5:</strong> If result is present then perform action on it else perform action by creating new Optional. If getEmployee did not return Employee then we can create and return empty Employee. Other alternatives to this function is orElse(T other), orElseGet(Supplier&lt;? extends T&gt; supplier) both of these functions returns T instead of Optional&lt;T&gt;</p> 
-</div> 
-<div class="listingblock"> 
- <div class="content"> 
-  <pre class="prettyprint highlight"><code class="language-java" data-lang="java">EmployeeService es = new EmployeeService();
-//Employee id 5 is not available.
-es.getEmployee(5)
-        .or(() -&gt; {return Optional.of(new Employee(0, "", 0));})
-        .ifPresent(System.out::println);
-//Output: Employee{ id=0, name='', age=0}</code></pre> 
- </div> 
-</div> 
-<div class="paragraph"> 
- <p><strong>Recipe 6:</strong> Throw exception if result is not present. orElseThrow takes supplier which should return throwable object.</p> 
-</div> 
-<div class="listingblock"> 
- <div class="content"> 
-  <pre class="prettyprint highlight"><code class="language-java" data-lang="java">EmployeeService es = new EmployeeService();
-es.getEmployee(5).orElseThrow(() -&gt; {
-            return new IllegalStateException("employee not available");
-        });
-//Output: Exception in thread "main" java.lang.IllegalStateException: employee not available</code></pre> 
- </div> 
-</div> 
-<div class="paragraph"> 
- <p><strong>Recipe 7:</strong> We can map the result to different type with map function. For example using map we can extract employee age from the employee object. The returned employee age from the map is wrapped in its own Optional. So make sure to unwrap it before using.</p> 
-</div> 
-<div class="listingblock"> 
- <div class="content"> 
-  <pre class="prettyprint highlight"><code class="language-java" data-lang="java">EmployeeService es = new EmployeeService();
-es.getEmployee(2)
-        .map(Employee::getAge)
-        .ifPresent(System.out::println);
-//Output: 28</code></pre> 
- </div> 
-</div> 
-<div class="paragraph"> 
- <p><strong>Recipe 8:</strong> Alternative to map is flatMap function. Both of these functions returns Optional except in flatMap we need to explicitly map to Optional.</p> 
-</div> 
-<div class="listingblock"> 
- <div class="content"> 
-  <pre class="prettyprint highlight"><code class="language-java" data-lang="java">EmployeeService es = new EmployeeService();
-es.getEmployee(2)
-        .flatMap(emp -&gt; Optional.of(emp.getAge()))
-        .ifPresent(System.out::println);
-//Output: 28</code></pre> 
+<div class="sect3"> 
+ <h4 id="_conclusion">Conclusion</h4> 
+ <div class="paragraph"> 
+  <p>In this article we learnt downloading images, running and testing containers. With this setup we can have mysql in the docker instead of on the machine.</p> 
  </div> 
 </div>
 
@@ -558,9 +606,9 @@ es.getEmployee(2)
 
     <script type="text/javascript">
         var disqus_shortname = 'null'; 
-        var disqus_identifier = 'blog/2018/04/3-recipes-for-optional.html';
-        var disqus_title = "Recipes for Optional";
-        var disqus_url = 'http://www.techstackjava.com/blog/2018/04/3-recipes-for-optional.html';
+        var disqus_identifier = 'blog/2018/07/22-pull-and-run-first-docker-image.html';
+        var disqus_title = "Pull And Run First Docker Image";
+        var disqus_url = 'http://www.techstackjava.com/blog/2018/07/22-pull-and-run-first-docker-image.html';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {

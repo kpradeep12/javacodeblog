@@ -6,9 +6,226 @@
     <atom:link href="http://www.techstackjava.com//feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Wed, 11 Jul 2018 06:19:26 -0400</pubDate>
-    <lastBuildDate>Wed, 11 Jul 2018 06:19:26 -0400</lastBuildDate>
+    <pubDate>Sun, 22 Jul 2018 19:56:20 -0400</pubDate>
+    <lastBuildDate>Sun, 22 Jul 2018 19:56:20 -0400</lastBuildDate>
 
+    
+    <item>
+      <title>Pull And Run First Docker Image</title>
+      <link>http://www.techstackjava.com//blog/2018/07/22-pull-and-run-first-docker-image.html</link>
+      <pubDate>Sun, 22 Jul 2018 00:00:00 -0400</pubDate>
+      <guid isPermaLink="false">blog/2018/07/22-pull-and-run-first-docker-image.html</guid>
+      <description>
+      &lt;div id=&quot;preamble&quot;&gt; 
+ &lt;div class=&quot;sectionbody&quot;&gt; 
+  &lt;div class=&quot;paragraph&quot;&gt; 
+   &lt;p&gt;Docker image is a file, which contains set of commands. When these commands are executed, instance of the image is created and this instance is called &lt;strong&gt;Container&lt;/strong&gt;. We can assume image files are like Java’s class files and objects are container instances.&lt;/p&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;_pull_docker_image&quot;&gt;Pull docker image&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;&lt;a href=&quot;https://store.docker.com/&quot;&gt;Docker Store&lt;/a&gt; is a central repository for docker image files. This repository is maintained by Docker and it contains images of many major applications. In this section we will pull &lt;strong&gt;mysql&lt;/strong&gt; image from docker store and then run it to create a container instance.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;We can search for mysql-server in &lt;strong&gt;&lt;a href=&quot;https://store.docker.com/&quot;&gt;docker store&lt;/a&gt;&lt;/strong&gt;. Here is the direct link of &lt;a href=&quot;https://store.docker.com/community/images/mysql/mysql-server&quot;&gt;mysql-server&lt;/a&gt; page in docker store. All image files will have a dedicated page in docker store which provides basic information about the image and instructions to pull, run and configure it, also it shows contents of image file. Below image shows the structure of the page.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph text-center&quot;&gt; 
+  &lt;p&gt;&lt;span class=&quot;image&quot;&gt;&lt;img src=&quot;http://www.techstackjava.com/img/posts/2018/07/docker-image-page.png&quot; alt=&quot;pet store hello&quot; width=&quot;500&quot; height=&quot;450&quot;&gt;&lt;/span&gt;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Lets pull mysql image from docker store. Open terminal and execute below command. Before executing this command make sure that docker is running. Refer &lt;strong&gt;&lt;a href=&quot;../06/09-docker-intro.html&quot;&gt;Docker introduction&lt;/a&gt;&lt;/strong&gt; for more details on Docker setup.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;docker pull mysql/mysql-server&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;This command will download mysql image and while downloading it prints some information on the console. On my terminal it printed below text;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;Using default tag: latest &lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;(1)&lt;/b&gt;
+latest: Pulling from mysql/mysql-server
+b0efbbec3b2e: Pull complete
+4d06a7b7ca82: Pull complete
+7ddc24d9f468: Pull complete
+8b211b61b1a0: Pull complete
+Digest: sha256:f1cb1e3f0124601b1496f485e9f4401ad10138294b5a38d932089daafd555e34 &lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;(2)&lt;/b&gt;
+Status: Downloaded newer image for mysql/mysql-server:latest &lt;i class=&quot;conum&quot; data-value=&quot;3&quot;&gt;&lt;/i&gt;&lt;b&gt;(3)&lt;/b&gt;&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;colist arabic&quot;&gt; 
+  &lt;table&gt; 
+   &lt;tbody&gt;
+    &lt;tr&gt; 
+     &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;1&lt;/b&gt;&lt;/td&gt; 
+     &lt;td&gt;&lt;strong&gt;tag&lt;/strong&gt; is like version number. If we don’t mention the version then docker will download &lt;strong&gt;latest&lt;/strong&gt; version by default. In the docker image page go to the &lt;strong&gt;tags&lt;/strong&gt; tab to check all available versions/tags. Check point &lt;strong&gt;3&lt;/strong&gt; below for more details on downloading specific tag.&lt;/td&gt; 
+    &lt;/tr&gt; 
+    &lt;tr&gt; 
+     &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;2&lt;/b&gt;&lt;/td&gt; 
+     &lt;td&gt;Docker image files are immutable, means once the image is build its content will never change. Each image will have unique digest value. This shows the digest of mysql image which we downloaded.&lt;/td&gt; 
+    &lt;/tr&gt; 
+    &lt;tr&gt; 
+     &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;3&quot;&gt;&lt;/i&gt;&lt;b&gt;3&lt;/b&gt;&lt;/td&gt; 
+     &lt;td&gt;In the pull command we didn’t mentioned the version so by default docker downloads &lt;strong&gt;latest&lt;/strong&gt; version. We can provide specific version in the pull command, for example to pull &lt;strong&gt;8.0&lt;/strong&gt; we can execute &lt;strong&gt;docker pull mysql/mysql-server:8.0&lt;/strong&gt;&lt;/td&gt; 
+    &lt;/tr&gt; 
+   &lt;/tbody&gt;
+  &lt;/table&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;_run_image_file&quot;&gt;Run image file&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;In the previous section we downloaded mysql image. In this section we will run this image. Execute below command, which will create mysql container instance.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;docker run mysql/mysql-server&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;We use &lt;strong&gt;run&lt;/strong&gt; sub-command to execute image files. If we downloaded multiple tags then we can provide specific tag name like &lt;strong&gt;docker run mysql/mysql-server:&amp;lt;tag&amp;gt;&lt;/strong&gt;. Run command takes some time to execute and while execution it prints text in the terminal. Look for below two important lines in the output;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;...
+...
+Warning: Unable to load &apos;/usr/share/zoneinfo/zone1970.tab&apos; as time zone. Skipping it.
+[Entrypoint] GENERATED ROOT PASSWORD: ILOvILAt20fIwSYlMEtKoruNEzk &lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;(1)&lt;/b&gt;
+[Server] &apos;user&apos; entry &apos;healthchecker@localhost&apos; ignored in --skip-name-resolve mode.
+...
+...
+...
+[System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: &apos;8.0.11&apos;  socket: &apos;/var/lib/mysql/mysql.sock&apos;  port: 3306  MySQL Community Server - GPL. &lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;(2)&lt;/b&gt;&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;colist arabic&quot;&gt; 
+  &lt;table&gt; 
+   &lt;tbody&gt;
+    &lt;tr&gt; 
+     &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;1&quot;&gt;&lt;/i&gt;&lt;b&gt;1&lt;/b&gt;&lt;/td&gt; 
+     &lt;td&gt;Some where in the center of the logs, we should see generated root password. Note down this password, it will be different on your machine. We need this password to connect mysql. If we want to provide our own password then we can provide it in run command like this &lt;strong&gt;docker run -e MYSQL_ROOT_PASSWORD=root mysql/mysql-server&lt;/strong&gt;. Here I provided &apos;root&apos; as the password.&lt;/td&gt; 
+    &lt;/tr&gt; 
+    &lt;tr&gt; 
+     &lt;td&gt;&lt;i class=&quot;conum&quot; data-value=&quot;2&quot;&gt;&lt;/i&gt;&lt;b&gt;2&lt;/b&gt;&lt;/td&gt; 
+     &lt;td&gt;At the end of the logs we should see message saying &lt;strong&gt;ready for connections&lt;/strong&gt; and also it shows &lt;strong&gt;version&lt;/strong&gt; and &lt;strong&gt;port number&lt;/strong&gt;.&lt;/td&gt; 
+    &lt;/tr&gt; 
+   &lt;/tbody&gt;
+  &lt;/table&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;_stop_container&quot;&gt;Stop container&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;In the above section we ran mysql as foreground process means terminal is taken up by the run command and we can not get prompt to enter other commands. To stop current running container first we need to execute below command in other terminal.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;docker ps&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;This command will list all running containers with some basic information for each container. Below are the some of the details it provides;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;ulist&quot;&gt; 
+  &lt;ul&gt; 
+   &lt;li&gt; &lt;p&gt;Container Id: Randomly generated unique Id to identify this container.&lt;/p&gt; &lt;/li&gt; 
+   &lt;li&gt; &lt;p&gt;Ports: Ports exposed by this container.&lt;/p&gt; &lt;/li&gt; 
+   &lt;li&gt; &lt;p&gt;Names: Random name assigned to this container.&lt;/p&gt; &lt;/li&gt; 
+  &lt;/ul&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Now we have the container id, we use this to stop the container. Execute below command;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;docker stop b1b681db49f2&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;b1b681db49f2 is the container id assigned to mysql container executing on my machine, this id will be different on your machine because it is a randomly generated id. Get this id from the result of &lt;strong&gt;docker ps&lt;/strong&gt; command. Verify if container was stopped by running &lt;strong&gt;docker ps&lt;/strong&gt; again, this time you should not see the mysql container in the result.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;_connect_to_mysql_container&quot;&gt;Connect to mysql container&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;In the previous sections we went through the process of starting and stopping containers. In this section we will test mysql container by connecting to it.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;admonitionblock important&quot;&gt; 
+  &lt;table&gt; 
+   &lt;tbody&gt;
+    &lt;tr&gt; 
+     &lt;td class=&quot;icon&quot;&gt; &lt;i class=&quot;fa icon-important&quot; title=&quot;Important&quot;&gt;&lt;/i&gt; &lt;/td&gt; 
+     &lt;td class=&quot;content&quot;&gt; Every container is different. Steps in this section explains the verification process of mysql container if we want verify any other container then we need to follow the process mentioned in the docker store page for that container. &lt;/td&gt; 
+    &lt;/tr&gt; 
+   &lt;/tbody&gt;
+  &lt;/table&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Lets start the mysql container;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;docker run --name mysql -e MYSQL_ROOT_PASSWORD=root -d mysql/mysql-server&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;I used below options in the run command:&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;ulist&quot;&gt; 
+  &lt;ul&gt; 
+   &lt;li&gt; &lt;p&gt;&lt;strong&gt;--name&lt;/strong&gt;: We can provide custom name to the container&lt;/p&gt; &lt;/li&gt; 
+   &lt;li&gt; &lt;p&gt;&lt;strong&gt;-e&lt;/strong&gt;: This flag helps us to set environment variables for the container. In this case we used this to set mysql root password. Check mysql docker store page for all available environment options for mysql.&lt;/p&gt; &lt;/li&gt; 
+   &lt;li&gt; &lt;p&gt;&lt;strong&gt;-d&lt;/strong&gt;: Runs container in the background so we can continue to use the prompt in this terminal.&lt;/p&gt; &lt;/li&gt; 
+  &lt;/ul&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;Because we are running container in the background we can not see the output logs on the terminal. We can see these logs by executing below command;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;docker logs mysql&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;&lt;strong&gt;docker logs&lt;/strong&gt; takes the container name and I provided &lt;strong&gt;mysql&lt;/strong&gt; because in the previous run command I provided container name as &lt;strong&gt;mysql&lt;/strong&gt;. We are having a running mysql container now lets execute bash in the mysql container so we can connect and execute some queries.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;docker exec -it mysql bash&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;&lt;strong&gt;docker exec&lt;/strong&gt; command runs the provided command with in the container. In this case we want &lt;strong&gt;bash&lt;/strong&gt; to run in the mysql container. This will provide a bash prompt which is running in the mysql container. Now connect to the mysql like below;&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;mysql -u &quot;root&quot; -p&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;This command prompts for the mysql password, enter the password. Now we can execute sql queries on mysql container. Below query lists all available databases.&lt;/p&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;listingblock&quot;&gt; 
+  &lt;div class=&quot;content&quot;&gt; 
+   &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;mysql&amp;gt; show databases;&lt;/code&gt;&lt;/pre&gt; 
+  &lt;/div&gt; 
+ &lt;/div&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;You can continue to execute mysql queries here.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt; 
+&lt;div class=&quot;sect3&quot;&gt; 
+ &lt;h4 id=&quot;_conclusion&quot;&gt;Conclusion&lt;/h4&gt; 
+ &lt;div class=&quot;paragraph&quot;&gt; 
+  &lt;p&gt;In this article we learnt downloading images, running and testing containers. With this setup we can have mysql in the docker instead of on the machine.&lt;/p&gt; 
+ &lt;/div&gt; 
+&lt;/div&gt;
+	  </description>
+    </item>
     
     <item>
       <title>Spring Cloud Configuration - Part 2</title>

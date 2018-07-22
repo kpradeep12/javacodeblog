@@ -70,6 +70,12 @@ article a:active, article a:focus, article a:hover {
   color: #824027;
   text-decoration: none;
 }
+article h4{
+  font-weight: 600;
+}
+article h3{
+  font-weight: 600;
+}
 
 pre.prettyprint {
   border: 1px solid #e6e6e6;
